@@ -1,0 +1,13 @@
+body {
+    background: #171716;
+}
+
+h3 {
+    color: white;
+}
+
+#lorem_text {
+    color: #fffb17;
+    font-family: "MV Boli", cursive;
+    font-weight: lighter;
+}
