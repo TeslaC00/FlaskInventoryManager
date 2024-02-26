@@ -5,6 +5,7 @@
 venv/
 __pycache__/
 pyvenv.cfg
+Scripts
 
 ### Flask ###
 instance/*
