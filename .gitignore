@@ -1,6 +1,11 @@
 # created by virtualenv automatically
 # Created by https://www.toptal.com/developers/gitignore/api/flask,pycharm
 # Edit at https://www.toptal.com/developers/gitignore?templates=flask,pycharm
+.idea/
+venv/
+__pycache__/
+pyvenv.cfg
+Scripts
 
 ### Flask ###
 instance/*
@@ -282,3 +287,4 @@ fabric.properties
 .idea/**/azureSettings.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/flask,pycharm
+/app/config.py
