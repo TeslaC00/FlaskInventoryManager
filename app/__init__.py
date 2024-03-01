@@ -16,6 +16,10 @@ def create_app():
     # Initialize database
     db.init_app(app)
 
+    # Create tables
+    with app.app_context():
+        db.create_all()
+
     # Initialize database migration tool
     migrate = Migrate(app, db)
 
