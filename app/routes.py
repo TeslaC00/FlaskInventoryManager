@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template
 from sqlalchemy import text
+
 from .database import db
 from .models import User
 
@@ -26,6 +27,7 @@ def analysis():
 def orders():
     return render_template('orders.html')
 
+
 @main_routes.route('/test_database_connection')
 def test_database_connection():
     try:
@@ -35,15 +37,18 @@ def test_database_connection():
     except Exception as e:
         return f'Database connection error: {str(e)}'
 
+
 # This function retrieves all the tables in the database
 def get_all_tables():
     meta = db.metadata
     return meta.tables.keys()
 
+
 @main_routes.route('/show_tables')
 def show_tables():
     all_tables = get_all_tables()
     return render_template('show_tables.html', tables=all_tables)
+
 
 # Create a route to add values to the table
 @main_routes.route('/add_user/<username>')
@@ -52,6 +57,7 @@ def add_user(username):
     db.session.add(new_user)
     db.session.commit()
     return 'User added successfully'
+
 
 @main_routes.route('/users')
 def show_users():

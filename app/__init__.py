@@ -2,7 +2,6 @@ from flask import Flask
 from flask_migrate import Migrate
 
 from .database import db
-
 from .routes import main_routes
 
 
