@@ -25,6 +25,7 @@ def analysis():
 def orders():
     return render_template('orders.html')
 
+
 @main_routes.route('/test_database_connection')
 def test_database_connection():
     try:
