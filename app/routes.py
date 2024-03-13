@@ -53,10 +53,7 @@ def show_tables():
 # Create a route to add values to the table
 @main_routes.route('/add_user/<username>/')
 def add_user(username):
-    new_user = User(username=username, email=username)
-    db.session.add(new_user)
-    db.session.commit()
-    return 'User added successfully'
+    return 'Can"t add any user to database now! Please try later'
 
 
 @main_routes.route('/users/')
