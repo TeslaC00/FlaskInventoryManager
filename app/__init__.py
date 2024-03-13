@@ -2,7 +2,6 @@ from flask import Flask
 from flask_migrate import Migrate
 
 from .database import db
-
 from .routes import main_routes
 
 9
@@ -15,6 +14,10 @@ def create_app():
 
     # Initialize database
     db.init_app(app)
+
+    # Create tables
+    with app.app_context():
+        db.create_all()
 
     # Initialize database migration tool
     migrate = Migrate(app, db)
