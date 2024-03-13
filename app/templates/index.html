@@ -34,72 +34,58 @@
         <div class="col-10">
             <nav class="navbar">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" aria-label="Search"
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search" aria-label="Search"
                            aria-describedby="basic-addon1">
                 </div>
             </nav>
             <div class="container navbar-nav-scroll" style="align-items: center;margin-top: 50px; margin-left: -7px;">
-                <div class="row row-cols-1 row-cols-md-2 g-4">
-                    <div class="col">
-                        <div class="card text-bg-light">
-                            <h5 class="card-header">Part Name:</h5>
-                            <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <p class="card-text">Part No:</p>
-                                <p class="card-text">Part Quantity:</p>
-                                <a href="#" class="btn btn-primary">Go to analysis</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card text-bg-light">
-                            <h5 class="card-header">Part Name:</h5>
-                            <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <p class="card-text">Part No:</p>
-                                <p class="card-text">Part Quantity:</p>
-                                <a href="#" class="btn btn-primary">Go to analysis</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card text-bg-light">
-                            <h5 class="card-header">Part Name:</h5>
-                            <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <p class="card-text">Part No:</p>
-                                <p class="card-text">Part Quantity:</p>
-                                <a href="#" class="btn btn-primary">Go to analysis</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card text-bg-light">
-                            <h5 class="card-header">Part Name:</h5>
-                            <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <p class="card-text">Part No:</p>
-                                <p class="card-text">Part Quantity:</p>
-                                <a href="#" class="btn btn-primary">Go to analysis</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card text-bg-light">
-                            <h5 class="card-header">Part Name:</h5>
-                            <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <p class="card-text">Part No:</p>
-                                <p class="card-text">Part Quantity:</p>
-                                <a href="#" class="btn btn-primary">Go to analysis</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <table id="myTable" class="table table-dark table-striped table-bordered border-primary table-hover">
+                    <thead class="sticky-top">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ item }}</td>
+                            <td>{{ item }}</td>
+                            <td>{{ item }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function filterTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0]; // Change index to match the column you want to search
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    document.getElementById("searchInput").addEventListener("keyup", filterTable);
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>

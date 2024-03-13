@@ -4,7 +4,7 @@ from flask_migrate import Migrate
 from .database import db
 from .routes import main_routes
 
-9
+
 def create_app():
     # Creates flask object
     app = Flask(__name__)

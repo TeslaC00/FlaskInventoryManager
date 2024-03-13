@@ -15,7 +15,8 @@ def root():
 
 @main_routes.route('/index/')
 def index():
-    return render_template('index.html')
+    items = ['Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item2', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item']
+    return render_template('index.html', items=items)
 
 
 @main_routes.route('/analysis/')
@@ -28,7 +29,7 @@ def orders():
     return render_template('orders.html')
 
 
-@main_routes.route('/test_database_connection')
+@main_routes.route('/test_database_connection/')
 def test_database_connection():
     try:
         # Execute a simple query to test the connection
@@ -44,14 +45,14 @@ def get_all_tables():
     return meta.tables.keys()
 
 
-@main_routes.route('/show_tables')
+@main_routes.route('/show_tables/')
 def show_tables():
     all_tables = get_all_tables()
     return render_template('show_tables.html', tables=all_tables)
 
 
 # Create a route to add values to the table
-@main_routes.route('/add_user/<username>')
+@main_routes.route('/add_user/<username>/')
 def add_user(username):
     new_user = User(username=username, email=username)
     db.session.add(new_user)
@@ -59,7 +60,7 @@ def add_user(username):
     return 'User added successfully'
 
 
-@main_routes.route('/users')
+@main_routes.route('/users/')
 def show_users():
     # Fetch all users from the User table
     users = User.query.all()
