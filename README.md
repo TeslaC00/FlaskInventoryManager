@@ -182,3 +182,7 @@ After migrating always update the database. Update the database
 whenever new change is made to the versions in migration directory.
 
 `flask db upgrade`
+
+###### Add Dummy Data to Database
+
+Run the `seed.py` file to add dummy data to the database automatically
