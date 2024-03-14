@@ -15,7 +15,9 @@ def root():
 
 @main_routes.route('/index/')
 def index():
-    return render_template('index.html')
+    all_tables=db.metadata.tables.keys()
+    items=["Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item2", "Item", "Item", "Item", "Item", "Item", "Item", "Item"]
+    return render_template('index.html', all_tables=all_tables, items=items)
 
 
 @main_routes.route('/analysis/')

@@ -42,16 +42,22 @@
                 <table id="myTable" class="table table-dark table-striped table-bordered border-primary table-hover">
                     <thead class="sticky-top">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        {% for table in all_tables %}
+                            <th scope="col">{{ table }}</th>
+                        {% endfor %}
                     </tr>
                     </thead>
                     <tbody>
                     {% for item in items %}
                         <tr>
                             <td>{{ loop.index }}</td>
+                            <td>{{ item }}</td>
+                            <td>{{ item }}</td>
+                            <td>{{ item }}</td>
+                            <td>{{ item }}</td>
+                            <td>{{ item }}</td>
+                            <td>{{ item }}</td>
+                            <td>{{ item }}</td>
                             <td>{{ item }}</td>
                             <td>{{ item }}</td>
                             <td>{{ item }}</td>
