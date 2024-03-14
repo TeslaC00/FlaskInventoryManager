@@ -9,3 +9,4 @@ from .goods_records import Goods_Records
 from .challan import Challan
 from .bill import Bill
 from .returned_good import Returned_Good
+from .raw_materials_part_no import RawMaterialsPartNo

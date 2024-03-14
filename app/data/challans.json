@@ -1,0 +1,8002 @@
+[
+  {
+    "date": "2010-12-03",
+    "supplier_id": 40,
+    "raw_material_name": "Metal",
+    "price": 1970,
+    "challan_no": 1524,
+    "quantity": 50
+  },
+  {
+    "date": "1989-01-30",
+    "supplier_id": 38,
+    "raw_material_name": "Rubber",
+    "price": 3561,
+    "challan_no": 1360,
+    "quantity": 67
+  },
+  {
+    "date": "2003-06-04",
+    "supplier_id": 39,
+    "raw_material_name": "Granite",
+    "price": 2560,
+    "challan_no": 9556,
+    "quantity": 59
+  },
+  {
+    "date": "2020-05-19",
+    "supplier_id": 19,
+    "raw_material_name": "Metal",
+    "price": 1466,
+    "challan_no": 7681,
+    "quantity": 5
+  },
+  {
+    "date": "1990-12-14",
+    "supplier_id": 37,
+    "raw_material_name": "Metal",
+    "price": 149,
+    "challan_no": 1977,
+    "quantity": 71
+  },
+  {
+    "date": "1984-08-03",
+    "supplier_id": 11,
+    "raw_material_name": "Cotton",
+    "price": 1185,
+    "challan_no": 2390,
+    "quantity": 80
+  },
+  {
+    "date": "2016-08-12",
+    "supplier_id": 27,
+    "raw_material_name": "Wooden",
+    "price": 2394,
+    "challan_no": 4876,
+    "quantity": 23
+  },
+  {
+    "date": "2011-12-30",
+    "supplier_id": 6,
+    "raw_material_name": "Granite",
+    "price": 938,
+    "challan_no": 4488,
+    "quantity": 23
+  },
+  {
+    "date": "1985-08-06",
+    "supplier_id": 24,
+    "raw_material_name": "Metal",
+    "price": 2459,
+    "challan_no": 609,
+    "quantity": 64
+  },
+  {
+    "date": "1982-04-11",
+    "supplier_id": 19,
+    "raw_material_name": "Frozen",
+    "price": 1253,
+    "challan_no": 371,
+    "quantity": 74
+  },
+  {
+    "date": "1990-08-14",
+    "supplier_id": 15,
+    "raw_material_name": "Bronze",
+    "price": 4523,
+    "challan_no": 1967,
+    "quantity": 68
+  },
+  {
+    "date": "2013-11-25",
+    "supplier_id": 16,
+    "raw_material_name": "Granite",
+    "price": 2597,
+    "challan_no": 4682,
+    "quantity": 37
+  },
+  {
+    "date": "2009-08-28",
+    "supplier_id": 4,
+    "raw_material_name": "Steel",
+    "price": 4072,
+    "challan_no": 1615,
+    "quantity": 77
+  },
+  {
+    "date": "2017-03-26",
+    "supplier_id": 36,
+    "raw_material_name": "Wooden",
+    "price": 1112,
+    "challan_no": 3255,
+    "quantity": 10
+  },
+  {
+    "date": "1985-10-30",
+    "supplier_id": 6,
+    "raw_material_name": "Cotton",
+    "price": 3229,
+    "challan_no": 5847,
+    "quantity": 80
+  },
+  {
+    "date": "2002-06-06",
+    "supplier_id": 30,
+    "raw_material_name": "Metal",
+    "price": 154,
+    "challan_no": 5286,
+    "quantity": 5
+  },
+  {
+    "date": "1981-02-01",
+    "supplier_id": 40,
+    "raw_material_name": "Fresh",
+    "price": 2912,
+    "challan_no": 1517,
+    "quantity": 85
+  },
+  {
+    "date": "1981-11-02",
+    "supplier_id": 21,
+    "raw_material_name": "Granite",
+    "price": 2081,
+    "challan_no": 7438,
+    "quantity": 86
+  },
+  {
+    "date": "2017-06-14",
+    "supplier_id": 43,
+    "raw_material_name": "Fresh",
+    "price": 235,
+    "challan_no": 1271,
+    "quantity": 8
+  },
+  {
+    "date": "1990-05-06",
+    "supplier_id": 25,
+    "raw_material_name": "Wooden",
+    "price": 235,
+    "challan_no": 5042,
+    "quantity": 40
+  },
+  {
+    "date": "1995-02-01",
+    "supplier_id": 49,
+    "raw_material_name": "Fresh",
+    "price": 3339,
+    "challan_no": 5169,
+    "quantity": 3
+  },
+  {
+    "date": "1990-10-04",
+    "supplier_id": 33,
+    "raw_material_name": "Plastic",
+    "price": 4342,
+    "challan_no": 3952,
+    "quantity": 76
+  },
+  {
+    "date": "2020-10-30",
+    "supplier_id": 15,
+    "raw_material_name": "Metal",
+    "price": 235,
+    "challan_no": 3535,
+    "quantity": 54
+  },
+  {
+    "date": "2003-06-18",
+    "supplier_id": 40,
+    "raw_material_name": "Concrete",
+    "price": 3883,
+    "challan_no": 8576,
+    "quantity": 80
+  },
+  {
+    "date": "2004-03-21",
+    "supplier_id": 13,
+    "raw_material_name": "Granite",
+    "price": 3984,
+    "challan_no": 1086,
+    "quantity": 21
+  },
+  {
+    "date": "1986-10-07",
+    "supplier_id": 49,
+    "raw_material_name": "Bronze",
+    "price": 2510,
+    "challan_no": 2039,
+    "quantity": 39
+  },
+  {
+    "date": "2008-04-01",
+    "supplier_id": 15,
+    "raw_material_name": "Granite",
+    "price": 3773,
+    "challan_no": 7794,
+    "quantity": 30
+  },
+  {
+    "date": "1999-08-04",
+    "supplier_id": 26,
+    "raw_material_name": "Soft",
+    "price": 2514,
+    "challan_no": 9895,
+    "quantity": 51
+  },
+  {
+    "date": "1999-10-26",
+    "supplier_id": 27,
+    "raw_material_name": "Fresh",
+    "price": 2137,
+    "challan_no": 1179,
+    "quantity": 10
+  },
+  {
+    "date": "2001-01-09",
+    "supplier_id": 9,
+    "raw_material_name": "Wooden",
+    "price": 4016,
+    "challan_no": 1343,
+    "quantity": 51
+  },
+  {
+    "date": "2018-12-13",
+    "supplier_id": 39,
+    "raw_material_name": "Soft",
+    "price": 3506,
+    "challan_no": 3525,
+    "quantity": 76
+  },
+  {
+    "date": "2015-10-06",
+    "supplier_id": 14,
+    "raw_material_name": "Wooden",
+    "price": 1017,
+    "challan_no": 1177,
+    "quantity": 85
+  },
+  {
+    "date": "2001-07-05",
+    "supplier_id": 25,
+    "raw_material_name": "Bronze",
+    "price": 370,
+    "challan_no": 4903,
+    "quantity": 69
+  },
+  {
+    "date": "1986-01-01",
+    "supplier_id": 2,
+    "raw_material_name": "Wooden",
+    "price": 2799,
+    "challan_no": 9904,
+    "quantity": 64
+  },
+  {
+    "date": "1994-03-26",
+    "supplier_id": 26,
+    "raw_material_name": "Concrete",
+    "price": 3167,
+    "challan_no": 9690,
+    "quantity": 7
+  },
+  {
+    "date": "2014-10-29",
+    "supplier_id": 41,
+    "raw_material_name": "Granite",
+    "price": 3108,
+    "challan_no": 9555,
+    "quantity": 39
+  },
+  {
+    "date": "1996-10-18",
+    "supplier_id": 32,
+    "raw_material_name": "Bronze",
+    "price": 213,
+    "challan_no": 5742,
+    "quantity": 53
+  },
+  {
+    "date": "2017-05-07",
+    "supplier_id": 9,
+    "raw_material_name": "Plastic",
+    "price": 880,
+    "challan_no": 5314,
+    "quantity": 75
+  },
+  {
+    "date": "1981-08-02",
+    "supplier_id": 47,
+    "raw_material_name": "Soft",
+    "price": 3898,
+    "challan_no": 4984,
+    "quantity": 69
+  },
+  {
+    "date": "1995-01-13",
+    "supplier_id": 9,
+    "raw_material_name": "Bronze",
+    "price": 2983,
+    "challan_no": 6451,
+    "quantity": 12
+  },
+  {
+    "date": "2022-03-26",
+    "supplier_id": 12,
+    "raw_material_name": "Granite",
+    "price": 4756,
+    "challan_no": 4201,
+    "quantity": 26
+  },
+  {
+    "date": "1980-02-14",
+    "supplier_id": 32,
+    "raw_material_name": "Steel",
+    "price": 614,
+    "challan_no": 1216,
+    "quantity": 51
+  },
+  {
+    "date": "2020-08-12",
+    "supplier_id": 32,
+    "raw_material_name": "Granite",
+    "price": 117,
+    "challan_no": 5881,
+    "quantity": 75
+  },
+  {
+    "date": "1997-06-10",
+    "supplier_id": 36,
+    "raw_material_name": "Soft",
+    "price": 3693,
+    "challan_no": 655,
+    "quantity": 99
+  },
+  {
+    "date": "2013-11-05",
+    "supplier_id": 49,
+    "raw_material_name": "Rubber",
+    "price": 4502,
+    "challan_no": 9481,
+    "quantity": 8
+  },
+  {
+    "date": "2002-01-09",
+    "supplier_id": 10,
+    "raw_material_name": "Bronze",
+    "price": 535,
+    "challan_no": 9770,
+    "quantity": 93
+  },
+  {
+    "date": "2008-07-24",
+    "supplier_id": 41,
+    "raw_material_name": "Wooden",
+    "price": 1871,
+    "challan_no": 6352,
+    "quantity": 8
+  },
+  {
+    "date": "2013-01-14",
+    "supplier_id": 12,
+    "raw_material_name": "Cotton",
+    "price": 404,
+    "challan_no": 8381,
+    "quantity": 17
+  },
+  {
+    "date": "1981-01-04",
+    "supplier_id": 42,
+    "raw_material_name": "Concrete",
+    "price": 2114,
+    "challan_no": 7057,
+    "quantity": 38
+  },
+  {
+    "date": "1993-06-23",
+    "supplier_id": 37,
+    "raw_material_name": "Frozen",
+    "price": 4135,
+    "challan_no": 2975,
+    "quantity": 98
+  },
+  {
+    "date": "1993-01-29",
+    "supplier_id": 13,
+    "raw_material_name": "Steel",
+    "price": 206,
+    "challan_no": 4704,
+    "quantity": 50
+  },
+  {
+    "date": "2008-12-15",
+    "supplier_id": 48,
+    "raw_material_name": "Fresh",
+    "price": 799,
+    "challan_no": 8517,
+    "quantity": 27
+  },
+  {
+    "date": "2022-05-10",
+    "supplier_id": 37,
+    "raw_material_name": "Soft",
+    "price": 1635,
+    "challan_no": 683,
+    "quantity": 18
+  },
+  {
+    "date": "1984-12-19",
+    "supplier_id": 40,
+    "raw_material_name": "Plastic",
+    "price": 1369,
+    "challan_no": 3791,
+    "quantity": 24
+  },
+  {
+    "date": "1994-05-13",
+    "supplier_id": 24,
+    "raw_material_name": "Granite",
+    "price": 4848,
+    "challan_no": 9334,
+    "quantity": 63
+  },
+  {
+    "date": "2022-11-15",
+    "supplier_id": 30,
+    "raw_material_name": "Fresh",
+    "price": 4804,
+    "challan_no": 905,
+    "quantity": 49
+  },
+  {
+    "date": "2006-05-12",
+    "supplier_id": 41,
+    "raw_material_name": "Granite",
+    "price": 1177,
+    "challan_no": 4323,
+    "quantity": 57
+  },
+  {
+    "date": "2007-06-24",
+    "supplier_id": 28,
+    "raw_material_name": "Metal",
+    "price": 3281,
+    "challan_no": 3022,
+    "quantity": 28
+  },
+  {
+    "date": "2013-08-13",
+    "supplier_id": 36,
+    "raw_material_name": "Frozen",
+    "price": 4482,
+    "challan_no": 299,
+    "quantity": 67
+  },
+  {
+    "date": "2016-12-05",
+    "supplier_id": 17,
+    "raw_material_name": "Soft",
+    "price": 2639,
+    "challan_no": 568,
+    "quantity": 92
+  },
+  {
+    "date": "2002-11-29",
+    "supplier_id": 32,
+    "raw_material_name": "Bronze",
+    "price": 1381,
+    "challan_no": 2633,
+    "quantity": 20
+  },
+  {
+    "date": "2007-09-16",
+    "supplier_id": 3,
+    "raw_material_name": "Wooden",
+    "price": 2384,
+    "challan_no": 6565,
+    "quantity": 83
+  },
+  {
+    "date": "2008-07-15",
+    "supplier_id": 2,
+    "raw_material_name": "Granite",
+    "price": 3641,
+    "challan_no": 8848,
+    "quantity": 88
+  },
+  {
+    "date": "2022-01-06",
+    "supplier_id": 41,
+    "raw_material_name": "Fresh",
+    "price": 1328,
+    "challan_no": 4341,
+    "quantity": 74
+  },
+  {
+    "date": "1981-08-10",
+    "supplier_id": 7,
+    "raw_material_name": "Rubber",
+    "price": 2553,
+    "challan_no": 751,
+    "quantity": 2
+  },
+  {
+    "date": "1986-06-08",
+    "supplier_id": 28,
+    "raw_material_name": "Rubber",
+    "price": 322,
+    "challan_no": 4997,
+    "quantity": 35
+  },
+  {
+    "date": "2019-09-21",
+    "supplier_id": 49,
+    "raw_material_name": "Cotton",
+    "price": 2745,
+    "challan_no": 7384,
+    "quantity": 50
+  },
+  {
+    "date": "2008-10-03",
+    "supplier_id": 37,
+    "raw_material_name": "Cotton",
+    "price": 1443,
+    "challan_no": 2643,
+    "quantity": 59
+  },
+  {
+    "date": "2004-06-24",
+    "supplier_id": 43,
+    "raw_material_name": "Metal",
+    "price": 3292,
+    "challan_no": 8887,
+    "quantity": 2
+  },
+  {
+    "date": "2021-09-10",
+    "supplier_id": 7,
+    "raw_material_name": "Cotton",
+    "price": 3095,
+    "challan_no": 3468,
+    "quantity": 70
+  },
+  {
+    "date": "1999-10-19",
+    "supplier_id": 1,
+    "raw_material_name": "Granite",
+    "price": 4458,
+    "challan_no": 4226,
+    "quantity": 17
+  },
+  {
+    "date": "2021-10-23",
+    "supplier_id": 13,
+    "raw_material_name": "Concrete",
+    "price": 4075,
+    "challan_no": 9573,
+    "quantity": 6
+  },
+  {
+    "date": "1995-01-20",
+    "supplier_id": 3,
+    "raw_material_name": "Concrete",
+    "price": 3638,
+    "challan_no": 2347,
+    "quantity": 78
+  },
+  {
+    "date": "1982-02-21",
+    "supplier_id": 49,
+    "raw_material_name": "Steel",
+    "price": 1754,
+    "challan_no": 6707,
+    "quantity": 80
+  },
+  {
+    "date": "1987-05-31",
+    "supplier_id": 38,
+    "raw_material_name": "Rubber",
+    "price": 1472,
+    "challan_no": 6363,
+    "quantity": 27
+  },
+  {
+    "date": "2008-05-11",
+    "supplier_id": 29,
+    "raw_material_name": "Soft",
+    "price": 4988,
+    "challan_no": 9539,
+    "quantity": 95
+  },
+  {
+    "date": "1980-03-03",
+    "supplier_id": 49,
+    "raw_material_name": "Soft",
+    "price": 4350,
+    "challan_no": 7938,
+    "quantity": 33
+  },
+  {
+    "date": "1994-08-17",
+    "supplier_id": 35,
+    "raw_material_name": "Granite",
+    "price": 2314,
+    "challan_no": 5027,
+    "quantity": 92
+  },
+  {
+    "date": "1988-12-24",
+    "supplier_id": 49,
+    "raw_material_name": "Steel",
+    "price": 2201,
+    "challan_no": 2872,
+    "quantity": 36
+  },
+  {
+    "date": "1999-07-13",
+    "supplier_id": 4,
+    "raw_material_name": "Fresh",
+    "price": 841,
+    "challan_no": 4620,
+    "quantity": 71
+  },
+  {
+    "date": "2010-12-09",
+    "supplier_id": 3,
+    "raw_material_name": "Steel",
+    "price": 1569,
+    "challan_no": 1903,
+    "quantity": 38
+  },
+  {
+    "date": "2012-05-12",
+    "supplier_id": 10,
+    "raw_material_name": "Rubber",
+    "price": 3001,
+    "challan_no": 9632,
+    "quantity": 71
+  },
+  {
+    "date": "1994-07-17",
+    "supplier_id": 35,
+    "raw_material_name": "Cotton",
+    "price": 2319,
+    "challan_no": 9081,
+    "quantity": 63
+  },
+  {
+    "date": "1990-11-01",
+    "supplier_id": 38,
+    "raw_material_name": "Cotton",
+    "price": 1477,
+    "challan_no": 767,
+    "quantity": 76
+  },
+  {
+    "date": "1989-11-20",
+    "supplier_id": 8,
+    "raw_material_name": "Frozen",
+    "price": 4398,
+    "challan_no": 363,
+    "quantity": 28
+  },
+  {
+    "date": "1990-11-17",
+    "supplier_id": 8,
+    "raw_material_name": "Cotton",
+    "price": 3706,
+    "challan_no": 1624,
+    "quantity": 39
+  },
+  {
+    "date": "1991-08-27",
+    "supplier_id": 9,
+    "raw_material_name": "Soft",
+    "price": 1485,
+    "challan_no": 1948,
+    "quantity": 54
+  },
+  {
+    "date": "2021-04-16",
+    "supplier_id": 45,
+    "raw_material_name": "Granite",
+    "price": 4747,
+    "challan_no": 1084,
+    "quantity": 56
+  },
+  {
+    "date": "2008-05-10",
+    "supplier_id": 34,
+    "raw_material_name": "Frozen",
+    "price": 2421,
+    "challan_no": 2660,
+    "quantity": 18
+  },
+  {
+    "date": "2015-06-28",
+    "supplier_id": 27,
+    "raw_material_name": "Soft",
+    "price": 4112,
+    "challan_no": 7307,
+    "quantity": 54
+  },
+  {
+    "date": "1993-04-25",
+    "supplier_id": 8,
+    "raw_material_name": "Cotton",
+    "price": 3396,
+    "challan_no": 8349,
+    "quantity": 91
+  },
+  {
+    "date": "1981-07-05",
+    "supplier_id": 28,
+    "raw_material_name": "Soft",
+    "price": 3992,
+    "challan_no": 4101,
+    "quantity": 40
+  },
+  {
+    "date": "1988-04-09",
+    "supplier_id": 46,
+    "raw_material_name": "Granite",
+    "price": 2134,
+    "challan_no": 7790,
+    "quantity": 35
+  },
+  {
+    "date": "1990-01-12",
+    "supplier_id": 29,
+    "raw_material_name": "Bronze",
+    "price": 4303,
+    "challan_no": 7676,
+    "quantity": 98
+  },
+  {
+    "date": "1993-05-27",
+    "supplier_id": 31,
+    "raw_material_name": "Bronze",
+    "price": 3796,
+    "challan_no": 9830,
+    "quantity": 25
+  },
+  {
+    "date": "2008-01-29",
+    "supplier_id": 5,
+    "raw_material_name": "Steel",
+    "price": 3871,
+    "challan_no": 1182,
+    "quantity": 83
+  },
+  {
+    "date": "2013-08-28",
+    "supplier_id": 49,
+    "raw_material_name": "Granite",
+    "price": 2961,
+    "challan_no": 5608,
+    "quantity": 94
+  },
+  {
+    "date": "2001-09-14",
+    "supplier_id": 28,
+    "raw_material_name": "Plastic",
+    "price": 187,
+    "challan_no": 9396,
+    "quantity": 40
+  },
+  {
+    "date": "2006-06-20",
+    "supplier_id": 40,
+    "raw_material_name": "Soft",
+    "price": 975,
+    "challan_no": 1176,
+    "quantity": 75
+  },
+  {
+    "date": "2016-04-07",
+    "supplier_id": 6,
+    "raw_material_name": "Rubber",
+    "price": 4290,
+    "challan_no": 4449,
+    "quantity": 47
+  },
+  {
+    "date": "2019-07-07",
+    "supplier_id": 22,
+    "raw_material_name": "Granite",
+    "price": 3226,
+    "challan_no": 2155,
+    "quantity": 81
+  },
+  {
+    "date": "1989-07-28",
+    "supplier_id": 13,
+    "raw_material_name": "Cotton",
+    "price": 3055,
+    "challan_no": 3519,
+    "quantity": 99
+  },
+  {
+    "date": "1999-05-26",
+    "supplier_id": 40,
+    "raw_material_name": "Wooden",
+    "price": 1772,
+    "challan_no": 6265,
+    "quantity": 64
+  },
+  {
+    "date": "2016-12-10",
+    "supplier_id": 34,
+    "raw_material_name": "Concrete",
+    "price": 3778,
+    "challan_no": 7155,
+    "quantity": 35
+  },
+  {
+    "date": "2004-05-31",
+    "supplier_id": 19,
+    "raw_material_name": "Cotton",
+    "price": 2052,
+    "challan_no": 596,
+    "quantity": 6
+  },
+  {
+    "date": "1999-11-24",
+    "supplier_id": 48,
+    "raw_material_name": "Concrete",
+    "price": 3056,
+    "challan_no": 615,
+    "quantity": 2
+  },
+  {
+    "date": "2012-01-05",
+    "supplier_id": 31,
+    "raw_material_name": "Fresh",
+    "price": 1844,
+    "challan_no": 7109,
+    "quantity": 18
+  },
+  {
+    "date": "1996-07-19",
+    "supplier_id": 25,
+    "raw_material_name": "Bronze",
+    "price": 1566,
+    "challan_no": 3357,
+    "quantity": 82
+  },
+  {
+    "date": "1984-05-20",
+    "supplier_id": 1,
+    "raw_material_name": "Concrete",
+    "price": 151,
+    "challan_no": 404,
+    "quantity": 71
+  },
+  {
+    "date": "1981-09-13",
+    "supplier_id": 27,
+    "raw_material_name": "Plastic",
+    "price": 3892,
+    "challan_no": 917,
+    "quantity": 87
+  },
+  {
+    "date": "1995-08-24",
+    "supplier_id": 8,
+    "raw_material_name": "Soft",
+    "price": 3551,
+    "challan_no": 6743,
+    "quantity": 2
+  },
+  {
+    "date": "2008-03-04",
+    "supplier_id": 33,
+    "raw_material_name": "Concrete",
+    "price": 3952,
+    "challan_no": 3097,
+    "quantity": 75
+  },
+  {
+    "date": "1998-06-22",
+    "supplier_id": 27,
+    "raw_material_name": "Plastic",
+    "price": 3249,
+    "challan_no": 7354,
+    "quantity": 87
+  },
+  {
+    "date": "1988-09-25",
+    "supplier_id": 34,
+    "raw_material_name": "Rubber",
+    "price": 3232,
+    "challan_no": 1649,
+    "quantity": 28
+  },
+  {
+    "date": "1991-09-12",
+    "supplier_id": 47,
+    "raw_material_name": "Plastic",
+    "price": 737,
+    "challan_no": 9171,
+    "quantity": 55
+  },
+  {
+    "date": "2008-08-19",
+    "supplier_id": 22,
+    "raw_material_name": "Wooden",
+    "price": 3804,
+    "challan_no": 7024,
+    "quantity": 17
+  },
+  {
+    "date": "2021-06-05",
+    "supplier_id": 34,
+    "raw_material_name": "Steel",
+    "price": 4876,
+    "challan_no": 5918,
+    "quantity": 92
+  },
+  {
+    "date": "1988-04-13",
+    "supplier_id": 33,
+    "raw_material_name": "Metal",
+    "price": 4163,
+    "challan_no": 5124,
+    "quantity": 76
+  },
+  {
+    "date": "2011-12-07",
+    "supplier_id": 43,
+    "raw_material_name": "Steel",
+    "price": 4889,
+    "challan_no": 8271,
+    "quantity": 49
+  },
+  {
+    "date": "2003-09-12",
+    "supplier_id": 21,
+    "raw_material_name": "Metal",
+    "price": 467,
+    "challan_no": 2112,
+    "quantity": 99
+  },
+  {
+    "date": "2019-12-25",
+    "supplier_id": 16,
+    "raw_material_name": "Fresh",
+    "price": 2087,
+    "challan_no": 1826,
+    "quantity": 82
+  },
+  {
+    "date": "2010-07-29",
+    "supplier_id": 7,
+    "raw_material_name": "Plastic",
+    "price": 2106,
+    "challan_no": 8542,
+    "quantity": 25
+  },
+  {
+    "date": "2011-06-22",
+    "supplier_id": 49,
+    "raw_material_name": "Plastic",
+    "price": 3689,
+    "challan_no": 2167,
+    "quantity": 87
+  },
+  {
+    "date": "2009-11-09",
+    "supplier_id": 2,
+    "raw_material_name": "Soft",
+    "price": 1920,
+    "challan_no": 8919,
+    "quantity": 72
+  },
+  {
+    "date": "1990-09-29",
+    "supplier_id": 11,
+    "raw_material_name": "Frozen",
+    "price": 1854,
+    "challan_no": 8076,
+    "quantity": 47
+  },
+  {
+    "date": "1995-10-02",
+    "supplier_id": 48,
+    "raw_material_name": "Plastic",
+    "price": 409,
+    "challan_no": 449,
+    "quantity": 52
+  },
+  {
+    "date": "1998-12-18",
+    "supplier_id": 12,
+    "raw_material_name": "Soft",
+    "price": 4818,
+    "challan_no": 391,
+    "quantity": 39
+  },
+  {
+    "date": "1990-04-05",
+    "supplier_id": 11,
+    "raw_material_name": "Metal",
+    "price": 3891,
+    "challan_no": 5638,
+    "quantity": 26
+  },
+  {
+    "date": "1992-01-26",
+    "supplier_id": 37,
+    "raw_material_name": "Wooden",
+    "price": 370,
+    "challan_no": 1169,
+    "quantity": 66
+  },
+  {
+    "date": "2017-09-30",
+    "supplier_id": 5,
+    "raw_material_name": "Rubber",
+    "price": 666,
+    "challan_no": 5570,
+    "quantity": 88
+  },
+  {
+    "date": "1995-11-29",
+    "supplier_id": 41,
+    "raw_material_name": "Bronze",
+    "price": 3385,
+    "challan_no": 9476,
+    "quantity": 26
+  },
+  {
+    "date": "2015-07-03",
+    "supplier_id": 7,
+    "raw_material_name": "Metal",
+    "price": 1833,
+    "challan_no": 1438,
+    "quantity": 80
+  },
+  {
+    "date": "1994-03-12",
+    "supplier_id": 12,
+    "raw_material_name": "Cotton",
+    "price": 3405,
+    "challan_no": 6805,
+    "quantity": 44
+  },
+  {
+    "date": "1984-06-14",
+    "supplier_id": 8,
+    "raw_material_name": "Concrete",
+    "price": 4128,
+    "challan_no": 7983,
+    "quantity": 64
+  },
+  {
+    "date": "2014-02-03",
+    "supplier_id": 16,
+    "raw_material_name": "Fresh",
+    "price": 4389,
+    "challan_no": 3638,
+    "quantity": 45
+  },
+  {
+    "date": "1999-04-11",
+    "supplier_id": 22,
+    "raw_material_name": "Bronze",
+    "price": 350,
+    "challan_no": 3570,
+    "quantity": 14
+  },
+  {
+    "date": "1988-09-23",
+    "supplier_id": 22,
+    "raw_material_name": "Soft",
+    "price": 2116,
+    "challan_no": 1139,
+    "quantity": 85
+  },
+  {
+    "date": "2013-01-18",
+    "supplier_id": 19,
+    "raw_material_name": "Steel",
+    "price": 4984,
+    "challan_no": 2848,
+    "quantity": 9
+  },
+  {
+    "date": "1990-06-29",
+    "supplier_id": 23,
+    "raw_material_name": "Plastic",
+    "price": 1059,
+    "challan_no": 6244,
+    "quantity": 9
+  },
+  {
+    "date": "1980-11-27",
+    "supplier_id": 25,
+    "raw_material_name": "Soft",
+    "price": 1763,
+    "challan_no": 3248,
+    "quantity": 50
+  },
+  {
+    "date": "1988-01-28",
+    "supplier_id": 13,
+    "raw_material_name": "Cotton",
+    "price": 4833,
+    "challan_no": 581,
+    "quantity": 24
+  },
+  {
+    "date": "1980-08-06",
+    "supplier_id": 8,
+    "raw_material_name": "Rubber",
+    "price": 4612,
+    "challan_no": 1552,
+    "quantity": 33
+  },
+  {
+    "date": "1995-03-26",
+    "supplier_id": 11,
+    "raw_material_name": "Bronze",
+    "price": 3940,
+    "challan_no": 353,
+    "quantity": 18
+  },
+  {
+    "date": "1998-07-22",
+    "supplier_id": 34,
+    "raw_material_name": "Granite",
+    "price": 3817,
+    "challan_no": 5645,
+    "quantity": 21
+  },
+  {
+    "date": "1986-08-20",
+    "supplier_id": 26,
+    "raw_material_name": "Cotton",
+    "price": 2352,
+    "challan_no": 9015,
+    "quantity": 89
+  },
+  {
+    "date": "2002-08-24",
+    "supplier_id": 38,
+    "raw_material_name": "Rubber",
+    "price": 205,
+    "challan_no": 4793,
+    "quantity": 54
+  },
+  {
+    "date": "2010-10-27",
+    "supplier_id": 25,
+    "raw_material_name": "Granite",
+    "price": 2534,
+    "challan_no": 2033,
+    "quantity": 49
+  },
+  {
+    "date": "2017-07-07",
+    "supplier_id": 42,
+    "raw_material_name": "Steel",
+    "price": 3367,
+    "challan_no": 9601,
+    "quantity": 73
+  },
+  {
+    "date": "1984-03-19",
+    "supplier_id": 27,
+    "raw_material_name": "Metal",
+    "price": 4920,
+    "challan_no": 5153,
+    "quantity": 91
+  },
+  {
+    "date": "2004-05-01",
+    "supplier_id": 22,
+    "raw_material_name": "Steel",
+    "price": 1331,
+    "challan_no": 9549,
+    "quantity": 11
+  },
+  {
+    "date": "1993-03-11",
+    "supplier_id": 47,
+    "raw_material_name": "Cotton",
+    "price": 4447,
+    "challan_no": 8604,
+    "quantity": 90
+  },
+  {
+    "date": "2014-05-28",
+    "supplier_id": 49,
+    "raw_material_name": "Concrete",
+    "price": 2141,
+    "challan_no": 1088,
+    "quantity": 31
+  },
+  {
+    "date": "2008-05-05",
+    "supplier_id": 4,
+    "raw_material_name": "Granite",
+    "price": 3586,
+    "challan_no": 5621,
+    "quantity": 98
+  },
+  {
+    "date": "1993-11-07",
+    "supplier_id": 27,
+    "raw_material_name": "Plastic",
+    "price": 2937,
+    "challan_no": 2981,
+    "quantity": 18
+  },
+  {
+    "date": "1986-10-15",
+    "supplier_id": 26,
+    "raw_material_name": "Granite",
+    "price": 1275,
+    "challan_no": 8164,
+    "quantity": 73
+  },
+  {
+    "date": "2006-12-12",
+    "supplier_id": 28,
+    "raw_material_name": "Plastic",
+    "price": 4180,
+    "challan_no": 2911,
+    "quantity": 13
+  },
+  {
+    "date": "2022-08-23",
+    "supplier_id": 22,
+    "raw_material_name": "Frozen",
+    "price": 2038,
+    "challan_no": 608,
+    "quantity": 27
+  },
+  {
+    "date": "1983-10-15",
+    "supplier_id": 22,
+    "raw_material_name": "Wooden",
+    "price": 463,
+    "challan_no": 139,
+    "quantity": 45
+  },
+  {
+    "date": "2003-01-14",
+    "supplier_id": 37,
+    "raw_material_name": "Soft",
+    "price": 1737,
+    "challan_no": 5015,
+    "quantity": 55
+  },
+  {
+    "date": "2019-11-27",
+    "supplier_id": 39,
+    "raw_material_name": "Soft",
+    "price": 3088,
+    "challan_no": 8294,
+    "quantity": 26
+  },
+  {
+    "date": "2017-07-05",
+    "supplier_id": 29,
+    "raw_material_name": "Cotton",
+    "price": 4340,
+    "challan_no": 6749,
+    "quantity": 81
+  },
+  {
+    "date": "2012-06-06",
+    "supplier_id": 12,
+    "raw_material_name": "Concrete",
+    "price": 1338,
+    "challan_no": 6171,
+    "quantity": 60
+  },
+  {
+    "date": "2012-12-28",
+    "supplier_id": 50,
+    "raw_material_name": "Concrete",
+    "price": 1139,
+    "challan_no": 3755,
+    "quantity": 23
+  },
+  {
+    "date": "2011-04-30",
+    "supplier_id": 21,
+    "raw_material_name": "Wooden",
+    "price": 3916,
+    "challan_no": 4771,
+    "quantity": 73
+  },
+  {
+    "date": "2002-08-23",
+    "supplier_id": 36,
+    "raw_material_name": "Plastic",
+    "price": 381,
+    "challan_no": 3896,
+    "quantity": 7
+  },
+  {
+    "date": "2006-07-27",
+    "supplier_id": 24,
+    "raw_material_name": "Rubber",
+    "price": 2079,
+    "challan_no": 4564,
+    "quantity": 25
+  },
+  {
+    "date": "2021-06-08",
+    "supplier_id": 18,
+    "raw_material_name": "Plastic",
+    "price": 1780,
+    "challan_no": 9767,
+    "quantity": 4
+  },
+  {
+    "date": "2020-04-13",
+    "supplier_id": 32,
+    "raw_material_name": "Soft",
+    "price": 2861,
+    "challan_no": 7900,
+    "quantity": 2
+  },
+  {
+    "date": "2010-01-26",
+    "supplier_id": 6,
+    "raw_material_name": "Metal",
+    "price": 3965,
+    "challan_no": 5742,
+    "quantity": 54
+  },
+  {
+    "date": "1982-04-25",
+    "supplier_id": 18,
+    "raw_material_name": "Soft",
+    "price": 4437,
+    "challan_no": 2660,
+    "quantity": 70
+  },
+  {
+    "date": "1995-08-14",
+    "supplier_id": 50,
+    "raw_material_name": "Bronze",
+    "price": 2080,
+    "challan_no": 4886,
+    "quantity": 35
+  },
+  {
+    "date": "2004-07-01",
+    "supplier_id": 15,
+    "raw_material_name": "Rubber",
+    "price": 423,
+    "challan_no": 5658,
+    "quantity": 67
+  },
+  {
+    "date": "1997-03-05",
+    "supplier_id": 40,
+    "raw_material_name": "Steel",
+    "price": 2961,
+    "challan_no": 831,
+    "quantity": 61
+  },
+  {
+    "date": "2014-10-01",
+    "supplier_id": 7,
+    "raw_material_name": "Fresh",
+    "price": 1371,
+    "challan_no": 1121,
+    "quantity": 24
+  },
+  {
+    "date": "1984-10-18",
+    "supplier_id": 7,
+    "raw_material_name": "Cotton",
+    "price": 2016,
+    "challan_no": 6347,
+    "quantity": 75
+  },
+  {
+    "date": "1996-11-23",
+    "supplier_id": 14,
+    "raw_material_name": "Frozen",
+    "price": 4582,
+    "challan_no": 4447,
+    "quantity": 63
+  },
+  {
+    "date": "2003-08-18",
+    "supplier_id": 41,
+    "raw_material_name": "Plastic",
+    "price": 1705,
+    "challan_no": 2951,
+    "quantity": 4
+  },
+  {
+    "date": "1989-05-11",
+    "supplier_id": 10,
+    "raw_material_name": "Concrete",
+    "price": 1891,
+    "challan_no": 3377,
+    "quantity": 18
+  },
+  {
+    "date": "1985-11-26",
+    "supplier_id": 39,
+    "raw_material_name": "Concrete",
+    "price": 1150,
+    "challan_no": 5018,
+    "quantity": 23
+  },
+  {
+    "date": "1987-02-19",
+    "supplier_id": 22,
+    "raw_material_name": "Granite",
+    "price": 1386,
+    "challan_no": 3067,
+    "quantity": 81
+  },
+  {
+    "date": "2015-01-14",
+    "supplier_id": 35,
+    "raw_material_name": "Concrete",
+    "price": 4216,
+    "challan_no": 909,
+    "quantity": 23
+  },
+  {
+    "date": "1989-11-30",
+    "supplier_id": 33,
+    "raw_material_name": "Cotton",
+    "price": 2169,
+    "challan_no": 9758,
+    "quantity": 4
+  },
+  {
+    "date": "1992-02-02",
+    "supplier_id": 44,
+    "raw_material_name": "Granite",
+    "price": 564,
+    "challan_no": 2332,
+    "quantity": 17
+  },
+  {
+    "date": "1993-05-07",
+    "supplier_id": 18,
+    "raw_material_name": "Rubber",
+    "price": 2562,
+    "challan_no": 6908,
+    "quantity": 92
+  },
+  {
+    "date": "1999-04-24",
+    "supplier_id": 32,
+    "raw_material_name": "Metal",
+    "price": 3404,
+    "challan_no": 4307,
+    "quantity": 12
+  },
+  {
+    "date": "2002-07-05",
+    "supplier_id": 2,
+    "raw_material_name": "Rubber",
+    "price": 3821,
+    "challan_no": 7883,
+    "quantity": 53
+  },
+  {
+    "date": "1996-08-31",
+    "supplier_id": 10,
+    "raw_material_name": "Rubber",
+    "price": 2637,
+    "challan_no": 3425,
+    "quantity": 87
+  },
+  {
+    "date": "2005-02-20",
+    "supplier_id": 35,
+    "raw_material_name": "Steel",
+    "price": 1203,
+    "challan_no": 7705,
+    "quantity": 33
+  },
+  {
+    "date": "2009-05-21",
+    "supplier_id": 28,
+    "raw_material_name": "Granite",
+    "price": 828,
+    "challan_no": 9265,
+    "quantity": 66
+  },
+  {
+    "date": "1988-09-13",
+    "supplier_id": 27,
+    "raw_material_name": "Wooden",
+    "price": 3010,
+    "challan_no": 9374,
+    "quantity": 10
+  },
+  {
+    "date": "2000-09-23",
+    "supplier_id": 11,
+    "raw_material_name": "Rubber",
+    "price": 712,
+    "challan_no": 1555,
+    "quantity": 9
+  },
+  {
+    "date": "2012-03-02",
+    "supplier_id": 25,
+    "raw_material_name": "Bronze",
+    "price": 2501,
+    "challan_no": 7363,
+    "quantity": 96
+  },
+  {
+    "date": "2014-06-03",
+    "supplier_id": 45,
+    "raw_material_name": "Soft",
+    "price": 2657,
+    "challan_no": 1868,
+    "quantity": 33
+  },
+  {
+    "date": "1984-07-05",
+    "supplier_id": 6,
+    "raw_material_name": "Steel",
+    "price": 1650,
+    "challan_no": 4817,
+    "quantity": 74
+  },
+  {
+    "date": "2015-08-20",
+    "supplier_id": 16,
+    "raw_material_name": "Bronze",
+    "price": 4941,
+    "challan_no": 4184,
+    "quantity": 17
+  },
+  {
+    "date": "1987-07-31",
+    "supplier_id": 19,
+    "raw_material_name": "Cotton",
+    "price": 2980,
+    "challan_no": 3899,
+    "quantity": 2
+  },
+  {
+    "date": "2004-05-11",
+    "supplier_id": 30,
+    "raw_material_name": "Rubber",
+    "price": 4343,
+    "challan_no": 8743,
+    "quantity": 6
+  },
+  {
+    "date": "2004-05-05",
+    "supplier_id": 46,
+    "raw_material_name": "Granite",
+    "price": 377,
+    "challan_no": 9152,
+    "quantity": 77
+  },
+  {
+    "date": "2009-06-30",
+    "supplier_id": 10,
+    "raw_material_name": "Wooden",
+    "price": 1223,
+    "challan_no": 8453,
+    "quantity": 36
+  },
+  {
+    "date": "2019-06-28",
+    "supplier_id": 29,
+    "raw_material_name": "Wooden",
+    "price": 1507,
+    "challan_no": 5203,
+    "quantity": 71
+  },
+  {
+    "date": "2021-03-05",
+    "supplier_id": 4,
+    "raw_material_name": "Metal",
+    "price": 647,
+    "challan_no": 192,
+    "quantity": 5
+  },
+  {
+    "date": "2013-06-20",
+    "supplier_id": 46,
+    "raw_material_name": "Fresh",
+    "price": 690,
+    "challan_no": 9151,
+    "quantity": 17
+  },
+  {
+    "date": "1987-10-09",
+    "supplier_id": 9,
+    "raw_material_name": "Cotton",
+    "price": 4562,
+    "challan_no": 2870,
+    "quantity": 6
+  },
+  {
+    "date": "2015-07-31",
+    "supplier_id": 39,
+    "raw_material_name": "Cotton",
+    "price": 134,
+    "challan_no": 9504,
+    "quantity": 63
+  },
+  {
+    "date": "1986-09-29",
+    "supplier_id": 8,
+    "raw_material_name": "Soft",
+    "price": 2265,
+    "challan_no": 8926,
+    "quantity": 6
+  },
+  {
+    "date": "1999-04-18",
+    "supplier_id": 38,
+    "raw_material_name": "Bronze",
+    "price": 4735,
+    "challan_no": 7099,
+    "quantity": 45
+  },
+  {
+    "date": "1992-07-07",
+    "supplier_id": 26,
+    "raw_material_name": "Concrete",
+    "price": 2685,
+    "challan_no": 3156,
+    "quantity": 6
+  },
+  {
+    "date": "2012-11-14",
+    "supplier_id": 45,
+    "raw_material_name": "Wooden",
+    "price": 1684,
+    "challan_no": 8957,
+    "quantity": 55
+  },
+  {
+    "date": "2016-09-12",
+    "supplier_id": 26,
+    "raw_material_name": "Steel",
+    "price": 1286,
+    "challan_no": 4309,
+    "quantity": 9
+  },
+  {
+    "date": "1989-05-25",
+    "supplier_id": 18,
+    "raw_material_name": "Plastic",
+    "price": 2003,
+    "challan_no": 8504,
+    "quantity": 94
+  },
+  {
+    "date": "2003-04-23",
+    "supplier_id": 35,
+    "raw_material_name": "Concrete",
+    "price": 3832,
+    "challan_no": 4330,
+    "quantity": 96
+  },
+  {
+    "date": "2021-04-21",
+    "supplier_id": 29,
+    "raw_material_name": "Soft",
+    "price": 238,
+    "challan_no": 1910,
+    "quantity": 20
+  },
+  {
+    "date": "2020-04-02",
+    "supplier_id": 7,
+    "raw_material_name": "Soft",
+    "price": 3962,
+    "challan_no": 8655,
+    "quantity": 20
+  },
+  {
+    "date": "2021-11-25",
+    "supplier_id": 47,
+    "raw_material_name": "Steel",
+    "price": 1076,
+    "challan_no": 8462,
+    "quantity": 61
+  },
+  {
+    "date": "1983-02-27",
+    "supplier_id": 1,
+    "raw_material_name": "Fresh",
+    "price": 1850,
+    "challan_no": 4863,
+    "quantity": 81
+  },
+  {
+    "date": "1998-03-07",
+    "supplier_id": 45,
+    "raw_material_name": "Soft",
+    "price": 2315,
+    "challan_no": 7685,
+    "quantity": 94
+  },
+  {
+    "date": "2010-09-01",
+    "supplier_id": 40,
+    "raw_material_name": "Concrete",
+    "price": 4481,
+    "challan_no": 3090,
+    "quantity": 51
+  },
+  {
+    "date": "2017-02-25",
+    "supplier_id": 11,
+    "raw_material_name": "Rubber",
+    "price": 4102,
+    "challan_no": 8098,
+    "quantity": 62
+  },
+  {
+    "date": "2003-07-24",
+    "supplier_id": 38,
+    "raw_material_name": "Soft",
+    "price": 4370,
+    "challan_no": 7209,
+    "quantity": 70
+  },
+  {
+    "date": "1994-07-17",
+    "supplier_id": 18,
+    "raw_material_name": "Frozen",
+    "price": 4215,
+    "challan_no": 9620,
+    "quantity": 65
+  },
+  {
+    "date": "2007-07-07",
+    "supplier_id": 36,
+    "raw_material_name": "Metal",
+    "price": 3928,
+    "challan_no": 8687,
+    "quantity": 5
+  },
+  {
+    "date": "1998-08-26",
+    "supplier_id": 36,
+    "raw_material_name": "Granite",
+    "price": 1646,
+    "challan_no": 3530,
+    "quantity": 73
+  },
+  {
+    "date": "2006-03-30",
+    "supplier_id": 36,
+    "raw_material_name": "Bronze",
+    "price": 4282,
+    "challan_no": 755,
+    "quantity": 40
+  },
+  {
+    "date": "2006-09-13",
+    "supplier_id": 9,
+    "raw_material_name": "Fresh",
+    "price": 4798,
+    "challan_no": 3509,
+    "quantity": 14
+  },
+  {
+    "date": "2002-08-28",
+    "supplier_id": 2,
+    "raw_material_name": "Concrete",
+    "price": 3584,
+    "challan_no": 9065,
+    "quantity": 97
+  },
+  {
+    "date": "2002-06-13",
+    "supplier_id": 5,
+    "raw_material_name": "Concrete",
+    "price": 752,
+    "challan_no": 365,
+    "quantity": 75
+  },
+  {
+    "date": "2015-10-29",
+    "supplier_id": 30,
+    "raw_material_name": "Bronze",
+    "price": 966,
+    "challan_no": 7095,
+    "quantity": 91
+  },
+  {
+    "date": "2005-06-24",
+    "supplier_id": 50,
+    "raw_material_name": "Granite",
+    "price": 4482,
+    "challan_no": 1406,
+    "quantity": 100
+  },
+  {
+    "date": "2013-05-30",
+    "supplier_id": 41,
+    "raw_material_name": "Fresh",
+    "price": 1526,
+    "challan_no": 330,
+    "quantity": 85
+  },
+  {
+    "date": "1983-07-26",
+    "supplier_id": 39,
+    "raw_material_name": "Fresh",
+    "price": 2563,
+    "challan_no": 7633,
+    "quantity": 30
+  },
+  {
+    "date": "1981-06-04",
+    "supplier_id": 46,
+    "raw_material_name": "Plastic",
+    "price": 3467,
+    "challan_no": 5265,
+    "quantity": 39
+  },
+  {
+    "date": "1980-08-14",
+    "supplier_id": 39,
+    "raw_material_name": "Fresh",
+    "price": 1667,
+    "challan_no": 247,
+    "quantity": 77
+  },
+  {
+    "date": "2001-09-06",
+    "supplier_id": 42,
+    "raw_material_name": "Rubber",
+    "price": 1719,
+    "challan_no": 9347,
+    "quantity": 6
+  },
+  {
+    "date": "2010-01-25",
+    "supplier_id": 31,
+    "raw_material_name": "Metal",
+    "price": 3258,
+    "challan_no": 9955,
+    "quantity": 94
+  },
+  {
+    "date": "1989-09-28",
+    "supplier_id": 4,
+    "raw_material_name": "Concrete",
+    "price": 4424,
+    "challan_no": 9577,
+    "quantity": 59
+  },
+  {
+    "date": "1986-09-26",
+    "supplier_id": 45,
+    "raw_material_name": "Frozen",
+    "price": 447,
+    "challan_no": 8201,
+    "quantity": 57
+  },
+  {
+    "date": "2020-01-07",
+    "supplier_id": 36,
+    "raw_material_name": "Rubber",
+    "price": 834,
+    "challan_no": 1724,
+    "quantity": 80
+  },
+  {
+    "date": "1993-10-27",
+    "supplier_id": 29,
+    "raw_material_name": "Plastic",
+    "price": 2393,
+    "challan_no": 4124,
+    "quantity": 73
+  },
+  {
+    "date": "2016-09-16",
+    "supplier_id": 33,
+    "raw_material_name": "Rubber",
+    "price": 1677,
+    "challan_no": 4544,
+    "quantity": 55
+  },
+  {
+    "date": "2003-04-25",
+    "supplier_id": 6,
+    "raw_material_name": "Concrete",
+    "price": 2277,
+    "challan_no": 7932,
+    "quantity": 18
+  },
+  {
+    "date": "1984-06-26",
+    "supplier_id": 48,
+    "raw_material_name": "Rubber",
+    "price": 4996,
+    "challan_no": 8696,
+    "quantity": 68
+  },
+  {
+    "date": "2013-10-22",
+    "supplier_id": 47,
+    "raw_material_name": "Metal",
+    "price": 3316,
+    "challan_no": 5318,
+    "quantity": 30
+  },
+  {
+    "date": "1983-12-29",
+    "supplier_id": 18,
+    "raw_material_name": "Rubber",
+    "price": 2153,
+    "challan_no": 3850,
+    "quantity": 60
+  },
+  {
+    "date": "2006-01-05",
+    "supplier_id": 9,
+    "raw_material_name": "Metal",
+    "price": 2443,
+    "challan_no": 5675,
+    "quantity": 89
+  },
+  {
+    "date": "1987-07-24",
+    "supplier_id": 9,
+    "raw_material_name": "Rubber",
+    "price": 2535,
+    "challan_no": 2898,
+    "quantity": 77
+  },
+  {
+    "date": "1989-07-05",
+    "supplier_id": 8,
+    "raw_material_name": "Wooden",
+    "price": 2698,
+    "challan_no": 6314,
+    "quantity": 63
+  },
+  {
+    "date": "2020-04-20",
+    "supplier_id": 16,
+    "raw_material_name": "Concrete",
+    "price": 464,
+    "challan_no": 3972,
+    "quantity": 43
+  },
+  {
+    "date": "2011-11-03",
+    "supplier_id": 5,
+    "raw_material_name": "Rubber",
+    "price": 1540,
+    "challan_no": 9783,
+    "quantity": 71
+  },
+  {
+    "date": "1981-11-29",
+    "supplier_id": 4,
+    "raw_material_name": "Wooden",
+    "price": 2337,
+    "challan_no": 7826,
+    "quantity": 44
+  },
+  {
+    "date": "2004-10-30",
+    "supplier_id": 15,
+    "raw_material_name": "Plastic",
+    "price": 3687,
+    "challan_no": 5208,
+    "quantity": 56
+  },
+  {
+    "date": "2001-01-13",
+    "supplier_id": 27,
+    "raw_material_name": "Steel",
+    "price": 1692,
+    "challan_no": 1163,
+    "quantity": 20
+  },
+  {
+    "date": "1981-08-15",
+    "supplier_id": 18,
+    "raw_material_name": "Cotton",
+    "price": 4257,
+    "challan_no": 3775,
+    "quantity": 38
+  },
+  {
+    "date": "2009-04-30",
+    "supplier_id": 10,
+    "raw_material_name": "Granite",
+    "price": 4453,
+    "challan_no": 1455,
+    "quantity": 76
+  },
+  {
+    "date": "2001-09-19",
+    "supplier_id": 23,
+    "raw_material_name": "Plastic",
+    "price": 3436,
+    "challan_no": 4311,
+    "quantity": 15
+  },
+  {
+    "date": "1995-11-25",
+    "supplier_id": 6,
+    "raw_material_name": "Wooden",
+    "price": 533,
+    "challan_no": 8369,
+    "quantity": 43
+  },
+  {
+    "date": "2004-08-20",
+    "supplier_id": 11,
+    "raw_material_name": "Concrete",
+    "price": 4752,
+    "challan_no": 4703,
+    "quantity": 1
+  },
+  {
+    "date": "1987-06-13",
+    "supplier_id": 6,
+    "raw_material_name": "Cotton",
+    "price": 1783,
+    "challan_no": 9471,
+    "quantity": 34
+  },
+  {
+    "date": "1992-03-24",
+    "supplier_id": 16,
+    "raw_material_name": "Rubber",
+    "price": 1539,
+    "challan_no": 5769,
+    "quantity": 90
+  },
+  {
+    "date": "2000-05-21",
+    "supplier_id": 40,
+    "raw_material_name": "Granite",
+    "price": 3421,
+    "challan_no": 3301,
+    "quantity": 66
+  },
+  {
+    "date": "2003-10-21",
+    "supplier_id": 42,
+    "raw_material_name": "Rubber",
+    "price": 3359,
+    "challan_no": 8725,
+    "quantity": 99
+  },
+  {
+    "date": "2011-02-04",
+    "supplier_id": 45,
+    "raw_material_name": "Steel",
+    "price": 2234,
+    "challan_no": 3749,
+    "quantity": 54
+  },
+  {
+    "date": "2011-11-19",
+    "supplier_id": 5,
+    "raw_material_name": "Soft",
+    "price": 1925,
+    "challan_no": 924,
+    "quantity": 91
+  },
+  {
+    "date": "2017-10-26",
+    "supplier_id": 18,
+    "raw_material_name": "Metal",
+    "price": 115,
+    "challan_no": 7989,
+    "quantity": 50
+  },
+  {
+    "date": "1992-03-12",
+    "supplier_id": 13,
+    "raw_material_name": "Wooden",
+    "price": 4155,
+    "challan_no": 1850,
+    "quantity": 25
+  },
+  {
+    "date": "1998-06-28",
+    "supplier_id": 37,
+    "raw_material_name": "Fresh",
+    "price": 1953,
+    "challan_no": 7192,
+    "quantity": 2
+  },
+  {
+    "date": "1991-01-04",
+    "supplier_id": 12,
+    "raw_material_name": "Wooden",
+    "price": 3216,
+    "challan_no": 1020,
+    "quantity": 8
+  },
+  {
+    "date": "1981-04-11",
+    "supplier_id": 37,
+    "raw_material_name": "Frozen",
+    "price": 712,
+    "challan_no": 2493,
+    "quantity": 79
+  },
+  {
+    "date": "1986-05-12",
+    "supplier_id": 1,
+    "raw_material_name": "Cotton",
+    "price": 3065,
+    "challan_no": 7721,
+    "quantity": 60
+  },
+  {
+    "date": "2018-08-27",
+    "supplier_id": 18,
+    "raw_material_name": "Rubber",
+    "price": 1288,
+    "challan_no": 5799,
+    "quantity": 18
+  },
+  {
+    "date": "1989-12-16",
+    "supplier_id": 34,
+    "raw_material_name": "Bronze",
+    "price": 1387,
+    "challan_no": 5781,
+    "quantity": 20
+  },
+  {
+    "date": "2016-02-11",
+    "supplier_id": 33,
+    "raw_material_name": "Granite",
+    "price": 1443,
+    "challan_no": 5199,
+    "quantity": 14
+  },
+  {
+    "date": "1997-03-18",
+    "supplier_id": 13,
+    "raw_material_name": "Plastic",
+    "price": 4982,
+    "challan_no": 2282,
+    "quantity": 83
+  },
+  {
+    "date": "2001-04-28",
+    "supplier_id": 14,
+    "raw_material_name": "Steel",
+    "price": 3191,
+    "challan_no": 3804,
+    "quantity": 89
+  },
+  {
+    "date": "1985-03-13",
+    "supplier_id": 48,
+    "raw_material_name": "Wooden",
+    "price": 1442,
+    "challan_no": 8346,
+    "quantity": 90
+  },
+  {
+    "date": "2010-01-29",
+    "supplier_id": 45,
+    "raw_material_name": "Granite",
+    "price": 3826,
+    "challan_no": 9702,
+    "quantity": 14
+  },
+  {
+    "date": "1994-11-27",
+    "supplier_id": 32,
+    "raw_material_name": "Wooden",
+    "price": 3315,
+    "challan_no": 2464,
+    "quantity": 48
+  },
+  {
+    "date": "1993-11-20",
+    "supplier_id": 15,
+    "raw_material_name": "Frozen",
+    "price": 2676,
+    "challan_no": 6255,
+    "quantity": 24
+  },
+  {
+    "date": "2012-05-25",
+    "supplier_id": 39,
+    "raw_material_name": "Rubber",
+    "price": 271,
+    "challan_no": 3342,
+    "quantity": 13
+  },
+  {
+    "date": "2021-11-09",
+    "supplier_id": 4,
+    "raw_material_name": "Fresh",
+    "price": 138,
+    "challan_no": 7757,
+    "quantity": 73
+  },
+  {
+    "date": "2000-11-13",
+    "supplier_id": 19,
+    "raw_material_name": "Concrete",
+    "price": 4643,
+    "challan_no": 4721,
+    "quantity": 42
+  },
+  {
+    "date": "1987-06-15",
+    "supplier_id": 3,
+    "raw_material_name": "Steel",
+    "price": 2321,
+    "challan_no": 7669,
+    "quantity": 33
+  },
+  {
+    "date": "2009-03-04",
+    "supplier_id": 37,
+    "raw_material_name": "Soft",
+    "price": 520,
+    "challan_no": 3558,
+    "quantity": 57
+  },
+  {
+    "date": "1997-03-31",
+    "supplier_id": 10,
+    "raw_material_name": "Bronze",
+    "price": 828,
+    "challan_no": 3866,
+    "quantity": 62
+  },
+  {
+    "date": "2014-07-31",
+    "supplier_id": 21,
+    "raw_material_name": "Wooden",
+    "price": 3002,
+    "challan_no": 5315,
+    "quantity": 33
+  },
+  {
+    "date": "1983-12-10",
+    "supplier_id": 11,
+    "raw_material_name": "Fresh",
+    "price": 4936,
+    "challan_no": 8771,
+    "quantity": 82
+  },
+  {
+    "date": "1980-09-19",
+    "supplier_id": 25,
+    "raw_material_name": "Metal",
+    "price": 1264,
+    "challan_no": 4212,
+    "quantity": 13
+  },
+  {
+    "date": "2008-10-05",
+    "supplier_id": 21,
+    "raw_material_name": "Granite",
+    "price": 2621,
+    "challan_no": 1207,
+    "quantity": 52
+  },
+  {
+    "date": "1992-03-28",
+    "supplier_id": 19,
+    "raw_material_name": "Metal",
+    "price": 4423,
+    "challan_no": 202,
+    "quantity": 33
+  },
+  {
+    "date": "2000-11-15",
+    "supplier_id": 28,
+    "raw_material_name": "Wooden",
+    "price": 4018,
+    "challan_no": 3676,
+    "quantity": 33
+  },
+  {
+    "date": "1983-01-20",
+    "supplier_id": 1,
+    "raw_material_name": "Cotton",
+    "price": 531,
+    "challan_no": 881,
+    "quantity": 73
+  },
+  {
+    "date": "1985-12-02",
+    "supplier_id": 44,
+    "raw_material_name": "Rubber",
+    "price": 3227,
+    "challan_no": 7632,
+    "quantity": 71
+  },
+  {
+    "date": "1994-04-20",
+    "supplier_id": 47,
+    "raw_material_name": "Steel",
+    "price": 475,
+    "challan_no": 3981,
+    "quantity": 49
+  },
+  {
+    "date": "1995-09-12",
+    "supplier_id": 46,
+    "raw_material_name": "Metal",
+    "price": 2500,
+    "challan_no": 3691,
+    "quantity": 58
+  },
+  {
+    "date": "2008-11-06",
+    "supplier_id": 11,
+    "raw_material_name": "Concrete",
+    "price": 4166,
+    "challan_no": 3657,
+    "quantity": 76
+  },
+  {
+    "date": "2008-06-15",
+    "supplier_id": 30,
+    "raw_material_name": "Concrete",
+    "price": 4162,
+    "challan_no": 9170,
+    "quantity": 57
+  },
+  {
+    "date": "1988-04-18",
+    "supplier_id": 35,
+    "raw_material_name": "Rubber",
+    "price": 3997,
+    "challan_no": 5922,
+    "quantity": 20
+  },
+  {
+    "date": "1983-08-30",
+    "supplier_id": 48,
+    "raw_material_name": "Granite",
+    "price": 4109,
+    "challan_no": 8228,
+    "quantity": 100
+  },
+  {
+    "date": "1997-08-28",
+    "supplier_id": 7,
+    "raw_material_name": "Wooden",
+    "price": 2111,
+    "challan_no": 7581,
+    "quantity": 24
+  },
+  {
+    "date": "1992-07-19",
+    "supplier_id": 5,
+    "raw_material_name": "Frozen",
+    "price": 4362,
+    "challan_no": 6725,
+    "quantity": 23
+  },
+  {
+    "date": "2014-08-31",
+    "supplier_id": 32,
+    "raw_material_name": "Rubber",
+    "price": 4791,
+    "challan_no": 8648,
+    "quantity": 45
+  },
+  {
+    "date": "1998-06-08",
+    "supplier_id": 45,
+    "raw_material_name": "Frozen",
+    "price": 886,
+    "challan_no": 5490,
+    "quantity": 72
+  },
+  {
+    "date": "2012-05-08",
+    "supplier_id": 35,
+    "raw_material_name": "Rubber",
+    "price": 1309,
+    "challan_no": 3367,
+    "quantity": 45
+  },
+  {
+    "date": "2004-03-12",
+    "supplier_id": 38,
+    "raw_material_name": "Soft",
+    "price": 1608,
+    "challan_no": 7368,
+    "quantity": 66
+  },
+  {
+    "date": "1980-03-01",
+    "supplier_id": 8,
+    "raw_material_name": "Steel",
+    "price": 3329,
+    "challan_no": 3281,
+    "quantity": 87
+  },
+  {
+    "date": "2009-09-19",
+    "supplier_id": 11,
+    "raw_material_name": "Frozen",
+    "price": 1492,
+    "challan_no": 9522,
+    "quantity": 66
+  },
+  {
+    "date": "2019-07-15",
+    "supplier_id": 31,
+    "raw_material_name": "Fresh",
+    "price": 2329,
+    "challan_no": 7198,
+    "quantity": 33
+  },
+  {
+    "date": "2014-11-07",
+    "supplier_id": 31,
+    "raw_material_name": "Soft",
+    "price": 2609,
+    "challan_no": 8052,
+    "quantity": 50
+  },
+  {
+    "date": "1992-11-10",
+    "supplier_id": 45,
+    "raw_material_name": "Concrete",
+    "price": 2030,
+    "challan_no": 3077,
+    "quantity": 32
+  },
+  {
+    "date": "1993-02-22",
+    "supplier_id": 50,
+    "raw_material_name": "Concrete",
+    "price": 1954,
+    "challan_no": 7792,
+    "quantity": 26
+  },
+  {
+    "date": "2020-03-12",
+    "supplier_id": 48,
+    "raw_material_name": "Wooden",
+    "price": 1125,
+    "challan_no": 1383,
+    "quantity": 81
+  },
+  {
+    "date": "1997-01-16",
+    "supplier_id": 27,
+    "raw_material_name": "Metal",
+    "price": 2299,
+    "challan_no": 4940,
+    "quantity": 11
+  },
+  {
+    "date": "1992-04-12",
+    "supplier_id": 20,
+    "raw_material_name": "Bronze",
+    "price": 149,
+    "challan_no": 8627,
+    "quantity": 54
+  },
+  {
+    "date": "1999-03-25",
+    "supplier_id": 1,
+    "raw_material_name": "Plastic",
+    "price": 3691,
+    "challan_no": 4223,
+    "quantity": 91
+  },
+  {
+    "date": "2001-03-03",
+    "supplier_id": 24,
+    "raw_material_name": "Fresh",
+    "price": 1200,
+    "challan_no": 365,
+    "quantity": 21
+  },
+  {
+    "date": "1986-04-19",
+    "supplier_id": 12,
+    "raw_material_name": "Fresh",
+    "price": 3748,
+    "challan_no": 4684,
+    "quantity": 41
+  },
+  {
+    "date": "2016-07-10",
+    "supplier_id": 21,
+    "raw_material_name": "Soft",
+    "price": 254,
+    "challan_no": 2644,
+    "quantity": 78
+  },
+  {
+    "date": "1990-08-31",
+    "supplier_id": 27,
+    "raw_material_name": "Metal",
+    "price": 2389,
+    "challan_no": 1304,
+    "quantity": 60
+  },
+  {
+    "date": "2008-07-08",
+    "supplier_id": 4,
+    "raw_material_name": "Bronze",
+    "price": 1687,
+    "challan_no": 922,
+    "quantity": 75
+  },
+  {
+    "date": "1999-08-27",
+    "supplier_id": 19,
+    "raw_material_name": "Plastic",
+    "price": 3501,
+    "challan_no": 4922,
+    "quantity": 7
+  },
+  {
+    "date": "1986-09-04",
+    "supplier_id": 27,
+    "raw_material_name": "Plastic",
+    "price": 2226,
+    "challan_no": 7030,
+    "quantity": 98
+  },
+  {
+    "date": "2012-07-06",
+    "supplier_id": 9,
+    "raw_material_name": "Frozen",
+    "price": 2121,
+    "challan_no": 7068,
+    "quantity": 90
+  },
+  {
+    "date": "2019-06-06",
+    "supplier_id": 12,
+    "raw_material_name": "Rubber",
+    "price": 142,
+    "challan_no": 5705,
+    "quantity": 55
+  },
+  {
+    "date": "1980-09-16",
+    "supplier_id": 40,
+    "raw_material_name": "Fresh",
+    "price": 2499,
+    "challan_no": 9004,
+    "quantity": 90
+  },
+  {
+    "date": "2000-08-10",
+    "supplier_id": 8,
+    "raw_material_name": "Fresh",
+    "price": 889,
+    "challan_no": 487,
+    "quantity": 1
+  },
+  {
+    "date": "2022-10-17",
+    "supplier_id": 27,
+    "raw_material_name": "Cotton",
+    "price": 1042,
+    "challan_no": 6202,
+    "quantity": 36
+  },
+  {
+    "date": "1985-06-11",
+    "supplier_id": 2,
+    "raw_material_name": "Wooden",
+    "price": 4967,
+    "challan_no": 4501,
+    "quantity": 40
+  },
+  {
+    "date": "2020-06-16",
+    "supplier_id": 6,
+    "raw_material_name": "Rubber",
+    "price": 3835,
+    "challan_no": 2093,
+    "quantity": 35
+  },
+  {
+    "date": "2014-10-04",
+    "supplier_id": 50,
+    "raw_material_name": "Bronze",
+    "price": 1909,
+    "challan_no": 2089,
+    "quantity": 74
+  },
+  {
+    "date": "2000-04-03",
+    "supplier_id": 32,
+    "raw_material_name": "Plastic",
+    "price": 3773,
+    "challan_no": 1773,
+    "quantity": 83
+  },
+  {
+    "date": "1987-07-04",
+    "supplier_id": 42,
+    "raw_material_name": "Cotton",
+    "price": 1238,
+    "challan_no": 9404,
+    "quantity": 8
+  },
+  {
+    "date": "2006-12-01",
+    "supplier_id": 50,
+    "raw_material_name": "Soft",
+    "price": 1785,
+    "challan_no": 7007,
+    "quantity": 76
+  },
+  {
+    "date": "1996-10-03",
+    "supplier_id": 15,
+    "raw_material_name": "Concrete",
+    "price": 803,
+    "challan_no": 3037,
+    "quantity": 79
+  },
+  {
+    "date": "2005-07-24",
+    "supplier_id": 49,
+    "raw_material_name": "Wooden",
+    "price": 181,
+    "challan_no": 8112,
+    "quantity": 16
+  },
+  {
+    "date": "1990-05-02",
+    "supplier_id": 30,
+    "raw_material_name": "Concrete",
+    "price": 2391,
+    "challan_no": 1445,
+    "quantity": 56
+  },
+  {
+    "date": "1984-03-20",
+    "supplier_id": 27,
+    "raw_material_name": "Metal",
+    "price": 4320,
+    "challan_no": 9898,
+    "quantity": 98
+  },
+  {
+    "date": "2002-05-08",
+    "supplier_id": 13,
+    "raw_material_name": "Metal",
+    "price": 2164,
+    "challan_no": 3122,
+    "quantity": 50
+  },
+  {
+    "date": "1995-05-15",
+    "supplier_id": 1,
+    "raw_material_name": "Wooden",
+    "price": 2798,
+    "challan_no": 9465,
+    "quantity": 65
+  },
+  {
+    "date": "2018-02-24",
+    "supplier_id": 36,
+    "raw_material_name": "Plastic",
+    "price": 2999,
+    "challan_no": 1057,
+    "quantity": 49
+  },
+  {
+    "date": "2017-12-17",
+    "supplier_id": 34,
+    "raw_material_name": "Metal",
+    "price": 1900,
+    "challan_no": 8416,
+    "quantity": 72
+  },
+  {
+    "date": "2008-07-31",
+    "supplier_id": 25,
+    "raw_material_name": "Plastic",
+    "price": 2996,
+    "challan_no": 2109,
+    "quantity": 13
+  },
+  {
+    "date": "2017-06-30",
+    "supplier_id": 11,
+    "raw_material_name": "Metal",
+    "price": 4259,
+    "challan_no": 3466,
+    "quantity": 67
+  },
+  {
+    "date": "2003-07-24",
+    "supplier_id": 23,
+    "raw_material_name": "Concrete",
+    "price": 2043,
+    "challan_no": 5023,
+    "quantity": 52
+  },
+  {
+    "date": "1990-01-09",
+    "supplier_id": 42,
+    "raw_material_name": "Concrete",
+    "price": 1858,
+    "challan_no": 462,
+    "quantity": 43
+  },
+  {
+    "date": "2002-08-27",
+    "supplier_id": 15,
+    "raw_material_name": "Concrete",
+    "price": 2896,
+    "challan_no": 6930,
+    "quantity": 3
+  },
+  {
+    "date": "2005-01-29",
+    "supplier_id": 48,
+    "raw_material_name": "Plastic",
+    "price": 993,
+    "challan_no": 2875,
+    "quantity": 87
+  },
+  {
+    "date": "2001-03-21",
+    "supplier_id": 40,
+    "raw_material_name": "Rubber",
+    "price": 4801,
+    "challan_no": 2084,
+    "quantity": 79
+  },
+  {
+    "date": "1985-11-13",
+    "supplier_id": 30,
+    "raw_material_name": "Plastic",
+    "price": 3714,
+    "challan_no": 7069,
+    "quantity": 93
+  },
+  {
+    "date": "2021-09-03",
+    "supplier_id": 44,
+    "raw_material_name": "Plastic",
+    "price": 1531,
+    "challan_no": 9676,
+    "quantity": 24
+  },
+  {
+    "date": "2013-03-20",
+    "supplier_id": 14,
+    "raw_material_name": "Granite",
+    "price": 2369,
+    "challan_no": 9687,
+    "quantity": 16
+  },
+  {
+    "date": "1999-07-16",
+    "supplier_id": 35,
+    "raw_material_name": "Cotton",
+    "price": 2825,
+    "challan_no": 9980,
+    "quantity": 14
+  },
+  {
+    "date": "1997-09-20",
+    "supplier_id": 49,
+    "raw_material_name": "Fresh",
+    "price": 4496,
+    "challan_no": 334,
+    "quantity": 7
+  },
+  {
+    "date": "2018-09-28",
+    "supplier_id": 9,
+    "raw_material_name": "Metal",
+    "price": 3389,
+    "challan_no": 8640,
+    "quantity": 67
+  },
+  {
+    "date": "2002-05-03",
+    "supplier_id": 46,
+    "raw_material_name": "Concrete",
+    "price": 4679,
+    "challan_no": 3039,
+    "quantity": 4
+  },
+  {
+    "date": "2016-06-08",
+    "supplier_id": 7,
+    "raw_material_name": "Rubber",
+    "price": 3653,
+    "challan_no": 7817,
+    "quantity": 27
+  },
+  {
+    "date": "2015-07-03",
+    "supplier_id": 34,
+    "raw_material_name": "Bronze",
+    "price": 3437,
+    "challan_no": 3663,
+    "quantity": 32
+  },
+  {
+    "date": "1997-12-11",
+    "supplier_id": 30,
+    "raw_material_name": "Rubber",
+    "price": 2208,
+    "challan_no": 8675,
+    "quantity": 88
+  },
+  {
+    "date": "2022-07-16",
+    "supplier_id": 10,
+    "raw_material_name": "Rubber",
+    "price": 1506,
+    "challan_no": 680,
+    "quantity": 75
+  },
+  {
+    "date": "1986-12-28",
+    "supplier_id": 22,
+    "raw_material_name": "Frozen",
+    "price": 1634,
+    "challan_no": 7182,
+    "quantity": 66
+  },
+  {
+    "date": "1987-10-17",
+    "supplier_id": 3,
+    "raw_material_name": "Soft",
+    "price": 942,
+    "challan_no": 1659,
+    "quantity": 31
+  },
+  {
+    "date": "1981-09-06",
+    "supplier_id": 36,
+    "raw_material_name": "Granite",
+    "price": 3873,
+    "challan_no": 344,
+    "quantity": 9
+  },
+  {
+    "date": "2021-04-13",
+    "supplier_id": 9,
+    "raw_material_name": "Metal",
+    "price": 368,
+    "challan_no": 503,
+    "quantity": 55
+  },
+  {
+    "date": "1993-11-29",
+    "supplier_id": 46,
+    "raw_material_name": "Plastic",
+    "price": 2530,
+    "challan_no": 7401,
+    "quantity": 97
+  },
+  {
+    "date": "1984-08-28",
+    "supplier_id": 46,
+    "raw_material_name": "Bronze",
+    "price": 1412,
+    "challan_no": 4255,
+    "quantity": 26
+  },
+  {
+    "date": "2019-07-23",
+    "supplier_id": 7,
+    "raw_material_name": "Plastic",
+    "price": 4767,
+    "challan_no": 744,
+    "quantity": 78
+  },
+  {
+    "date": "1996-04-29",
+    "supplier_id": 23,
+    "raw_material_name": "Cotton",
+    "price": 1902,
+    "challan_no": 2618,
+    "quantity": 16
+  },
+  {
+    "date": "2006-07-27",
+    "supplier_id": 47,
+    "raw_material_name": "Wooden",
+    "price": 3925,
+    "challan_no": 7274,
+    "quantity": 27
+  },
+  {
+    "date": "1988-03-08",
+    "supplier_id": 42,
+    "raw_material_name": "Granite",
+    "price": 1845,
+    "challan_no": 3652,
+    "quantity": 92
+  },
+  {
+    "date": "2018-04-20",
+    "supplier_id": 18,
+    "raw_material_name": "Plastic",
+    "price": 2247,
+    "challan_no": 3525,
+    "quantity": 72
+  },
+  {
+    "date": "1996-10-06",
+    "supplier_id": 26,
+    "raw_material_name": "Plastic",
+    "price": 932,
+    "challan_no": 4941,
+    "quantity": 13
+  },
+  {
+    "date": "2004-07-08",
+    "supplier_id": 24,
+    "raw_material_name": "Metal",
+    "price": 589,
+    "challan_no": 1058,
+    "quantity": 48
+  },
+  {
+    "date": "2003-03-27",
+    "supplier_id": 42,
+    "raw_material_name": "Rubber",
+    "price": 2648,
+    "challan_no": 6995,
+    "quantity": 17
+  },
+  {
+    "date": "1999-02-07",
+    "supplier_id": 35,
+    "raw_material_name": "Steel",
+    "price": 3216,
+    "challan_no": 3483,
+    "quantity": 69
+  },
+  {
+    "date": "1996-08-10",
+    "supplier_id": 17,
+    "raw_material_name": "Frozen",
+    "price": 577,
+    "challan_no": 7900,
+    "quantity": 85
+  },
+  {
+    "date": "1994-04-04",
+    "supplier_id": 23,
+    "raw_material_name": "Steel",
+    "price": 2875,
+    "challan_no": 1912,
+    "quantity": 76
+  },
+  {
+    "date": "2017-03-25",
+    "supplier_id": 29,
+    "raw_material_name": "Bronze",
+    "price": 496,
+    "challan_no": 2603,
+    "quantity": 20
+  },
+  {
+    "date": "1992-09-23",
+    "supplier_id": 35,
+    "raw_material_name": "Bronze",
+    "price": 321,
+    "challan_no": 7431,
+    "quantity": 9
+  },
+  {
+    "date": "1988-12-26",
+    "supplier_id": 28,
+    "raw_material_name": "Steel",
+    "price": 2926,
+    "challan_no": 4444,
+    "quantity": 56
+  },
+  {
+    "date": "1988-04-26",
+    "supplier_id": 17,
+    "raw_material_name": "Granite",
+    "price": 606,
+    "challan_no": 861,
+    "quantity": 13
+  },
+  {
+    "date": "2000-04-14",
+    "supplier_id": 29,
+    "raw_material_name": "Plastic",
+    "price": 1019,
+    "challan_no": 3946,
+    "quantity": 24
+  },
+  {
+    "date": "1994-03-22",
+    "supplier_id": 45,
+    "raw_material_name": "Rubber",
+    "price": 1977,
+    "challan_no": 3362,
+    "quantity": 50
+  },
+  {
+    "date": "1999-09-17",
+    "supplier_id": 48,
+    "raw_material_name": "Plastic",
+    "price": 1479,
+    "challan_no": 7184,
+    "quantity": 85
+  },
+  {
+    "date": "2012-10-16",
+    "supplier_id": 12,
+    "raw_material_name": "Frozen",
+    "price": 4439,
+    "challan_no": 8164,
+    "quantity": 85
+  },
+  {
+    "date": "1995-05-21",
+    "supplier_id": 34,
+    "raw_material_name": "Soft",
+    "price": 3289,
+    "challan_no": 5901,
+    "quantity": 63
+  },
+  {
+    "date": "2010-07-01",
+    "supplier_id": 22,
+    "raw_material_name": "Granite",
+    "price": 4970,
+    "challan_no": 1036,
+    "quantity": 16
+  },
+  {
+    "date": "1981-12-07",
+    "supplier_id": 23,
+    "raw_material_name": "Rubber",
+    "price": 859,
+    "challan_no": 8011,
+    "quantity": 72
+  },
+  {
+    "date": "1986-07-24",
+    "supplier_id": 18,
+    "raw_material_name": "Cotton",
+    "price": 2036,
+    "challan_no": 261,
+    "quantity": 30
+  },
+  {
+    "date": "1997-01-15",
+    "supplier_id": 22,
+    "raw_material_name": "Wooden",
+    "price": 4949,
+    "challan_no": 5857,
+    "quantity": 57
+  },
+  {
+    "date": "1982-04-14",
+    "supplier_id": 50,
+    "raw_material_name": "Metal",
+    "price": 770,
+    "challan_no": 9510,
+    "quantity": 83
+  },
+  {
+    "date": "2013-05-16",
+    "supplier_id": 50,
+    "raw_material_name": "Rubber",
+    "price": 4941,
+    "challan_no": 8058,
+    "quantity": 35
+  },
+  {
+    "date": "2017-02-25",
+    "supplier_id": 47,
+    "raw_material_name": "Rubber",
+    "price": 4860,
+    "challan_no": 3170,
+    "quantity": 45
+  },
+  {
+    "date": "2003-05-23",
+    "supplier_id": 45,
+    "raw_material_name": "Rubber",
+    "price": 2017,
+    "challan_no": 7210,
+    "quantity": 3
+  },
+  {
+    "date": "1998-08-01",
+    "supplier_id": 41,
+    "raw_material_name": "Concrete",
+    "price": 2939,
+    "challan_no": 3724,
+    "quantity": 13
+  },
+  {
+    "date": "2006-10-12",
+    "supplier_id": 24,
+    "raw_material_name": "Bronze",
+    "price": 1837,
+    "challan_no": 3443,
+    "quantity": 47
+  },
+  {
+    "date": "1998-10-27",
+    "supplier_id": 11,
+    "raw_material_name": "Cotton",
+    "price": 2596,
+    "challan_no": 9025,
+    "quantity": 53
+  },
+  {
+    "date": "1988-03-03",
+    "supplier_id": 35,
+    "raw_material_name": "Rubber",
+    "price": 1176,
+    "challan_no": 6334,
+    "quantity": 58
+  },
+  {
+    "date": "1981-03-18",
+    "supplier_id": 29,
+    "raw_material_name": "Rubber",
+    "price": 1032,
+    "challan_no": 2530,
+    "quantity": 32
+  },
+  {
+    "date": "1998-10-18",
+    "supplier_id": 23,
+    "raw_material_name": "Frozen",
+    "price": 4071,
+    "challan_no": 5837,
+    "quantity": 71
+  },
+  {
+    "date": "2000-08-14",
+    "supplier_id": 4,
+    "raw_material_name": "Plastic",
+    "price": 2903,
+    "challan_no": 8550,
+    "quantity": 41
+  },
+  {
+    "date": "1995-08-13",
+    "supplier_id": 4,
+    "raw_material_name": "Frozen",
+    "price": 3384,
+    "challan_no": 1274,
+    "quantity": 97
+  },
+  {
+    "date": "2006-10-23",
+    "supplier_id": 12,
+    "raw_material_name": "Granite",
+    "price": 3384,
+    "challan_no": 7539,
+    "quantity": 16
+  },
+  {
+    "date": "2019-06-28",
+    "supplier_id": 48,
+    "raw_material_name": "Granite",
+    "price": 2008,
+    "challan_no": 1853,
+    "quantity": 34
+  },
+  {
+    "date": "1981-02-12",
+    "supplier_id": 15,
+    "raw_material_name": "Concrete",
+    "price": 1219,
+    "challan_no": 5157,
+    "quantity": 12
+  },
+  {
+    "date": "2021-04-23",
+    "supplier_id": 30,
+    "raw_material_name": "Bronze",
+    "price": 2601,
+    "challan_no": 2544,
+    "quantity": 93
+  },
+  {
+    "date": "2000-06-16",
+    "supplier_id": 15,
+    "raw_material_name": "Wooden",
+    "price": 4008,
+    "challan_no": 4033,
+    "quantity": 64
+  },
+  {
+    "date": "1981-12-30",
+    "supplier_id": 36,
+    "raw_material_name": "Steel",
+    "price": 4837,
+    "challan_no": 6486,
+    "quantity": 66
+  },
+  {
+    "date": "2009-11-19",
+    "supplier_id": 39,
+    "raw_material_name": "Cotton",
+    "price": 1850,
+    "challan_no": 7989,
+    "quantity": 27
+  },
+  {
+    "date": "1995-09-02",
+    "supplier_id": 43,
+    "raw_material_name": "Steel",
+    "price": 3347,
+    "challan_no": 3707,
+    "quantity": 89
+  },
+  {
+    "date": "2009-12-31",
+    "supplier_id": 12,
+    "raw_material_name": "Frozen",
+    "price": 2858,
+    "challan_no": 5172,
+    "quantity": 35
+  },
+  {
+    "date": "2022-04-23",
+    "supplier_id": 50,
+    "raw_material_name": "Wooden",
+    "price": 1975,
+    "challan_no": 7054,
+    "quantity": 73
+  },
+  {
+    "date": "2016-06-03",
+    "supplier_id": 20,
+    "raw_material_name": "Fresh",
+    "price": 4309,
+    "challan_no": 2304,
+    "quantity": 34
+  },
+  {
+    "date": "2008-01-13",
+    "supplier_id": 20,
+    "raw_material_name": "Granite",
+    "price": 2074,
+    "challan_no": 5616,
+    "quantity": 79
+  },
+  {
+    "date": "2001-11-20",
+    "supplier_id": 8,
+    "raw_material_name": "Plastic",
+    "price": 1011,
+    "challan_no": 5628,
+    "quantity": 61
+  },
+  {
+    "date": "2010-10-09",
+    "supplier_id": 29,
+    "raw_material_name": "Frozen",
+    "price": 1186,
+    "challan_no": 5681,
+    "quantity": 84
+  },
+  {
+    "date": "2019-07-30",
+    "supplier_id": 23,
+    "raw_material_name": "Wooden",
+    "price": 1544,
+    "challan_no": 6862,
+    "quantity": 3
+  },
+  {
+    "date": "1991-02-01",
+    "supplier_id": 1,
+    "raw_material_name": "Fresh",
+    "price": 1801,
+    "challan_no": 2445,
+    "quantity": 99
+  },
+  {
+    "date": "1989-03-24",
+    "supplier_id": 31,
+    "raw_material_name": "Granite",
+    "price": 2125,
+    "challan_no": 1905,
+    "quantity": 28
+  },
+  {
+    "date": "2007-01-18",
+    "supplier_id": 50,
+    "raw_material_name": "Metal",
+    "price": 1466,
+    "challan_no": 4853,
+    "quantity": 52
+  },
+  {
+    "date": "1980-02-22",
+    "supplier_id": 15,
+    "raw_material_name": "Concrete",
+    "price": 2480,
+    "challan_no": 8281,
+    "quantity": 18
+  },
+  {
+    "date": "1985-12-21",
+    "supplier_id": 31,
+    "raw_material_name": "Metal",
+    "price": 4696,
+    "challan_no": 1498,
+    "quantity": 86
+  },
+  {
+    "date": "2000-09-22",
+    "supplier_id": 34,
+    "raw_material_name": "Bronze",
+    "price": 4371,
+    "challan_no": 7221,
+    "quantity": 51
+  },
+  {
+    "date": "2022-12-24",
+    "supplier_id": 41,
+    "raw_material_name": "Steel",
+    "price": 2433,
+    "challan_no": 9732,
+    "quantity": 48
+  },
+  {
+    "date": "2012-04-02",
+    "supplier_id": 30,
+    "raw_material_name": "Rubber",
+    "price": 731,
+    "challan_no": 7009,
+    "quantity": 18
+  },
+  {
+    "date": "1982-04-28",
+    "supplier_id": 6,
+    "raw_material_name": "Metal",
+    "price": 1753,
+    "challan_no": 6543,
+    "quantity": 39
+  },
+  {
+    "date": "2007-06-29",
+    "supplier_id": 22,
+    "raw_material_name": "Plastic",
+    "price": 2007,
+    "challan_no": 9949,
+    "quantity": 43
+  },
+  {
+    "date": "2008-06-19",
+    "supplier_id": 6,
+    "raw_material_name": "Plastic",
+    "price": 3700,
+    "challan_no": 188,
+    "quantity": 51
+  },
+  {
+    "date": "2017-11-21",
+    "supplier_id": 35,
+    "raw_material_name": "Granite",
+    "price": 3894,
+    "challan_no": 2155,
+    "quantity": 15
+  },
+  {
+    "date": "2006-11-15",
+    "supplier_id": 5,
+    "raw_material_name": "Plastic",
+    "price": 1811,
+    "challan_no": 2828,
+    "quantity": 2
+  },
+  {
+    "date": "2013-07-19",
+    "supplier_id": 12,
+    "raw_material_name": "Metal",
+    "price": 4277,
+    "challan_no": 5975,
+    "quantity": 8
+  },
+  {
+    "date": "1981-08-27",
+    "supplier_id": 21,
+    "raw_material_name": "Wooden",
+    "price": 3622,
+    "challan_no": 6144,
+    "quantity": 40
+  },
+  {
+    "date": "1991-10-26",
+    "supplier_id": 1,
+    "raw_material_name": "Concrete",
+    "price": 1997,
+    "challan_no": 8473,
+    "quantity": 12
+  },
+  {
+    "date": "2020-01-29",
+    "supplier_id": 47,
+    "raw_material_name": "Steel",
+    "price": 542,
+    "challan_no": 9721,
+    "quantity": 2
+  },
+  {
+    "date": "2010-01-20",
+    "supplier_id": 12,
+    "raw_material_name": "Rubber",
+    "price": 4968,
+    "challan_no": 9867,
+    "quantity": 9
+  },
+  {
+    "date": "1995-04-08",
+    "supplier_id": 36,
+    "raw_material_name": "Granite",
+    "price": 4987,
+    "challan_no": 9956,
+    "quantity": 45
+  },
+  {
+    "date": "1995-07-03",
+    "supplier_id": 14,
+    "raw_material_name": "Frozen",
+    "price": 2338,
+    "challan_no": 7580,
+    "quantity": 78
+  },
+  {
+    "date": "1984-07-26",
+    "supplier_id": 23,
+    "raw_material_name": "Metal",
+    "price": 1358,
+    "challan_no": 462,
+    "quantity": 18
+  },
+  {
+    "date": "2011-10-28",
+    "supplier_id": 45,
+    "raw_material_name": "Fresh",
+    "price": 260,
+    "challan_no": 871,
+    "quantity": 39
+  },
+  {
+    "date": "2019-05-26",
+    "supplier_id": 43,
+    "raw_material_name": "Rubber",
+    "price": 3275,
+    "challan_no": 5648,
+    "quantity": 68
+  },
+  {
+    "date": "1997-11-05",
+    "supplier_id": 15,
+    "raw_material_name": "Plastic",
+    "price": 1369,
+    "challan_no": 1126,
+    "quantity": 96
+  },
+  {
+    "date": "1992-10-03",
+    "supplier_id": 41,
+    "raw_material_name": "Concrete",
+    "price": 3796,
+    "challan_no": 6966,
+    "quantity": 47
+  },
+  {
+    "date": "2012-07-03",
+    "supplier_id": 16,
+    "raw_material_name": "Granite",
+    "price": 2770,
+    "challan_no": 9527,
+    "quantity": 77
+  },
+  {
+    "date": "2007-06-24",
+    "supplier_id": 28,
+    "raw_material_name": "Steel",
+    "price": 484,
+    "challan_no": 2588,
+    "quantity": 67
+  },
+  {
+    "date": "2011-11-25",
+    "supplier_id": 10,
+    "raw_material_name": "Fresh",
+    "price": 2383,
+    "challan_no": 4399,
+    "quantity": 70
+  },
+  {
+    "date": "1984-02-01",
+    "supplier_id": 36,
+    "raw_material_name": "Fresh",
+    "price": 1681,
+    "challan_no": 8442,
+    "quantity": 56
+  },
+  {
+    "date": "2013-10-16",
+    "supplier_id": 33,
+    "raw_material_name": "Frozen",
+    "price": 2608,
+    "challan_no": 5002,
+    "quantity": 38
+  },
+  {
+    "date": "2000-08-25",
+    "supplier_id": 23,
+    "raw_material_name": "Plastic",
+    "price": 2995,
+    "challan_no": 4022,
+    "quantity": 12
+  },
+  {
+    "date": "1987-12-28",
+    "supplier_id": 44,
+    "raw_material_name": "Plastic",
+    "price": 2161,
+    "challan_no": 3711,
+    "quantity": 10
+  },
+  {
+    "date": "1998-02-06",
+    "supplier_id": 2,
+    "raw_material_name": "Steel",
+    "price": 3458,
+    "challan_no": 4075,
+    "quantity": 83
+  },
+  {
+    "date": "1989-09-05",
+    "supplier_id": 24,
+    "raw_material_name": "Rubber",
+    "price": 203,
+    "challan_no": 6318,
+    "quantity": 97
+  },
+  {
+    "date": "2007-11-19",
+    "supplier_id": 35,
+    "raw_material_name": "Frozen",
+    "price": 4705,
+    "challan_no": 9499,
+    "quantity": 63
+  },
+  {
+    "date": "2014-05-19",
+    "supplier_id": 34,
+    "raw_material_name": "Fresh",
+    "price": 2095,
+    "challan_no": 5274,
+    "quantity": 40
+  },
+  {
+    "date": "2011-05-27",
+    "supplier_id": 15,
+    "raw_material_name": "Rubber",
+    "price": 3952,
+    "challan_no": 8156,
+    "quantity": 80
+  },
+  {
+    "date": "2018-04-04",
+    "supplier_id": 36,
+    "raw_material_name": "Concrete",
+    "price": 998,
+    "challan_no": 1797,
+    "quantity": 53
+  },
+  {
+    "date": "2010-07-01",
+    "supplier_id": 34,
+    "raw_material_name": "Rubber",
+    "price": 2148,
+    "challan_no": 405,
+    "quantity": 30
+  },
+  {
+    "date": "2020-01-19",
+    "supplier_id": 36,
+    "raw_material_name": "Cotton",
+    "price": 1739,
+    "challan_no": 4014,
+    "quantity": 100
+  },
+  {
+    "date": "2019-12-08",
+    "supplier_id": 6,
+    "raw_material_name": "Metal",
+    "price": 4628,
+    "challan_no": 1608,
+    "quantity": 4
+  },
+  {
+    "date": "2005-02-03",
+    "supplier_id": 10,
+    "raw_material_name": "Plastic",
+    "price": 3804,
+    "challan_no": 1338,
+    "quantity": 39
+  },
+  {
+    "date": "2000-05-05",
+    "supplier_id": 32,
+    "raw_material_name": "Fresh",
+    "price": 1807,
+    "challan_no": 3337,
+    "quantity": 32
+  },
+  {
+    "date": "2013-05-01",
+    "supplier_id": 40,
+    "raw_material_name": "Frozen",
+    "price": 2474,
+    "challan_no": 7151,
+    "quantity": 93
+  },
+  {
+    "date": "2002-02-19",
+    "supplier_id": 47,
+    "raw_material_name": "Granite",
+    "price": 2478,
+    "challan_no": 3457,
+    "quantity": 91
+  },
+  {
+    "date": "1987-10-14",
+    "supplier_id": 4,
+    "raw_material_name": "Soft",
+    "price": 2052,
+    "challan_no": 7716,
+    "quantity": 91
+  },
+  {
+    "date": "1995-02-05",
+    "supplier_id": 16,
+    "raw_material_name": "Wooden",
+    "price": 523,
+    "challan_no": 3441,
+    "quantity": 46
+  },
+  {
+    "date": "1988-03-17",
+    "supplier_id": 11,
+    "raw_material_name": "Fresh",
+    "price": 4794,
+    "challan_no": 518,
+    "quantity": 44
+  },
+  {
+    "date": "1997-08-08",
+    "supplier_id": 15,
+    "raw_material_name": "Granite",
+    "price": 2287,
+    "challan_no": 6500,
+    "quantity": 33
+  },
+  {
+    "date": "1988-08-12",
+    "supplier_id": 22,
+    "raw_material_name": "Frozen",
+    "price": 3422,
+    "challan_no": 8126,
+    "quantity": 38
+  },
+  {
+    "date": "1990-12-03",
+    "supplier_id": 47,
+    "raw_material_name": "Rubber",
+    "price": 1056,
+    "challan_no": 5426,
+    "quantity": 69
+  },
+  {
+    "date": "1989-07-28",
+    "supplier_id": 5,
+    "raw_material_name": "Plastic",
+    "price": 2939,
+    "challan_no": 7554,
+    "quantity": 3
+  },
+  {
+    "date": "2000-09-01",
+    "supplier_id": 27,
+    "raw_material_name": "Metal",
+    "price": 2760,
+    "challan_no": 7263,
+    "quantity": 18
+  },
+  {
+    "date": "2007-09-20",
+    "supplier_id": 39,
+    "raw_material_name": "Frozen",
+    "price": 544,
+    "challan_no": 6432,
+    "quantity": 86
+  },
+  {
+    "date": "2018-03-02",
+    "supplier_id": 13,
+    "raw_material_name": "Frozen",
+    "price": 704,
+    "challan_no": 3852,
+    "quantity": 32
+  },
+  {
+    "date": "2015-06-09",
+    "supplier_id": 38,
+    "raw_material_name": "Soft",
+    "price": 100,
+    "challan_no": 8377,
+    "quantity": 60
+  },
+  {
+    "date": "2011-05-30",
+    "supplier_id": 5,
+    "raw_material_name": "Frozen",
+    "price": 4483,
+    "challan_no": 3056,
+    "quantity": 73
+  },
+  {
+    "date": "2011-11-06",
+    "supplier_id": 34,
+    "raw_material_name": "Steel",
+    "price": 4325,
+    "challan_no": 6798,
+    "quantity": 1
+  },
+  {
+    "date": "1999-09-27",
+    "supplier_id": 42,
+    "raw_material_name": "Metal",
+    "price": 3434,
+    "challan_no": 5655,
+    "quantity": 86
+  },
+  {
+    "date": "1980-01-29",
+    "supplier_id": 1,
+    "raw_material_name": "Rubber",
+    "price": 3680,
+    "challan_no": 3969,
+    "quantity": 56
+  },
+  {
+    "date": "1998-11-20",
+    "supplier_id": 27,
+    "raw_material_name": "Plastic",
+    "price": 3324,
+    "challan_no": 9332,
+    "quantity": 9
+  },
+  {
+    "date": "1990-08-30",
+    "supplier_id": 7,
+    "raw_material_name": "Rubber",
+    "price": 4008,
+    "challan_no": 6599,
+    "quantity": 75
+  },
+  {
+    "date": "2019-03-01",
+    "supplier_id": 49,
+    "raw_material_name": "Rubber",
+    "price": 3154,
+    "challan_no": 8441,
+    "quantity": 84
+  },
+  {
+    "date": "2010-11-06",
+    "supplier_id": 50,
+    "raw_material_name": "Granite",
+    "price": 1147,
+    "challan_no": 7115,
+    "quantity": 52
+  },
+  {
+    "date": "1990-01-11",
+    "supplier_id": 16,
+    "raw_material_name": "Soft",
+    "price": 1231,
+    "challan_no": 311,
+    "quantity": 56
+  },
+  {
+    "date": "2019-07-03",
+    "supplier_id": 25,
+    "raw_material_name": "Granite",
+    "price": 2901,
+    "challan_no": 5534,
+    "quantity": 94
+  },
+  {
+    "date": "1983-06-28",
+    "supplier_id": 40,
+    "raw_material_name": "Concrete",
+    "price": 122,
+    "challan_no": 9380,
+    "quantity": 80
+  },
+  {
+    "date": "2002-08-05",
+    "supplier_id": 5,
+    "raw_material_name": "Rubber",
+    "price": 588,
+    "challan_no": 2702,
+    "quantity": 5
+  },
+  {
+    "date": "1988-04-21",
+    "supplier_id": 19,
+    "raw_material_name": "Plastic",
+    "price": 1517,
+    "challan_no": 443,
+    "quantity": 86
+  },
+  {
+    "date": "1999-10-20",
+    "supplier_id": 32,
+    "raw_material_name": "Fresh",
+    "price": 2183,
+    "challan_no": 2142,
+    "quantity": 35
+  },
+  {
+    "date": "2014-12-27",
+    "supplier_id": 1,
+    "raw_material_name": "Frozen",
+    "price": 1757,
+    "challan_no": 3236,
+    "quantity": 1
+  },
+  {
+    "date": "2014-12-14",
+    "supplier_id": 41,
+    "raw_material_name": "Bronze",
+    "price": 4104,
+    "challan_no": 9488,
+    "quantity": 78
+  },
+  {
+    "date": "1984-05-18",
+    "supplier_id": 40,
+    "raw_material_name": "Cotton",
+    "price": 2295,
+    "challan_no": 7307,
+    "quantity": 76
+  },
+  {
+    "date": "2001-07-04",
+    "supplier_id": 2,
+    "raw_material_name": "Bronze",
+    "price": 4026,
+    "challan_no": 5657,
+    "quantity": 54
+  },
+  {
+    "date": "2020-09-30",
+    "supplier_id": 41,
+    "raw_material_name": "Wooden",
+    "price": 1729,
+    "challan_no": 8965,
+    "quantity": 36
+  },
+  {
+    "date": "2017-12-28",
+    "supplier_id": 24,
+    "raw_material_name": "Frozen",
+    "price": 2895,
+    "challan_no": 5979,
+    "quantity": 93
+  },
+  {
+    "date": "2015-12-29",
+    "supplier_id": 46,
+    "raw_material_name": "Cotton",
+    "price": 2810,
+    "challan_no": 7602,
+    "quantity": 54
+  },
+  {
+    "date": "1991-09-22",
+    "supplier_id": 1,
+    "raw_material_name": "Rubber",
+    "price": 4140,
+    "challan_no": 6630,
+    "quantity": 59
+  },
+  {
+    "date": "1996-03-20",
+    "supplier_id": 12,
+    "raw_material_name": "Soft",
+    "price": 2378,
+    "challan_no": 9731,
+    "quantity": 50
+  },
+  {
+    "date": "1997-05-16",
+    "supplier_id": 28,
+    "raw_material_name": "Wooden",
+    "price": 4106,
+    "challan_no": 5247,
+    "quantity": 85
+  },
+  {
+    "date": "1985-02-03",
+    "supplier_id": 36,
+    "raw_material_name": "Granite",
+    "price": 4394,
+    "challan_no": 7314,
+    "quantity": 31
+  },
+  {
+    "date": "2012-06-06",
+    "supplier_id": 47,
+    "raw_material_name": "Fresh",
+    "price": 842,
+    "challan_no": 7954,
+    "quantity": 51
+  },
+  {
+    "date": "1989-05-07",
+    "supplier_id": 45,
+    "raw_material_name": "Frozen",
+    "price": 263,
+    "challan_no": 5175,
+    "quantity": 99
+  },
+  {
+    "date": "2014-12-31",
+    "supplier_id": 43,
+    "raw_material_name": "Cotton",
+    "price": 1646,
+    "challan_no": 2289,
+    "quantity": 27
+  },
+  {
+    "date": "1989-10-21",
+    "supplier_id": 15,
+    "raw_material_name": "Metal",
+    "price": 3646,
+    "challan_no": 107,
+    "quantity": 83
+  },
+  {
+    "date": "2007-05-11",
+    "supplier_id": 21,
+    "raw_material_name": "Soft",
+    "price": 3954,
+    "challan_no": 7603,
+    "quantity": 53
+  },
+  {
+    "date": "2008-08-30",
+    "supplier_id": 25,
+    "raw_material_name": "Concrete",
+    "price": 3772,
+    "challan_no": 9868,
+    "quantity": 57
+  },
+  {
+    "date": "1986-07-19",
+    "supplier_id": 38,
+    "raw_material_name": "Bronze",
+    "price": 3991,
+    "challan_no": 8475,
+    "quantity": 60
+  },
+  {
+    "date": "1988-01-07",
+    "supplier_id": 43,
+    "raw_material_name": "Concrete",
+    "price": 1439,
+    "challan_no": 970,
+    "quantity": 91
+  },
+  {
+    "date": "1987-09-14",
+    "supplier_id": 26,
+    "raw_material_name": "Granite",
+    "price": 1544,
+    "challan_no": 5568,
+    "quantity": 10
+  },
+  {
+    "date": "2012-12-15",
+    "supplier_id": 30,
+    "raw_material_name": "Cotton",
+    "price": 3824,
+    "challan_no": 6497,
+    "quantity": 51
+  },
+  {
+    "date": "1988-11-29",
+    "supplier_id": 48,
+    "raw_material_name": "Fresh",
+    "price": 3504,
+    "challan_no": 9831,
+    "quantity": 6
+  },
+  {
+    "date": "2022-09-05",
+    "supplier_id": 18,
+    "raw_material_name": "Wooden",
+    "price": 4088,
+    "challan_no": 5864,
+    "quantity": 72
+  },
+  {
+    "date": "1982-01-12",
+    "supplier_id": 34,
+    "raw_material_name": "Cotton",
+    "price": 4707,
+    "challan_no": 5518,
+    "quantity": 44
+  },
+  {
+    "date": "2008-01-12",
+    "supplier_id": 19,
+    "raw_material_name": "Cotton",
+    "price": 3775,
+    "challan_no": 6684,
+    "quantity": 47
+  },
+  {
+    "date": "2011-12-06",
+    "supplier_id": 17,
+    "raw_material_name": "Soft",
+    "price": 4000,
+    "challan_no": 7048,
+    "quantity": 37
+  },
+  {
+    "date": "1990-10-03",
+    "supplier_id": 20,
+    "raw_material_name": "Bronze",
+    "price": 3971,
+    "challan_no": 7584,
+    "quantity": 17
+  },
+  {
+    "date": "1986-01-18",
+    "supplier_id": 43,
+    "raw_material_name": "Steel",
+    "price": 904,
+    "challan_no": 1688,
+    "quantity": 54
+  },
+  {
+    "date": "1994-10-04",
+    "supplier_id": 23,
+    "raw_material_name": "Soft",
+    "price": 4786,
+    "challan_no": 4176,
+    "quantity": 92
+  },
+  {
+    "date": "2020-01-09",
+    "supplier_id": 37,
+    "raw_material_name": "Frozen",
+    "price": 2470,
+    "challan_no": 7338,
+    "quantity": 88
+  },
+  {
+    "date": "1988-12-09",
+    "supplier_id": 26,
+    "raw_material_name": "Fresh",
+    "price": 1957,
+    "challan_no": 1992,
+    "quantity": 19
+  },
+  {
+    "date": "1994-12-22",
+    "supplier_id": 26,
+    "raw_material_name": "Frozen",
+    "price": 471,
+    "challan_no": 4233,
+    "quantity": 70
+  },
+  {
+    "date": "1982-02-22",
+    "supplier_id": 47,
+    "raw_material_name": "Bronze",
+    "price": 3917,
+    "challan_no": 6543,
+    "quantity": 52
+  },
+  {
+    "date": "2001-10-30",
+    "supplier_id": 16,
+    "raw_material_name": "Frozen",
+    "price": 1181,
+    "challan_no": 2154,
+    "quantity": 66
+  },
+  {
+    "date": "1980-04-13",
+    "supplier_id": 22,
+    "raw_material_name": "Metal",
+    "price": 3451,
+    "challan_no": 6363,
+    "quantity": 2
+  },
+  {
+    "date": "2003-07-08",
+    "supplier_id": 8,
+    "raw_material_name": "Wooden",
+    "price": 2504,
+    "challan_no": 675,
+    "quantity": 15
+  },
+  {
+    "date": "2019-05-22",
+    "supplier_id": 27,
+    "raw_material_name": "Plastic",
+    "price": 4939,
+    "challan_no": 7402,
+    "quantity": 14
+  },
+  {
+    "date": "2000-11-08",
+    "supplier_id": 50,
+    "raw_material_name": "Bronze",
+    "price": 2889,
+    "challan_no": 2104,
+    "quantity": 16
+  },
+  {
+    "date": "1984-03-05",
+    "supplier_id": 14,
+    "raw_material_name": "Metal",
+    "price": 3034,
+    "challan_no": 9832,
+    "quantity": 84
+  },
+  {
+    "date": "2009-03-13",
+    "supplier_id": 1,
+    "raw_material_name": "Granite",
+    "price": 1155,
+    "challan_no": 204,
+    "quantity": 93
+  },
+  {
+    "date": "2010-02-09",
+    "supplier_id": 49,
+    "raw_material_name": "Wooden",
+    "price": 4677,
+    "challan_no": 5085,
+    "quantity": 97
+  },
+  {
+    "date": "2000-02-06",
+    "supplier_id": 22,
+    "raw_material_name": "Steel",
+    "price": 3762,
+    "challan_no": 5267,
+    "quantity": 12
+  },
+  {
+    "date": "1989-06-29",
+    "supplier_id": 9,
+    "raw_material_name": "Soft",
+    "price": 1430,
+    "challan_no": 8422,
+    "quantity": 17
+  },
+  {
+    "date": "2019-04-19",
+    "supplier_id": 12,
+    "raw_material_name": "Metal",
+    "price": 1532,
+    "challan_no": 7812,
+    "quantity": 89
+  },
+  {
+    "date": "1999-10-08",
+    "supplier_id": 9,
+    "raw_material_name": "Cotton",
+    "price": 374,
+    "challan_no": 8968,
+    "quantity": 90
+  },
+  {
+    "date": "1992-12-18",
+    "supplier_id": 49,
+    "raw_material_name": "Steel",
+    "price": 1110,
+    "challan_no": 5741,
+    "quantity": 33
+  },
+  {
+    "date": "1982-12-09",
+    "supplier_id": 40,
+    "raw_material_name": "Bronze",
+    "price": 2570,
+    "challan_no": 6170,
+    "quantity": 64
+  },
+  {
+    "date": "1985-12-18",
+    "supplier_id": 3,
+    "raw_material_name": "Concrete",
+    "price": 4076,
+    "challan_no": 9001,
+    "quantity": 97
+  },
+  {
+    "date": "1998-11-10",
+    "supplier_id": 23,
+    "raw_material_name": "Metal",
+    "price": 1736,
+    "challan_no": 4519,
+    "quantity": 15
+  },
+  {
+    "date": "1991-01-03",
+    "supplier_id": 3,
+    "raw_material_name": "Cotton",
+    "price": 1033,
+    "challan_no": 4009,
+    "quantity": 84
+  },
+  {
+    "date": "2006-06-08",
+    "supplier_id": 15,
+    "raw_material_name": "Rubber",
+    "price": 3361,
+    "challan_no": 6139,
+    "quantity": 7
+  },
+  {
+    "date": "1988-08-31",
+    "supplier_id": 50,
+    "raw_material_name": "Wooden",
+    "price": 3462,
+    "challan_no": 5997,
+    "quantity": 98
+  },
+  {
+    "date": "1986-06-13",
+    "supplier_id": 39,
+    "raw_material_name": "Soft",
+    "price": 3457,
+    "challan_no": 2179,
+    "quantity": 75
+  },
+  {
+    "date": "2003-03-04",
+    "supplier_id": 32,
+    "raw_material_name": "Wooden",
+    "price": 4661,
+    "challan_no": 7064,
+    "quantity": 56
+  },
+  {
+    "date": "2019-02-11",
+    "supplier_id": 14,
+    "raw_material_name": "Fresh",
+    "price": 4713,
+    "challan_no": 9677,
+    "quantity": 66
+  },
+  {
+    "date": "1995-10-13",
+    "supplier_id": 42,
+    "raw_material_name": "Metal",
+    "price": 2824,
+    "challan_no": 9955,
+    "quantity": 67
+  },
+  {
+    "date": "1986-05-06",
+    "supplier_id": 20,
+    "raw_material_name": "Wooden",
+    "price": 1297,
+    "challan_no": 7839,
+    "quantity": 35
+  },
+  {
+    "date": "1987-06-17",
+    "supplier_id": 8,
+    "raw_material_name": "Bronze",
+    "price": 3280,
+    "challan_no": 2529,
+    "quantity": 17
+  },
+  {
+    "date": "1991-09-30",
+    "supplier_id": 7,
+    "raw_material_name": "Steel",
+    "price": 2002,
+    "challan_no": 8742,
+    "quantity": 84
+  },
+  {
+    "date": "1998-05-11",
+    "supplier_id": 39,
+    "raw_material_name": "Soft",
+    "price": 1079,
+    "challan_no": 4945,
+    "quantity": 50
+  },
+  {
+    "date": "1998-01-15",
+    "supplier_id": 11,
+    "raw_material_name": "Concrete",
+    "price": 106,
+    "challan_no": 3626,
+    "quantity": 61
+  },
+  {
+    "date": "2014-08-10",
+    "supplier_id": 28,
+    "raw_material_name": "Plastic",
+    "price": 4765,
+    "challan_no": 8717,
+    "quantity": 45
+  },
+  {
+    "date": "2021-06-15",
+    "supplier_id": 5,
+    "raw_material_name": "Plastic",
+    "price": 2177,
+    "challan_no": 6010,
+    "quantity": 28
+  },
+  {
+    "date": "2008-02-14",
+    "supplier_id": 41,
+    "raw_material_name": "Granite",
+    "price": 2935,
+    "challan_no": 7721,
+    "quantity": 63
+  },
+  {
+    "date": "1985-09-16",
+    "supplier_id": 33,
+    "raw_material_name": "Cotton",
+    "price": 2407,
+    "challan_no": 2047,
+    "quantity": 84
+  },
+  {
+    "date": "1992-11-27",
+    "supplier_id": 22,
+    "raw_material_name": "Fresh",
+    "price": 1209,
+    "challan_no": 9271,
+    "quantity": 59
+  },
+  {
+    "date": "1989-09-14",
+    "supplier_id": 19,
+    "raw_material_name": "Soft",
+    "price": 2169,
+    "challan_no": 5679,
+    "quantity": 86
+  },
+  {
+    "date": "2006-11-15",
+    "supplier_id": 8,
+    "raw_material_name": "Soft",
+    "price": 256,
+    "challan_no": 7011,
+    "quantity": 28
+  },
+  {
+    "date": "1988-12-23",
+    "supplier_id": 40,
+    "raw_material_name": "Frozen",
+    "price": 4755,
+    "challan_no": 3744,
+    "quantity": 5
+  },
+  {
+    "date": "2020-05-22",
+    "supplier_id": 42,
+    "raw_material_name": "Cotton",
+    "price": 3017,
+    "challan_no": 7011,
+    "quantity": 16
+  },
+  {
+    "date": "2001-08-12",
+    "supplier_id": 50,
+    "raw_material_name": "Concrete",
+    "price": 2482,
+    "challan_no": 8041,
+    "quantity": 50
+  },
+  {
+    "date": "2003-01-30",
+    "supplier_id": 39,
+    "raw_material_name": "Plastic",
+    "price": 4508,
+    "challan_no": 4312,
+    "quantity": 3
+  },
+  {
+    "date": "1987-08-07",
+    "supplier_id": 49,
+    "raw_material_name": "Concrete",
+    "price": 1744,
+    "challan_no": 5666,
+    "quantity": 91
+  },
+  {
+    "date": "2012-12-21",
+    "supplier_id": 41,
+    "raw_material_name": "Rubber",
+    "price": 1822,
+    "challan_no": 3464,
+    "quantity": 33
+  },
+  {
+    "date": "2012-03-21",
+    "supplier_id": 32,
+    "raw_material_name": "Metal",
+    "price": 4143,
+    "challan_no": 5766,
+    "quantity": 68
+  },
+  {
+    "date": "2022-11-03",
+    "supplier_id": 2,
+    "raw_material_name": "Wooden",
+    "price": 3783,
+    "challan_no": 1817,
+    "quantity": 77
+  },
+  {
+    "date": "2003-11-16",
+    "supplier_id": 30,
+    "raw_material_name": "Concrete",
+    "price": 2095,
+    "challan_no": 5589,
+    "quantity": 60
+  },
+  {
+    "date": "1984-01-17",
+    "supplier_id": 37,
+    "raw_material_name": "Soft",
+    "price": 2764,
+    "challan_no": 6233,
+    "quantity": 11
+  },
+  {
+    "date": "1982-01-11",
+    "supplier_id": 8,
+    "raw_material_name": "Plastic",
+    "price": 785,
+    "challan_no": 273,
+    "quantity": 78
+  },
+  {
+    "date": "2022-06-24",
+    "supplier_id": 50,
+    "raw_material_name": "Wooden",
+    "price": 4181,
+    "challan_no": 7457,
+    "quantity": 83
+  },
+  {
+    "date": "2000-01-16",
+    "supplier_id": 30,
+    "raw_material_name": "Bronze",
+    "price": 492,
+    "challan_no": 1114,
+    "quantity": 66
+  },
+  {
+    "date": "2015-06-06",
+    "supplier_id": 21,
+    "raw_material_name": "Soft",
+    "price": 1587,
+    "challan_no": 5738,
+    "quantity": 97
+  },
+  {
+    "date": "2000-09-26",
+    "supplier_id": 1,
+    "raw_material_name": "Rubber",
+    "price": 1131,
+    "challan_no": 3878,
+    "quantity": 83
+  },
+  {
+    "date": "2015-08-07",
+    "supplier_id": 32,
+    "raw_material_name": "Cotton",
+    "price": 4343,
+    "challan_no": 7633,
+    "quantity": 81
+  },
+  {
+    "date": "1986-07-10",
+    "supplier_id": 31,
+    "raw_material_name": "Soft",
+    "price": 327,
+    "challan_no": 5220,
+    "quantity": 73
+  },
+  {
+    "date": "1991-02-11",
+    "supplier_id": 41,
+    "raw_material_name": "Frozen",
+    "price": 3615,
+    "challan_no": 4721,
+    "quantity": 38
+  },
+  {
+    "date": "1987-12-01",
+    "supplier_id": 50,
+    "raw_material_name": "Granite",
+    "price": 940,
+    "challan_no": 8689,
+    "quantity": 9
+  },
+  {
+    "date": "1984-08-17",
+    "supplier_id": 34,
+    "raw_material_name": "Wooden",
+    "price": 926,
+    "challan_no": 4936,
+    "quantity": 1
+  },
+  {
+    "date": "1995-01-18",
+    "supplier_id": 33,
+    "raw_material_name": "Concrete",
+    "price": 4573,
+    "challan_no": 4602,
+    "quantity": 14
+  },
+  {
+    "date": "2008-10-12",
+    "supplier_id": 39,
+    "raw_material_name": "Frozen",
+    "price": 3553,
+    "challan_no": 9241,
+    "quantity": 68
+  },
+  {
+    "date": "1992-11-12",
+    "supplier_id": 20,
+    "raw_material_name": "Cotton",
+    "price": 3323,
+    "challan_no": 6544,
+    "quantity": 63
+  },
+  {
+    "date": "2020-05-28",
+    "supplier_id": 36,
+    "raw_material_name": "Fresh",
+    "price": 3434,
+    "challan_no": 1075,
+    "quantity": 84
+  },
+  {
+    "date": "1980-03-24",
+    "supplier_id": 30,
+    "raw_material_name": "Soft",
+    "price": 1103,
+    "challan_no": 6216,
+    "quantity": 55
+  },
+  {
+    "date": "2002-10-26",
+    "supplier_id": 9,
+    "raw_material_name": "Plastic",
+    "price": 1187,
+    "challan_no": 1246,
+    "quantity": 63
+  },
+  {
+    "date": "2009-10-07",
+    "supplier_id": 31,
+    "raw_material_name": "Frozen",
+    "price": 4151,
+    "challan_no": 7578,
+    "quantity": 33
+  },
+  {
+    "date": "2014-04-14",
+    "supplier_id": 10,
+    "raw_material_name": "Fresh",
+    "price": 2111,
+    "challan_no": 3695,
+    "quantity": 76
+  },
+  {
+    "date": "1989-03-09",
+    "supplier_id": 5,
+    "raw_material_name": "Plastic",
+    "price": 4935,
+    "challan_no": 967,
+    "quantity": 41
+  },
+  {
+    "date": "1984-08-20",
+    "supplier_id": 2,
+    "raw_material_name": "Cotton",
+    "price": 2191,
+    "challan_no": 8533,
+    "quantity": 93
+  },
+  {
+    "date": "2003-03-17",
+    "supplier_id": 31,
+    "raw_material_name": "Metal",
+    "price": 2302,
+    "challan_no": 4706,
+    "quantity": 48
+  },
+  {
+    "date": "2021-11-23",
+    "supplier_id": 27,
+    "raw_material_name": "Plastic",
+    "price": 712,
+    "challan_no": 1543,
+    "quantity": 10
+  },
+  {
+    "date": "1980-05-17",
+    "supplier_id": 11,
+    "raw_material_name": "Rubber",
+    "price": 1046,
+    "challan_no": 8160,
+    "quantity": 10
+  },
+  {
+    "date": "2003-08-27",
+    "supplier_id": 24,
+    "raw_material_name": "Granite",
+    "price": 137,
+    "challan_no": 6491,
+    "quantity": 14
+  },
+  {
+    "date": "2005-01-15",
+    "supplier_id": 24,
+    "raw_material_name": "Granite",
+    "price": 3620,
+    "challan_no": 140,
+    "quantity": 33
+  },
+  {
+    "date": "1986-08-07",
+    "supplier_id": 41,
+    "raw_material_name": "Soft",
+    "price": 1000,
+    "challan_no": 487,
+    "quantity": 42
+  },
+  {
+    "date": "2016-07-14",
+    "supplier_id": 17,
+    "raw_material_name": "Metal",
+    "price": 2376,
+    "challan_no": 6029,
+    "quantity": 14
+  },
+  {
+    "date": "2005-07-02",
+    "supplier_id": 5,
+    "raw_material_name": "Soft",
+    "price": 4212,
+    "challan_no": 2318,
+    "quantity": 3
+  },
+  {
+    "date": "1997-04-23",
+    "supplier_id": 4,
+    "raw_material_name": "Rubber",
+    "price": 2089,
+    "challan_no": 3124,
+    "quantity": 74
+  },
+  {
+    "date": "2018-05-21",
+    "supplier_id": 50,
+    "raw_material_name": "Metal",
+    "price": 165,
+    "challan_no": 8329,
+    "quantity": 36
+  },
+  {
+    "date": "2017-03-19",
+    "supplier_id": 49,
+    "raw_material_name": "Plastic",
+    "price": 2819,
+    "challan_no": 9635,
+    "quantity": 48
+  },
+  {
+    "date": "1996-10-27",
+    "supplier_id": 38,
+    "raw_material_name": "Granite",
+    "price": 3318,
+    "challan_no": 6903,
+    "quantity": 99
+  },
+  {
+    "date": "2018-10-28",
+    "supplier_id": 14,
+    "raw_material_name": "Steel",
+    "price": 986,
+    "challan_no": 9044,
+    "quantity": 53
+  },
+  {
+    "date": "2022-12-27",
+    "supplier_id": 25,
+    "raw_material_name": "Granite",
+    "price": 3576,
+    "challan_no": 9683,
+    "quantity": 23
+  },
+  {
+    "date": "2002-09-07",
+    "supplier_id": 16,
+    "raw_material_name": "Concrete",
+    "price": 2953,
+    "challan_no": 948,
+    "quantity": 55
+  },
+  {
+    "date": "1988-12-01",
+    "supplier_id": 33,
+    "raw_material_name": "Plastic",
+    "price": 3505,
+    "challan_no": 8537,
+    "quantity": 73
+  },
+  {
+    "date": "2003-05-21",
+    "supplier_id": 2,
+    "raw_material_name": "Cotton",
+    "price": 820,
+    "challan_no": 236,
+    "quantity": 77
+  },
+  {
+    "date": "2012-07-02",
+    "supplier_id": 10,
+    "raw_material_name": "Steel",
+    "price": 4106,
+    "challan_no": 6778,
+    "quantity": 21
+  },
+  {
+    "date": "1998-03-16",
+    "supplier_id": 10,
+    "raw_material_name": "Plastic",
+    "price": 131,
+    "challan_no": 6185,
+    "quantity": 46
+  },
+  {
+    "date": "2008-06-28",
+    "supplier_id": 37,
+    "raw_material_name": "Steel",
+    "price": 106,
+    "challan_no": 6147,
+    "quantity": 46
+  },
+  {
+    "date": "1989-03-21",
+    "supplier_id": 28,
+    "raw_material_name": "Bronze",
+    "price": 3473,
+    "challan_no": 1200,
+    "quantity": 66
+  },
+  {
+    "date": "1990-12-15",
+    "supplier_id": 25,
+    "raw_material_name": "Granite",
+    "price": 2696,
+    "challan_no": 7813,
+    "quantity": 77
+  },
+  {
+    "date": "1989-07-28",
+    "supplier_id": 17,
+    "raw_material_name": "Cotton",
+    "price": 444,
+    "challan_no": 4678,
+    "quantity": 29
+  },
+  {
+    "date": "1987-06-14",
+    "supplier_id": 5,
+    "raw_material_name": "Cotton",
+    "price": 1175,
+    "challan_no": 9557,
+    "quantity": 52
+  },
+  {
+    "date": "2011-10-14",
+    "supplier_id": 44,
+    "raw_material_name": "Fresh",
+    "price": 4590,
+    "challan_no": 8746,
+    "quantity": 37
+  },
+  {
+    "date": "1992-01-25",
+    "supplier_id": 50,
+    "raw_material_name": "Fresh",
+    "price": 914,
+    "challan_no": 2977,
+    "quantity": 23
+  },
+  {
+    "date": "2003-11-08",
+    "supplier_id": 43,
+    "raw_material_name": "Fresh",
+    "price": 1933,
+    "challan_no": 8991,
+    "quantity": 37
+  },
+  {
+    "date": "1984-10-09",
+    "supplier_id": 27,
+    "raw_material_name": "Soft",
+    "price": 2930,
+    "challan_no": 8880,
+    "quantity": 52
+  },
+  {
+    "date": "2019-11-24",
+    "supplier_id": 16,
+    "raw_material_name": "Fresh",
+    "price": 2448,
+    "challan_no": 4127,
+    "quantity": 20
+  },
+  {
+    "date": "2010-11-10",
+    "supplier_id": 39,
+    "raw_material_name": "Soft",
+    "price": 659,
+    "challan_no": 4655,
+    "quantity": 67
+  },
+  {
+    "date": "2021-09-05",
+    "supplier_id": 25,
+    "raw_material_name": "Fresh",
+    "price": 4632,
+    "challan_no": 7671,
+    "quantity": 2
+  },
+  {
+    "date": "2010-11-24",
+    "supplier_id": 1,
+    "raw_material_name": "Frozen",
+    "price": 4391,
+    "challan_no": 2364,
+    "quantity": 74
+  },
+  {
+    "date": "1993-01-13",
+    "supplier_id": 30,
+    "raw_material_name": "Granite",
+    "price": 4779,
+    "challan_no": 4926,
+    "quantity": 13
+  },
+  {
+    "date": "2012-10-05",
+    "supplier_id": 40,
+    "raw_material_name": "Bronze",
+    "price": 2616,
+    "challan_no": 1007,
+    "quantity": 62
+  },
+  {
+    "date": "2014-03-07",
+    "supplier_id": 45,
+    "raw_material_name": "Bronze",
+    "price": 2967,
+    "challan_no": 5416,
+    "quantity": 5
+  },
+  {
+    "date": "1981-01-30",
+    "supplier_id": 48,
+    "raw_material_name": "Metal",
+    "price": 857,
+    "challan_no": 594,
+    "quantity": 43
+  },
+  {
+    "date": "2015-02-19",
+    "supplier_id": 14,
+    "raw_material_name": "Soft",
+    "price": 2244,
+    "challan_no": 3786,
+    "quantity": 31
+  },
+  {
+    "date": "1996-11-02",
+    "supplier_id": 6,
+    "raw_material_name": "Wooden",
+    "price": 3531,
+    "challan_no": 7057,
+    "quantity": 3
+  },
+  {
+    "date": "1985-12-07",
+    "supplier_id": 20,
+    "raw_material_name": "Bronze",
+    "price": 1009,
+    "challan_no": 2151,
+    "quantity": 42
+  },
+  {
+    "date": "1998-09-27",
+    "supplier_id": 48,
+    "raw_material_name": "Soft",
+    "price": 795,
+    "challan_no": 6871,
+    "quantity": 20
+  },
+  {
+    "date": "1988-09-14",
+    "supplier_id": 31,
+    "raw_material_name": "Rubber",
+    "price": 2368,
+    "challan_no": 4427,
+    "quantity": 36
+  },
+  {
+    "date": "1987-04-02",
+    "supplier_id": 42,
+    "raw_material_name": "Soft",
+    "price": 4461,
+    "challan_no": 2847,
+    "quantity": 94
+  },
+  {
+    "date": "1987-09-08",
+    "supplier_id": 10,
+    "raw_material_name": "Granite",
+    "price": 913,
+    "challan_no": 3194,
+    "quantity": 30
+  },
+  {
+    "date": "1986-10-17",
+    "supplier_id": 40,
+    "raw_material_name": "Soft",
+    "price": 205,
+    "challan_no": 6732,
+    "quantity": 4
+  },
+  {
+    "date": "1980-02-20",
+    "supplier_id": 47,
+    "raw_material_name": "Rubber",
+    "price": 3078,
+    "challan_no": 8070,
+    "quantity": 29
+  },
+  {
+    "date": "1982-10-23",
+    "supplier_id": 31,
+    "raw_material_name": "Frozen",
+    "price": 4778,
+    "challan_no": 664,
+    "quantity": 67
+  },
+  {
+    "date": "1994-02-06",
+    "supplier_id": 45,
+    "raw_material_name": "Wooden",
+    "price": 238,
+    "challan_no": 9519,
+    "quantity": 79
+  },
+  {
+    "date": "1989-02-11",
+    "supplier_id": 7,
+    "raw_material_name": "Granite",
+    "price": 788,
+    "challan_no": 375,
+    "quantity": 66
+  },
+  {
+    "date": "2018-12-09",
+    "supplier_id": 11,
+    "raw_material_name": "Granite",
+    "price": 3266,
+    "challan_no": 3172,
+    "quantity": 12
+  },
+  {
+    "date": "1996-02-16",
+    "supplier_id": 41,
+    "raw_material_name": "Bronze",
+    "price": 3634,
+    "challan_no": 4479,
+    "quantity": 62
+  },
+  {
+    "date": "1984-04-26",
+    "supplier_id": 9,
+    "raw_material_name": "Soft",
+    "price": 4796,
+    "challan_no": 3113,
+    "quantity": 95
+  },
+  {
+    "date": "2022-07-19",
+    "supplier_id": 22,
+    "raw_material_name": "Steel",
+    "price": 4334,
+    "challan_no": 4870,
+    "quantity": 56
+  },
+  {
+    "date": "2013-04-04",
+    "supplier_id": 11,
+    "raw_material_name": "Rubber",
+    "price": 4635,
+    "challan_no": 3149,
+    "quantity": 20
+  },
+  {
+    "date": "2004-09-19",
+    "supplier_id": 39,
+    "raw_material_name": "Frozen",
+    "price": 4047,
+    "challan_no": 3065,
+    "quantity": 36
+  },
+  {
+    "date": "1994-01-17",
+    "supplier_id": 24,
+    "raw_material_name": "Frozen",
+    "price": 3483,
+    "challan_no": 8365,
+    "quantity": 85
+  },
+  {
+    "date": "1995-06-20",
+    "supplier_id": 11,
+    "raw_material_name": "Rubber",
+    "price": 3909,
+    "challan_no": 1765,
+    "quantity": 88
+  },
+  {
+    "date": "2022-05-23",
+    "supplier_id": 38,
+    "raw_material_name": "Concrete",
+    "price": 812,
+    "challan_no": 4915,
+    "quantity": 6
+  },
+  {
+    "date": "2006-07-28",
+    "supplier_id": 16,
+    "raw_material_name": "Wooden",
+    "price": 321,
+    "challan_no": 6118,
+    "quantity": 23
+  },
+  {
+    "date": "1991-09-13",
+    "supplier_id": 2,
+    "raw_material_name": "Soft",
+    "price": 4600,
+    "challan_no": 6481,
+    "quantity": 58
+  },
+  {
+    "date": "1980-03-12",
+    "supplier_id": 4,
+    "raw_material_name": "Steel",
+    "price": 1925,
+    "challan_no": 6832,
+    "quantity": 33
+  },
+  {
+    "date": "1994-04-23",
+    "supplier_id": 13,
+    "raw_material_name": "Metal",
+    "price": 1632,
+    "challan_no": 732,
+    "quantity": 29
+  },
+  {
+    "date": "1992-06-29",
+    "supplier_id": 29,
+    "raw_material_name": "Wooden",
+    "price": 2898,
+    "challan_no": 6367,
+    "quantity": 51
+  },
+  {
+    "date": "1984-09-11",
+    "supplier_id": 18,
+    "raw_material_name": "Plastic",
+    "price": 510,
+    "challan_no": 9962,
+    "quantity": 94
+  },
+  {
+    "date": "1981-07-26",
+    "supplier_id": 21,
+    "raw_material_name": "Rubber",
+    "price": 1145,
+    "challan_no": 2501,
+    "quantity": 87
+  },
+  {
+    "date": "1999-04-05",
+    "supplier_id": 44,
+    "raw_material_name": "Soft",
+    "price": 4443,
+    "challan_no": 6981,
+    "quantity": 22
+  },
+  {
+    "date": "1989-07-20",
+    "supplier_id": 36,
+    "raw_material_name": "Bronze",
+    "price": 2503,
+    "challan_no": 9465,
+    "quantity": 96
+  },
+  {
+    "date": "2004-02-06",
+    "supplier_id": 24,
+    "raw_material_name": "Plastic",
+    "price": 4558,
+    "challan_no": 1719,
+    "quantity": 32
+  },
+  {
+    "date": "2021-09-23",
+    "supplier_id": 4,
+    "raw_material_name": "Frozen",
+    "price": 3171,
+    "challan_no": 6697,
+    "quantity": 23
+  },
+  {
+    "date": "2013-12-07",
+    "supplier_id": 42,
+    "raw_material_name": "Frozen",
+    "price": 4573,
+    "challan_no": 3434,
+    "quantity": 100
+  },
+  {
+    "date": "1985-07-12",
+    "supplier_id": 40,
+    "raw_material_name": "Fresh",
+    "price": 1750,
+    "challan_no": 8056,
+    "quantity": 84
+  },
+  {
+    "date": "2002-09-30",
+    "supplier_id": 48,
+    "raw_material_name": "Fresh",
+    "price": 3269,
+    "challan_no": 3882,
+    "quantity": 42
+  },
+  {
+    "date": "2018-04-24",
+    "supplier_id": 7,
+    "raw_material_name": "Granite",
+    "price": 999,
+    "challan_no": 3605,
+    "quantity": 38
+  },
+  {
+    "date": "1986-11-11",
+    "supplier_id": 20,
+    "raw_material_name": "Steel",
+    "price": 101,
+    "challan_no": 6538,
+    "quantity": 39
+  },
+  {
+    "date": "1998-11-09",
+    "supplier_id": 3,
+    "raw_material_name": "Steel",
+    "price": 3072,
+    "challan_no": 725,
+    "quantity": 84
+  },
+  {
+    "date": "1990-05-21",
+    "supplier_id": 30,
+    "raw_material_name": "Concrete",
+    "price": 1371,
+    "challan_no": 4037,
+    "quantity": 73
+  },
+  {
+    "date": "2020-02-10",
+    "supplier_id": 49,
+    "raw_material_name": "Fresh",
+    "price": 3570,
+    "challan_no": 5551,
+    "quantity": 88
+  },
+  {
+    "date": "2021-11-02",
+    "supplier_id": 9,
+    "raw_material_name": "Concrete",
+    "price": 3436,
+    "challan_no": 5751,
+    "quantity": 42
+  },
+  {
+    "date": "2013-10-13",
+    "supplier_id": 15,
+    "raw_material_name": "Soft",
+    "price": 577,
+    "challan_no": 8866,
+    "quantity": 90
+  },
+  {
+    "date": "2015-08-04",
+    "supplier_id": 26,
+    "raw_material_name": "Wooden",
+    "price": 1522,
+    "challan_no": 6399,
+    "quantity": 16
+  },
+  {
+    "date": "2020-11-14",
+    "supplier_id": 46,
+    "raw_material_name": "Steel",
+    "price": 413,
+    "challan_no": 663,
+    "quantity": 13
+  },
+  {
+    "date": "2011-08-27",
+    "supplier_id": 33,
+    "raw_material_name": "Bronze",
+    "price": 1353,
+    "challan_no": 7322,
+    "quantity": 33
+  },
+  {
+    "date": "2014-03-09",
+    "supplier_id": 39,
+    "raw_material_name": "Steel",
+    "price": 4708,
+    "challan_no": 1855,
+    "quantity": 36
+  },
+  {
+    "date": "2018-05-04",
+    "supplier_id": 23,
+    "raw_material_name": "Wooden",
+    "price": 2439,
+    "challan_no": 592,
+    "quantity": 97
+  },
+  {
+    "date": "2011-02-12",
+    "supplier_id": 42,
+    "raw_material_name": "Metal",
+    "price": 3060,
+    "challan_no": 4256,
+    "quantity": 15
+  },
+  {
+    "date": "2014-01-16",
+    "supplier_id": 15,
+    "raw_material_name": "Cotton",
+    "price": 4701,
+    "challan_no": 4152,
+    "quantity": 41
+  },
+  {
+    "date": "1995-05-25",
+    "supplier_id": 41,
+    "raw_material_name": "Rubber",
+    "price": 3204,
+    "challan_no": 2832,
+    "quantity": 94
+  },
+  {
+    "date": "2006-06-26",
+    "supplier_id": 23,
+    "raw_material_name": "Plastic",
+    "price": 3432,
+    "challan_no": 8693,
+    "quantity": 82
+  },
+  {
+    "date": "1997-06-17",
+    "supplier_id": 31,
+    "raw_material_name": "Granite",
+    "price": 2533,
+    "challan_no": 5880,
+    "quantity": 42
+  },
+  {
+    "date": "1992-04-21",
+    "supplier_id": 12,
+    "raw_material_name": "Concrete",
+    "price": 2110,
+    "challan_no": 8950,
+    "quantity": 89
+  },
+  {
+    "date": "2018-10-12",
+    "supplier_id": 32,
+    "raw_material_name": "Fresh",
+    "price": 2078,
+    "challan_no": 5844,
+    "quantity": 32
+  },
+  {
+    "date": "2003-07-10",
+    "supplier_id": 31,
+    "raw_material_name": "Bronze",
+    "price": 4602,
+    "challan_no": 9433,
+    "quantity": 48
+  },
+  {
+    "date": "1990-10-16",
+    "supplier_id": 29,
+    "raw_material_name": "Steel",
+    "price": 4100,
+    "challan_no": 1231,
+    "quantity": 32
+  },
+  {
+    "date": "1985-10-16",
+    "supplier_id": 37,
+    "raw_material_name": "Concrete",
+    "price": 729,
+    "challan_no": 7378,
+    "quantity": 9
+  },
+  {
+    "date": "1994-10-09",
+    "supplier_id": 24,
+    "raw_material_name": "Cotton",
+    "price": 2506,
+    "challan_no": 856,
+    "quantity": 45
+  },
+  {
+    "date": "2018-09-20",
+    "supplier_id": 48,
+    "raw_material_name": "Frozen",
+    "price": 3423,
+    "challan_no": 356,
+    "quantity": 94
+  },
+  {
+    "date": "2011-12-28",
+    "supplier_id": 17,
+    "raw_material_name": "Concrete",
+    "price": 3493,
+    "challan_no": 574,
+    "quantity": 77
+  },
+  {
+    "date": "2016-12-26",
+    "supplier_id": 13,
+    "raw_material_name": "Concrete",
+    "price": 3725,
+    "challan_no": 5657,
+    "quantity": 13
+  },
+  {
+    "date": "1997-02-07",
+    "supplier_id": 11,
+    "raw_material_name": "Concrete",
+    "price": 1204,
+    "challan_no": 3316,
+    "quantity": 57
+  },
+  {
+    "date": "1998-12-11",
+    "supplier_id": 26,
+    "raw_material_name": "Steel",
+    "price": 2216,
+    "challan_no": 6865,
+    "quantity": 33
+  },
+  {
+    "date": "1985-02-23",
+    "supplier_id": 29,
+    "raw_material_name": "Cotton",
+    "price": 4189,
+    "challan_no": 4567,
+    "quantity": 1
+  },
+  {
+    "date": "2013-02-09",
+    "supplier_id": 25,
+    "raw_material_name": "Fresh",
+    "price": 4870,
+    "challan_no": 5708,
+    "quantity": 61
+  },
+  {
+    "date": "1989-03-17",
+    "supplier_id": 17,
+    "raw_material_name": "Fresh",
+    "price": 4674,
+    "challan_no": 7112,
+    "quantity": 79
+  },
+  {
+    "date": "1989-03-11",
+    "supplier_id": 21,
+    "raw_material_name": "Granite",
+    "price": 4137,
+    "challan_no": 3181,
+    "quantity": 34
+  },
+  {
+    "date": "1997-09-28",
+    "supplier_id": 12,
+    "raw_material_name": "Soft",
+    "price": 2654,
+    "challan_no": 3604,
+    "quantity": 51
+  },
+  {
+    "date": "1983-04-17",
+    "supplier_id": 34,
+    "raw_material_name": "Concrete",
+    "price": 3810,
+    "challan_no": 1116,
+    "quantity": 8
+  },
+  {
+    "date": "1996-01-20",
+    "supplier_id": 37,
+    "raw_material_name": "Wooden",
+    "price": 4749,
+    "challan_no": 4629,
+    "quantity": 19
+  },
+  {
+    "date": "2006-08-30",
+    "supplier_id": 4,
+    "raw_material_name": "Frozen",
+    "price": 488,
+    "challan_no": 1387,
+    "quantity": 1
+  },
+  {
+    "date": "1993-06-29",
+    "supplier_id": 5,
+    "raw_material_name": "Cotton",
+    "price": 1511,
+    "challan_no": 8254,
+    "quantity": 57
+  },
+  {
+    "date": "1997-10-10",
+    "supplier_id": 15,
+    "raw_material_name": "Steel",
+    "price": 3867,
+    "challan_no": 2964,
+    "quantity": 92
+  },
+  {
+    "date": "2006-09-06",
+    "supplier_id": 23,
+    "raw_material_name": "Soft",
+    "price": 2755,
+    "challan_no": 4617,
+    "quantity": 88
+  },
+  {
+    "date": "1997-12-23",
+    "supplier_id": 15,
+    "raw_material_name": "Metal",
+    "price": 767,
+    "challan_no": 9845,
+    "quantity": 43
+  },
+  {
+    "date": "1997-11-02",
+    "supplier_id": 41,
+    "raw_material_name": "Metal",
+    "price": 129,
+    "challan_no": 7871,
+    "quantity": 11
+  },
+  {
+    "date": "1987-05-02",
+    "supplier_id": 16,
+    "raw_material_name": "Metal",
+    "price": 3384,
+    "challan_no": 2607,
+    "quantity": 20
+  },
+  {
+    "date": "2022-02-12",
+    "supplier_id": 21,
+    "raw_material_name": "Fresh",
+    "price": 4787,
+    "challan_no": 4821,
+    "quantity": 71
+  },
+  {
+    "date": "1988-03-31",
+    "supplier_id": 45,
+    "raw_material_name": "Steel",
+    "price": 3492,
+    "challan_no": 3043,
+    "quantity": 10
+  },
+  {
+    "date": "2006-03-31",
+    "supplier_id": 43,
+    "raw_material_name": "Steel",
+    "price": 2750,
+    "challan_no": 1273,
+    "quantity": 29
+  },
+  {
+    "date": "1982-11-26",
+    "supplier_id": 26,
+    "raw_material_name": "Wooden",
+    "price": 2957,
+    "challan_no": 3879,
+    "quantity": 98
+  },
+  {
+    "date": "1992-04-02",
+    "supplier_id": 41,
+    "raw_material_name": "Wooden",
+    "price": 3776,
+    "challan_no": 482,
+    "quantity": 71
+  },
+  {
+    "date": "1984-03-25",
+    "supplier_id": 22,
+    "raw_material_name": "Plastic",
+    "price": 162,
+    "challan_no": 182,
+    "quantity": 83
+  },
+  {
+    "date": "2004-07-04",
+    "supplier_id": 2,
+    "raw_material_name": "Concrete",
+    "price": 4338,
+    "challan_no": 1880,
+    "quantity": 100
+  },
+  {
+    "date": "2016-07-09",
+    "supplier_id": 1,
+    "raw_material_name": "Plastic",
+    "price": 1865,
+    "challan_no": 1848,
+    "quantity": 17
+  },
+  {
+    "date": "1988-11-08",
+    "supplier_id": 4,
+    "raw_material_name": "Concrete",
+    "price": 2550,
+    "challan_no": 6835,
+    "quantity": 15
+  },
+  {
+    "date": "2019-12-20",
+    "supplier_id": 48,
+    "raw_material_name": "Steel",
+    "price": 2650,
+    "challan_no": 9805,
+    "quantity": 36
+  },
+  {
+    "date": "1985-08-25",
+    "supplier_id": 26,
+    "raw_material_name": "Soft",
+    "price": 199,
+    "challan_no": 8635,
+    "quantity": 40
+  },
+  {
+    "date": "1986-05-15",
+    "supplier_id": 17,
+    "raw_material_name": "Cotton",
+    "price": 1595,
+    "challan_no": 418,
+    "quantity": 42
+  },
+  {
+    "date": "2022-09-11",
+    "supplier_id": 10,
+    "raw_material_name": "Steel",
+    "price": 3326,
+    "challan_no": 4132,
+    "quantity": 19
+  },
+  {
+    "date": "1997-11-29",
+    "supplier_id": 13,
+    "raw_material_name": "Frozen",
+    "price": 2386,
+    "challan_no": 9895,
+    "quantity": 11
+  },
+  {
+    "date": "1997-06-02",
+    "supplier_id": 24,
+    "raw_material_name": "Wooden",
+    "price": 813,
+    "challan_no": 484,
+    "quantity": 90
+  },
+  {
+    "date": "2023-01-04",
+    "supplier_id": 13,
+    "raw_material_name": "Steel",
+    "price": 2973,
+    "challan_no": 2007,
+    "quantity": 14
+  },
+  {
+    "date": "2021-08-24",
+    "supplier_id": 43,
+    "raw_material_name": "Frozen",
+    "price": 2771,
+    "challan_no": 4429,
+    "quantity": 3
+  },
+  {
+    "date": "2016-10-24",
+    "supplier_id": 25,
+    "raw_material_name": "Bronze",
+    "price": 401,
+    "challan_no": 6388,
+    "quantity": 13
+  },
+  {
+    "date": "2001-01-19",
+    "supplier_id": 43,
+    "raw_material_name": "Rubber",
+    "price": 2009,
+    "challan_no": 995,
+    "quantity": 39
+  },
+  {
+    "date": "2002-12-06",
+    "supplier_id": 23,
+    "raw_material_name": "Fresh",
+    "price": 2725,
+    "challan_no": 2371,
+    "quantity": 24
+  },
+  {
+    "date": "2003-04-17",
+    "supplier_id": 8,
+    "raw_material_name": "Granite",
+    "price": 2358,
+    "challan_no": 7488,
+    "quantity": 27
+  },
+  {
+    "date": "2010-09-21",
+    "supplier_id": 35,
+    "raw_material_name": "Steel",
+    "price": 1627,
+    "challan_no": 5097,
+    "quantity": 36
+  },
+  {
+    "date": "1991-06-12",
+    "supplier_id": 26,
+    "raw_material_name": "Granite",
+    "price": 2914,
+    "challan_no": 3149,
+    "quantity": 67
+  },
+  {
+    "date": "1986-02-26",
+    "supplier_id": 19,
+    "raw_material_name": "Granite",
+    "price": 2406,
+    "challan_no": 2036,
+    "quantity": 95
+  },
+  {
+    "date": "2021-06-16",
+    "supplier_id": 7,
+    "raw_material_name": "Steel",
+    "price": 1742,
+    "challan_no": 3997,
+    "quantity": 97
+  },
+  {
+    "date": "2018-01-03",
+    "supplier_id": 25,
+    "raw_material_name": "Fresh",
+    "price": 2058,
+    "challan_no": 5858,
+    "quantity": 42
+  },
+  {
+    "date": "1987-03-16",
+    "supplier_id": 44,
+    "raw_material_name": "Cotton",
+    "price": 4016,
+    "challan_no": 2940,
+    "quantity": 99
+  },
+  {
+    "date": "2004-01-27",
+    "supplier_id": 2,
+    "raw_material_name": "Cotton",
+    "price": 592,
+    "challan_no": 8816,
+    "quantity": 92
+  },
+  {
+    "date": "1990-12-22",
+    "supplier_id": 30,
+    "raw_material_name": "Wooden",
+    "price": 288,
+    "challan_no": 9540,
+    "quantity": 11
+  },
+  {
+    "date": "2020-10-04",
+    "supplier_id": 31,
+    "raw_material_name": "Bronze",
+    "price": 2688,
+    "challan_no": 8040,
+    "quantity": 16
+  },
+  {
+    "date": "2004-03-06",
+    "supplier_id": 37,
+    "raw_material_name": "Granite",
+    "price": 3065,
+    "challan_no": 8677,
+    "quantity": 66
+  },
+  {
+    "date": "1991-02-18",
+    "supplier_id": 34,
+    "raw_material_name": "Fresh",
+    "price": 1079,
+    "challan_no": 8300,
+    "quantity": 44
+  },
+  {
+    "date": "2008-05-21",
+    "supplier_id": 43,
+    "raw_material_name": "Fresh",
+    "price": 2964,
+    "challan_no": 3060,
+    "quantity": 26
+  },
+  {
+    "date": "1997-04-04",
+    "supplier_id": 41,
+    "raw_material_name": "Fresh",
+    "price": 4805,
+    "challan_no": 6664,
+    "quantity": 75
+  },
+  {
+    "date": "2012-11-26",
+    "supplier_id": 2,
+    "raw_material_name": "Wooden",
+    "price": 3937,
+    "challan_no": 1014,
+    "quantity": 78
+  },
+  {
+    "date": "2019-01-16",
+    "supplier_id": 40,
+    "raw_material_name": "Metal",
+    "price": 366,
+    "challan_no": 1621,
+    "quantity": 59
+  },
+  {
+    "date": "2016-11-25",
+    "supplier_id": 45,
+    "raw_material_name": "Steel",
+    "price": 3290,
+    "challan_no": 628,
+    "quantity": 87
+  },
+  {
+    "date": "2006-06-01",
+    "supplier_id": 22,
+    "raw_material_name": "Concrete",
+    "price": 733,
+    "challan_no": 1633,
+    "quantity": 2
+  },
+  {
+    "date": "1986-04-04",
+    "supplier_id": 22,
+    "raw_material_name": "Rubber",
+    "price": 1861,
+    "challan_no": 8052,
+    "quantity": 38
+  },
+  {
+    "date": "2006-10-15",
+    "supplier_id": 2,
+    "raw_material_name": "Cotton",
+    "price": 3959,
+    "challan_no": 1894,
+    "quantity": 94
+  },
+  {
+    "date": "2020-01-12",
+    "supplier_id": 34,
+    "raw_material_name": "Bronze",
+    "price": 3501,
+    "challan_no": 5931,
+    "quantity": 73
+  },
+  {
+    "date": "1983-04-27",
+    "supplier_id": 39,
+    "raw_material_name": "Plastic",
+    "price": 1460,
+    "challan_no": 8328,
+    "quantity": 82
+  },
+  {
+    "date": "2002-09-16",
+    "supplier_id": 44,
+    "raw_material_name": "Steel",
+    "price": 3504,
+    "challan_no": 9772,
+    "quantity": 61
+  },
+  {
+    "date": "2002-12-14",
+    "supplier_id": 49,
+    "raw_material_name": "Concrete",
+    "price": 2777,
+    "challan_no": 7164,
+    "quantity": 28
+  },
+  {
+    "date": "2004-08-12",
+    "supplier_id": 19,
+    "raw_material_name": "Rubber",
+    "price": 2312,
+    "challan_no": 4678,
+    "quantity": 39
+  },
+  {
+    "date": "2004-02-08",
+    "supplier_id": 16,
+    "raw_material_name": "Soft",
+    "price": 797,
+    "challan_no": 2526,
+    "quantity": 30
+  },
+  {
+    "date": "2012-02-13",
+    "supplier_id": 20,
+    "raw_material_name": "Soft",
+    "price": 2823,
+    "challan_no": 9166,
+    "quantity": 35
+  },
+  {
+    "date": "1988-03-12",
+    "supplier_id": 10,
+    "raw_material_name": "Soft",
+    "price": 231,
+    "challan_no": 8080,
+    "quantity": 63
+  },
+  {
+    "date": "2016-02-22",
+    "supplier_id": 43,
+    "raw_material_name": "Frozen",
+    "price": 4106,
+    "challan_no": 1593,
+    "quantity": 25
+  },
+  {
+    "date": "1981-09-11",
+    "supplier_id": 31,
+    "raw_material_name": "Fresh",
+    "price": 4706,
+    "challan_no": 5261,
+    "quantity": 18
+  },
+  {
+    "date": "2001-02-22",
+    "supplier_id": 26,
+    "raw_material_name": "Steel",
+    "price": 308,
+    "challan_no": 1893,
+    "quantity": 56
+  },
+  {
+    "date": "1990-09-15",
+    "supplier_id": 21,
+    "raw_material_name": "Fresh",
+    "price": 3140,
+    "challan_no": 3085,
+    "quantity": 43
+  },
+  {
+    "date": "2015-12-07",
+    "supplier_id": 23,
+    "raw_material_name": "Frozen",
+    "price": 4688,
+    "challan_no": 5679,
+    "quantity": 92
+  },
+  {
+    "date": "1989-02-08",
+    "supplier_id": 3,
+    "raw_material_name": "Soft",
+    "price": 1288,
+    "challan_no": 1889,
+    "quantity": 85
+  },
+  {
+    "date": "2020-05-31",
+    "supplier_id": 13,
+    "raw_material_name": "Concrete",
+    "price": 1094,
+    "challan_no": 2311,
+    "quantity": 1
+  },
+  {
+    "date": "1981-08-18",
+    "supplier_id": 32,
+    "raw_material_name": "Bronze",
+    "price": 3697,
+    "challan_no": 8047,
+    "quantity": 28
+  },
+  {
+    "date": "1995-08-18",
+    "supplier_id": 5,
+    "raw_material_name": "Wooden",
+    "price": 4963,
+    "challan_no": 5861,
+    "quantity": 90
+  },
+  {
+    "date": "2021-08-14",
+    "supplier_id": 33,
+    "raw_material_name": "Frozen",
+    "price": 3555,
+    "challan_no": 8228,
+    "quantity": 53
+  },
+  {
+    "date": "1985-09-01",
+    "supplier_id": 40,
+    "raw_material_name": "Frozen",
+    "price": 1381,
+    "challan_no": 5770,
+    "quantity": 26
+  },
+  {
+    "date": "2013-11-07",
+    "supplier_id": 12,
+    "raw_material_name": "Bronze",
+    "price": 3662,
+    "challan_no": 9427,
+    "quantity": 30
+  },
+  {
+    "date": "2021-09-01",
+    "supplier_id": 24,
+    "raw_material_name": "Cotton",
+    "price": 1208,
+    "challan_no": 9904,
+    "quantity": 65
+  },
+  {
+    "date": "1986-09-21",
+    "supplier_id": 9,
+    "raw_material_name": "Concrete",
+    "price": 3841,
+    "challan_no": 3868,
+    "quantity": 35
+  },
+  {
+    "date": "2008-09-22",
+    "supplier_id": 23,
+    "raw_material_name": "Fresh",
+    "price": 2868,
+    "challan_no": 7600,
+    "quantity": 55
+  },
+  {
+    "date": "2009-02-15",
+    "supplier_id": 25,
+    "raw_material_name": "Rubber",
+    "price": 892,
+    "challan_no": 6777,
+    "quantity": 35
+  },
+  {
+    "date": "1990-06-11",
+    "supplier_id": 19,
+    "raw_material_name": "Soft",
+    "price": 816,
+    "challan_no": 1597,
+    "quantity": 74
+  },
+  {
+    "date": "2020-03-15",
+    "supplier_id": 16,
+    "raw_material_name": "Soft",
+    "price": 4229,
+    "challan_no": 8854,
+    "quantity": 57
+  },
+  {
+    "date": "1987-10-29",
+    "supplier_id": 21,
+    "raw_material_name": "Fresh",
+    "price": 3964,
+    "challan_no": 5594,
+    "quantity": 60
+  },
+  {
+    "date": "2020-11-06",
+    "supplier_id": 27,
+    "raw_material_name": "Wooden",
+    "price": 4708,
+    "challan_no": 2083,
+    "quantity": 71
+  },
+  {
+    "date": "1988-04-03",
+    "supplier_id": 38,
+    "raw_material_name": "Wooden",
+    "price": 1910,
+    "challan_no": 7519,
+    "quantity": 12
+  },
+  {
+    "date": "1998-05-24",
+    "supplier_id": 44,
+    "raw_material_name": "Cotton",
+    "price": 4530,
+    "challan_no": 9961,
+    "quantity": 51
+  },
+  {
+    "date": "2012-05-15",
+    "supplier_id": 7,
+    "raw_material_name": "Plastic",
+    "price": 4775,
+    "challan_no": 3267,
+    "quantity": 83
+  },
+  {
+    "date": "2009-04-16",
+    "supplier_id": 36,
+    "raw_material_name": "Plastic",
+    "price": 4082,
+    "challan_no": 1213,
+    "quantity": 54
+  },
+  {
+    "date": "2004-08-31",
+    "supplier_id": 4,
+    "raw_material_name": "Rubber",
+    "price": 1029,
+    "challan_no": 2709,
+    "quantity": 16
+  },
+  {
+    "date": "2023-01-30",
+    "supplier_id": 22,
+    "raw_material_name": "Bronze",
+    "price": 3411,
+    "challan_no": 3191,
+    "quantity": 63
+  },
+  {
+    "date": "1991-02-20",
+    "supplier_id": 45,
+    "raw_material_name": "Concrete",
+    "price": 4557,
+    "challan_no": 3223,
+    "quantity": 9
+  },
+  {
+    "date": "2018-07-03",
+    "supplier_id": 12,
+    "raw_material_name": "Soft",
+    "price": 916,
+    "challan_no": 8098,
+    "quantity": 8
+  },
+  {
+    "date": "1992-08-12",
+    "supplier_id": 45,
+    "raw_material_name": "Wooden",
+    "price": 3426,
+    "challan_no": 6339,
+    "quantity": 27
+  },
+  {
+    "date": "2015-04-12",
+    "supplier_id": 21,
+    "raw_material_name": "Soft",
+    "price": 3269,
+    "challan_no": 2669,
+    "quantity": 71
+  },
+  {
+    "date": "1992-06-06",
+    "supplier_id": 14,
+    "raw_material_name": "Fresh",
+    "price": 638,
+    "challan_no": 1843,
+    "quantity": 23
+  },
+  {
+    "date": "1995-09-03",
+    "supplier_id": 45,
+    "raw_material_name": "Fresh",
+    "price": 2727,
+    "challan_no": 637,
+    "quantity": 41
+  },
+  {
+    "date": "1986-12-09",
+    "supplier_id": 14,
+    "raw_material_name": "Steel",
+    "price": 2219,
+    "challan_no": 131,
+    "quantity": 4
+  },
+  {
+    "date": "1997-08-24",
+    "supplier_id": 4,
+    "raw_material_name": "Granite",
+    "price": 3453,
+    "challan_no": 7382,
+    "quantity": 28
+  },
+  {
+    "date": "2013-05-06",
+    "supplier_id": 49,
+    "raw_material_name": "Rubber",
+    "price": 984,
+    "challan_no": 3232,
+    "quantity": 3
+  },
+  {
+    "date": "2003-04-28",
+    "supplier_id": 9,
+    "raw_material_name": "Soft",
+    "price": 4038,
+    "challan_no": 8094,
+    "quantity": 67
+  },
+  {
+    "date": "1988-05-01",
+    "supplier_id": 39,
+    "raw_material_name": "Metal",
+    "price": 899,
+    "challan_no": 8043,
+    "quantity": 88
+  },
+  {
+    "date": "2017-06-23",
+    "supplier_id": 17,
+    "raw_material_name": "Soft",
+    "price": 3066,
+    "challan_no": 6749,
+    "quantity": 85
+  },
+  {
+    "date": "2022-04-01",
+    "supplier_id": 24,
+    "raw_material_name": "Fresh",
+    "price": 940,
+    "challan_no": 6102,
+    "quantity": 85
+  },
+  {
+    "date": "1983-04-19",
+    "supplier_id": 14,
+    "raw_material_name": "Fresh",
+    "price": 3427,
+    "challan_no": 8121,
+    "quantity": 60
+  },
+  {
+    "date": "2006-05-06",
+    "supplier_id": 31,
+    "raw_material_name": "Concrete",
+    "price": 4144,
+    "challan_no": 4236,
+    "quantity": 24
+  },
+  {
+    "date": "2011-10-27",
+    "supplier_id": 39,
+    "raw_material_name": "Metal",
+    "price": 2429,
+    "challan_no": 8895,
+    "quantity": 15
+  },
+  {
+    "date": "1994-09-30",
+    "supplier_id": 9,
+    "raw_material_name": "Rubber",
+    "price": 675,
+    "challan_no": 7781,
+    "quantity": 85
+  },
+  {
+    "date": "1987-12-11",
+    "supplier_id": 27,
+    "raw_material_name": "Wooden",
+    "price": 1452,
+    "challan_no": 9710,
+    "quantity": 22
+  },
+  {
+    "date": "2022-01-14",
+    "supplier_id": 30,
+    "raw_material_name": "Plastic",
+    "price": 3017,
+    "challan_no": 9871,
+    "quantity": 73
+  },
+  {
+    "date": "2001-03-01",
+    "supplier_id": 31,
+    "raw_material_name": "Metal",
+    "price": 2150,
+    "challan_no": 2184,
+    "quantity": 57
+  },
+  {
+    "date": "1984-09-08",
+    "supplier_id": 5,
+    "raw_material_name": "Metal",
+    "price": 4155,
+    "challan_no": 1384,
+    "quantity": 45
+  },
+  {
+    "date": "2006-07-06",
+    "supplier_id": 42,
+    "raw_material_name": "Granite",
+    "price": 3105,
+    "challan_no": 3695,
+    "quantity": 98
+  },
+  {
+    "date": "1996-08-21",
+    "supplier_id": 22,
+    "raw_material_name": "Frozen",
+    "price": 4392,
+    "challan_no": 3304,
+    "quantity": 50
+  },
+  {
+    "date": "1998-08-02",
+    "supplier_id": 29,
+    "raw_material_name": "Soft",
+    "price": 1752,
+    "challan_no": 5378,
+    "quantity": 70
+  },
+  {
+    "date": "2003-08-22",
+    "supplier_id": 34,
+    "raw_material_name": "Metal",
+    "price": 400,
+    "challan_no": 119,
+    "quantity": 18
+  },
+  {
+    "date": "2004-10-31",
+    "supplier_id": 11,
+    "raw_material_name": "Granite",
+    "price": 473,
+    "challan_no": 1359,
+    "quantity": 89
+  },
+  {
+    "date": "1992-06-15",
+    "supplier_id": 46,
+    "raw_material_name": "Plastic",
+    "price": 1089,
+    "challan_no": 265,
+    "quantity": 47
+  },
+  {
+    "date": "1995-06-22",
+    "supplier_id": 16,
+    "raw_material_name": "Metal",
+    "price": 2435,
+    "challan_no": 6559,
+    "quantity": 18
+  },
+  {
+    "date": "2012-01-07",
+    "supplier_id": 6,
+    "raw_material_name": "Soft",
+    "price": 769,
+    "challan_no": 658,
+    "quantity": 21
+  },
+  {
+    "date": "2016-06-06",
+    "supplier_id": 42,
+    "raw_material_name": "Plastic",
+    "price": 3797,
+    "challan_no": 2103,
+    "quantity": 43
+  },
+  {
+    "date": "1992-10-16",
+    "supplier_id": 37,
+    "raw_material_name": "Plastic",
+    "price": 808,
+    "challan_no": 5570,
+    "quantity": 44
+  },
+  {
+    "date": "1995-10-17",
+    "supplier_id": 30,
+    "raw_material_name": "Bronze",
+    "price": 3479,
+    "challan_no": 1114,
+    "quantity": 11
+  },
+  {
+    "date": "2004-07-22",
+    "supplier_id": 27,
+    "raw_material_name": "Granite",
+    "price": 4739,
+    "challan_no": 929,
+    "quantity": 82
+  },
+  {
+    "date": "2019-09-18",
+    "supplier_id": 45,
+    "raw_material_name": "Rubber",
+    "price": 597,
+    "challan_no": 4896,
+    "quantity": 49
+  },
+  {
+    "date": "2007-11-10",
+    "supplier_id": 13,
+    "raw_material_name": "Soft",
+    "price": 3229,
+    "challan_no": 8513,
+    "quantity": 18
+  },
+  {
+    "date": "2021-07-21",
+    "supplier_id": 18,
+    "raw_material_name": "Plastic",
+    "price": 582,
+    "challan_no": 689,
+    "quantity": 41
+  },
+  {
+    "date": "2014-07-28",
+    "supplier_id": 27,
+    "raw_material_name": "Soft",
+    "price": 3846,
+    "challan_no": 6379,
+    "quantity": 52
+  },
+  {
+    "date": "1999-04-14",
+    "supplier_id": 19,
+    "raw_material_name": "Soft",
+    "price": 416,
+    "challan_no": 8990,
+    "quantity": 36
+  },
+  {
+    "date": "2017-07-11",
+    "supplier_id": 37,
+    "raw_material_name": "Fresh",
+    "price": 4934,
+    "challan_no": 4193,
+    "quantity": 30
+  },
+  {
+    "date": "1985-03-06",
+    "supplier_id": 1,
+    "raw_material_name": "Frozen",
+    "price": 3462,
+    "challan_no": 6654,
+    "quantity": 46
+  },
+  {
+    "date": "1982-05-29",
+    "supplier_id": 30,
+    "raw_material_name": "Soft",
+    "price": 980,
+    "challan_no": 7501,
+    "quantity": 31
+  },
+  {
+    "date": "2015-11-20",
+    "supplier_id": 4,
+    "raw_material_name": "Granite",
+    "price": 1480,
+    "challan_no": 191,
+    "quantity": 57
+  },
+  {
+    "date": "2014-03-09",
+    "supplier_id": 4,
+    "raw_material_name": "Plastic",
+    "price": 3890,
+    "challan_no": 9171,
+    "quantity": 47
+  },
+  {
+    "date": "2004-03-05",
+    "supplier_id": 3,
+    "raw_material_name": "Cotton",
+    "price": 3678,
+    "challan_no": 2616,
+    "quantity": 3
+  },
+  {
+    "date": "2004-04-25",
+    "supplier_id": 5,
+    "raw_material_name": "Metal",
+    "price": 2014,
+    "challan_no": 1273,
+    "quantity": 5
+  },
+  {
+    "date": "1999-10-16",
+    "supplier_id": 24,
+    "raw_material_name": "Granite",
+    "price": 1348,
+    "challan_no": 7271,
+    "quantity": 25
+  },
+  {
+    "date": "2003-05-22",
+    "supplier_id": 17,
+    "raw_material_name": "Fresh",
+    "price": 293,
+    "challan_no": 9188,
+    "quantity": 55
+  },
+  {
+    "date": "2014-12-27",
+    "supplier_id": 30,
+    "raw_material_name": "Rubber",
+    "price": 1526,
+    "challan_no": 2757,
+    "quantity": 79
+  },
+  {
+    "date": "1982-04-04",
+    "supplier_id": 43,
+    "raw_material_name": "Metal",
+    "price": 4432,
+    "challan_no": 3100,
+    "quantity": 77
+  },
+  {
+    "date": "2012-12-15",
+    "supplier_id": 42,
+    "raw_material_name": "Wooden",
+    "price": 3500,
+    "challan_no": 2443,
+    "quantity": 22
+  },
+  {
+    "date": "1999-03-31",
+    "supplier_id": 36,
+    "raw_material_name": "Bronze",
+    "price": 1624,
+    "challan_no": 5827,
+    "quantity": 34
+  },
+  {
+    "date": "1989-01-16",
+    "supplier_id": 46,
+    "raw_material_name": "Wooden",
+    "price": 3295,
+    "challan_no": 4415,
+    "quantity": 46
+  },
+  {
+    "date": "2012-09-24",
+    "supplier_id": 42,
+    "raw_material_name": "Cotton",
+    "price": 2588,
+    "challan_no": 7732,
+    "quantity": 23
+  },
+  {
+    "date": "2014-02-06",
+    "supplier_id": 46,
+    "raw_material_name": "Plastic",
+    "price": 3434,
+    "challan_no": 6801,
+    "quantity": 67
+  },
+  {
+    "date": "1982-03-09",
+    "supplier_id": 34,
+    "raw_material_name": "Granite",
+    "price": 1006,
+    "challan_no": 3658,
+    "quantity": 90
+  },
+  {
+    "date": "2008-05-23",
+    "supplier_id": 49,
+    "raw_material_name": "Metal",
+    "price": 4291,
+    "challan_no": 8938,
+    "quantity": 94
+  },
+  {
+    "date": "2006-05-15",
+    "supplier_id": 26,
+    "raw_material_name": "Metal",
+    "price": 4809,
+    "challan_no": 8606,
+    "quantity": 58
+  },
+  {
+    "date": "1983-12-25",
+    "supplier_id": 42,
+    "raw_material_name": "Cotton",
+    "price": 148,
+    "challan_no": 1491,
+    "quantity": 10
+  },
+  {
+    "date": "2005-04-07",
+    "supplier_id": 35,
+    "raw_material_name": "Plastic",
+    "price": 2669,
+    "challan_no": 3997,
+    "quantity": 15
+  },
+  {
+    "date": "2017-06-11",
+    "supplier_id": 39,
+    "raw_material_name": "Granite",
+    "price": 2636,
+    "challan_no": 7112,
+    "quantity": 62
+  },
+  {
+    "date": "2006-08-24",
+    "supplier_id": 40,
+    "raw_material_name": "Fresh",
+    "price": 4919,
+    "challan_no": 3628,
+    "quantity": 72
+  },
+  {
+    "date": "1981-08-16",
+    "supplier_id": 40,
+    "raw_material_name": "Frozen",
+    "price": 4306,
+    "challan_no": 9188,
+    "quantity": 11
+  },
+  {
+    "date": "2017-01-25",
+    "supplier_id": 45,
+    "raw_material_name": "Steel",
+    "price": 3151,
+    "challan_no": 8613,
+    "quantity": 54
+  },
+  {
+    "date": "1985-04-05",
+    "supplier_id": 31,
+    "raw_material_name": "Plastic",
+    "price": 740,
+    "challan_no": 8813,
+    "quantity": 76
+  },
+  {
+    "date": "1985-09-29",
+    "supplier_id": 45,
+    "raw_material_name": "Concrete",
+    "price": 4173,
+    "challan_no": 8086,
+    "quantity": 100
+  },
+  {
+    "date": "2019-01-19",
+    "supplier_id": 11,
+    "raw_material_name": "Frozen",
+    "price": 3300,
+    "challan_no": 5658,
+    "quantity": 71
+  },
+  {
+    "date": "2017-02-16",
+    "supplier_id": 43,
+    "raw_material_name": "Concrete",
+    "price": 3741,
+    "challan_no": 9106,
+    "quantity": 25
+  },
+  {
+    "date": "1994-09-01",
+    "supplier_id": 43,
+    "raw_material_name": "Plastic",
+    "price": 4979,
+    "challan_no": 115,
+    "quantity": 32
+  },
+  {
+    "date": "2008-05-19",
+    "supplier_id": 10,
+    "raw_material_name": "Concrete",
+    "price": 3903,
+    "challan_no": 1413,
+    "quantity": 89
+  },
+  {
+    "date": "2000-10-26",
+    "supplier_id": 29,
+    "raw_material_name": "Wooden",
+    "price": 136,
+    "challan_no": 6686,
+    "quantity": 37
+  },
+  {
+    "date": "2010-07-06",
+    "supplier_id": 24,
+    "raw_material_name": "Soft",
+    "price": 4668,
+    "challan_no": 2024,
+    "quantity": 75
+  },
+  {
+    "date": "2022-03-15",
+    "supplier_id": 16,
+    "raw_material_name": "Concrete",
+    "price": 2001,
+    "challan_no": 6699,
+    "quantity": 22
+  },
+  {
+    "date": "2016-06-16",
+    "supplier_id": 45,
+    "raw_material_name": "Wooden",
+    "price": 2278,
+    "challan_no": 971,
+    "quantity": 54
+  },
+  {
+    "date": "1983-10-17",
+    "supplier_id": 13,
+    "raw_material_name": "Plastic",
+    "price": 4695,
+    "challan_no": 9302,
+    "quantity": 60
+  },
+  {
+    "date": "1992-09-17",
+    "supplier_id": 30,
+    "raw_material_name": "Wooden",
+    "price": 2960,
+    "challan_no": 8815,
+    "quantity": 94
+  },
+  {
+    "date": "2009-11-20",
+    "supplier_id": 20,
+    "raw_material_name": "Granite",
+    "price": 4909,
+    "challan_no": 3593,
+    "quantity": 61
+  },
+  {
+    "date": "1998-05-13",
+    "supplier_id": 40,
+    "raw_material_name": "Bronze",
+    "price": 3717,
+    "challan_no": 9475,
+    "quantity": 66
+  },
+  {
+    "date": "1981-09-24",
+    "supplier_id": 30,
+    "raw_material_name": "Metal",
+    "price": 2386,
+    "challan_no": 8915,
+    "quantity": 59
+  },
+  {
+    "date": "2000-07-15",
+    "supplier_id": 46,
+    "raw_material_name": "Cotton",
+    "price": 4892,
+    "challan_no": 2527,
+    "quantity": 16
+  },
+  {
+    "date": "2008-12-19",
+    "supplier_id": 6,
+    "raw_material_name": "Steel",
+    "price": 4914,
+    "challan_no": 6809,
+    "quantity": 99
+  },
+  {
+    "date": "2011-08-02",
+    "supplier_id": 30,
+    "raw_material_name": "Frozen",
+    "price": 1567,
+    "challan_no": 5752,
+    "quantity": 89
+  },
+  {
+    "date": "2010-12-07",
+    "supplier_id": 11,
+    "raw_material_name": "Steel",
+    "price": 3899,
+    "challan_no": 5953,
+    "quantity": 58
+  },
+  {
+    "date": "2014-01-25",
+    "supplier_id": 22,
+    "raw_material_name": "Wooden",
+    "price": 4037,
+    "challan_no": 6547,
+    "quantity": 91
+  },
+  {
+    "date": "1987-04-19",
+    "supplier_id": 20,
+    "raw_material_name": "Bronze",
+    "price": 1966,
+    "challan_no": 1713,
+    "quantity": 14
+  },
+  {
+    "date": "1995-12-09",
+    "supplier_id": 23,
+    "raw_material_name": "Granite",
+    "price": 4397,
+    "challan_no": 2109,
+    "quantity": 77
+  },
+  {
+    "date": "2003-10-16",
+    "supplier_id": 19,
+    "raw_material_name": "Plastic",
+    "price": 4183,
+    "challan_no": 5404,
+    "quantity": 5
+  },
+  {
+    "date": "2015-01-26",
+    "supplier_id": 21,
+    "raw_material_name": "Metal",
+    "price": 783,
+    "challan_no": 5174,
+    "quantity": 49
+  },
+  {
+    "date": "2000-12-27",
+    "supplier_id": 5,
+    "raw_material_name": "Plastic",
+    "price": 558,
+    "challan_no": 9575,
+    "quantity": 22
+  },
+  {
+    "date": "1986-03-20",
+    "supplier_id": 46,
+    "raw_material_name": "Wooden",
+    "price": 3312,
+    "challan_no": 4544,
+    "quantity": 38
+  },
+  {
+    "date": "2002-01-15",
+    "supplier_id": 7,
+    "raw_material_name": "Plastic",
+    "price": 3707,
+    "challan_no": 2701,
+    "quantity": 84
+  },
+  {
+    "date": "1982-02-18",
+    "supplier_id": 19,
+    "raw_material_name": "Steel",
+    "price": 1875,
+    "challan_no": 3290,
+    "quantity": 92
+  },
+  {
+    "date": "2014-07-26",
+    "supplier_id": 33,
+    "raw_material_name": "Fresh",
+    "price": 3290,
+    "challan_no": 1119,
+    "quantity": 39
+  },
+  {
+    "date": "2001-11-25",
+    "supplier_id": 35,
+    "raw_material_name": "Cotton",
+    "price": 4831,
+    "challan_no": 6887,
+    "quantity": 73
+  },
+  {
+    "date": "2020-12-15",
+    "supplier_id": 16,
+    "raw_material_name": "Fresh",
+    "price": 1942,
+    "challan_no": 6523,
+    "quantity": 28
+  },
+  {
+    "date": "1991-12-09",
+    "supplier_id": 7,
+    "raw_material_name": "Bronze",
+    "price": 3949,
+    "challan_no": 6050,
+    "quantity": 54
+  },
+  {
+    "date": "2015-05-01",
+    "supplier_id": 22,
+    "raw_material_name": "Steel",
+    "price": 3949,
+    "challan_no": 9069,
+    "quantity": 65
+  },
+  {
+    "date": "2006-01-23",
+    "supplier_id": 42,
+    "raw_material_name": "Steel",
+    "price": 4803,
+    "challan_no": 8777,
+    "quantity": 60
+  },
+  {
+    "date": "2018-08-02",
+    "supplier_id": 27,
+    "raw_material_name": "Steel",
+    "price": 2756,
+    "challan_no": 5837,
+    "quantity": 6
+  },
+  {
+    "date": "2014-04-28",
+    "supplier_id": 14,
+    "raw_material_name": "Fresh",
+    "price": 1355,
+    "challan_no": 4933,
+    "quantity": 94
+  },
+  {
+    "date": "2015-10-21",
+    "supplier_id": 7,
+    "raw_material_name": "Bronze",
+    "price": 2342,
+    "challan_no": 2339,
+    "quantity": 79
+  },
+  {
+    "date": "1998-12-22",
+    "supplier_id": 20,
+    "raw_material_name": "Fresh",
+    "price": 1195,
+    "challan_no": 3044,
+    "quantity": 59
+  },
+  {
+    "date": "2015-12-22",
+    "supplier_id": 1,
+    "raw_material_name": "Frozen",
+    "price": 3525,
+    "challan_no": 2115,
+    "quantity": 15
+  },
+  {
+    "date": "1991-06-26",
+    "supplier_id": 21,
+    "raw_material_name": "Plastic",
+    "price": 110,
+    "challan_no": 9480,
+    "quantity": 20
+  },
+  {
+    "date": "1983-06-25",
+    "supplier_id": 41,
+    "raw_material_name": "Cotton",
+    "price": 2191,
+    "challan_no": 5951,
+    "quantity": 60
+  },
+  {
+    "date": "2016-03-18",
+    "supplier_id": 29,
+    "raw_material_name": "Soft",
+    "price": 4028,
+    "challan_no": 917,
+    "quantity": 22
+  },
+  {
+    "date": "2018-03-17",
+    "supplier_id": 3,
+    "raw_material_name": "Fresh",
+    "price": 1557,
+    "challan_no": 9001,
+    "quantity": 18
+  },
+  {
+    "date": "2022-01-05",
+    "supplier_id": 31,
+    "raw_material_name": "Fresh",
+    "price": 3535,
+    "challan_no": 6149,
+    "quantity": 44
+  },
+  {
+    "date": "2012-06-12",
+    "supplier_id": 12,
+    "raw_material_name": "Granite",
+    "price": 692,
+    "challan_no": 9717,
+    "quantity": 38
+  },
+  {
+    "date": "2019-01-04",
+    "supplier_id": 24,
+    "raw_material_name": "Wooden",
+    "price": 3111,
+    "challan_no": 2670,
+    "quantity": 77
+  },
+  {
+    "date": "2013-11-12",
+    "supplier_id": 36,
+    "raw_material_name": "Metal",
+    "price": 191,
+    "challan_no": 8968,
+    "quantity": 16
+  },
+  {
+    "date": "2007-10-12",
+    "supplier_id": 15,
+    "raw_material_name": "Rubber",
+    "price": 4965,
+    "challan_no": 6850,
+    "quantity": 99
+  },
+  {
+    "date": "1987-09-21",
+    "supplier_id": 38,
+    "raw_material_name": "Granite",
+    "price": 3043,
+    "challan_no": 6613,
+    "quantity": 95
+  },
+  {
+    "date": "2000-05-13",
+    "supplier_id": 8,
+    "raw_material_name": "Wooden",
+    "price": 4475,
+    "challan_no": 4849,
+    "quantity": 87
+  },
+  {
+    "date": "2000-01-19",
+    "supplier_id": 25,
+    "raw_material_name": "Soft",
+    "price": 3430,
+    "challan_no": 1680,
+    "quantity": 29
+  },
+  {
+    "date": "2016-10-15",
+    "supplier_id": 47,
+    "raw_material_name": "Concrete",
+    "price": 4059,
+    "challan_no": 1255,
+    "quantity": 71
+  },
+  {
+    "date": "2020-06-17",
+    "supplier_id": 49,
+    "raw_material_name": "Wooden",
+    "price": 1842,
+    "challan_no": 2691,
+    "quantity": 23
+  },
+  {
+    "date": "2008-05-08",
+    "supplier_id": 16,
+    "raw_material_name": "Wooden",
+    "price": 4372,
+    "challan_no": 3146,
+    "quantity": 67
+  },
+  {
+    "date": "1988-09-15",
+    "supplier_id": 38,
+    "raw_material_name": "Frozen",
+    "price": 1964,
+    "challan_no": 5719,
+    "quantity": 5
+  },
+  {
+    "date": "1988-11-30",
+    "supplier_id": 19,
+    "raw_material_name": "Granite",
+    "price": 4990,
+    "challan_no": 2535,
+    "quantity": 49
+  },
+  {
+    "date": "2008-02-03",
+    "supplier_id": 16,
+    "raw_material_name": "Bronze",
+    "price": 4051,
+    "challan_no": 1913,
+    "quantity": 53
+  },
+  {
+    "date": "1988-08-06",
+    "supplier_id": 27,
+    "raw_material_name": "Rubber",
+    "price": 2421,
+    "challan_no": 471,
+    "quantity": 78
+  },
+  {
+    "date": "1985-07-05",
+    "supplier_id": 11,
+    "raw_material_name": "Rubber",
+    "price": 3356,
+    "challan_no": 9841,
+    "quantity": 39
+  },
+  {
+    "date": "1984-09-14",
+    "supplier_id": 42,
+    "raw_material_name": "Cotton",
+    "price": 2441,
+    "challan_no": 4061,
+    "quantity": 96
+  },
+  {
+    "date": "1984-12-06",
+    "supplier_id": 45,
+    "raw_material_name": "Cotton",
+    "price": 1100,
+    "challan_no": 3164,
+    "quantity": 49
+  },
+  {
+    "date": "2011-02-16",
+    "supplier_id": 28,
+    "raw_material_name": "Bronze",
+    "price": 1055,
+    "challan_no": 4128,
+    "quantity": 25
+  },
+  {
+    "date": "1997-03-22",
+    "supplier_id": 8,
+    "raw_material_name": "Steel",
+    "price": 2018,
+    "challan_no": 1580,
+    "quantity": 96
+  },
+  {
+    "date": "2016-02-22",
+    "supplier_id": 37,
+    "raw_material_name": "Frozen",
+    "price": 3509,
+    "challan_no": 4612,
+    "quantity": 99
+  },
+  {
+    "date": "2012-08-29",
+    "supplier_id": 19,
+    "raw_material_name": "Rubber",
+    "price": 2974,
+    "challan_no": 9689,
+    "quantity": 14
+  },
+  {
+    "date": "2021-08-16",
+    "supplier_id": 22,
+    "raw_material_name": "Frozen",
+    "price": 1126,
+    "challan_no": 7758,
+    "quantity": 100
+  },
+  {
+    "date": "1980-07-29",
+    "supplier_id": 16,
+    "raw_material_name": "Frozen",
+    "price": 2109,
+    "challan_no": 8319,
+    "quantity": 81
+  },
+  {
+    "date": "2007-08-11",
+    "supplier_id": 34,
+    "raw_material_name": "Plastic",
+    "price": 2766,
+    "challan_no": 9393,
+    "quantity": 100
+  },
+  {
+    "date": "1993-01-14",
+    "supplier_id": 42,
+    "raw_material_name": "Cotton",
+    "price": 1872,
+    "challan_no": 295,
+    "quantity": 55
+  },
+  {
+    "date": "2008-07-18",
+    "supplier_id": 40,
+    "raw_material_name": "Steel",
+    "price": 1346,
+    "challan_no": 9312,
+    "quantity": 16
+  },
+  {
+    "date": "1995-04-07",
+    "supplier_id": 2,
+    "raw_material_name": "Wooden",
+    "price": 360,
+    "challan_no": 8822,
+    "quantity": 61
+  },
+  {
+    "date": "1988-11-02",
+    "supplier_id": 19,
+    "raw_material_name": "Cotton",
+    "price": 1983,
+    "challan_no": 8834,
+    "quantity": 9
+  },
+  {
+    "date": "1995-06-27",
+    "supplier_id": 13,
+    "raw_material_name": "Fresh",
+    "price": 4791,
+    "challan_no": 6845,
+    "quantity": 46
+  },
+  {
+    "date": "1985-02-26",
+    "supplier_id": 23,
+    "raw_material_name": "Granite",
+    "price": 1508,
+    "challan_no": 8172,
+    "quantity": 94
+  },
+  {
+    "date": "2018-10-20",
+    "supplier_id": 21,
+    "raw_material_name": "Bronze",
+    "price": 3802,
+    "challan_no": 583,
+    "quantity": 79
+  },
+  {
+    "date": "1993-12-11",
+    "supplier_id": 24,
+    "raw_material_name": "Plastic",
+    "price": 1627,
+    "challan_no": 724,
+    "quantity": 88
+  },
+  {
+    "date": "1997-08-06",
+    "supplier_id": 13,
+    "raw_material_name": "Bronze",
+    "price": 4319,
+    "challan_no": 3405,
+    "quantity": 26
+  },
+  {
+    "date": "2012-02-05",
+    "supplier_id": 50,
+    "raw_material_name": "Granite",
+    "price": 3721,
+    "challan_no": 2222,
+    "quantity": 48
+  },
+  {
+    "date": "1992-01-07",
+    "supplier_id": 48,
+    "raw_material_name": "Granite",
+    "price": 3759,
+    "challan_no": 8693,
+    "quantity": 54
+  },
+  {
+    "date": "1997-05-03",
+    "supplier_id": 32,
+    "raw_material_name": "Concrete",
+    "price": 369,
+    "challan_no": 6880,
+    "quantity": 70
+  },
+  {
+    "date": "2009-11-28",
+    "supplier_id": 2,
+    "raw_material_name": "Plastic",
+    "price": 4493,
+    "challan_no": 6958,
+    "quantity": 48
+  },
+  {
+    "date": "2008-03-06",
+    "supplier_id": 2,
+    "raw_material_name": "Concrete",
+    "price": 1691,
+    "challan_no": 286,
+    "quantity": 81
+  },
+  {
+    "date": "1984-01-30",
+    "supplier_id": 31,
+    "raw_material_name": "Rubber",
+    "price": 4922,
+    "challan_no": 9455,
+    "quantity": 1
+  },
+  {
+    "date": "1999-09-16",
+    "supplier_id": 16,
+    "raw_material_name": "Steel",
+    "price": 3742,
+    "challan_no": 4355,
+    "quantity": 79
+  },
+  {
+    "date": "2017-10-18",
+    "supplier_id": 10,
+    "raw_material_name": "Steel",
+    "price": 2503,
+    "challan_no": 7293,
+    "quantity": 14
+  },
+  {
+    "date": "1986-01-26",
+    "supplier_id": 14,
+    "raw_material_name": "Concrete",
+    "price": 458,
+    "challan_no": 6658,
+    "quantity": 26
+  },
+  {
+    "date": "2004-12-14",
+    "supplier_id": 45,
+    "raw_material_name": "Granite",
+    "price": 2873,
+    "challan_no": 2664,
+    "quantity": 26
+  },
+  {
+    "date": "1986-03-26",
+    "supplier_id": 15,
+    "raw_material_name": "Rubber",
+    "price": 4719,
+    "challan_no": 1560,
+    "quantity": 9
+  },
+  {
+    "date": "1996-12-06",
+    "supplier_id": 37,
+    "raw_material_name": "Frozen",
+    "price": 669,
+    "challan_no": 8742,
+    "quantity": 2
+  },
+  {
+    "date": "1992-09-29",
+    "supplier_id": 7,
+    "raw_material_name": "Granite",
+    "price": 4310,
+    "challan_no": 3342,
+    "quantity": 73
+  },
+  {
+    "date": "2011-11-06",
+    "supplier_id": 41,
+    "raw_material_name": "Frozen",
+    "price": 3411,
+    "challan_no": 4804,
+    "quantity": 96
+  },
+  {
+    "date": "2004-11-08",
+    "supplier_id": 6,
+    "raw_material_name": "Rubber",
+    "price": 4243,
+    "challan_no": 7576,
+    "quantity": 70
+  },
+  {
+    "date": "2015-08-31",
+    "supplier_id": 29,
+    "raw_material_name": "Soft",
+    "price": 4131,
+    "challan_no": 7897,
+    "quantity": 54
+  },
+  {
+    "date": "2012-09-03",
+    "supplier_id": 9,
+    "raw_material_name": "Fresh",
+    "price": 4599,
+    "challan_no": 9269,
+    "quantity": 84
+  },
+  {
+    "date": "2006-02-22",
+    "supplier_id": 35,
+    "raw_material_name": "Bronze",
+    "price": 2149,
+    "challan_no": 6715,
+    "quantity": 51
+  },
+  {
+    "date": "1980-03-30",
+    "supplier_id": 11,
+    "raw_material_name": "Concrete",
+    "price": 4111,
+    "challan_no": 3379,
+    "quantity": 55
+  },
+  {
+    "date": "2009-03-31",
+    "supplier_id": 22,
+    "raw_material_name": "Concrete",
+    "price": 2425,
+    "challan_no": 9639,
+    "quantity": 79
+  },
+  {
+    "date": "1988-06-24",
+    "supplier_id": 50,
+    "raw_material_name": "Steel",
+    "price": 4966,
+    "challan_no": 8280,
+    "quantity": 20
+  },
+  {
+    "date": "1996-11-09",
+    "supplier_id": 29,
+    "raw_material_name": "Wooden",
+    "price": 1500,
+    "challan_no": 5388,
+    "quantity": 51
+  },
+  {
+    "date": "1984-10-19",
+    "supplier_id": 4,
+    "raw_material_name": "Frozen",
+    "price": 3946,
+    "challan_no": 3152,
+    "quantity": 38
+  },
+  {
+    "date": "2015-12-01",
+    "supplier_id": 30,
+    "raw_material_name": "Bronze",
+    "price": 843,
+    "challan_no": 420,
+    "quantity": 36
+  },
+  {
+    "date": "2000-08-02",
+    "supplier_id": 32,
+    "raw_material_name": "Soft",
+    "price": 1036,
+    "challan_no": 5103,
+    "quantity": 32
+  },
+  {
+    "date": "2004-10-28",
+    "supplier_id": 19,
+    "raw_material_name": "Soft",
+    "price": 2604,
+    "challan_no": 2507,
+    "quantity": 72
+  },
+  {
+    "date": "2011-05-08",
+    "supplier_id": 2,
+    "raw_material_name": "Wooden",
+    "price": 186,
+    "challan_no": 1921,
+    "quantity": 34
+  },
+  {
+    "date": "1993-12-18",
+    "supplier_id": 43,
+    "raw_material_name": "Plastic",
+    "price": 3304,
+    "challan_no": 7735,
+    "quantity": 51
+  },
+  {
+    "date": "2015-01-20",
+    "supplier_id": 30,
+    "raw_material_name": "Granite",
+    "price": 592,
+    "challan_no": 1319,
+    "quantity": 16
+  },
+  {
+    "date": "2009-11-23",
+    "supplier_id": 26,
+    "raw_material_name": "Cotton",
+    "price": 3371,
+    "challan_no": 4926,
+    "quantity": 94
+  },
+  {
+    "date": "2001-07-16",
+    "supplier_id": 40,
+    "raw_material_name": "Frozen",
+    "price": 1389,
+    "challan_no": 2379,
+    "quantity": 50
+  },
+  {
+    "date": "1983-11-10",
+    "supplier_id": 14,
+    "raw_material_name": "Frozen",
+    "price": 2245,
+    "challan_no": 9949,
+    "quantity": 17
+  },
+  {
+    "date": "2015-01-22",
+    "supplier_id": 29,
+    "raw_material_name": "Cotton",
+    "price": 4606,
+    "challan_no": 4422,
+    "quantity": 50
+  },
+  {
+    "date": "2015-03-22",
+    "supplier_id": 7,
+    "raw_material_name": "Soft",
+    "price": 1449,
+    "challan_no": 5592,
+    "quantity": 50
+  },
+  {
+    "date": "1986-06-06",
+    "supplier_id": 26,
+    "raw_material_name": "Cotton",
+    "price": 1603,
+    "challan_no": 143,
+    "quantity": 58
+  },
+  {
+    "date": "2009-04-30",
+    "supplier_id": 2,
+    "raw_material_name": "Fresh",
+    "price": 420,
+    "challan_no": 6213,
+    "quantity": 34
+  },
+  {
+    "date": "1992-05-23",
+    "supplier_id": 9,
+    "raw_material_name": "Concrete",
+    "price": 1670,
+    "challan_no": 1197,
+    "quantity": 13
+  },
+  {
+    "date": "1992-05-16",
+    "supplier_id": 28,
+    "raw_material_name": "Plastic",
+    "price": 3809,
+    "challan_no": 5749,
+    "quantity": 50
+  },
+  {
+    "date": "2012-07-02",
+    "supplier_id": 7,
+    "raw_material_name": "Wooden",
+    "price": 3009,
+    "challan_no": 3058,
+    "quantity": 37
+  },
+  {
+    "date": "2014-04-05",
+    "supplier_id": 16,
+    "raw_material_name": "Steel",
+    "price": 3337,
+    "challan_no": 9875,
+    "quantity": 43
+  },
+  {
+    "date": "2020-10-01",
+    "supplier_id": 30,
+    "raw_material_name": "Concrete",
+    "price": 4570,
+    "challan_no": 9120,
+    "quantity": 12
+  },
+  {
+    "date": "2007-08-17",
+    "supplier_id": 7,
+    "raw_material_name": "Rubber",
+    "price": 4163,
+    "challan_no": 6981,
+    "quantity": 20
+  },
+  {
+    "date": "1995-08-29",
+    "supplier_id": 28,
+    "raw_material_name": "Bronze",
+    "price": 3993,
+    "challan_no": 8390,
+    "quantity": 41
+  },
+  {
+    "date": "1983-12-03",
+    "supplier_id": 5,
+    "raw_material_name": "Steel",
+    "price": 2959,
+    "challan_no": 6570,
+    "quantity": 77
+  },
+  {
+    "date": "2012-03-11",
+    "supplier_id": 47,
+    "raw_material_name": "Plastic",
+    "price": 500,
+    "challan_no": 5768,
+    "quantity": 83
+  },
+  {
+    "date": "1999-08-09",
+    "supplier_id": 33,
+    "raw_material_name": "Rubber",
+    "price": 3715,
+    "challan_no": 7134,
+    "quantity": 55
+  },
+  {
+    "date": "2013-12-30",
+    "supplier_id": 20,
+    "raw_material_name": "Fresh",
+    "price": 347,
+    "challan_no": 2405,
+    "quantity": 34
+  },
+  {
+    "date": "2016-01-09",
+    "supplier_id": 23,
+    "raw_material_name": "Frozen",
+    "price": 389,
+    "challan_no": 1192,
+    "quantity": 88
+  },
+  {
+    "date": "2009-02-05",
+    "supplier_id": 26,
+    "raw_material_name": "Fresh",
+    "price": 3763,
+    "challan_no": 8382,
+    "quantity": 40
+  },
+  {
+    "date": "2004-01-23",
+    "supplier_id": 30,
+    "raw_material_name": "Cotton",
+    "price": 1408,
+    "challan_no": 5664,
+    "quantity": 23
+  },
+  {
+    "date": "1999-08-13",
+    "supplier_id": 30,
+    "raw_material_name": "Plastic",
+    "price": 278,
+    "challan_no": 4493,
+    "quantity": 87
+  },
+  {
+    "date": "2020-05-31",
+    "supplier_id": 43,
+    "raw_material_name": "Metal",
+    "price": 4051,
+    "challan_no": 6268,
+    "quantity": 70
+  },
+  {
+    "date": "2007-09-05",
+    "supplier_id": 44,
+    "raw_material_name": "Granite",
+    "price": 4357,
+    "challan_no": 1839,
+    "quantity": 40
+  },
+  {
+    "date": "2019-07-12",
+    "supplier_id": 26,
+    "raw_material_name": "Rubber",
+    "price": 465,
+    "challan_no": 7794,
+    "quantity": 45
+  },
+  {
+    "date": "2003-05-19",
+    "supplier_id": 36,
+    "raw_material_name": "Fresh",
+    "price": 1444,
+    "challan_no": 4466,
+    "quantity": 51
+  },
+  {
+    "date": "1986-05-21",
+    "supplier_id": 40,
+    "raw_material_name": "Cotton",
+    "price": 758,
+    "challan_no": 2833,
+    "quantity": 49
+  },
+  {
+    "date": "1992-06-02",
+    "supplier_id": 2,
+    "raw_material_name": "Frozen",
+    "price": 3744,
+    "challan_no": 2562,
+    "quantity": 59
+  },
+  {
+    "date": "2003-05-31",
+    "supplier_id": 31,
+    "raw_material_name": "Metal",
+    "price": 4924,
+    "challan_no": 8402,
+    "quantity": 59
+  },
+  {
+    "date": "2005-10-27",
+    "supplier_id": 8,
+    "raw_material_name": "Soft",
+    "price": 4886,
+    "challan_no": 9442,
+    "quantity": 65
+  },
+  {
+    "date": "2021-12-03",
+    "supplier_id": 47,
+    "raw_material_name": "Cotton",
+    "price": 1203,
+    "challan_no": 5768,
+    "quantity": 95
+  },
+  {
+    "date": "2015-10-15",
+    "supplier_id": 17,
+    "raw_material_name": "Wooden",
+    "price": 4627,
+    "challan_no": 4019,
+    "quantity": 8
+  },
+  {
+    "date": "1981-12-22",
+    "supplier_id": 37,
+    "raw_material_name": "Fresh",
+    "price": 4275,
+    "challan_no": 1637,
+    "quantity": 46
+  },
+  {
+    "date": "1996-04-02",
+    "supplier_id": 44,
+    "raw_material_name": "Frozen",
+    "price": 1002,
+    "challan_no": 442,
+    "quantity": 69
+  },
+  {
+    "date": "2017-05-23",
+    "supplier_id": 36,
+    "raw_material_name": "Steel",
+    "price": 1943,
+    "challan_no": 2226,
+    "quantity": 71
+  },
+  {
+    "date": "1999-03-01",
+    "supplier_id": 36,
+    "raw_material_name": "Metal",
+    "price": 2969,
+    "challan_no": 4288,
+    "quantity": 15
+  },
+  {
+    "date": "1987-08-02",
+    "supplier_id": 30,
+    "raw_material_name": "Wooden",
+    "price": 3422,
+    "challan_no": 7642,
+    "quantity": 17
+  },
+  {
+    "date": "2021-10-30",
+    "supplier_id": 35,
+    "raw_material_name": "Soft",
+    "price": 1365,
+    "challan_no": 2978,
+    "quantity": 96
+  },
+  {
+    "date": "1990-07-31",
+    "supplier_id": 1,
+    "raw_material_name": "Rubber",
+    "price": 3295,
+    "challan_no": 9005,
+    "quantity": 23
+  },
+  {
+    "date": "2002-02-10",
+    "supplier_id": 4,
+    "raw_material_name": "Frozen",
+    "price": 261,
+    "challan_no": 5011,
+    "quantity": 52
+  },
+  {
+    "date": "2016-01-19",
+    "supplier_id": 24,
+    "raw_material_name": "Wooden",
+    "price": 417,
+    "challan_no": 5129,
+    "quantity": 86
+  },
+  {
+    "date": "1992-11-19",
+    "supplier_id": 24,
+    "raw_material_name": "Concrete",
+    "price": 4586,
+    "challan_no": 3140,
+    "quantity": 50
+  },
+  {
+    "date": "1991-08-29",
+    "supplier_id": 11,
+    "raw_material_name": "Fresh",
+    "price": 848,
+    "challan_no": 8095,
+    "quantity": 87
+  },
+  {
+    "date": "2012-02-25",
+    "supplier_id": 19,
+    "raw_material_name": "Soft",
+    "price": 1759,
+    "challan_no": 8722,
+    "quantity": 10
+  },
+  {
+    "date": "1999-02-14",
+    "supplier_id": 36,
+    "raw_material_name": "Metal",
+    "price": 4317,
+    "challan_no": 2841,
+    "quantity": 26
+  },
+  {
+    "date": "2012-04-22",
+    "supplier_id": 23,
+    "raw_material_name": "Frozen",
+    "price": 3906,
+    "challan_no": 8858,
+    "quantity": 35
+  },
+  {
+    "date": "2009-06-27",
+    "supplier_id": 5,
+    "raw_material_name": "Granite",
+    "price": 2423,
+    "challan_no": 1047,
+    "quantity": 15
+  },
+  {
+    "date": "1980-03-17",
+    "supplier_id": 23,
+    "raw_material_name": "Metal",
+    "price": 3617,
+    "challan_no": 6281,
+    "quantity": 37
+  },
+  {
+    "date": "2015-05-27",
+    "supplier_id": 25,
+    "raw_material_name": "Cotton",
+    "price": 881,
+    "challan_no": 4953,
+    "quantity": 46
+  },
+  {
+    "date": "2006-12-14",
+    "supplier_id": 20,
+    "raw_material_name": "Concrete",
+    "price": 1934,
+    "challan_no": 7978,
+    "quantity": 53
+  },
+  {
+    "date": "2022-04-20",
+    "supplier_id": 31,
+    "raw_material_name": "Bronze",
+    "price": 4062,
+    "challan_no": 8497,
+    "quantity": 19
+  },
+  {
+    "date": "1993-01-20",
+    "supplier_id": 43,
+    "raw_material_name": "Cotton",
+    "price": 4926,
+    "challan_no": 2089,
+    "quantity": 90
+  },
+  {
+    "date": "1988-10-04",
+    "supplier_id": 28,
+    "raw_material_name": "Steel",
+    "price": 755,
+    "challan_no": 1321,
+    "quantity": 92
+  },
+  {
+    "date": "1998-08-10",
+    "supplier_id": 6,
+    "raw_material_name": "Fresh",
+    "price": 3728,
+    "challan_no": 2072,
+    "quantity": 39
+  },
+  {
+    "date": "2006-06-14",
+    "supplier_id": 11,
+    "raw_material_name": "Fresh",
+    "price": 2782,
+    "challan_no": 1339,
+    "quantity": 11
+  },
+  {
+    "date": "1994-08-14",
+    "supplier_id": 17,
+    "raw_material_name": "Plastic",
+    "price": 373,
+    "challan_no": 5233,
+    "quantity": 1
+  },
+  {
+    "date": "1988-06-12",
+    "supplier_id": 7,
+    "raw_material_name": "Wooden",
+    "price": 1898,
+    "challan_no": 319,
+    "quantity": 21
+  },
+  {
+    "date": "2023-02-16",
+    "supplier_id": 9,
+    "raw_material_name": "Concrete",
+    "price": 3929,
+    "challan_no": 9070,
+    "quantity": 38
+  },
+  {
+    "date": "2017-10-10",
+    "supplier_id": 31,
+    "raw_material_name": "Cotton",
+    "price": 3495,
+    "challan_no": 739,
+    "quantity": 43
+  },
+  {
+    "date": "1995-06-05",
+    "supplier_id": 48,
+    "raw_material_name": "Metal",
+    "price": 1146,
+    "challan_no": 992,
+    "quantity": 92
+  },
+  {
+    "date": "2018-07-13",
+    "supplier_id": 15,
+    "raw_material_name": "Concrete",
+    "price": 4723,
+    "challan_no": 6680,
+    "quantity": 38
+  },
+  {
+    "date": "2020-08-21",
+    "supplier_id": 44,
+    "raw_material_name": "Soft",
+    "price": 4895,
+    "challan_no": 9070,
+    "quantity": 79
+  }
+]
