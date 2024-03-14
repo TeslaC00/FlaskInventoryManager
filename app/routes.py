@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, redirect, jsonify
 from sqlalchemy import text
 
 from .database import db
@@ -77,3 +77,15 @@ def get_all_tables_list():
     meta = db.metadata
     db.reflect()
     return list(meta.tables.keys())
+
+
+@main_routes.route('/update-data', methods=['POST'])
+def update_data():
+    changes = request.json.get('changes', [])
+    # Process your changes here (e.g., update your database)
+    for change in changes:
+        row, prop, oldVal, newVal = change
+        print(f"Row {row} column {prop} changed from {oldVal} to {newVal}")
+        # Update the database based on each change
+
+    return jsonify({"status": "success"})
