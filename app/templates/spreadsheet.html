@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spreadsheet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/handsontable.full.min.css') }}">
+</head>
+<body>
+    <div id="hot"></div>
+
+    <script src="{{ url_for('static', filename='js/handsontable.full.min.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var data = {{ tables|tojson }};
+            var container = document.getElementById('hot');
+            var hot = new Handsontable(container, {
+                data: [data],
+                rowHeaders: true,
+                colHeaders: ['Tables in Database'],
+                readOnly: true,
+                licenseKey: 'non-commercial-and-evaluation' // Add your license key here
+            });
+        });
+    </script>
+</body>
+</html>

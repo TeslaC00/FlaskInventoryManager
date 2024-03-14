@@ -15,8 +15,9 @@ def root():
 
 @main_routes.route('/index/')
 def index():
-    all_tables=db.metadata.tables.keys()
-    items=["Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item2", "Item", "Item", "Item", "Item", "Item", "Item", "Item"]
+    all_tables = db.metadata.tables.keys()
+    items = ["Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item2", "Item", "Item",
+             "Item", "Item", "Item", "Item", "Item"]
     return render_template('index.html', all_tables=all_tables, items=items)
 
 
@@ -63,3 +64,16 @@ def show_users():
     # Fetch all users from the User table
     users = User.query.all()
     return render_template('user.html', users=users)
+
+
+@main_routes.route('/spreadsheet')
+def show_tables2():
+    tables = get_all_tables_list()
+    return render_template('spreadsheet.html', tables=tables)
+
+
+# This function retrieves all the tables in the database and returns in a list
+def get_all_tables_list():
+    meta = db.metadata
+    db.reflect()
+    return list(meta.tables.keys())
