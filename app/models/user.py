@@ -1,11 +1,8 @@
-from app.database import db
+from app import db
 
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    flag = db.Column(db.String(120))
-
-    def __repr__(self):
-        return '<User %r>' % self.username
+    __tablename__ = 'User'
+    Username = db.Column(db.String(50), primary_key=True)
+    password = db.Column(db.String(50), nullable=False)
+    user_type = db.Column(db.String(20), nullable=False)
