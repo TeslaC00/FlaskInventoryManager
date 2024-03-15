@@ -8,24 +8,22 @@
 <body>
     <div id="hot"></div>
 
-    <script src="{{ url_for('static', filename='js/handsontable.full.min.js') }}"></script>
-    <script>
+   <script src="{{ url_for('static', filename='js/handsontable.full.min.js') }}"></script>
+<script>
 document.addEventListener('DOMContentLoaded', function() {
     var data = {{ tables|tojson }};
     var container = document.getElementById('hot');
     var hot = new Handsontable(container, {
-        data: [data],
+        data: data, // Use the data directly
         licenseKey: 'non-commercial-and-evaluation',
         rowHeaders: true,
-        colHeaders: ['Tables in Database'],
+        colHeaders: ['Date', 'Quantity Used', 'Raw Material Name'],
+        // Add your column headers based on what 'to_dict' outputs
         // Other configurations...
         afterChange: function(changes, source) {
             if (!changes || source === 'loadData') {
-                // Don't send this change (it's a data load or no changes)
                 return;
             }
-            // changes is an array of changes,
-            // where each change is [row, prop, oldVal, newVal]
             fetch('/update-data', {
                 method: 'POST',
                 headers: {

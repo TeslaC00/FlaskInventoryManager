@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, jsonify
 from sqlalchemy import text
 
 from .database import db
-from .models import User
+from .models import User,Raw_Material_Records
 
 # Blueprint object to define routes
 main_routes = Blueprint('main', __name__)
@@ -68,8 +68,9 @@ def show_users():
 
 @main_routes.route('/spreadsheet')
 def show_tables2():
-    tables = get_all_tables_list()
-    return render_template('spreadsheet.html', tables=tables)
+    records = Raw_Material_Records.query.all()
+    results = [record.to_dict() for record in records]
+    return render_template('spreadsheet.html', tables=results)
 
 
 # This function retrieves all the tables in the database and returns in a list
@@ -79,7 +80,7 @@ def get_all_tables_list():
     return list(meta.tables.keys())
 
 
-@main_routes.route('/update-data', methods=['POST'])
+@main_routes.route('/update-data/', methods=['POST'])
 def update_data():
     changes = request.json.get('changes', [])
     # Process your changes here (e.g., update your database)
@@ -89,3 +90,10 @@ def update_data():
         # Update the database based on each change
 
     return jsonify({"status": "success"})
+
+
+@main_routes.route('/json')
+def json_response():
+    records = Raw_Material_Records.query.all()
+    results = [record.to_dict() for record in records]
+    return jsonify(results)
