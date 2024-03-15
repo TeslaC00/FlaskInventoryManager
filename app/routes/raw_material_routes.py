@@ -18,5 +18,7 @@ def show_raw_material_by_unit(unit):
 
 @raw_material_bp.route('/find/<name>/')
 def show_raw_materials_by_name(name):
-    raw_materials = Raw_Material.query.filter(Raw_Material.raw_material_name == name).all()
+    pattern = f'{name}%'  # Matches anything that starts with `name`
+    raw_materials = Raw_Material.query.filter(Raw_Material.raw_material_name.like(pattern)).all()
     return render_template('raw_material.html', materials=raw_materials)
+
