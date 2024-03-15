@@ -4,15 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User List</title>
+    <link rel="stylesheet" , href="{{ url_for('static',filename='css/wuxia.css') }}">
 </head>
 <body>
 <h1>User List</h1>
-<ul>
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Passwords</th>
+        <th>User Type</th>
+    </tr>
     {% for user in users %}
-        <li>username: {{ user.username }}</li>
-        <li>password: {{ user.password }}</li>
-        <li>user type: {{ user.user_type }}</li>
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.password }}</td>
+            <td>{{ user.user_type }}</td>
+        </tr>
     {% endfor %}
-</ul>
+</table>
 </body>
 </html>

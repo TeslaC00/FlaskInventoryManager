@@ -1,10 +1,10 @@
-from flask import Blueprint, render_template, request, redirect, jsonify
+# Blueprint object to define routes
+from flask import Blueprint, render_template, request, jsonify
 from sqlalchemy import text
 
-from .database import db
-from .models import User,Raw_Material_Records
+from app import db
+from app.models import Raw_Material_Records
 
-# Blueprint object to define routes
 main_routes = Blueprint('main', __name__)
 
 
@@ -53,20 +53,7 @@ def show_tables():
     return render_template('show_tables.html', tables=all_tables)
 
 
-# Create a route to add values to the table
-@main_routes.route('/add_user/<username>/')
-def add_user(username):
-    return 'Can"t add any user to database now! Please try later'
-
-
-@main_routes.route('/users/')
-def show_users():
-    # Fetch all users from the User table
-    users = User.query.all()
-    return render_template('user.html', users=users)
-
-
-@main_routes.route('/spreadsheet')
+@main_routes.route('/spreadsheet/')
 def show_tables2():
     records = Raw_Material_Records.query.all()
     results = [record.to_dict() for record in records]
