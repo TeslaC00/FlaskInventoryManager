@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, request, jsonify
 from sqlalchemy import text
 
-from app import db
+from app.database import db
 from app.models import Raw_Material_Records
 
 main_routes = Blueprint('main', __name__)
@@ -10,7 +10,7 @@ main_routes = Blueprint('main', __name__)
 
 @main_routes.route('/')
 def root():
-    return render_template('home.html')
+    return render_template('base.html')
 
 
 @main_routes.route('/index/')
