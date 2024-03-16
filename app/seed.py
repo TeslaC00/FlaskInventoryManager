@@ -2,7 +2,7 @@ from json import load
 
 from app import db, create_app
 from app.models import Buyer, Supplier, Raw_Material, Goods, Bill, Challan, Goods_Records, Raw_Material_Records, \
-    Returned_Good, RawMaterialsPartNo, User, Write_off
+    Returned_Good, Raw_Materials_Part_No, User, Write_off, Goods_Scrap, Raw_Materials_Scrap
 
 app = create_app()
 app.app_context().push()
@@ -44,7 +44,7 @@ def seed():
         db.session.add(record)
 
     for item in read_json('data/raw_material_part_no.json'):
-        record = RawMaterialsPartNo(**item)
+        record = Raw_Materials_Part_No(**item)
         db.session.add(record)
 
     for item in read_json('data/goods_records.json'):
@@ -57,6 +57,14 @@ def seed():
 
     for item in read_json('data/users.json'):
         record = User(**item)
+        db.session.add(record)
+
+    for item in read_json('data/goods_scrap.json'):
+        record = Goods_Scrap(**item)
+        db.session.add(record)
+
+    for item in read_json('data/raw_materials_scrap.json'):
+        record = Raw_Materials_Scrap(**item)
         db.session.add(record)
 
     record = Write_off(write_offs="A write off that has written off the inventory")
