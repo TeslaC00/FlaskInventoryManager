@@ -1,23 +1,61 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, flash, session
+from flask_login import LoginManager, login_user, logout_user, current_user
 
+import app
+from app.forms.login_form import LoginForm
 from app.models import User
 
+# path for authentication related pages
 auth_bp = Blueprint('auth', __name__)
+
+login_manager = LoginManager()
+
+# To display warning if user is not logged in and try to access other pages
+login_manager.login_view = 'auth.login_page'
+
+
+@login_manager.user_loader
+def load_user(username):
+    return User.query.get(username)
 
 
 @auth_bp.route('/')
 def login_page():
-    message = request.args.get('message')
-    return render_template('auth/login.html', message=message)
+    """
+    Renders the Login page when logged in else redirects to the login page
+    :return: rendered login.html
+    """
+    if current_user.is_authenticated:
+        return redirect(url_for('main.root'))
+    form = LoginForm()
+    return render_template('auth/login.html', form=form)
 
 
-@auth_bp.route('/login', methods=['POST'])
-def login_post():
-    username = request.form['username']
-    password = request.form['password']
-    user = User.query.filter_by(username=username).first()
+@auth_bp.route('/login/', methods=['POST', 'GET'])
+def login():
+    """
+    Checks for user and password validation. If both are valid then login the user and redirects to the base page.
+    If user is invalid then flashes invalid user message then redirects to login page.
+    :return: redirect to base page
+    """
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        app.app.logger.debug(user)
+        if user and user.password == form.password.data:
+            login_user(user)
+            return redirect(url_for('main.root'))
+        else:
+            flash('Invalid username or password')
+    return redirect(url_for('auth.login_page'))
 
-    if user and user.password == password:
-        return f'Logged in as {user.username}'
-    else:
-        return redirect(url_for('auth.login_page', message='Bad Credentials'))
+
+@auth_bp.route('/logout')
+def logout():
+    """
+    Logs out the current user, clears the session and redirects to the login page
+    :return: redirect to login page
+    """
+    logout_user()
+    session.clear()
+    return redirect(url_for('auth.login'))
