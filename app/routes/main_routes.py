@@ -1,10 +1,10 @@
-from flask import Blueprint, render_template, request, redirect, jsonify
+# Blueprint object to define routes
+from flask import Blueprint, render_template, request, jsonify
 from sqlalchemy import text
 
-from .database import db
-from .models import User
+from app import db
+from app.models import Raw_Material_Records
 
-# Blueprint object to define routes
 main_routes = Blueprint('main', __name__)
 
 
@@ -53,23 +53,11 @@ def show_tables():
     return render_template('show_tables.html', tables=all_tables)
 
 
-# Create a route to add values to the table
-@main_routes.route('/add_user/<username>/')
-def add_user(username):
-    return 'Can"t add any user to database now! Please try later'
-
-
-@main_routes.route('/users/')
-def show_users():
-    # Fetch all users from the User table
-    users = User.query.all()
-    return render_template('user.html', users=users)
-
-
-@main_routes.route('/spreadsheet')
+@main_routes.route('/spreadsheet/')
 def show_tables2():
-    tables = get_all_tables_list()
-    return render_template('spreadsheet.html', tables=tables)
+    records = Raw_Material_Records.query.all()
+    results = [record.to_dict() for record in records]
+    return render_template('spreadsheet.html', tables=results)
 
 
 # This function retrieves all the tables in the database and returns in a list
@@ -79,7 +67,7 @@ def get_all_tables_list():
     return list(meta.tables.keys())
 
 
-@main_routes.route('/update-data', methods=['POST'])
+@main_routes.route('/update-data/', methods=['POST'])
 def update_data():
     changes = request.json.get('changes', [])
     # Process your changes here (e.g., update your database)
@@ -89,3 +77,10 @@ def update_data():
         # Update the database based on each change
 
     return jsonify({"status": "success"})
+
+
+@main_routes.route('/json')
+def json_response():
+    records = Raw_Material_Records.query.all()
+    results = [record.to_dict() for record in records]
+    return jsonify(results)

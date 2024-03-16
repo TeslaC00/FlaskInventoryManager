@@ -1,0 +1,902 @@
+[
+  {
+    "date": "1991-05-17",
+    "raw_material_name": "Fresh",
+    "type_of_scrap": "LRS",
+    "quantity": 9
+  },
+  {
+    "date": "2012-04-02",
+    "raw_material_name": "Fresh",
+    "type_of_scrap": "OK",
+    "quantity": 16
+  },
+  {
+    "date": "2006-06-09",
+    "raw_material_name": "Rubber",
+    "type_of_scrap": "NG",
+    "quantity": 20
+  },
+  {
+    "date": "1997-09-21",
+    "raw_material_name": "Concrete",
+    "type_of_scrap": "LRS",
+    "quantity": 8
+  },
+  {
+    "date": "1993-11-16",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "LRS",
+    "quantity": 12
+  },
+  {
+    "date": "2020-11-25",
+    "raw_material_name": "Concrete",
+    "type_of_scrap": "OK",
+    "quantity": 17
+  },
+  {
+    "date": "1983-11-21",
+    "raw_material_name": "Granite",
+    "type_of_scrap": "OK",
+    "quantity": 5
+  },
+  {
+    "date": "1980-08-25",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "LRS",
+    "quantity": 14
+  },
+  {
+    "date": "2012-02-08",
+    "raw_material_name": "Wooden",
+    "type_of_scrap": "LRS",
+    "quantity": 13
+  },
+  {
+    "date": "2020-08-11",
+    "raw_material_name": "Fresh",
+    "type_of_scrap": "LRS",
+    "quantity": 9
+  },
+  {
+    "date": "2006-10-12",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "LRS",
+    "quantity": 14
+  },
+  {
+    "date": "2011-05-27",
+    "raw_material_name": "Wooden",
+    "type_of_scrap": "OK",
+    "quantity": 20
+  },
+  {
+    "date": "2020-11-29",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "NG",
+    "quantity": 5
+  },
+  {
+    "date": "1991-06-09",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "LRS",
+    "quantity": 11
+  },
+  {
+    "date": "1982-07-23",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "NG",
+    "quantity": 20
+  },
+  {
+    "date": "2014-10-20",
+    "raw_material_name": "Plastic",
+    "type_of_scrap": "OK",
+    "quantity": 18
+  },
+  {
+    "date": "1980-07-29",
+    "raw_material_name": "Metal",
+    "type_of_scrap": "NG",
+    "quantity": 15
+  },
+  {
+    "date": "2004-05-09",
+    "raw_material_name": "Soft",
+    "type_of_scrap": "NG",
+    "quantity": 11
+  },
+  {
+    "date": "1983-08-26",
+    "raw_material_name": "Steel",
+    "type_of_scrap": "NG",
+    "quantity": 9
+  },
+  {
+    "date": "1981-04-19",
+    "raw_material_name": "Rubber",
+    "type_of_scrap": "OK",
+    "quantity": 13
+  },
+  {
+    "date": "1988-03-09",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "OK",
+    "quantity": 16
+  },
+  {
+    "date": "2000-11-09",
+    "raw_material_name": "Frozen",
+    "type_of_scrap": "NG",
+    "quantity": 10
+  },
+  {
+    "date": "2016-06-11",
+    "raw_material_name": "Concrete",
+    "type_of_scrap": "LRS",
+    "quantity": 11
+  },
+  {
+    "date": "1987-12-13",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "NG",
+    "quantity": 19
+  },
+  {
+    "date": "2008-12-21",
+    "raw_material_name": "Granite",
+    "type_of_scrap": "NG",
+    "quantity": 16
+  },
+  {
+    "date": "2018-04-15",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "NG",
+    "quantity": 7
+  },
+  {
+    "date": "1982-08-11",
+    "raw_material_name": "Fresh",
+    "type_of_scrap": "LRS",
+    "quantity": 13
+  },
+  {
+    "date": "1987-12-26",
+    "raw_material_name": "Frozen",
+    "type_of_scrap": "LRS",
+    "quantity": 6
+  },
+  {
+    "date": "1992-03-01",
+    "raw_material_name": "Granite",
+    "type_of_scrap": "OK",
+    "quantity": 11
+  },
+  {
+    "date": "2015-08-19",
+    "raw_material_name": "Wooden",
+    "type_of_scrap": "OK",
+    "quantity": 9
+  },
+  {
+    "date": "2020-01-26",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "NG",
+    "quantity": 15
+  },
+  {
+    "date": "1998-03-21",
+    "raw_material_name": "Steel",
+    "type_of_scrap": "OK",
+    "quantity": 16
+  },
+  {
+    "date": "1992-06-16",
+    "raw_material_name": "Granite",
+    "type_of_scrap": "OK",
+    "quantity": 6
+  },
+  {
+    "date": "2017-10-28",
+    "raw_material_name": "Concrete",
+    "type_of_scrap": "LRS",
+    "quantity": 18
+  },
+  {
+    "date": "1994-03-16",
+    "raw_material_name": "Frozen",
+    "type_of_scrap": "LRS",
+    "quantity": 14
+  },
+  {
+    "date": "1988-11-19",
+    "raw_material_name": "Soft",
+    "type_of_scrap": "LRS",
+    "quantity": 19
+  },
+  {
+    "date": "2003-08-30",
+    "raw_material_name": "Soft",
+    "type_of_scrap": "LRS",
+    "quantity": 13
+  },
+  {
+    "date": "2008-09-21",
+    "raw_material_name": "Plastic",
+    "type_of_scrap": "NG",
+    "quantity": 7
+  },
+  {
+    "date": "1991-05-01",
+    "raw_material_name": "Rubber",
+    "type_of_scrap": "OK",
+    "quantity": 12
+  },
+  {
+    "date": "1980-12-02",
+    "raw_material_name": "Wooden",
+    "type_of_scrap": "NG",
+    "quantity": 18
+  },
+  {
+    "date": "2004-02-22",
+    "raw_material_name": "Metal",
+    "type_of_scrap": "LRS",
+    "quantity": 18
+  },
+  {
+    "date": "1993-04-09",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "LRS",
+    "quantity": 12
+  },
+  {
+    "date": "1994-10-26",
+    "raw_material_name": "Plastic",
+    "type_of_scrap": "NG",
+    "quantity": 16
+  },
+  {
+    "date": "1987-04-15",
+    "raw_material_name": "Wooden",
+    "type_of_scrap": "LRS",
+    "quantity": 13
+  },
+  {
+    "date": "2021-04-23",
+    "raw_material_name": "Wooden",
+    "type_of_scrap": "OK",
+    "quantity": 9
+  },
+  {
+    "date": "2008-02-05",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "LRS",
+    "quantity": 19
+  },
+  {
+    "date": "2020-08-14",
+    "raw_material_name": "Granite",
+    "type_of_scrap": "OK",
+    "quantity": 18
+  },
+  {
+    "date": "2019-12-05",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "LRS",
+    "quantity": 13
+  },
+  {
+    "date": "2019-12-21",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "NG",
+    "quantity": 12
+  },
+  {
+    "date": "2003-11-08",
+    "raw_material_name": "Fresh",
+    "type_of_scrap": "NG",
+    "quantity": 9
+  },
+  {
+    "date": "1980-05-27",
+    "raw_material_name": "Granite",
+    "type_of_scrap": "LRS",
+    "quantity": 7
+  },
+  {
+    "date": "2013-08-15",
+    "raw_material_name": "Fresh",
+    "type_of_scrap": "NG",
+    "quantity": 9
+  },
+  {
+    "date": "2021-01-24",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "NG",
+    "quantity": 9
+  },
+  {
+    "date": "1983-05-31",
+    "raw_material_name": "Fresh",
+    "type_of_scrap": "NG",
+    "quantity": 17
+  },
+  {
+    "date": "2019-12-30",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "OK",
+    "quantity": 8
+  },
+  {
+    "date": "1987-02-07",
+    "raw_material_name": "Metal",
+    "type_of_scrap": "LRS",
+    "quantity": 16
+  },
+  {
+    "date": "1989-08-25",
+    "raw_material_name": "Frozen",
+    "type_of_scrap": "LRS",
+    "quantity": 12
+  },
+  {
+    "date": "2006-01-21",
+    "raw_material_name": "Plastic",
+    "type_of_scrap": "LRS",
+    "quantity": 16
+  },
+  {
+    "date": "1983-01-03",
+    "raw_material_name": "Wooden",
+    "type_of_scrap": "NG",
+    "quantity": 19
+  },
+  {
+    "date": "2015-05-13",
+    "raw_material_name": "Metal",
+    "type_of_scrap": "NG",
+    "quantity": 9
+  },
+  {
+    "date": "2000-07-11",
+    "raw_material_name": "Steel",
+    "type_of_scrap": "OK",
+    "quantity": 9
+  },
+  {
+    "date": "2009-09-21",
+    "raw_material_name": "Fresh",
+    "type_of_scrap": "LRS",
+    "quantity": 6
+  },
+  {
+    "date": "1993-11-14",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "OK",
+    "quantity": 16
+  },
+  {
+    "date": "1981-05-29",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "LRS",
+    "quantity": 14
+  },
+  {
+    "date": "2003-05-09",
+    "raw_material_name": "Plastic",
+    "type_of_scrap": "NG",
+    "quantity": 5
+  },
+  {
+    "date": "1991-10-24",
+    "raw_material_name": "Steel",
+    "type_of_scrap": "LRS",
+    "quantity": 18
+  },
+  {
+    "date": "2016-01-28",
+    "raw_material_name": "Steel",
+    "type_of_scrap": "OK",
+    "quantity": 14
+  },
+  {
+    "date": "2022-05-21",
+    "raw_material_name": "Steel",
+    "type_of_scrap": "NG",
+    "quantity": 6
+  },
+  {
+    "date": "2009-09-09",
+    "raw_material_name": "Plastic",
+    "type_of_scrap": "LRS",
+    "quantity": 7
+  },
+  {
+    "date": "2005-03-09",
+    "raw_material_name": "Frozen",
+    "type_of_scrap": "LRS",
+    "quantity": 20
+  },
+  {
+    "date": "2007-02-18",
+    "raw_material_name": "Granite",
+    "type_of_scrap": "OK",
+    "quantity": 13
+  },
+  {
+    "date": "1995-01-27",
+    "raw_material_name": "Wooden",
+    "type_of_scrap": "NG",
+    "quantity": 5
+  },
+  {
+    "date": "2009-07-15",
+    "raw_material_name": "Soft",
+    "type_of_scrap": "LRS",
+    "quantity": 14
+  },
+  {
+    "date": "2020-09-26",
+    "raw_material_name": "Plastic",
+    "type_of_scrap": "OK",
+    "quantity": 6
+  },
+  {
+    "date": "1985-04-27",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "LRS",
+    "quantity": 17
+  },
+  {
+    "date": "2002-07-29",
+    "raw_material_name": "Soft",
+    "type_of_scrap": "LRS",
+    "quantity": 18
+  },
+  {
+    "date": "2010-09-04",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "LRS",
+    "quantity": 6
+  },
+  {
+    "date": "2020-06-26",
+    "raw_material_name": "Granite",
+    "type_of_scrap": "LRS",
+    "quantity": 6
+  },
+  {
+    "date": "1983-10-09",
+    "raw_material_name": "Steel",
+    "type_of_scrap": "LRS",
+    "quantity": 11
+  },
+  {
+    "date": "1992-02-23",
+    "raw_material_name": "Steel",
+    "type_of_scrap": "OK",
+    "quantity": 15
+  },
+  {
+    "date": "2010-10-18",
+    "raw_material_name": "Steel",
+    "type_of_scrap": "NG",
+    "quantity": 15
+  },
+  {
+    "date": "1991-11-19",
+    "raw_material_name": "Wooden",
+    "type_of_scrap": "NG",
+    "quantity": 13
+  },
+  {
+    "date": "2008-09-25",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "NG",
+    "quantity": 12
+  },
+  {
+    "date": "1985-06-03",
+    "raw_material_name": "Rubber",
+    "type_of_scrap": "NG",
+    "quantity": 9
+  },
+  {
+    "date": "2012-03-01",
+    "raw_material_name": "Fresh",
+    "type_of_scrap": "LRS",
+    "quantity": 10
+  },
+  {
+    "date": "2012-02-13",
+    "raw_material_name": "Frozen",
+    "type_of_scrap": "LRS",
+    "quantity": 11
+  },
+  {
+    "date": "1982-04-25",
+    "raw_material_name": "Frozen",
+    "type_of_scrap": "LRS",
+    "quantity": 20
+  },
+  {
+    "date": "1987-10-18",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "OK",
+    "quantity": 5
+  },
+  {
+    "date": "2008-11-05",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "NG",
+    "quantity": 6
+  },
+  {
+    "date": "1987-01-30",
+    "raw_material_name": "Concrete",
+    "type_of_scrap": "NG",
+    "quantity": 11
+  },
+  {
+    "date": "2002-03-31",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "LRS",
+    "quantity": 15
+  },
+  {
+    "date": "2016-10-05",
+    "raw_material_name": "Plastic",
+    "type_of_scrap": "NG",
+    "quantity": 13
+  },
+  {
+    "date": "2021-07-15",
+    "raw_material_name": "Frozen",
+    "type_of_scrap": "OK",
+    "quantity": 14
+  },
+  {
+    "date": "2006-07-25",
+    "raw_material_name": "Wooden",
+    "type_of_scrap": "NG",
+    "quantity": 17
+  },
+  {
+    "date": "2005-08-04",
+    "raw_material_name": "Rubber",
+    "type_of_scrap": "OK",
+    "quantity": 9
+  },
+  {
+    "date": "1989-08-24",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "NG",
+    "quantity": 15
+  },
+  {
+    "date": "1981-08-24",
+    "raw_material_name": "Fresh",
+    "type_of_scrap": "OK",
+    "quantity": 8
+  },
+  {
+    "date": "2008-05-02",
+    "raw_material_name": "Soft",
+    "type_of_scrap": "LRS",
+    "quantity": 19
+  },
+  {
+    "date": "2004-11-19",
+    "raw_material_name": "Fresh",
+    "type_of_scrap": "OK",
+    "quantity": 7
+  },
+  {
+    "date": "1981-08-08",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "LRS",
+    "quantity": 16
+  },
+  {
+    "date": "2000-12-01",
+    "raw_material_name": "Metal",
+    "type_of_scrap": "LRS",
+    "quantity": 14
+  },
+  {
+    "date": "1993-11-23",
+    "raw_material_name": "Plastic",
+    "type_of_scrap": "LRS",
+    "quantity": 7
+  },
+  {
+    "date": "2000-06-29",
+    "raw_material_name": "Frozen",
+    "type_of_scrap": "OK",
+    "quantity": 6
+  },
+  {
+    "date": "1983-11-03",
+    "raw_material_name": "Frozen",
+    "type_of_scrap": "OK",
+    "quantity": 7
+  },
+  {
+    "date": "2017-08-26",
+    "raw_material_name": "Concrete",
+    "type_of_scrap": "OK",
+    "quantity": 12
+  },
+  {
+    "date": "2007-09-18",
+    "raw_material_name": "Rubber",
+    "type_of_scrap": "OK",
+    "quantity": 16
+  },
+  {
+    "date": "2004-12-23",
+    "raw_material_name": "Rubber",
+    "type_of_scrap": "LRS",
+    "quantity": 20
+  },
+  {
+    "date": "1987-10-27",
+    "raw_material_name": "Steel",
+    "type_of_scrap": "OK",
+    "quantity": 12
+  },
+  {
+    "date": "1981-09-15",
+    "raw_material_name": "Soft",
+    "type_of_scrap": "NG",
+    "quantity": 16
+  },
+  {
+    "date": "1984-06-09",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "LRS",
+    "quantity": 12
+  },
+  {
+    "date": "2000-01-26",
+    "raw_material_name": "Concrete",
+    "type_of_scrap": "OK",
+    "quantity": 20
+  },
+  {
+    "date": "1990-04-06",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "LRS",
+    "quantity": 12
+  },
+  {
+    "date": "1983-10-07",
+    "raw_material_name": "Fresh",
+    "type_of_scrap": "OK",
+    "quantity": 15
+  },
+  {
+    "date": "2016-04-06",
+    "raw_material_name": "Concrete",
+    "type_of_scrap": "OK",
+    "quantity": 15
+  },
+  {
+    "date": "2020-09-21",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "OK",
+    "quantity": 10
+  },
+  {
+    "date": "2002-06-17",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "NG",
+    "quantity": 14
+  },
+  {
+    "date": "2003-07-25",
+    "raw_material_name": "Steel",
+    "type_of_scrap": "LRS",
+    "quantity": 14
+  },
+  {
+    "date": "1996-02-18",
+    "raw_material_name": "Frozen",
+    "type_of_scrap": "LRS",
+    "quantity": 13
+  },
+  {
+    "date": "2016-05-18",
+    "raw_material_name": "Granite",
+    "type_of_scrap": "NG",
+    "quantity": 13
+  },
+  {
+    "date": "2017-04-27",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "LRS",
+    "quantity": 5
+  },
+  {
+    "date": "1989-03-02",
+    "raw_material_name": "Metal",
+    "type_of_scrap": "NG",
+    "quantity": 11
+  },
+  {
+    "date": "2000-09-24",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "NG",
+    "quantity": 6
+  },
+  {
+    "date": "1988-02-13",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "NG",
+    "quantity": 6
+  },
+  {
+    "date": "1991-05-07",
+    "raw_material_name": "Fresh",
+    "type_of_scrap": "NG",
+    "quantity": 7
+  },
+  {
+    "date": "2006-11-20",
+    "raw_material_name": "Fresh",
+    "type_of_scrap": "OK",
+    "quantity": 10
+  },
+  {
+    "date": "2005-03-22",
+    "raw_material_name": "Granite",
+    "type_of_scrap": "NG",
+    "quantity": 6
+  },
+  {
+    "date": "1986-10-10",
+    "raw_material_name": "Wooden",
+    "type_of_scrap": "OK",
+    "quantity": 17
+  },
+  {
+    "date": "1993-03-26",
+    "raw_material_name": "Cotton",
+    "type_of_scrap": "NG",
+    "quantity": 14
+  },
+  {
+    "date": "2008-12-08",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "OK",
+    "quantity": 18
+  },
+  {
+    "date": "2011-05-15",
+    "raw_material_name": "Concrete",
+    "type_of_scrap": "NG",
+    "quantity": 11
+  },
+  {
+    "date": "1981-01-18",
+    "raw_material_name": "Bronze",
+    "type_of_scrap": "NG",
+    "quantity": 7
+  },
+  {
+    "date": "1994-06-12",
+    "raw_material_name": "Rubber",
+    "type_of_scrap": "NG",
+    "quantity": 14
+  },
+  {
+    "date": "1992-10-16",
+    "raw_material_name": "Wooden",
+    "type_of_scrap": "OK",
+    "quantity": 9
+  },
+  {
+    "date": "1991-04-10",
+    "raw_material_name": "Steel",
+    "type_of_scrap": "LRS",
+    "quantity": 20
+  },
+  {
+    "date": "2018-05-20",
+    "raw_material_name": "Concrete",
+    "type_of_scrap": "NG",
+    "quantity": 13
+  },
+  {
+    "date": "2007-10-30",
+    "raw_material_name": "Rubber",
+    "type_of_scrap": "OK",
+    "quantity": 7
+  },
+  {
+    "date": "1983-06-05",
+    "raw_material_name": "Rubber",
+    "type_of_scrap": "LRS",
+    "quantity": 15
+  },
+  {
+    "date": "2006-11-14",
+    "raw_material_name": "Metal",
+    "type_of_scrap": "LRS",
+    "quantity": 20
+  },
+  {
+    "date": "2007-09-02",
+    "raw_material_name": "Concrete",
+    "type_of_scrap": "LRS",
+    "quantity": 13
+  },
+  {
+    "date": "1994-09-12",
+    "raw_material_name": "Soft",
+    "type_of_scrap": "LRS",
+    "quantity": 15
+  },
+  {
+    "date": "1996-07-14",
+    "raw_material_name": "Frozen",
+    "type_of_scrap": "LRS",
+    "quantity": 17
+  },
+  {
+    "date": "2010-11-24",
+    "raw_material_name": "Frozen",
+    "type_of_scrap": "OK",
+    "quantity": 6
+  },
+  {
+    "date": "1995-07-24",
+    "raw_material_name": "Plastic",
+    "type_of_scrap": "NG",
+    "quantity": 14
+  },
+  {
+    "date": "2011-06-12",
+    "raw_material_name": "Wooden",
+    "type_of_scrap": "NG",
+    "quantity": 14
+  },
+  {
+    "date": "2017-05-23",
+    "raw_material_name": "Concrete",
+    "type_of_scrap": "LRS",
+    "quantity": 9
+  },
+  {
+    "date": "2000-08-21",
+    "raw_material_name": "Rubber",
+    "type_of_scrap": "NG",
+    "quantity": 5
+  },
+  {
+    "date": "1981-03-08",
+    "raw_material_name": "Concrete",
+    "type_of_scrap": "NG",
+    "quantity": 18
+  },
+  {
+    "date": "2003-11-27",
+    "raw_material_name": "Soft",
+    "type_of_scrap": "OK",
+    "quantity": 13
+  },
+  {
+    "date": "2007-05-31",
+    "raw_material_name": "Concrete",
+    "type_of_scrap": "LRS",
+    "quantity": 7
+  },
+  {
+    "date": "2008-08-21",
+    "raw_material_name": "Rubber",
+    "type_of_scrap": "OK",
+    "quantity": 16
+  }
+]

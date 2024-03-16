@@ -8,3 +8,10 @@ class Raw_Material_Records(db.Model):
     raw_material_name = db.Column(db.String(50), db.ForeignKey('Raw_Material.raw_material_name'))
     raw_material = db.relationship('Raw_Material', backref='raw_material_records')
     __table_args__ = (db.PrimaryKeyConstraint('date', 'raw_material_name'),)
+
+    def to_dict(self):
+        return {
+            'date': self.date,
+            'quantity_used': self.quantity_used,
+            'raw_material_name': self.raw_material_name,
+        }

@@ -3,6 +3,8 @@ from flask_migrate import Migrate
 
 from .database import db
 from .routes import main_routes
+from .routes.user_routes import user_bp
+from app.routes import register_routes
 
 
 def create_app():
@@ -23,6 +25,6 @@ def create_app():
     migrate = Migrate(app, db)
 
     # Registering blueprints
-    app.register_blueprint(main_routes)
+    register_routes(app)
 
     return app

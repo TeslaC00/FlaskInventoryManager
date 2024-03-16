@@ -1,8 +1,8 @@
 from app import db
 
 
-class RawMaterialsPartNo(db.Model):
-    __tablename__ = 'raw_materials_part_no'
+class Raw_Materials_Part_No(db.Model):
+    __tablename__ = 'Raw_Materials_Part_No'
     supplier_id = db.Column(db.Integer, db.ForeignKey('Supplier.supplier_id'), nullable=False)
     raw_material_name = db.Column(db.String(50), db.ForeignKey('Raw_Material.raw_material_name'), nullable=False)
     part_no = db.Column(db.Integer, nullable=False)
