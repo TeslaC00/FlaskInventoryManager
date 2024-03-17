@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Form</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Example item list for autocomplete
+            var itemList = ["Item 1", "Item 2", "Item 3"];
+            $("#item").autocomplete({
+                source: itemList
+            });
+        });
+    </script>
+    <style>
+        .sidebar {
+            height: 100vh;
+            background-color: #343a40;
+            width: 250px; /* Sidebar width */
+            position: fixed;
+            top: 0;
+            left: -250px; /* Initially hidden */
+            transition: left 0.3s;
+        }
+        .sidebar.active {
+            left: 0; /* Show sidebar */
+        }
+        .sidebar a {
+            color: white;
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        .toggle-sidebar {
+            cursor: pointer;
+            position: fixed;
+            left: 0;
+            top: 25px;
+            width: 35px;
+            height: 35px;
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            line-height: 35px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+
+<div class="toggle-sidebar">&#9776;</div>
+
+<nav class="sidebar navbar-dark bg-dark">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="/index/">Inventory</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/analysis/">Analysis</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/orders/">Orders</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Account</a>
+        </li>
+    </ul>
+</nav>
+
+        <!-- Form -->
+        <div class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Sales Form
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="gstNo">GST No</label>
+                                <input type="text" class="form-control" id="gstNo" placeholder="GST No">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="date">Date</label>
+                                <input type="date" class="form-control" id="date">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="billNo">Bill No</label>
+                                <input type="text" class="form-control" id="billNo" placeholder="Bill No">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="item">Item</label>
+                                <input type="text" class="form-control" id="item" placeholder="Item">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="rate">Rate</label>
+                                <input type="number" class="form-control" id="rate" placeholder="Rate">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Quantity</label>
+                            <input type="number" class="form-control" id="quantity" placeholder="Quantity">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="totalBeforeTax">Total Before Tax</label>
+                                <input type="number" class="form-control" id="totalBeforeTax" placeholder="Total Before Tax">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="sgst">SGST</label>
+                                <input type="number" class="form-control" id="sgst" placeholder="SGST">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="cgst">CGST</label>
+                                <input type="number" class="form-control" id="cgst" placeholder="CGST">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="igst">IGST</label>
+                                <input type="number" class="form-control" id="igst" placeholder="IGST">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="totalAfterTax">Total After Tax</label>
+                                <input type="number" class="form-control" id="totalAfterTax" placeholder="Total After Tax">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.toggle-sidebar').click(function() {
+            $('.sidebar').toggleClass('active');
+        });
+    });
+</script>
+</body>
+</html>
