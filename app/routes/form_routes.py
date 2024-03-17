@@ -5,9 +5,6 @@ from app.models import Goods
 
 form_bp = Blueprint('form_bp', __name__)
 
-# Sample data for autocomplete
-ITEMS = ["Item1", "Item2", "Item3", "Item4"]
-
 
 @form_bp.route('/form', methods=['GET', 'POST'])
 def form():
