@@ -33,7 +33,7 @@ def analysis():
 @main_routes.route('/orders/')
 @login_required
 def orders():
-    return render_template('orders.html')
+    return render_template('form.html')
 
 
 @main_routes.route('/test_database_connection/')
