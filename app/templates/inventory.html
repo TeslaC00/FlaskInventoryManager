@@ -23,9 +23,18 @@
     const rawMaterialsContainer = document.getElementById('raw-materials');
     const rawMaterialSettings = {
         data: rawMaterialData,
+        filters: true,
         licenseKey: 'non-commercial-and-evaluation',
         rowHeaders: true,
-        colHeaders: ['Raw_materials', 'Unit_Type', "Quantity"]
+        colHeaders: ['Raw_materials', 'Unit_Type', "Quantity"],
+        dropdownMenu: true,
+        {#plugins: [Handsontable.plugins.FiltersPlugin, 'search'],#}
+        {#search: true#}
+        {#column:[#}
+        {#    {type: 'text'},#}
+        {#    {type: 'text'},#}
+        {#    {type: 'numeric'}#}
+        {#]#}
     };
     const rawMaterialsTable = new Handsontable(rawMaterialsContainer, rawMaterialSettings);
 
@@ -34,9 +43,19 @@
     const producedGoodData = {{table2|tojson}};
     const producedGoodsSetting = {
         data: producedGoodData,
+        filters: true,
         licenseKey: 'non-commercial-and-evaluation',
         rowHeaders: true,
-        colHeaders: ["Good_name", "Unit_type", "Quantity", "Part_no"]
+        colHeaders: ["Good_name", "Unit_type", "Quantity", "Part_no"],
+        dropdownMenu: true
+        {#plugins: [Handsontable.plugins.FiltersPlugin, 'search'],#}
+        {#search: true#}
+        {#column:[#}
+        {#    {type: 'varchar'},#}
+        {#    {type: 'varchar'},#}
+        {#    {type: 'int'},#}
+        {#    {type: 'int'}#}
+        {#]#}
     };
     const producedGoodTable = new Handsontable(producedGoodsContainer, producedGoodsSetting);
 </script>
