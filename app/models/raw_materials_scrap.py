@@ -9,3 +9,11 @@ class Raw_Materials_Scrap(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     raw_material = db.relationship('Raw_Material', backref='raw_materials_scrap')
     __table_args__ = (db.PrimaryKeyConstraint('date', 'raw_material_name'),)
+
+    def to_dict(self):
+        return {
+            'date': self.date,
+            'raw_material_name': self.raw_material_name,
+            'type_of_scrap': self.type_of_scrap,
+            'quantity': self.quantity
+        }

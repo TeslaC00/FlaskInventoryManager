@@ -9,3 +9,10 @@ class Raw_Materials_Part_No(db.Model):
     supplier = db.relationship('Supplier', backref='part_no')
     raw_material = db.relationship('Raw_Material', backref='part_no')
     __table_args__ = (db.PrimaryKeyConstraint('supplier_id', 'raw_material_name'),)
+
+    def to_dict(self):
+        return {
+            'supplier_id': self.supplier_id,
+            'raw_material_name': self.raw_material_name,
+            'part_no': self.part_no,
+        }

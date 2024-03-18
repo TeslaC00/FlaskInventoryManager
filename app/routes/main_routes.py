@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request, jsonify
 from sqlalchemy import text
 
 from app import db
-from app.models import Raw_Material_Records
+from app.models import Raw_Material_Records, Raw_Material, Goods
 
 main_routes = Blueprint('main', __name__)
 

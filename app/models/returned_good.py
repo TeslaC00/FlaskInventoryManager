@@ -10,3 +10,11 @@ class Returned_Good(db.Model):
     buyer = db.relationship('Buyer', backref='returned_goods')
     goods = db.relationship('Goods', backref='returned_goods')
     __table_args__ = (db.PrimaryKeyConstraint('date', 'good_name', 'buyer_id', name='returned_goods__pkey'),)
+
+    def to_dict(self):
+        return {
+            'date': self.date,
+            'quantity': self.quantity,
+            'buyer_id': self.buyer_id,
+            'good_name': self.good_name,
+        }
