@@ -8,3 +8,10 @@ class Goods_Records(db.Model):
     good_name = db.Column(db.String(50), db.ForeignKey('Goods.good_name'))
     goods = db.relationship('Goods', backref='goods_records')
     __table_args__ = (db.PrimaryKeyConstraint('date', 'good_name'),)
+
+    def to_dict(self):
+        return {
+            'date': self.date,
+            'quantity_produced': self.quantity_produced,
+            'good_name': self.good_name
+        }

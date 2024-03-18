@@ -7,3 +7,11 @@ class Goods(db.Model):
     unit_type = db.Column(db.String(10), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     part_no = db.Column(db.Integer, nullable=False, unique=True)
+
+    def to_dict(self):
+        return {
+            'good_name': self.good_name,
+            'unit_type': self.unit_type,
+            'quantity': self.quantity,
+            'part_no': self.part_no
+        }
