@@ -1,6 +1,6 @@
 from flask import render_template, redirect, Blueprint
 
-from app import db
+from app.database import db
 from app.models import User
 
 user_bp = Blueprint('user_bp', __name__)

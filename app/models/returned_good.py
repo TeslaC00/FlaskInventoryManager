@@ -1,4 +1,4 @@
-from app import db
+from app.database import db
 
 
 class Returned_Good(db.Model):

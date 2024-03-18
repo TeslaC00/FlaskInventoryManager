@@ -1,19 +1,22 @@
 # Blueprint object to define routes
 from flask import Blueprint, render_template, request, jsonify
+from flask_login import login_required
 from sqlalchemy import text
 
-from app import db
-from app.models import Raw_Material_Records, Raw_Material, Goods
+from app.database import db
+from app.models import Raw_Material_Records
 
 main_routes = Blueprint('main', __name__)
 
 
-@main_routes.route('/')
+@main_routes.route('/base/')
+@login_required
 def root():
-    return render_template('home.html')
+    return render_template('base.html')
 
 
 @main_routes.route('/index/')
+@login_required
 def index():
     all_tables = db.metadata.tables.keys()
     items = ["Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item2", "Item", "Item",
@@ -22,13 +25,15 @@ def index():
 
 
 @main_routes.route('/analysis/')
+@login_required
 def analysis():
     return render_template('analysis.html')
 
 
 @main_routes.route('/orders/')
+@login_required
 def orders():
-    return render_template('orders.html')
+    return render_template('form.html')
 
 
 @main_routes.route('/test_database_connection/')

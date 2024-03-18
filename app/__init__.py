@@ -1,30 +1,32 @@
 from flask import Flask
+from flask_login import LoginManager
 from flask_migrate import Migrate
 
-from .database import db
-from .routes import main_routes
-from .routes.user_routes import user_bp
 from app.routes import register_routes
+from .database import db
+from .routes.auth import login_manager
 
+# Creates flask object
+app = Flask(__name__)
 
-def create_app():
-    # Creates flask object
-    app = Flask(__name__)
+# Secret Key
+app.secret_key = 'secret_key'
 
-    # Load local configurations from config.py
-    app.config.from_pyfile('config.py')
+# Load local configurations from config.py
+app.config.from_pyfile('config.py')
 
-    # Initialize database
-    db.init_app(app)
+# Initialize login manager
+login_manager.init_app(app)
 
-    # Create tables
-    with app.app_context():
-        db.create_all()
+# Initialize database
+db.init_app(app)
 
-    # Initialize database migration tool
-    migrate = Migrate(app, db)
+# Create tables
+with app.app_context():
+    db.create_all()
 
-    # Registering blueprints
-    register_routes(app)
+# Initialize database migration tool
+Migrate(app, db)
 
-    return app
+# Registering blueprints
+register_routes(app)
