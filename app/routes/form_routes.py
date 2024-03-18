@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify
-from app.models.raw_material import Raw_Material
-from app import db
+
 from app.models import Goods
 
 form_bp = Blueprint('form_bp', __name__)
