@@ -1,10 +1,9 @@
 from json import load
 
-from app import db, create_app
+from app import db, app
 from app.models import Buyer, Supplier, Raw_Material, Goods, Bill, Challan, Goods_Records, Raw_Material_Records, \
     Returned_Good, Raw_Materials_Part_No, User, Write_off, Goods_Scrap, Raw_Materials_Scrap
 
-app = create_app()
 app.app_context().push()
 
 

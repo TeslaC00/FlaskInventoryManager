@@ -186,3 +186,25 @@ whenever new change is made to the versions in migration directory.
 ###### Add Dummy Data to Database
 
 Run the `seed.py` file to add dummy data to the database automatically
+
+## Git Branch Rules
+
+###### Branch Naming Convention
+
+When creating a new feature or working on a bug fix create new branch
+under a category that is appropriate for the branch. Use the naming
+convention below when creating new branch.
+
+<font color="green">*Note: use dash (-) rather space in branch or category name*</font>
+
+`category-name/branch-name`
+
+###### Git Commands
+
+Create new branch from terminal
+
+`git checkout -b <category-name>/<branch-name>`
+
+Push the new branch on GitHub
+
+`git push -u origin <category-name>/<branch-name>`

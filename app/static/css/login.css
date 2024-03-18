@@ -1,0 +1,33 @@
+/* login.css */
+
+/* Center all content */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    margin: 0;
+    background-image: url("../images/login_image_1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Style form container */
+.form-container {
+    max-width: 800px;
+    padding: 20px;
+    text-align: center; /* Center text content inside the container */
+}
+
+/* Style form inputs */
+.form-group {
+    padding: 20px;
+    text-align: left; /* Reset text alignment for input fields */
+}
+
+/* Center the button */
+.btn-primary {
+    display: block; /* Ensure the button takes up full width of its container */
+    margin: 0 auto; /* Center the button horizontally */
+}
