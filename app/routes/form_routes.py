@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify
-from app.models.raw_material import Raw_Material
-from app import db
+
 from app.models import Goods
 
 form_bp = Blueprint('form_bp', __name__)
@@ -20,4 +19,3 @@ def autocomplete():
     results = Goods.query.filter(Goods.good_name.like(f'%{search}%')).limit(10).all()
     # Return good_name for both "id" and "name" in the JSON response
     return jsonify(matching_results=[{"id": item.good_name, "name": item.good_name} for item in results])
-
