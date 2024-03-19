@@ -1,65 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/handsontable.full.min.css') }}">
-</head>
-<body>
-<h1>Inventory</h1>
+{% extends 'base.html' %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/handsontable.full.min.css') }}">
+{% endblock %}
+{% block content %}
+    <h1>Inventory</h1>
 
-<h2>Raw materials</h2>
-<div id="raw-materials"></div>
+    <h2>Raw materials</h2>
+    <div id="raw-materials"></div>
 
-<h3>Produced Goods</h3>
-<div id="produced-goods"></div>
+    <h3>Produced Goods</h3>
+    <div id="produced-goods"></div>
+{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/handsontable.full.min.js') }}"></script>
+    <script>
+        const rawMaterialData = {{ table1|tojson }};
 
-<script src="{{ url_for('static', filename='js/handsontable.full.min.js') }}"></script>
-<script>
-    const rawMaterialData = {{ table1|tojson }};
+        //Initialize Handsontable for Raw Materials
+        const rawMaterialsContainer = document.getElementById('raw-materials');
+        const rawMaterialSettings = {
+            data: rawMaterialData,
+            filters: true,
+            licenseKey: 'non-commercial-and-evaluation',
+            rowHeaders: true,
+            colHeaders: ['Raw_materials', 'Unit_Type', "Quantity"],
+            dropdownMenu: true,
+            {#plugins: [Handsontable.plugins.FiltersPlugin, 'search'],#}
+            {#search: true#}
+            {#column:[#}
+            {#    {type: 'text'},#}
+            {#    {type: 'text'},#}
+            {#    {type: 'numeric'}#}
+            {#]#}
+        };
+        const rawMaterialsTable = new Handsontable(rawMaterialsContainer, rawMaterialSettings);
 
-    //Initialize Handsontable for Raw Materials
-    const rawMaterialsContainer = document.getElementById('raw-materials');
-    const rawMaterialSettings = {
-        data: rawMaterialData,
-        filters: true,
-        licenseKey: 'non-commercial-and-evaluation',
-        rowHeaders: true,
-        colHeaders: ['Raw_materials', 'Unit_Type', "Quantity"],
-        dropdownMenu: true,
-        {#plugins: [Handsontable.plugins.FiltersPlugin, 'search'],#}
-        {#search: true#}
-        {#column:[#}
-        {#    {type: 'text'},#}
-        {#    {type: 'text'},#}
-        {#    {type: 'numeric'}#}
-        {#]#}
-    };
-    const rawMaterialsTable = new Handsontable(rawMaterialsContainer, rawMaterialSettings);
+        //Initialize Handsontable for Produced Goods
+        const producedGoodsContainer = document.getElementById('produced-goods');
+        const producedGoodData = {{table2|tojson}};
+        const producedGoodsSetting = {
+            data: producedGoodData,
+            filters: true,
+            licenseKey: 'non-commercial-and-evaluation',
+            rowHeaders: true,
+            colHeaders: ["Good_name", "Unit_type", "Quantity", "Part_no"],
+            dropdownMenu: true
 
-    //Initialize Handsontable for Produced Goods
-    const producedGoodsContainer = document.getElementById('produced-goods');
-    const producedGoodData = {{table2|tojson}};
-    const producedGoodsSetting = {
-        data: producedGoodData,
-        filters: true,
-        licenseKey: 'non-commercial-and-evaluation',
-        rowHeaders: true,
-        colHeaders: ["Good_name", "Unit_type", "Quantity", "Part_no"],
-        dropdownMenu: true
-
-        {#plugins: [Handsontable.plugins.FiltersPlugin, 'search'],#}
-        {#search: true#}
-        {#column:[#}
-        {#    {type: 'varchar'},#}
-        {#    {type: 'varchar'},#}
-        {#    {type: 'int'},#}
-        {#    {type: 'int'}#}
-        {#]#}
-    };
-    const producedGoodTable = new Handsontable(producedGoodsContainer, producedGoodsSetting);
-</script>
-
-</body>
-</html>
+            {#plugins: [Handsontable.plugins.FiltersPlugin, 'search'],#}
+            {#search: true#}
+            {#column:[#}
+            {#    {type: 'varchar'},#}
+            {#    {type: 'varchar'},#}
+            {#    {type: 'int'},#}
+            {#    {type: 'int'}#}
+            {#]#}
+        };
+        const producedGoodTable = new Handsontable(producedGoodsContainer, producedGoodsSetting);
+    </script>
+{% endblock %}

@@ -33,6 +33,11 @@ def analysis():
 @main_routes.route('/orders/')
 @login_required
 def orders():
+    return render_template('orders.html')
+
+
+@main_routes.route('/form')
+def form():
     return render_template('form.html')
 
 
