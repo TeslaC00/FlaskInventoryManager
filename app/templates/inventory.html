@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/handsontable.full.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/handsontable.css') }}">
 {% endblock %}
 {% block content %}
-    <h1>Inventory</h1>
+    <h1>INVENTORY</h1>
 
-    <h2>Raw materials</h2>
+    <h2>Raw Materials</h2>
     <div id="raw-materials"></div>
 
     <h3>Produced Goods</h3>
@@ -25,13 +26,9 @@
             rowHeaders: true,
             colHeaders: ['Raw_materials', 'Unit_Type', "Quantity"],
             dropdownMenu: true,
-            {#plugins: [Handsontable.plugins.FiltersPlugin, 'search'],#}
-            {#search: true#}
-            {#column:[#}
-            {#    {type: 'text'},#}
-            {#    {type: 'text'},#}
-            {#    {type: 'numeric'}#}
-            {#]#}
+            {#colWidths:[450,350,350]#}
+            stretchH: 'all',
+            height: 500
         };
         const rawMaterialsTable = new Handsontable(rawMaterialsContainer, rawMaterialSettings);
 
@@ -44,16 +41,11 @@
             licenseKey: 'non-commercial-and-evaluation',
             rowHeaders: true,
             colHeaders: ["Good_name", "Unit_type", "Quantity", "Part_no"],
-            dropdownMenu: true
+            dropdownMenu: true,
+            stretchH: 'all',
+            height: 500
+            {#colWidths: [450,350,350,350]#}
 
-            {#plugins: [Handsontable.plugins.FiltersPlugin, 'search'],#}
-            {#search: true#}
-            {#column:[#}
-            {#    {type: 'varchar'},#}
-            {#    {type: 'varchar'},#}
-            {#    {type: 'int'},#}
-            {#    {type: 'int'}#}
-            {#]#}
         };
         const producedGoodTable = new Handsontable(producedGoodsContainer, producedGoodsSetting);
     </script>
