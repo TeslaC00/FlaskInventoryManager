@@ -12,3 +12,13 @@ class Challan(db.Model):
     supplier = db.relationship('Supplier', backref='challans')
     raw_material = db.relationship('Raw_Material', backref='challans')
     __table_args__ = (db.PrimaryKeyConstraint('date', 'supplier_id', 'raw_material_name', name='challan_pkey'),)
+
+    def to_dict(self):
+        return {
+            'price': self.price,
+            'challan_no': self.challan_no,
+            'date': self.date,
+            'quantity': self.quantity,
+            'supplier_id': self.supplier_id,
+            'raw_material_name': self.raw_material_name
+        }
