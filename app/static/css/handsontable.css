@@ -17,10 +17,9 @@ h3{
 
 
 .handsontable th, .handsontable td {
-    font-family: Arial, sans-serif; /* Set font family */
-    font-size: 14px; /* Set font size */
+    font-family: Arial, sans-serif;
+    font-size: 14px;
     width: calc(100%/4);
-    /*padding: 8px; !* Add padding *!*/
 }
 
 body{
@@ -34,12 +33,10 @@ body{
     width: auto;
 }
 
-/* Optional: Set background color and border */
-.handsontable th {
-    background-color: #4ccabf; /* Set background color */
-    /*border: 1px solid #ddd; !* Add border *!*/
-}
 
-.handsontable td {
-    /*border: 1px solid #ddd; !* Add border *!*/
+.handsontable th {
+    background-color: #9dc0b4;
+}
+.ht_master tbody tr:nth-child(even) > td {
+  background-color: hsl(199, 100%, 95%);
 }
