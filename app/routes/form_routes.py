@@ -10,7 +10,7 @@ def form():
     if request.method == 'POST':
         # Here you can handle the form data
         print(request.form)
-    return render_template('form.html', items=ITEMS)
+    return render_template('form.html')
 
 
 @form_bp.route('/autocomplete', methods=['GET'])
