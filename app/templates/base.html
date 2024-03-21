@@ -1,55 +1,49 @@
 <!doctype html>
+<!-- Base template for Flask App. This template includes Bootstrap for styling and responsiveness. -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Flask App</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    {% block head %}
-
-    {% endblock %}
+    <!-- Custom styles for this template -->
+    {% block head %}{% endblock %}
 </head>
 <body>
 <div class="container-fluid" style="margin-left: -15px; margin-right: -15px">
     <div class="row">
+        <!-- Sidebar navigation -->
         <div class="col-2">
             <nav class="navbar bg-dark navbar-dark" style="height: 100vh; align-items: flex-start;text-align: center">
                 <div class="container-fluid" style="flex-direction: column">
-                    <a class="navbar-brand nav-link" href="{{ url_for('main.root') }}"
-                       style="font-size: 35px; margin-left: .5rem">Dashboard</a>
+                    <!-- Main navigation links -->
+                    <a class="navbar-brand nav-link" href="{{ url_for('main.root') }}" style="font-size: 35px; margin-left: .5rem">Dashboard</a>
                     <ul class="navbar-nav" style="font-size: 20px">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('inventory_bp.show_inventory') }}">Inventory</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('main.analysis') }}">Analysis</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('main.orders') }}">Orders</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('main.root') }}">Account</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('inventory_bp.show_inventory') }}">Inventory</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.analysis') }}">Analysis</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.orders') }}">Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.root') }}">Account</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a></li>
                     </ul>
                 </div>
             </nav>
         </div>
+        <!-- Main content area -->
         <div class="col-10">
             {% block content %}
+                <!-- Welcome message -->
                 <h1 style="text-align: center; margin-top: 30px">Welcome to Database Management App</h1>
             {% endblock %}
         </div>
     </div>
 </div>
+<!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-{% block scripts %}
-
-{% endblock %}
+<!-- Custom scripts for this template -->
+{% block scripts %}{% endblock %}
 </body>
 </html>
