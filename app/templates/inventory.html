@@ -17,14 +17,20 @@
     <script>
         const rawMaterialData = {{ table1|tojson }};
 
+        const reorderedData = rawMaterialData.map(item => ({
+        Part_Name: item.raw_material_name,
+        Unit_Type: item.unit_type,
+        Quantity: item.quantity
+    }));
+
         //Initialize Handsontable for Raw Materials
         const rawMaterialsContainer = document.getElementById('raw-materials');
         const rawMaterialSettings = {
-            data: rawMaterialData,
+            data: reorderedData,
             filters: true,
             licenseKey: 'non-commercial-and-evaluation',
             rowHeaders: true,
-            colHeaders: ['Raw_materials', 'Unit_Type', "Quantity"],
+            colHeaders: ['Part_Name', 'Unit_Type', "Quantity"],
             dropdownMenu: true,
             contextMenu: true,
             stretchH: 'all',
