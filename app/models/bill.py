@@ -1,5 +1,6 @@
 from app.database import db
 
+
 class Bill(db.Model):
     """
     Represents a Bill record within a relational database,

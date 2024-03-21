@@ -1,5 +1,6 @@
 from app.database import db
 
+
 class Raw_Materials_Part_No(db.Model):
     """
     Represents a mapping between raw materials and their part numbers from specific suppliers,

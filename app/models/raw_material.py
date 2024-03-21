@@ -1,5 +1,6 @@
 from app.database import db
 
+
 class Raw_Material(db.Model):
     """
     Represents a raw material record within a relational database, modeled using SQLAlchemy ORM

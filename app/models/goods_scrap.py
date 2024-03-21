@@ -1,5 +1,6 @@
 from app.database import db
 
+
 class Goods_Scrap(db.Model):
     """
     Represents a record of scrapped goods within a relational database, modeled using SQLAlchemy ORM

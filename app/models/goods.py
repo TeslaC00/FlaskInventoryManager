@@ -1,5 +1,6 @@
 from app.database import db
 
+
 class Goods(db.Model):
     """
     Represents a Goods record within a relational database, modeled using SQLAlchemy ORM

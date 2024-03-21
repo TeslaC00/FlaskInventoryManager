@@ -1,5 +1,6 @@
 from app.database import db
 
+
 class Buyer(db.Model):
     """
     Represents a Buyer record within a relational database, modeled using SQLAlchemy ORM

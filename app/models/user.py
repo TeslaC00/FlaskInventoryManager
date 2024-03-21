@@ -1,4 +1,5 @@
 from flask_login import UserMixin
+
 from app.database import db
 
 
@@ -55,4 +56,3 @@ class User(db.Model, UserMixin):
             str: The username of the user, serving as the unique identifier.
         """
         return self.username
-

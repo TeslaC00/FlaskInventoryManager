@@ -1,5 +1,6 @@
 from app.database import db
 
+
 class Raw_Material_Records(db.Model):
     """
     Represents a record of raw material usage within a relational database, modeled using SQLAlchemy ORM

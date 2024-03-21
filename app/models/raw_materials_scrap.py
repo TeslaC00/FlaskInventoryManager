@@ -1,5 +1,6 @@
 from app.database import db
 
+
 class Raw_Materials_Scrap(db.Model):
     """
     Represents records of scrap generated from raw materials within a relational database,

@@ -1,6 +1,7 @@
 ```python
 from app.database import db
 
+
 class Challan(db.Model):
     """
     Represents a Challan record within a relational database, modeled using SQLAlchemy ORM
@@ -53,4 +54,6 @@ class Challan(db.Model):
             'supplier_id': self.supplier_id,
             'raw_material_name': self.raw_material_name
         }
+
+
 ```

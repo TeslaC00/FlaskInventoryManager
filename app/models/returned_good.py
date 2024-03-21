@@ -1,5 +1,6 @@
 from app.database import db
 
+
 class Returned_Good(db.Model):
     """
     Represents records of goods returned by buyers, encapsulated within a relational database
