@@ -22,8 +22,8 @@ def load_user(username):
 @auth_bp.route('/')
 def login_page():
     """
-    Renders the Login page when logged in else redirects to the login page
-    :return: rendered login.html
+    Renders the base page when user is authenticated, otherwise redirects to the login page
+    :return: Response: rendered login.html
     """
     if current_user.is_authenticated:
         return redirect(url_for('main.root'))
@@ -34,9 +34,11 @@ def login_page():
 @auth_bp.route('/login/', methods=['POST', 'GET'])
 def login():
     """
-    Checks for user and password validation. If both are valid then login the user and redirects to the base page.
+    Authenticates user based on the username and password provided in the form
+
+    If provided credentials are valid, login the user and redirects to the base page.
     If user is invalid then flashes invalid user message then redirects to login page.
-    :return: redirect to base page
+    :return: Response: Redirect to base page if authentication succeeds, otherwise redirects to login page.
     """
     form = LoginForm()
     if form.validate_on_submit():
@@ -54,7 +56,7 @@ def login():
 def logout():
     """
     Logs out the current user, clears the session and redirects to the login page
-    :return: redirect to login page
+    :return: Response: Redirect to login page
     """
     logout_user()
     session.clear()
