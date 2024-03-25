@@ -2,6 +2,23 @@ from app.database import db
 
 
 class Bill(db.Model):
+    """
+    Represents a Bill record in the database.
+    This model stores information about goods purchased by the buyers.
+    It interacts with Buyer and Goods models.
+
+    Attributes:
+        __tablename__ (str): Name of the table in the database.
+        price (Integer): Stores the price of the goods in the bill. Not null.
+        bill_no (Integer): Stores the bill number. Not null.
+        quantity (Integer): Stores the quantity of goods in the bill. Not null.
+        date (Date): Stores the date on which the bill was issued. Not null.
+        buyer_id (Integer): Foreign key links to the Buyer's ID. Not null.
+        good_name (str,50): Foreign key links to the Good's name. Not null.
+        buyer (relationship): Establishes a relationship with the Buyer model.
+        goods (relationship): Establishes a relationship with the Goods model.
+        __table_args__: Additional table options, including a composite primary key('date','buyer_id','good_name').
+    """
     __tablename__ = 'Bill'
     price = db.Column(db.Integer, nullable=False)
     bill_no = db.Column(db.Integer, nullable=False)

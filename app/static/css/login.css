@@ -7,6 +7,7 @@ body {
     align-items: center;
     height: 90vh;
     margin: 0;
+    /*TODO: background image not covering entire browser in brave when resizing the browser*/
     background-image: url("../images/login_image_2.jpg");
     background-size: cover;
     background-repeat: no-repeat;

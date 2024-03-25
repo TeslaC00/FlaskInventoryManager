@@ -1,60 +1,76 @@
-{% extends 'base.html' %}
-{% block content %}
-	<div class="container mt-5 d-flex justify-content-center align-items-center">
-            <!-- Form -->
-        <div class="col-md-9 col-lg-10 px-md-4 ml-sm-auto">
-            <div class="card">
-                <div class="card-header">
-                Sales Form
-                </div>
-                <div class="card-body">
-                    <form>
-                        <div class="row mb-3">
-                            <div class="form-group col-md-6">
-                                <label for="gstNo">GST No</label>
-                                <input type="text" class="form-control" id="gstNo" placeholder="GST No">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="date">Date</label>
-                                <input type="date" class="form-control" id="date">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="form-group col-md-4">
-                                <label for="billNo">Bill No</label>
-                                <input type="text" class="form-control" id="billNo" placeholder="Bill No">
-                            </div>
-                        </div>
-                        <!-- Dynamic Items Section -->
-                        <div id="itemsSection">
-                            <!-- Items will be added here dynamically -->
-                        </div>
-                        <button type="button" class="btn btn-secondary mb-2" onclick="addItem()">Add Item</button>
+{% extends "base.html" %}
 
-                        <div class="row g-3 mb-3">
-                            <div class="form-group col-md-4">
-                                <label for="totalBeforeTax">Total Before Tax</label>
-                                <input type="number" class="form-control" id="totalBeforeTax" placeholder="Total Before Tax" readonly>
+{% block head %}
+<title>Sales Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+{% endblock %}
+
+{#TODO: block integer input fields to have negative values#}
+{#TODO: fix auto data focus and selection when selecting date#}
+{#TODO: finalise various jquery scripts imports#}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="container mt-5">
+            <!-- Form -->
+            <div class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Sales Form
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="gstNo">GST No</label>
+                                    <input type="text" class="form-control" id="gstNo" placeholder="GST No">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="date">Date</label>
+                                    <input type="date" class="form-control" id="date">
+                                </div>
                             </div>
-                            <div class="form-group col-md-2">
-                                <label for="sgst">SGST (%)</label>
-                                <input type="number" class="form-control" id="sgst" placeholder="SGST" oninput="calculateTax()">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="billNo">Bill No</label>
+                                    <input type="text" class="form-control" id="billNo" placeholder="Bill No">
+                                </div>
                             </div>
-                            <div class="form-group col-md-2">
-                                <label for="cgst">CGST (%)</label>
-                                <input type="number" class="form-control" id="cgst" placeholder="CGST" oninput="calculateTax()">
+
+                            <!-- Dynamic Items Section -->
+                            <div id="itemsSection">
+                                <!-- Items will be added here dynamically -->
                             </div>
-                            <div class="form-group col-md-2">
-                                <label for="igst">IGST (%)</label>
-                                <input type="number" class="form-control" id="igst" placeholder="IGST" oninput="calculateTax()">
+                            
+                            <button type="button" class="btn btn-secondary mb-2" onclick="addItem()">Add Item</button>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="totalBeforeTax">Total Before Tax</label>
+                                    <input type="number" class="form-control" id="totalBeforeTax" placeholder="Total Before Tax" readonly>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="sgst">SGST (%)</label>
+                                    <input type="number" class="form-control" id="sgst" placeholder="SGST" oninput="calculateTax()">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="cgst">CGST (%)</label>
+                                    <input type="number" class="form-control" id="cgst" placeholder="CGST" oninput="calculateTax()">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="igst">IGST (%)</label>
+                                    <input type="number" class="form-control" id="igst" placeholder="IGST" oninput="calculateTax()">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="totalAfterTax">Total After Tax</label>
+                                    <input type="number" class="form-control" id="totalAfterTax" placeholder="Total After Tax" readonly>
+                                </div>
                             </div>
-                            <div class="form-group col-md-2">
-                                <label for="totalAfterTax">Total After Tax</label>
-                                <input type="number" class="form-control" id="totalAfterTax" placeholder="Total After Tax" readonly>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -62,44 +78,51 @@
 {% endblock %}
 
 {% block scripts %}
+    <!-- jQuery Full Version -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <!-- JavaScript and jQuery scripts -->
+
+        <!-- JavaScript and jQuery scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         let itemCount = 0;
-
         $(document).ready(function() {
-            initializeAutocomplete(".item"); // Initialize autocomplete for existing items (if any)
+            // Initialize autocomplete for existing items (if any)
+            initializeAutocomplete(".item");
         });
 
         function addItem() {
             itemCount++;
             const itemHTML = `
-            <div class="row g-2 mb-2 new-item-form" id="itemRow${itemCount}">
-                <div class="form-group col-md-4">
-                    <input type="text" class="form-control item" placeholder="Item" id="item${itemCount}">
-                </div>
-                <div class="form-group col-md-4">
-                    <input type="number" class="form-control rate" placeholder="Rate" id="rate${itemCount}" oninput="calculateTotalBeforeTax()">
-                </div>
-                <div class="form-group col-md-3">
-                    <input type="number" class="form-control quantity" placeholder="Quantity" id="quantity${itemCount}" oninput="calculateTotalBeforeTax()">
-                </div>
-                <div class="col-md-1">
-                    <button type="button" class="btn btn-danger" onclick="removeItem(${itemCount})">Remove</button>
-                </div>
-            </div>`;
+                <div class="form-row" id="itemRow${itemCount}">
+                    <div class="form-group col-md-4">
+                        <input type="text" class="form-control item" placeholder="Item" id="item${itemCount}">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input type="number" class="form-control rate" placeholder="Rate" id="rate${itemCount}" 
+                        oninput="calculateTotalBeforeTax()">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input type="number" class="form-control quantity" placeholder="Quantity" id="quantity${itemCount}" oninput="calculateTotalBeforeTax()">
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-danger" onclick="removeItem(${itemCount})">Remove</button>
+                    </div>
+                </div>`;
             $('#itemsSection').append(itemHTML);
             initializeAutocomplete(`#item${itemCount}`); // Initialize autocomplete for the new item
         }
 
         function removeItem(itemId) {
             $(`#itemRow${itemId}`).remove();
-            calculateTotalBeforeTax(); // Recalculate totals after item removal
+            // Recalculate totals after item removal
+            calculateTotalBeforeTax();
         }
 
         function initializeAutocomplete(selector) {
@@ -113,13 +136,13 @@
                         $.getJSON("/autocomplete", { q: request.term }, function(data) {
                             response($.map(data.matching_results, function(item) {
                                 return {
-                                    // Return the item name without adding <strong> tags
-                                    label: item.name, // No highlight
-                                    value: item.name
-                                };
-                            }));
+                                // Return the item name without adding <strong> tags
+                                label: item.name, // No highlight
+                                value: item.name
+                            };
+                        }));
                         });
-                    }, 300); // Adjust debounce time as needed
+                        }, 300); // Adjust debounce time as needed
                 },
                 minLength: 2,
                 select: function(event, ui) {
@@ -128,15 +151,15 @@
             }).on("autocompletecreate", function() {
                 $(this).data("ui-autocomplete")._renderItem = function(ul, item) {
                     return $("<li>")
-                        .append($("<div>").text(item.label)) // Use jQuery's .text() to safely render text
-                        .appendTo(ul);
+                    .append($("<div>").text(item.label)) // Use jQuery's .text() to safely render text
+                    .appendTo(ul);
                 };
             });
         }
 
         function calculateTotalBeforeTax() {
             let totalBeforeTax = 0;
-            document.querySelectorAll('.new-item-form').forEach(itemRow => {
+            document.querySelectorAll('.form-row').forEach(itemRow => {
                 const rate = itemRow.querySelector('.rate')?.value || 0;
                 const quantity = itemRow.querySelector('.quantity')?.value || 0;
                 totalBeforeTax += rate * quantity;
@@ -153,17 +176,21 @@
             const taxTotal = totalBeforeTax * (sgst + cgst + igst) / 100;
             document.getElementById('totalAfterTax').value = (totalBeforeTax + taxTotal).toFixed(2);
         }
+    </script>
 
-        // All your JavaScript code
+    <script>
+    // All your JavaScript code
         $(document).ready(function () {
             $('.toggle-sidebar').click(function () {
                 $('.sidebar').toggleClass('active');
             });
         });
+    </script>
 
-        // Add autocomplete functionality for dynamically added items
+    <script>
+    // Add autocomplete functionality for dynamically added items
         $(document).ready(function() {
-            var debounceTimer;
+            let debounceTimer;
             $(".item").each(function() {
                 $(this).autocomplete({
                     source: function(request, response) {
@@ -174,12 +201,13 @@
                             $.getJSON("/autocomplete", { q: request.term }, function(data) {
                                 response($.map(data.matching_results, function(item) {
                                     return {
-                                        label: item.name.replace(new RegExp(request.term, "gi"), (match) => `<strong>${match}</strong>`), // Highlight matching part
+                                        // Highlight matching part
+                                        label: item.name.replace(new RegExp(request.term, "gi"), (match) => `<strong>${match}</strong>`),
                                         value: item.name
                                     };
                                 }));
                             });
-                        }, 300); // Adjust debounce time as needed
+                            }, 300); // Adjust debounce time as needed
                     },
                     minLength: 2,
                     select: function(event, ui) {
