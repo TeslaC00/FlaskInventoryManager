@@ -4,7 +4,7 @@ from flask_login import login_required
 from sqlalchemy import text
 
 from app.database import db
-from app.models import Raw_Material_Records
+from app.models import Raw_Material_Records, Goods
 
 main_routes = Blueprint('main', __name__)
 
@@ -21,18 +21,11 @@ def root():
     return render_template('base.html')
 
 
-@main_routes.route('/index/')
+# TODO: add content to profile page
+@main_routes.route('/profile/')
 @login_required
-def index():
-    """
-    Serves the index page with a list of database tables and pre-defined items. Requires user to be logged in.
-
-    Returns:
-    - The rendered index.html template with a list of all database tables and items.
-    """
-    all_tables = db.metadata.tables.keys()
-    items = ["Item"] * 17 + ["Item2"]
-    return render_template('index.html', all_tables=all_tables, items=items)
+def profile():
+    return render_template('profile.html')
 
 
 @main_routes.route('/analysis/')
@@ -59,15 +52,18 @@ def orders():
     return render_template('orders.html')
 
 
-@main_routes.route('/form')
-def form():
-    """
-    Serves a generic form page.
+# TODO: add content to audits page
+@main_routes.route('/audits/')
+@login_required
+def audits():
+    return render_template('audits.html')
 
-    Returns:
-    - The rendered form.html template.
-    """
-    return render_template('form.html')
+
+# TODO: add content to settings page
+@main_routes.route('/settings/')
+@login_required
+def settings():
+    return render_template('settings.html')
 
 
 @main_routes.route('/test_database_connection/')
@@ -84,31 +80,6 @@ def test_database_connection():
         return 'Database connected successfully!'
     except Exception as e:
         return f'Database connection error: {str(e)}'
-
-
-@main_routes.route('/show_tables/')
-def show_tables():
-    """
-    Retrieves and displays all the tables in the database.
-
-    Returns:
-    - The rendered show_tables.html template with a list of all database tables.
-    """
-    all_tables = get_all_tables()
-    return render_template('show_tables.html', tables=all_tables)
-
-
-@main_routes.route('/spreadsheet/')
-def show_tables2():
-    """
-    Retrieves all records from the Raw_Material_Records table and displays them in a spreadsheet format.
-
-    Returns:
-    - The rendered spreadsheet.html template with all records from Raw_Material_Records.
-    """
-    records = Raw_Material_Records.query.all()
-    results = [record.to_dict() for record in records]
-    return render_template('spreadsheet.html', tables=results)
 
 
 @main_routes.route('/update-data/', methods=['POST'])
@@ -139,3 +110,20 @@ def json_response():
     records = Raw_Material_Records.query.all()
     results = [record.to_dict() for record in records]
     return jsonify(results)
+
+
+@main_routes.route('/autocomplete', methods=['GET'])
+def autocomplete():
+    """
+    Route to handle autocomplete suggestions.
+    Fetches goods names from the database that match the user's search query and returns them in a JSON format suitable
+    for autocomplete functionalities.
+
+    :return: A JSON response containing matching results, each with an "id" and "name" derived from goods names in the
+    database.
+    """
+    search = request.args.get('q')  # Get the search query parameter 'q' from the URL
+    results = Goods.query.filter(Goods.good_name.like(f'%{search}%')).limit(
+        10).all()  # Query the database for goods names that contain the search term
+    # Prepare and return the JSON response with the search results
+    return jsonify(matching_results=[{"id": item.good_name, "name": item.good_name} for item in results])

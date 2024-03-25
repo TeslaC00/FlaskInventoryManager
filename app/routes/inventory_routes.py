@@ -3,7 +3,7 @@ from flask import render_template, Blueprint
 from app.models import Goods, Raw_Material
 
 # Initialize a Blueprint for inventory-related routes
-inventory_bp = Blueprint('inventory_bp', __name__)
+inventory_bp = Blueprint('inventory', __name__)
 
 
 @inventory_bp.route('/')
