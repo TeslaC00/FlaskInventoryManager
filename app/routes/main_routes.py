@@ -4,7 +4,7 @@ from flask_login import login_required
 from sqlalchemy import text
 
 from app.database import db
-from app.models import Raw_Material_Records, Goods
+from app.models import Raw_Material_Records, Goods, Raw_Material
 
 main_routes = Blueprint('main', __name__)
 
@@ -57,6 +57,18 @@ def orders():
 @login_required
 def audits():
     return render_template('audits.html')
+
+
+@main_routes.route('/WriteOff/')
+@login_required
+def WriteOff():
+    raw_material_data = Raw_Material.query.all()
+    produced_good_data = Goods.query.all()
+
+    table1 = [record.to_dict() for record in raw_material_data]
+    table2 = [record.to_dict() for record in produced_good_data]
+
+    return render_template('WriteOff.html', table1=table1, table2=table2)
 
 
 # TODO: add content to settings page
