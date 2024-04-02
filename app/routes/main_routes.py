@@ -4,7 +4,7 @@ from flask_login import login_required
 from sqlalchemy import text
 
 from app.database import db
-from app.models import Raw_Material_Records, Goods, Raw_Material
+from app.models import Raw_Material_Records, Goods, Raw_Material, User
 
 main_routes = Blueprint('main', __name__)
 
@@ -21,11 +21,11 @@ def root():
     return render_template('base.html')
 
 
-# TODO: add content to profile page
 @main_routes.route('/profile/')
 @login_required
 def profile():
-    return render_template('profile.html')
+    users = User.query.all()
+    return render_template('profile.html', users=users)
 
 
 @main_routes.route('/analysis/')
@@ -59,9 +59,9 @@ def audits():
     return render_template('audits.html')
 
 
-@main_routes.route('/WriteOff/')
+@main_routes.route('/writeOff/')
 @login_required
-def WriteOff():
+def write_off():
     raw_material_data = Raw_Material.query.all()
     produced_good_data = Goods.query.all()
 
