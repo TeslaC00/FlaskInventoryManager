@@ -25,8 +25,16 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
                         {#TODO: why is there href for image#}
+                        {#TODO: add default user and admin image#}
+                        {#href to go to account directly#}
                         <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                            <img src="/account.png" class="avatar img-fluid" alt="Account Image not available">
+                            {% if current_user.user_type=='admin' %}
+                                <img src="/static/images/admin.jpg" class="avatar img-fluid"
+                                     alt="Account Image not available">
+                            {% else %}
+                                <img src="/static/images/user.jpg" class="avatar img-fluid"
+                                     alt="Account Image not available">
+                            {% endif %}
                         </a>
                         <div class="dropdown-menu dropdown-menu-end rounded">
                         </div>
