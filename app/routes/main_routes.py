@@ -78,6 +78,12 @@ def settings():
     return render_template('settings.html')
 
 
+@main_routes.route('/addentry/')
+@login_required
+def addentry():
+    return render_template('addentry.html')
+
+
 @main_routes.route('/test_database_connection/')
 def test_database_connection():
     """
