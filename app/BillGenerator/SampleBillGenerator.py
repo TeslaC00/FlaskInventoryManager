@@ -19,10 +19,11 @@ def generate_invoice(buyer_details, seller_details, items, bill_no, bill_date, s
     styles = getSampleStyleSheet()
 
     # Adjust table column widths here
-    colWidths = [1.9 * inch, 0.75 * inch, 0.6 * inch, 1 * inch, 0.9 * inch, 0.9 * inch, 1 * inch]
+    colWidths = [1.7 * inch, 0.75 * inch, 0.6 * inch, 1.2 * inch, 0.9 * inch, 0.9 * inch, 1.2 * inch]
 
     # Header
     header_data = [
+
         [[Paragraph(
             f"<b>Seller:</b><br/>{seller_details['company_name']}<br/>GST: {seller_details['gst_no']}<br/>{seller_details['address']}",
             styles['Normal'])],
@@ -100,6 +101,10 @@ seller_details = {
 items = [
     {"name": "Item 1", "price": 1000.0, "quantity": 2},
     {"name": "Item 2", "price": 500.0, "quantity": 3},
+    {"name": "Item 3", "price": 500.0, "quantity": 4},
+    {"name": "Item 4", "price": 900.0, "quantity": 1},
+    {"name": "Item 5", "price": 700.0, "quantity": 2},
+    {"name": "Item 6", "price": 1200.0, "quantity": 3}
 ]
 
 generate_invoice(buyer_details, seller_details, items, "123456", "2024-04-03", "User XYZ")
