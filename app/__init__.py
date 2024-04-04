@@ -1,10 +1,10 @@
 from flask import Flask
-from flask_login import LoginManager
 from flask_migrate import Migrate
 
 from app.routes import register_routes
 from .database import db
 from .routes.auth import login_manager
+from app.logger import logger
 
 # Creates flask object
 app = Flask(__name__)
@@ -30,3 +30,5 @@ Migrate(app, db)
 
 # Registering blueprints
 register_routes(app)
+
+logger.info('Finished initializing FlaskInventoryManager')
