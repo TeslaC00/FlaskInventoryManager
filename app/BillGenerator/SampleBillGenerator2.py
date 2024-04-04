@@ -27,48 +27,50 @@ def generate_invoice(buyer_details, seller_details, items, bill_no, bill_date, s
                               ))
     styles.add(ParagraphStyle(name='Normal_CENTER',
                               alignment=TA_CENTER,
-                              fontSize=20
+                              fontSize=20,
+                              leading=15
+                              ))
+    styles.add(ParagraphStyle(name='Normal_CENTER2',
+                              alignment=TA_CENTER,
+                              ))
+    styles.add(ParagraphStyle(name='Seller_Details',
+                              fontSize=8
                               ))
 
     # Adjust table column widths here
-    colWidths = [1.7 * inch, 0.75 * inch, 0.6 * inch, 1.2 * inch, 0.9 * inch, 0.9 * inch, 1.2 * inch]
+    colWidths = [1.45 * inch, 0.75 * inch, 0.6 * inch, 1.2 * inch, 0.9 * inch, 0.9 * inch, 1.2 * inch]
 
-    story.append(Paragraph("INVOICE", styles['Normal_CENTER']))
-    story.append(Spacer(1, 20))
+    header1_data = [
+        [Paragraph(f"<b>REG NO. : 06EGAPK9506B1ZQ</b>")],
+        [Paragraph(f"<b>MUSKAN ENGINEERS</b>", styles['Normal_CENTER'])],
+        [Paragraph(f"<font size=8>Address. H.No.-458,Gali No.-1/13B, Basai Enclave, Gurgaon Haryana 122001</font>",
+                   styles['Normal_CENTER2'])]
+
+    ]
+    header1_table = Table(header1_data, colWidths=[7 * inch, 1 * inch])
+    header1_table.setStyle(TableStyle([
+        ('BOX', (0, 0), (-1, -1), 1, colors.black),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+    ]))
+    story.append(header1_table)
 
     # Header
     header_data = [
 
         [[Paragraph(
-            f"<b>Seller:</b><br/>{seller_details['company_name']}<br/>GST: {seller_details['gst_no']}<br/>{seller_details['address']}",
-            styles['Normal'])],
-            [Paragraph(
-                f"<b>Buyer:</b><br/>{buyer_details['company_name']}<br/>GST: {buyer_details['gst_no']}<br/>{buyer_details['address']}",
-                styles['Normal']),
-                [Paragraph(
-                    f"<b>Buyer:</b><br/>{buyer_details['company_name']}<br/>GST: {buyer_details['gst_no']}<br/>{buyer_details['address']}",
-                    styles['Normal'])
-                ]
-            ]
-        ],
-        [Paragraph(
             f"<b>Buyer:</b><br/>{buyer_details['company_name']}<br/>GST: {buyer_details['gst_no']}<br/>{buyer_details['address']}",
-            styles['Normal'])
-        ]
+            styles['Normal_LEFT'])],
+            [Paragraph(
+                f"<b>Sr.No.: </b><u>{seller_details['sr_no']}</u><br/><b>Date: </b><u>{seller_details['date']}</u><br/><b>P.O. No.: </b><u>{seller_details['po_no']}</u><br/><b>P.O. Date: </b><u>{seller_details['po_date']}</u>",
+                styles['Seller_Details'])]
+        ],
 
     ]
-    header_table = Table(header_data, colWidths=[3.5 * inch, 3.5 * inch])
+    header_table = Table(header_data, colWidths=[5.5 * inch, 1.5 * inch])
     header_table.setStyle(TableStyle([
         ('GRID', (0, 0), (-1, -1), 1, colors.black),
-        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
     ]))
     story.append(header_table)
-    story.append(Spacer(1, 12))
-
-    # Bill details
-    bill_details = f"Bill No: {bill_no}\nDate: {bill_date}"
-    story.append(Paragraph(bill_details, styles['Normal_LEFT']))
-    story.append(Spacer(1, 12))
 
     # Items table
     item_data = [['Item', 'Price', 'Qty', 'Amt Before Tax', 'SGST (9%)', 'CGST (9%)', 'Total After GST']]
@@ -119,9 +121,10 @@ buyer_details = {
 }
 
 seller_details = {
-    "gst_no": "27BBBBB1234F2Z5",
-    "address": "Seller Address, City, State, Zip",
-    "company_name": "Seller Company Pvt Ltd"
+    "sr_no": 23,
+    "date": "04-04-2024",
+    "po_no": 4200412,
+    "po_date": "14-04-2024"
 }
 
 items = [
