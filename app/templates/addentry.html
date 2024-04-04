@@ -13,24 +13,28 @@
             <div class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="card">
                     <div class="card-header">
-                        Sales Form
+                        Purchase
                     </div>
                     <div class="card-body">
                         <form>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="gstNo">GST No</label>
-                                    <input type="text" class="form-control" id="gstNo" placeholder="GST No">
+                                    <label for="supplier id">Supplier ID</label>
+                                    <input type="text" class="form-control" id="Supplier ID" placeholder="Supplier ID">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="date">Date</label>
-                                    <input type="date" class="form-control" id="date">
+                                    <label for="supplier name">Supplier Name</label>
+                                    <input type="text" class="form-control" id="supplier name" placeholder="Supplier Name">
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="billNo">Bill No</label>
-                                    <input type="text" class="form-control" id="billNo" placeholder="Bill No">
+                                <div class="form-group col-md-6">
+                                    <label for="challan no">Challan No.</label>
+                                    <input type="number" class="form-control" id="challan no" placeholder="Challan No.">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="date">Date</label>
+                                    <input type="date" class="form-control" id="date" placeholder="date">
                                 </div>
                             </div>
 
@@ -39,38 +43,18 @@
                                 <!-- Items will be added here dynamically -->
                             </div>
 
-                            <button type="button" class="btn btn-secondary mb-2" onclick="addItem()">Add Item</button>
+                            <button type="button" class="btn btn-secondary mb-2" onclick="addItem()">Add Raw Material</button>
 
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="totalBeforeTax">Total Before Tax</label>
-                                    <input type="number" class="form-control" id="totalBeforeTax" placeholder="Total Before Tax" readonly>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="sgst">SGST (%)</label>
-                                    <input type="number" class="form-control" id="sgst" placeholder="SGST" oninput="calculateTax()">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="cgst">CGST (%)</label>
-                                    <input type="number" class="form-control" id="cgst" placeholder="CGST" oninput="calculateTax()">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="igst">IGST (%)</label>
-                                    <input type="number" class="form-control" id="igst" placeholder="IGST" oninput="calculateTax()">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="totalAfterTax">Total After Tax</label>
-                                    <input type="number" class="form-control" id="totalAfterTax" placeholder="Total After Tax" readonly>
-                                </div>
+                            <div class="form-row col-md-12">
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
-
-                            <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 {% endblock %}
 
 {% block scripts %}
@@ -96,12 +80,12 @@
         function addItem() {
             itemCount++;
             const itemHTML = `
-                <div class="form-row" id="itemRow${itemCount}">
+                <div class="form-row" id="RawRow${itemCount}">
                     <div class="form-group col-md-4">
-                        <input type="text" class="form-control item" placeholder="Item" id="item${itemCount}">
+                        <input type="text" class="form-control item" placeholder="Raw Material" id="raw${itemCount}">
                     </div>
-                    <div class="form-group col-md-4">
-                        <input type="number" class="form-control rate" placeholder="Rate" id="rate${itemCount}" 
+                    <div class="form-group col-md-3">
+                        <input type="number" class="form-control rate" placeholder="Price" id="price${itemCount}"
                         oninput="calculateTotalBeforeTax()">
                     </div>
                     <div class="form-group col-md-3">
@@ -116,7 +100,7 @@
         }
 
         function removeItem(itemId) {
-            $(`#itemRow${itemId}`).remove();
+            $(`#RawRow${itemId}`).remove();
             // Recalculate totals after item removal
             calculateTotalBeforeTax();
         }
@@ -187,7 +171,7 @@
     // Add autocomplete functionality for dynamically added items
         $(document).ready(function() {
             let debounceTimer;
-            $(".item").each(function() {
+            $(".raw").each(function() {
                 $(this).autocomplete({
                     source: function(request, response) {
                         if (debounceTimer) {
