@@ -22,4 +22,3 @@ stream_handler.setFormatter(formatter)
 # Add both handlers to the logger
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
-# nothin
