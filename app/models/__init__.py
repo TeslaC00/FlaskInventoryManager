@@ -1,5 +1,6 @@
 from .audit_log import AuditLog
 from .bill import Bill
+from .bom import Bom
 from .buyer import Buyer
 from .challan import Challan
 from .goods import Goods
