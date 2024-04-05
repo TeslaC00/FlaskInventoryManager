@@ -30,4 +30,4 @@ def register_routes(app):
     """
     app.register_blueprint(auth_bp)
     app.register_blueprint(main_routes)
-    app.register_blueprint(inventory_bp, url_prefix='/inventory')
+    app.register_blueprint(inventory_bp)

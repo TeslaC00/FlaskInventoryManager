@@ -120,6 +120,27 @@ a.sidebar-link:hover {
     position: relative;
 }
 
+#sidebar:not(.expand) .sidebar-item a.sidebar-link span {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    left: 70px;
+    background-color: #0e2238;
+    padding-top: 11px;
+    padding-right: 11px;
+    padding-left: 11px;
+    padding-bottom: 11px;
+    min-width: 10rem;
+    display: none;
+}
+
+#sidebar:not(.expand) .sidebar-item:hover a.sidebar-link span {
+    display: block;
+    max-height: 15em;
+    width: 100%;
+    opacity: 1;
+}
+
 #sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
     position: absolute;
     top: 0;
