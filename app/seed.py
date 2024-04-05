@@ -1,10 +1,11 @@
 from json import load
 
-from app import db, app
+from app import create_app
+from app.database import db
 from app.models import Buyer, Supplier, Raw_Material, Goods, Bill, Challan, Goods_Records, Raw_Material_Records, \
     Returned_Good, Raw_Materials_Part_No, User, Write_off, Goods_Scrap, Raw_Materials_Scrap
 
-app.app_context().push()
+create_app().app_context().push()
 
 
 def read_json(filename):
