@@ -26,11 +26,11 @@ class Product(db.Model):
     part_no = db.Column(db.Integer, nullable=False, unique=True)
     unit_type = db.Column(db.String(10), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    bills = db.relationship('bill', backref='product')
-    product_prices = db.relationship('product_prices', backref='product')
-    product_returned = db.relationship('product_returned', backref='product')
-    product_scraps = db.relationship('product_scrap', backref='product')
-    production_logs = db.relationship('production_log', backref='product')
+    bills = db.relationship('Bill', backref='product')
+    product_prices = db.relationship('ProductPrice', backref='product')
+    product_returned = db.relationship('ProductReturned', backref='product')
+    product_scraps = db.relationship('ProductScrap', backref='product')
+    production_logs = db.relationship('ProductionLog', backref='product')
 
     def to_dict(self):
         """

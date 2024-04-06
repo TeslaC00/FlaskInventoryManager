@@ -37,7 +37,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(50), nullable=False)
     role = db.Column(db.String(20), nullable=False)
     last_login = db.Column(db.DateTime, nullable=False)
-    audit_logs = db.relationship('audit_log', backref='user')
+    audit_logs = db.relationship('AuditLog', backref='user')
 
     def __init__(self, username, password, role):
         self.username = username

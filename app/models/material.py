@@ -25,11 +25,11 @@ class Material(db.Model):
     name = db.Column(db.String(50), primary_key=True)
     unit_type = db.Column(db.String(10), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    challans = db.relationship('challan', backref='material')
-    material_part_nos = db.relationship('material_part_no', backref='material')
-    material_prices = db.relationship('material_price', backref='material')
-    material_scraps = db.relationship('material_scrap', backref='material')
-    production_logs = db.relationship('production_log', backref='material')
+    challans = db.relationship('Challan', backref='material')
+    material_part_nos = db.relationship('MaterialPartNo', backref='material')
+    material_prices = db.relationship('MaterialPrice', backref='material')
+    material_scraps = db.relationship('MaterialScrap', backref='material')
+    production_logs = db.relationship('ProductionLog', backref='material')
 
     def to_dict(self):
         """

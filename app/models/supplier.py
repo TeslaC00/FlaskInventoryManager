@@ -30,9 +30,9 @@ class Supplier(db.Model):
     GST_No = db.Column(db.String(15), nullable=False)
     state_code = db.Column(db.Integer, nullable=False)
     state_name = db.Column(db.String(30), nullable=False)
-    challans = db.relationship('challan', backref='supplier')
-    material_part_nos = db.relationship('material_part_no', backref='supplier')
-    material_prices = db.relationship('material_price', backref='supplier')
+    challans = db.relationship('Challan', backref='supplier')
+    material_part_nos = db.relationship('MaterialPartNo', backref='supplier')
+    material_prices = db.relationship('MaterialPrice', backref='supplier')
 
     def to_dict(self):
         """

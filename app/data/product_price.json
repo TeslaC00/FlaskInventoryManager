@@ -1,0 +1,502 @@
+[
+  {
+    "date": "1980-01-01",
+    "product_name": "Gorgeous Plastic Hat",
+    "price": 335
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Licensed Rubber Chair",
+    "price": 959
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Electronic Wooden Mouse",
+    "price": 996
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Bespoke Granite Car",
+    "price": 122
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Tasty Bronze Salad",
+    "price": 754
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Electronic Cotton Towels",
+    "price": 657
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Modern Granite Chips",
+    "price": 833
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Handmade Granite Soap",
+    "price": 490
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Awesome Plastic Mouse",
+    "price": 449
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Rustic Fresh Towels",
+    "price": 470
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Tasty Rubber Pants",
+    "price": 246
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Recycled Granite Hat",
+    "price": 385
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Bespoke Metal Keyboard",
+    "price": 581
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Bespoke Granite Chips",
+    "price": 391
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Handmade Concrete Bike",
+    "price": 959
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Intelligent Soft Mouse",
+    "price": 660
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Incredible Fresh Fish",
+    "price": 886
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Elegant Metal Salad",
+    "price": 831
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Licensed Cotton Cheese",
+    "price": 766
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Modern Soft Car",
+    "price": 410
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Handcrafted Frozen Chips",
+    "price": 439
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Incredible Plastic Bacon",
+    "price": 266
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Practical Wooden Tuna",
+    "price": 606
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Licensed Bronze Car",
+    "price": 126
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Awesome Rubber Computer",
+    "price": 834
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Electronic Rubber Pants",
+    "price": 148
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Elegant Granite Chicken",
+    "price": 346
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Tasty Rubber Mouse",
+    "price": 854
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Unbranded Steel Shoes",
+    "price": 982
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Unbranded Fresh Keyboard",
+    "price": 286
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Fantastic Frozen Gloves",
+    "price": 596
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Intelligent Fresh Table",
+    "price": 144
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Ergonomic Plastic Pizza",
+    "price": 413
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Incredible Granite Hat",
+    "price": 604
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Licensed Bronze Soap",
+    "price": 608
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Elegant Plastic Bike",
+    "price": 321
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Gorgeous Steel Pizza",
+    "price": 862
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Licensed Plastic Keyboard",
+    "price": 958
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Bespoke Fresh Fish",
+    "price": 462
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Licensed Steel Soap",
+    "price": 355
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Generic Steel Hat",
+    "price": 552
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Elegant Cotton Ball",
+    "price": 248
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Tasty Steel Bike",
+    "price": 974
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Tasty Soft Bacon",
+    "price": 572
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Small Steel Bike",
+    "price": 813
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Unbranded Fresh Mouse",
+    "price": 561
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Fantastic Cotton Shirt",
+    "price": 302
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Handmade Soft Gloves",
+    "price": 457
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Incredible Cotton Mouse",
+    "price": 110
+  },
+  {
+    "date": "1980-01-01",
+    "product_name": "Practical Fresh Soap",
+    "price": 105
+  },
+  {
+    "date": "1990-12-02",
+    "product_name": "Bespoke Granite Car",
+    "price": 760
+  },
+  {
+    "date": "1985-01-19",
+    "product_name": "Recycled Granite Hat",
+    "price": 296
+  },
+  {
+    "date": "2005-08-22",
+    "product_name": "Licensed Cotton Cheese",
+    "price": 436
+  },
+  {
+    "date": "2018-02-21",
+    "product_name": "Licensed Rubber Chair",
+    "price": 962
+  },
+  {
+    "date": "2017-12-15",
+    "product_name": "Licensed Plastic Keyboard",
+    "price": 496
+  },
+  {
+    "date": "2015-06-27",
+    "product_name": "Small Steel Bike",
+    "price": 865
+  },
+  {
+    "date": "1996-07-18",
+    "product_name": "Elegant Metal Salad",
+    "price": 911
+  },
+  {
+    "date": "2019-12-04",
+    "product_name": "Awesome Plastic Mouse",
+    "price": 208
+  },
+  {
+    "date": "2002-01-23",
+    "product_name": "Recycled Granite Hat",
+    "price": 793
+  },
+  {
+    "date": "1991-07-10",
+    "product_name": "Rustic Fresh Towels",
+    "price": 878
+  },
+  {
+    "date": "1980-10-19",
+    "product_name": "Licensed Bronze Car",
+    "price": 256
+  },
+  {
+    "date": "2015-03-28",
+    "product_name": "Generic Steel Hat",
+    "price": 365
+  },
+  {
+    "date": "1984-10-25",
+    "product_name": "Tasty Rubber Pants",
+    "price": 632
+  },
+  {
+    "date": "2014-05-24",
+    "product_name": "Licensed Bronze Car",
+    "price": 468
+  },
+  {
+    "date": "2004-05-07",
+    "product_name": "Elegant Granite Chicken",
+    "price": 884
+  },
+  {
+    "date": "2017-07-09",
+    "product_name": "Bespoke Granite Car",
+    "price": 691
+  },
+  {
+    "date": "1987-09-30",
+    "product_name": "Incredible Fresh Fish",
+    "price": 356
+  },
+  {
+    "date": "1985-10-13",
+    "product_name": "Fantastic Frozen Gloves",
+    "price": 427
+  },
+  {
+    "date": "1987-06-06",
+    "product_name": "Handmade Granite Soap",
+    "price": 313
+  },
+  {
+    "date": "2000-03-24",
+    "product_name": "Bespoke Metal Keyboard",
+    "price": 576
+  },
+  {
+    "date": "2016-01-19",
+    "product_name": "Elegant Metal Salad",
+    "price": 260
+  },
+  {
+    "date": "1989-07-30",
+    "product_name": "Recycled Granite Hat",
+    "price": 633
+  },
+  {
+    "date": "1980-03-11",
+    "product_name": "Bespoke Granite Car",
+    "price": 643
+  },
+  {
+    "date": "1987-05-22",
+    "product_name": "Intelligent Fresh Table",
+    "price": 877
+  },
+  {
+    "date": "2007-01-09",
+    "product_name": "Modern Soft Car",
+    "price": 243
+  },
+  {
+    "date": "2018-02-26",
+    "product_name": "Tasty Rubber Mouse",
+    "price": 576
+  },
+  {
+    "date": "2007-05-05",
+    "product_name": "Tasty Steel Bike",
+    "price": 216
+  },
+  {
+    "date": "2009-08-27",
+    "product_name": "Fantastic Cotton Shirt",
+    "price": 477
+  },
+  {
+    "date": "1989-03-14",
+    "product_name": "Bespoke Granite Chips",
+    "price": 895
+  },
+  {
+    "date": "2001-12-10",
+    "product_name": "Licensed Steel Soap",
+    "price": 587
+  },
+  {
+    "date": "2005-01-07",
+    "product_name": "Incredible Granite Hat",
+    "price": 689
+  },
+  {
+    "date": "2012-08-17",
+    "product_name": "Handcrafted Frozen Chips",
+    "price": 987
+  },
+  {
+    "date": "1997-12-16",
+    "product_name": "Elegant Metal Salad",
+    "price": 821
+  },
+  {
+    "date": "2009-04-18",
+    "product_name": "Incredible Cotton Mouse",
+    "price": 638
+  },
+  {
+    "date": "2022-05-18",
+    "product_name": "Licensed Rubber Chair",
+    "price": 591
+  },
+  {
+    "date": "2010-07-11",
+    "product_name": "Elegant Cotton Ball",
+    "price": 451
+  },
+  {
+    "date": "1986-01-10",
+    "product_name": "Incredible Granite Hat",
+    "price": 327
+  },
+  {
+    "date": "2007-01-14",
+    "product_name": "Bespoke Granite Chips",
+    "price": 528
+  },
+  {
+    "date": "1982-11-11",
+    "product_name": "Handcrafted Frozen Chips",
+    "price": 543
+  },
+  {
+    "date": "1982-07-30",
+    "product_name": "Ergonomic Plastic Pizza",
+    "price": 176
+  },
+  {
+    "date": "2022-08-28",
+    "product_name": "Modern Soft Car",
+    "price": 548
+  },
+  {
+    "date": "2008-04-22",
+    "product_name": "Modern Granite Chips",
+    "price": 728
+  },
+  {
+    "date": "2017-06-05",
+    "product_name": "Awesome Plastic Mouse",
+    "price": 123
+  },
+  {
+    "date": "1990-04-21",
+    "product_name": "Unbranded Fresh Keyboard",
+    "price": 589
+  },
+  {
+    "date": "2020-07-19",
+    "product_name": "Elegant Granite Chicken",
+    "price": 645
+  },
+  {
+    "date": "1992-07-19",
+    "product_name": "Unbranded Steel Shoes",
+    "price": 152
+  },
+  {
+    "date": "2013-12-30",
+    "product_name": "Gorgeous Plastic Hat",
+    "price": 974
+  },
+  {
+    "date": "1980-07-28",
+    "product_name": "Electronic Cotton Towels",
+    "price": 941
+  },
+  {
+    "date": "1982-11-17",
+    "product_name": "Electronic Wooden Mouse",
+    "price": 497
+  },
+  {
+    "date": "2018-03-27",
+    "product_name": "Gorgeous Steel Pizza",
+    "price": 167
+  }
+]

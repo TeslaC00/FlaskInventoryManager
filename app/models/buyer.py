@@ -28,8 +28,8 @@ class Buyer(db.Model):
     GST_No = db.Column(db.String(15), nullable=False)
     state_code = db.Column(db.Integer, nullable=False)
     state_name = db.Column(db.String(30), nullable=False)
-    bills = db.relationship('bill', backref='buyer')
-    product_returned = db.relationship('product_returned', backref='buyer')
+    bills = db.relationship('Bill', backref='buyer')
+    product_returned = db.relationship('ProductReturned', backref='buyer')
 
     def to_dict(self):
         """
