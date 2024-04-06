@@ -1,7 +1,7 @@
 from app.database import db
 
 
-class Write_off(db.Model):
+class WriteOff(db.Model):
     """
     Represents a write-off record within the application, useful for managing and tracking items that are written off.
 
@@ -18,7 +18,7 @@ class Write_off(db.Model):
         to_dict(self): Converts the Write_off instance into a dictionary containing 'id' and 'write_offs' as keys.
     """
 
-    __tablename__ = 'Write_off'
+    __tablename__ = 'write_off'
     id = db.Column(db.Integer, primary_key=True)
     write_offs = db.Column(db.String(100), nullable=False)
 

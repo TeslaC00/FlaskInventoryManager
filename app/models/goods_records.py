@@ -1,6 +1,9 @@
+import warnings
+
 from app.database import db
 
 
+@DeprecationWarning
 class Goods_Records(db.Model):
     """
     Represents a Goods_Records record within a relational database, modeled using SQLAlchemy ORM
@@ -23,12 +26,16 @@ class Goods_Records(db.Model):
         including 'date', 'quantity_produced', and 'good_name'.
     """
 
-    __tablename__ = 'Goods_Records'
+    __tablename__ = 'goods_records'
     date = db.Column(db.Date, nullable=False)
     quantity_produced = db.Column(db.Integer, nullable=False)
-    good_name = db.Column(db.String(50), db.ForeignKey('Goods.good_name'))
-    goods = db.relationship('Goods', backref='goods_records')
+    good_name = db.Column(db.String(50), db.ForeignKey('goods.good_name'))
+    goods = db.relationship('goods', backref='goods_records')
     __table_args__ = (db.PrimaryKeyConstraint('date', 'good_name'),)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        warnings.warn("YourModel is deprecated. Please migrate to a new model.", DeprecationWarning)
 
     def to_dict(self):
         """
@@ -41,5 +48,5 @@ class Goods_Records(db.Model):
         return {
             'date': self.date,
             'quantity_produced': self.quantity_produced,
-            'good_name': self.good_name
+            'product_name': self.good_name
         }

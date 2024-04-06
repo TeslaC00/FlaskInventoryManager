@@ -32,11 +32,12 @@ class User(db.Model, UserMixin):
                       for Flask-Login's user session management.
     """
 
-    __tablename__ = 'User'
+    __tablename__ = 'user'
     username = db.Column(db.String(50), primary_key=True)
     password = db.Column(db.String(50), nullable=False)
     role = db.Column(db.String(20), nullable=False)
     last_login = db.Column(db.DateTime, nullable=False)
+    audit_logs = db.relationship('audit_log', backref='user')
 
     def __init__(self, username, password, role):
         self.username = username
@@ -56,7 +57,8 @@ class User(db.Model, UserMixin):
         return {
             'username': self.username,
             'password': self.password,
-            'user_type': self.role
+            'role': self.role,
+            'last_login': self.last_login,
         }
 
     def get_id(self):

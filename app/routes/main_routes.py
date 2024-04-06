@@ -4,7 +4,7 @@ from flask_login import login_required
 from sqlalchemy import text
 
 from app.database import db
-from app.models import Raw_Material_Records, Goods, Raw_Material, User
+from app.models import Product, Material, User
 
 main_routes = Blueprint('main', __name__)
 
@@ -62,8 +62,8 @@ def audits():
 @main_routes.route('/writeOff/')
 @login_required
 def write_off():
-    raw_material_data = Raw_Material.query.all()
-    produced_good_data = Goods.query.all()
+    raw_material_data = Material.query.all()
+    produced_good_data = Product.query.all()
 
     table1 = [record.to_dict() for record in raw_material_data]
     table2 = [record.to_dict() for record in produced_good_data]
@@ -117,17 +117,18 @@ def update_data():
     return jsonify({"status": "success"})
 
 
-@main_routes.route('/json')
-def json_response():
-    """
-    Retrieves all records from the Raw_Material_Records table and returns them in a JSON format.
-
-    Returns:
-    - A JSON response containing all records from Raw_Material_Records.
-    """
-    records = Raw_Material_Records.query.all()
-    results = [record.to_dict() for record in records]
-    return jsonify(results)
+# TODO: change from records to production log
+# @main_routes.route('/json')
+# def json_response():
+#     """
+#     Retrieves all records from the Raw_Material_Records table and returns them in a JSON format.
+#
+#     Returns:
+#     - A JSON response containing all records from Raw_Material_Records.
+#     """
+#     records = Raw_Material_Records.query.all()
+#     results = [record.to_dict() for record in records]
+#     return jsonify(results)
 
 
 @main_routes.route('/autocomplete', methods=['GET'])
@@ -141,7 +142,7 @@ def autocomplete():
     database.
     """
     search = request.args.get('q')  # Get the search query parameter 'q' from the URL
-    results = Goods.query.filter(Goods.good_name.like(f'%{search}%')).limit(
+    results = Product.query.filter(Product.name.like(f'%{search}%')).limit(
         10).all()  # Query the database for goods names that contain the search term
     # Prepare and return the JSON response with the search results
-    return jsonify(matching_results=[{"id": item.good_name, "name": item.good_name} for item in results])
+    return jsonify(matching_results=[{"id": item.name, "name": item.name} for item in results])

@@ -1,7 +1,7 @@
 from flask import render_template, Blueprint
 
 from app.logger import logger
-from app.models import Goods, Raw_Material
+from app.models import Product, Material
 
 # Initialize a Blueprint for inventory-related routes
 inventory_bp = Blueprint('inventory', __name__)
@@ -17,7 +17,7 @@ def show_inv_raw():
     """
     try:
         # Query all raw material records from the database
-        raw_material_data = Raw_Material.query.all()
+        raw_material_data = Material.query.all()
 
         # Convert the raw material and produced goods records to dictionaries for template rendering
         # Assuming 'to_dict' method is implemented in both 'Raw_Material' and 'Goods' models for serialization
@@ -44,7 +44,7 @@ def show_inv_prod():
     try:
 
         # Query all produced goods records from the database
-        produced_good_data = Goods.query.all()
+        produced_good_data = Product.query.all()
 
         # Convert the raw material and produced goods records to dictionaries for template rendering
         # Assuming 'to_dict' method is implemented in both 'Raw_Material' and 'Goods' models for serialization

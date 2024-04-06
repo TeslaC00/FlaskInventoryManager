@@ -1,20 +1,26 @@
+import warnings
+
 from app.database import db
 
 
+@DeprecationWarning
 class Bom(db.Model):
-    __tablename__ = 'Bom'
-    good_name = db.Column(db.String(50), db.ForeignKey('Goods.good_name'), nullable=False)
-    raw_material_name = db.Column(db.String(50), db.ForeignKey('Raw_Material.raw_material_name'), nullable=False)
+    __tablename__ = 'bom'
+    product_name = db.Column(db.String(50), db.ForeignKey('product.name', name='fk_bom_product_name'), nullable=False)
+    material_name = db.Column(db.String(50), db.ForeignKey('material.name', name='fk_bom_material_name'),
+                              nullable=False)
     date = db.Column(db.Date, nullable=False)
     ratio = db.Column(db.Integer, nullable=False)
-    goods = db.relationship('Goods', backref='bom_good')
-    raw_material = db.relationship('Raw_Material', backref='bom_material')
-    __table_args__ = (db.PrimaryKeyConstraint('good_name', 'raw_material_name', name='bom_pkey'),)
+    __table_args__ = (db.PrimaryKeyConstraint(product_name, material_name, name='pk_bom'),)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        warnings.warn("YourModel is deprecated. Please migrate to a new model.", DeprecationWarning)
 
     def to_dict(self):
         return {
-            'good_name': self.good_name,
-            'raw_material_name': self.raw_material_name,
+            'product_name': self.product_name,
+            'material_name': self.material_name,
             'date': self.date,
             'ratio': self.ratio
         }

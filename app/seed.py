@@ -2,8 +2,8 @@ from json import load
 
 from app import create_app
 from app.database import db
-from app.models import Buyer, Supplier, Raw_Material, Goods, Bill, Challan, Goods_Records, Raw_Material_Records, \
-    Returned_Good, Raw_Materials_Part_No, User, Write_off, Goods_Scrap, Raw_Materials_Scrap
+from app.models import Buyer, Supplier, Material, Product, Bill, Challan, Goods_Records, Raw_Material_Records, \
+    ProductReturned, MaterialPartNo, User, WriteOff, ProductScrap, MaterialScrap
 
 create_app().app_context().push()
 
@@ -24,11 +24,11 @@ def seed():
         db.session.add(record)
 
     for item in read_json('data/raw_materials.json'):
-        record = Raw_Material(**item)
+        record = Material(**item)
         db.session.add(record)
 
     for item in read_json('data/goods.json'):
-        record = Goods(**item)
+        record = Product(**item)
         db.session.add(record)
 
     for item in read_json('data/bills.json'):
@@ -36,7 +36,7 @@ def seed():
         db.session.add(record)
 
     for item in read_json('data/returned_good.json'):
-        record = Returned_Good(**item)
+        record = ProductReturned(**item)
         db.session.add(record)
 
     for item in read_json('data/challans.json'):
@@ -44,7 +44,7 @@ def seed():
         db.session.add(record)
 
     for item in read_json('data/raw_material_part_no.json'):
-        record = Raw_Materials_Part_No(**item)
+        record = MaterialPartNo(**item)
         db.session.add(record)
 
     for item in read_json('data/goods_records.json'):
@@ -60,14 +60,14 @@ def seed():
         db.session.add(record)
 
     for item in read_json('data/goods_scrap.json'):
-        record = Goods_Scrap(**item)
+        record = ProductScrap(**item)
         db.session.add(record)
 
     for item in read_json('data/raw_materials_scrap.json'):
-        record = Raw_Materials_Scrap(**item)
+        record = MaterialScrap(**item)
         db.session.add(record)
 
-    record = Write_off(write_offs="A write off that has written off the inventory")
+    record = WriteOff(write_offs="A write off that has written off the inventory")
     db.session.add(record)
 
     db.session.commit()

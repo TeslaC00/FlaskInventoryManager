@@ -31,7 +31,7 @@ class AuditLog(db.Model):
     A model representing an audit log entry in the database.
 
     Attributes:
-        audit_id (int): The primary key and unique identifier for the audit log entry.
+        id (int): The primary key and unique identifier for the audit log entry.
         table_name (str): The name of the table that the change occurred in.
         table_primary_key (str): The primary key value of the row that was changed.
         column_name (str): The name of the column that was changed.
@@ -63,20 +63,20 @@ class AuditLog(db.Model):
         - The action_type column uses the ActionType enum to ensure only valid actions are recorded.
     """
     __tablename__ = 'audit_log'
-    audit_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     table_name = db.Column(db.String(100), nullable=False)
     table_primary_key = db.Column(db.String(100), nullable=False)
     column_name = db.Column(db.String(100), nullable=False)
     old_value = db.Column(db.String(100), nullable=False)
     new_value = db.Column(db.String(100), nullable=False)
-    username = db.Column(db.String(100), db.ForeignKey('User.username'), nullable=False)
+    username = db.Column(db.String(100), db.ForeignKey('user.username', name='fk_audit_log_user_username'),
+                         nullable=False)
     change_timestamp = db.Column(db.DateTime, nullable=False, default=func.now())
     action_type = db.Column(db.Enum(ActionType), nullable=False)
-    user = db.relationship('User', backref=db.backref('user'))
 
     def to_dict(self):
         return {
-            'audit_id': self.audit_id,
+            'audit_id': self.id,
             'table_name': self.table_name,
             'table_primary_key': self.table_primary_key,
             'column_name': self.column_name,

@@ -1,7 +1,7 @@
 from app.database import db
 
 
-class Raw_Material(db.Model):
+class Material(db.Model):
     """
     Represents a raw material record within a relational database, modeled using SQLAlchemy ORM
     as part of the application's database schema. This model is designed to maintain information
@@ -9,7 +9,7 @@ class Raw_Material(db.Model):
 
     Attributes:
         __tablename__ (str): Specifies the name of the table in the database for the Raw_Material model.
-        raw_material_name (db.Column): The name of the raw material, which serves as the primary key for the Raw_Material table. It is a non-nullable string of maximum length 50.
+        name (db.Column): The name of the raw material, which serves as the primary key for the Raw_Material table. It is a non-nullable string of maximum length 50.
         unit_type (db.Column): Specifies the unit of measure for the raw material (e.g., kg, liters). It is a non-nullable string of maximum length 10.
         quantity (db.Column): Represents the current stock quantity of the raw material. It is a non-nullable integer, indicating how much of the material is available.
 
@@ -21,10 +21,15 @@ class Raw_Material(db.Model):
         including 'raw_material_name', 'unit_type', and 'quantity'.
     """
 
-    __tablename__ = 'Raw_Material'
-    raw_material_name = db.Column(db.String(50), primary_key=True)
+    __tablename__ = 'material'
+    name = db.Column(db.String(50), primary_key=True)
     unit_type = db.Column(db.String(10), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
+    challans = db.relationship('challan', backref='material')
+    material_part_nos = db.relationship('material_part_no', backref='material')
+    material_prices = db.relationship('material_price', backref='material')
+    material_scraps = db.relationship('material_scrap', backref='material')
+    production_logs = db.relationship('production_log', backref='material')
 
     def to_dict(self):
         """
@@ -35,7 +40,7 @@ class Raw_Material(db.Model):
             including 'raw_material_name', 'unit_type', and 'quantity'.
         """
         return {
-            'raw_material_name': self.raw_material_name,
+            'material_name': self.name,
             'unit_type': self.unit_type,
             'quantity': self.quantity
         }
