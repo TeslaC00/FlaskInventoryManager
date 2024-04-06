@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>New Supplier Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+{% endblock %}
+
+{#TODO: block integer input fields to have negative values#}
+{#TODO: fix auto data focus and selection when selecting date#}
+{#TODO: finalise various jquery scripts imports#}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="container mt-5">
+            <!-- Form -->
+            <div class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        New Supplier
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="supplier id">Supplier ID</label>
+                                    <input type="text" class="form-control" id="Supplier ID" placeholder="Supplier ID">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="supplier name">Supplier Name</label>
+                                    <input type="text" class="form-control" id="supplier name" placeholder="Supplier Name">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+
+                                    <label for="state name">State Name</label>
+                                    <input type="text" class="form-control" id="state name" placeholder="State Name">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="state code">State code</label>
+                                    <input type="number" class="form-control" id="state code" placeholder="State Code">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="gstNo">GST No.</label>
+                                    <input type="number" class="form-control" id="gstNo" placeholder="GST No.">
+                                </div>
+                            </div>
+
+                             <button type="submit" class="btn btn-primary">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% block scripts %}
+{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#supplierForm').submit(function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Fetch form values
+            var supplierId = $('#supplier_id').val();
+            var supplierName = $('#supplier_name').val();
+
+            // AJAX request to check if supplier ID or name already exists
+            $.ajax({
+                type: 'POST',
+                url: '/app/data/suppliers',
+                data: { supplier_id: supplierId, supplier_name: supplierName },
+                success: function(response) {
+                    // Reset validation feedback
+                    $('#supplier_id').removeClass('is-invalid');
+                    $('#supplier_name').removeClass('is-invalid');
+                    $('#supplierIdFeedback').empty();
+                    $('#supplierNameFeedback').empty();
+
+                    // If supplier already exists, show error feedback
+                    if (response.error) {
+                        if (response.error_field === 'supplier_id') {
+                            $('#supplier_id').addClass('is-invalid');
+                            $('#supplierIdFeedback').text(response.error);
+                        } else if (response.error_field === 'supplier_name') {
+                            $('#supplier_name').addClass('is-invalid');
+                            $('#supplierNameFeedback').text(response.error);
+                        }
+                    } else {
+                        // If supplier does not exist, submit the form
+                        $('#supplierForm').unbind('submit').submit();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error checking supplier:', error);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
