@@ -17,4 +17,4 @@ def purchase():
 
     return render_template('addentry.html', form=form)
 
-@challan.
+# @challan.
