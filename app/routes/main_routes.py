@@ -83,6 +83,7 @@ def settings():
 def addentry():
     return render_template('addentry.html')
 
+
 @main_routes.route('/addsupplier/')
 @login_required
 def addsupplier():
@@ -151,3 +152,20 @@ def autocomplete():
         10).all()  # Query the database for goods names that contain the search term
     # Prepare and return the JSON response with the search results
     return jsonify(matching_results=[{"id": item.name, "name": item.name} for item in results])
+
+
+@main_routes.route('/autocomplete_raw', methods=['GET'])
+def autocomplete_raw():
+    """
+    Route to handle autocomplete suggestions.
+    Fetches raw material names from the database that match the user's search query and returns them in a JSON format suitable
+    for autocomplete functionalities.
+
+    :return: A JSON response containing matching results, each with an "id" and "name" derived from raw material names in the
+    database.
+    """
+    search = request.args.get('q')  # Get the search query parameter 'q' from the URL
+    results = Material.query.filter(Material.name.like(f'%{search}%')).limit(
+        10).all()  # Query the database for goods names that contain the search term
+    # Prepare and return the JSON response with the search results
+    return jsonify(matching_results=[{"name": raw.name} for raw in results])
