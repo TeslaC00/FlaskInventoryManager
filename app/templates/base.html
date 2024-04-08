@@ -15,7 +15,7 @@
         <title>Flask App</title>
     {% endblock %}
 </head>
-<body>
+<body data-bs-theme="light">
 <div class="wrapper">
     {% include 'sidebar.html' %}
     <div class="main">
@@ -56,6 +56,13 @@
         document.querySelector("#sidebar").classList.toggle("expand");
     });
 </script>
+    <script>
+    function darkMode()
+    {
+        var element = document.body;
+        element.dataset.bsTheme = element.dataset.bsTheme == "light" ? "dark" : "light";
+    }
+    </script>
 <!-- Custom scripts for this template -->
 {% block scripts %}{% endblock %}
 </body>
