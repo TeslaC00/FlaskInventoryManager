@@ -84,11 +84,6 @@ def addentry():
     return render_template('addentry.html')
 
 
-@main_routes.route('/addsupplier/')
-@login_required
-def addsupplier():
-    return render_template('addsupplier.html')
-
 
 @main_routes.route('/test_database_connection/')
 def test_database_connection():

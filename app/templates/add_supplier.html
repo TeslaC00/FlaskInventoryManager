@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>New Supplier Form</title>
+    <style>
+        form {
+            background: linear-gradient(45deg, #2980b9, #6dd5fa);
+            color: #fff;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="container mt-5">
+            <div class="col-md-9 mx-auto col-lg-10 px-md-4">
+                <div class="card">
+                    <div class="card-header">New Supplier</div>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <div class="card-body">
+                        <div class="form-container">
+                            <form method="post" action="{{ url_for('supplier.add_supplier') }}">
+                                {{ form.hidden_tag() }}
+                                <div class="mb-3">
+                                    <div class="input-container">
+                                        {{ form.name.label(class="form-label") }}
+                                        {{ form.name(class="form-control") }}
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-container">
+                                        {{ form.GST_No.label(class="form-label") }}
+                                        {{ form.GST_No(class="form-control") }}
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-container">
+                                        {{ form.state_code.label(class="form-label") }}
+                                        {{ form.state_code(class="form-control") }}
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-container">
+                                        {{ form.state_name.label(class="form-label") }}
+                                        {{ form.state_name(class="form-control") }}
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
