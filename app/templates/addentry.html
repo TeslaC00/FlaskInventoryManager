@@ -113,12 +113,12 @@
                         clearTimeout(debounceTimer);
                     }
                     debounceTimer = setTimeout(function() {
-                        $.getJSON("/autocomplete", { q: request.term }, function(data) {
-                            response($.map(data.matching_results, function(item) {
+                        $.getJSON("/autocomplete_raw", { q: request.term }, function(data) {
+                            response($.map(data.matching_results, function(raw) {
                                 return {
                                 // Return the item name without adding <strong> tags
-                                label: item.name, // No highlight
-                                value: item.name
+                                label: raw.name.replace(new RegExp(request.term, "gi"), (match) => `<strong>${match}</strong>`), // No highlight
+                                value: raw.name
                             };
                         }));
                         });
@@ -126,7 +126,7 @@
                 },
                 minLength: 2,
                 select: function(event, ui) {
-                    console.log("Selected: " + ui.item.value);
+                    console.log("Selected: " + ui.raw.value);
                 }
             }).on("autocompletecreate", function() {
                 $(this).data("ui-autocomplete")._renderItem = function(ul, item) {
@@ -178,12 +178,12 @@
                             clearTimeout(debounceTimer);
                         }
                         debounceTimer = setTimeout(function() {
-                            $.getJSON("/autocomplete", { q: request.term }, function(data) {
-                                response($.map(data.matching_results, function(item) {
+                            $.getJSON("/autocomplete_raw", { q: request.term }, function(data) {
+                                response($.map(data.matching_results, function(raw) {
                                     return {
                                         // Highlight matching part
-                                        label: item.name.replace(new RegExp(request.term, "gi"), (match) => `<strong>${match}</strong>`),
-                                        value: item.name
+                                        label: raw.name.replace(new RegExp(request.term, "gi"), (match) => `<strong>${match}</strong>`),
+                                        value: raw.name
                                     };
                                 }));
                             });
@@ -194,7 +194,7 @@
                         console.log("Selected: " + ui.item.value);
                     }
                 }).on("autocompletecreate", function() {
-                    $(this).data("ui-autocomplete")._renderItem = function(ul, item) {
+                    $(this).data("ui-autocomplete_raw")._renderItem = function(ul, raw) {
                         return $("<li>")
                         .append($("<div>").html(item.label)) // Use jQuery's .html() to render HTML
                         .appendTo(ul);
