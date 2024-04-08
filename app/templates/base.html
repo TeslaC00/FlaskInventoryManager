@@ -59,13 +59,15 @@
         document.querySelector("#sidebar").classList.toggle("expand");
     });
 </script>
-<script>
-    function darkMode() {
-        var element = document.body;
-        element.dataset.bsTheme = element.dataset.bsTheme == "light" ? "dark" : "light";
-    }
-</script>
+{#<script>#}
+{#    function darkMode() {#}
+{#        const element = document.body;#}
+{#        element.dataset.bsTheme = element.dataset.bsTheme === "light" ? "dark" : "light";#}
+{#    }#}
+{#</script>#}
 <!-- Custom scripts for this template -->
+<script src="{{ url_for('static', filename='js/dark_mode.js') }}"></script>
 {% block scripts %}{% endblock %}
+
 </body>
 </html>
