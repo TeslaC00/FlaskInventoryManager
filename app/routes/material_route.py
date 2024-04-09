@@ -30,7 +30,7 @@ def get_materials():
     return jsonify(materials)
 
 
-@material_routes.route('/api/material/<str:name>', methods=['GET'])
+@material_routes.route('/api/material/<string:name>', methods=['GET'])
 def get_material(name):
     material = Material.query.get(name)
     if material:
@@ -41,7 +41,7 @@ def get_material(name):
         flash(f'Materia {name} not found', 'error')
 
 
-@material_routes.route('/api/material/<str:name>', methods=['GET', 'POST'])
+@material_routes.route('/api/material/<string:name>', methods=['GET', 'POST'])
 def update_material(name):
     material = Material.query.get(name)
     form = MaterialForm(obj=material)
@@ -54,7 +54,7 @@ def update_material(name):
         flash(f'Material {material.name} updated', 'success')
 
 
-@material_routes.route('/api/material/<str:name>', methods=['POST'])
+@material_routes.route('/api/material/<string:name>', methods=['POST'])
 def delete_material(name):
     material = Material.query.get(name)
     if material:

@@ -1,128 +1,143 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <title>Purchase Form</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <title>New Challan Entry Form</title>
+    <style>
+        form {
+            background: #f8f9fa; /* Light grey background */
+            color: #333; /* Dark grey text for better readability */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header, .btn-primary {
+            background: #007bff; /* Bootstrap primary color for consistency */
+            color: #fff;
+        }
+
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
     <div class="container-fluid">
         <div class="container mt-5">
-            <!-- Form -->
-            <div class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <div class="col-md-9 mx-auto col-lg-10 px-md-4">
                 <div class="card">
-                    <div class="card-header">
-                        Purchase
-                    </div>
+                    <div class="card-header">New Challan Entry</div>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
                     <div class="card-body">
-                        <form>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="supplier id">Supplier ID</label>
-                                    <input type="text" class="form-control" id="Supplier ID" placeholder="Supplier ID">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="supplier name">Supplier Name</label>
-                                    <input type="text" class="form-control" id="supplier name" placeholder="Supplier Name">
-                                </div>
+                        <form method="post" action="{{ url_for('challan.add_challan') }}">
+                            {{ form.hidden_tag() }}
+                            <div class="mb-3">
+                                {{ form.challan_no.label(class="form-label") }}
+                                {{ form.challan_no(class="form-control") }}
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-
-                                    <label for="challan no">Challan No.</label>
-                                    <input type="number" class="form-control" id="challan no" placeholder="Challan No.">
+                            <div class="mb-3">
+                                {{ form.supplier_id.label(class="form-label") }}
+                                {{ form.supplier_id(class="form-control") }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.supplier_name.label(class="form-label") }}
+                                {{ form.supplier_name(class="form-control") }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.date.label(class="form-label") }}
+                                {{ form.date(class="form-control") }}
+                            </div>
+                            <div id="items-section" class="mb-3">
+                                <label class="form-label">Items</label>
+                                <div id="items-container">
+                                    <!-- JavaScript will append item fields here -->
+                                <fieldset>
+        <legend>Add Products</legend>
+        <div id="products">
+            {% for product in form.products %}
+                <div class="product">
+                    {{ product.name.label }} {{ product.name }}
+                    {{ product.price.label }} {{ product.price }}
+                {{ product.quantity.label }}{{ product.quantity }}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" id="add-product">Add Product</button>
+    </fieldset>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="date">Date</label>
-                                    <input type="date" class="form-control" id="date" placeholder="date">
-                                </div>
+                                <button type="button" id="add-item" class="btn btn-secondary">Add Item</button>
                             </div>
 
-                            <!-- Dynamic Items Section -->
-                            <div id="itemsSection">
-                                <!-- Items will be added here dynamically -->
-                            </div>
-
-                            <button type="button" class="btn btn-secondary mb-2" onclick="addItem()">Add Raw Material</button>
-
-                            <div class="form-row col-md-12">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
+                            <button type="submit" class="btn btn-primary">{{ form.submit }}</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-{% endblock %}
-
-{% block scripts %}
-    <!-- Optimize script imports -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <script>
-        let itemCount = 0;
+    document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('add-product').addEventListener('click', function() {
+        let productsDiv = document.getElementById('products');
+        let productCount = productsDiv.getElementsByClassName('product').length;
 
-        $(document).ready(function() {
-            // Toggle sidebar
-            $('.toggle-sidebar').click(function() {
-                $('.sidebar').toggleClass('active');
-            });
+        let newProductDiv = document.createElement('div');
+        newProductDiv.className = 'product';
 
-            // Add item functionality
+        let nameLabel = document.createElement('label');
+        nameLabel.textContent = 'Product Name';
+        let nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.name = 'products-' + productCount + '-name';
+
+        let priceLabel = document.createElement('label');
+        priceLabel.textContent = 'Price';
+        let priceInput = document.createElement('input');
+        priceInput.type = 'text';
+        priceInput.name = 'products-' + productCount + '-price';
+
+        newProductDiv.appendChild(nameLabel);
+        newProductDiv.appendChild(nameInput);
+        newProductDiv.appendChild(priceLabel);
+        newProductDiv.appendChild(priceInput);
+
+        productsDiv.appendChild(newProductDiv);
+    });
+});
+
+        document.addEventListener('DOMContentLoaded', function () {
+            let itemIndex = 0;
+
             function addItem() {
-                itemCount++;
-                const itemHTML = `
-                    <div class="form-row" id="RawRow${itemCount}">
-                        <div class="form-group col-md-4">
-                            <input type="text" class="form-control item" placeholder="Raw Material" id="raw${itemCount}">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <input type="number" class="form-control rate" placeholder="Price" id="price${itemCount}">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <input type="number" class="form-control quantity" placeholder="Quantity" id="quantity${itemCount}">
-                        </div>
-                        <div class="col-md-1">
-                            <button type="button" class="btn btn-danger" onclick="removeItem(${itemCount})">Remove</button>
-                        </div>
-                    </div>`;
-                $('#itemsSection').append(itemHTML);
-                initializeAutocomplete(`#raw${itemCount}`); // Fixed to correctly initialize new items
+                const container = document.getElementById('items-container');
+                let itemHTML = `<div class="item-group mb-2" id="item-${itemIndex}">
+            <input type="text" name="items-${itemIndex}-name" placeholder="Raw Material" required class="form-control mb-2">
+            <input type="number" step="any" name="items-${itemIndex}-price" placeholder="Price" required class="form-control mb-2">
+            <input type="number" name="items-${itemIndex}-quantity" placeholder="Quantity" required class="form-control mb-2">
+            <button type="button" onclick="removeItem(${itemIndex})" class="btn btn-danger">Remove</button>
+        </div>`;
+                container.insertAdjacentHTML('beforeend', itemHTML);
+                itemIndex++;
             }
 
-            window.addItem = addItem; // Expose addItem to global scope to make it accessible for onclick events
-
-            function removeItem(itemId) {
-                $(`#RawRow${itemId}`).remove();
+            window.removeItem = function (index) {
+                let item = document.getElementById(`item-${index}`);
+                item.parentNode.removeChild(item);
             }
 
-            window.removeItem = removeItem; // Expose removeItem to global scope
-
-            // Initialize autocomplete for existing and dynamically added items
-            function initializeAutocomplete(selector) {
-                $(selector).autocomplete({
-                    source: function(request, response) {
-                        $.getJSON("/autocomplete_raw", { q: request.term }, function(data) {
-                            response($.map(data.matching_results, function(item) {
-                                return {
-                                    label: item.name, // Removed highlight for simplicity
-                                    value: item.name
-                                };
-                            }));
-                        });
-                    },
-                    minLength: 2
-                });
-            }
-
-            // Initialize for existing items, if any. Example selector: ".item"
-             initializeAutocomplete(".item");
+            document.getElementById('add-item').addEventListener('click', addItem);
         });
     </script>
+
 {% endblock %}

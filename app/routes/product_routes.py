@@ -31,7 +31,7 @@ def get_products():
     return jsonify(products)
 
 
-@product_routes.route('/api/product/<str:name>', methods=['GET'])
+@product_routes.route('/api/product/<string:name>', methods=['GET'])
 def get_product(name):
     product = Product.query.get(name)
     if product:
@@ -42,7 +42,7 @@ def get_product(name):
         flash(f'Product {name} not found', 'error')
 
 
-@product_routes.route('/api/product/<str:name>', methods=['GET', 'POST'])
+@product_routes.route('/api/product/<string:name>', methods=['GET', 'POST'])
 def update_product(name):
     product = Product.query.get(name)
     form = ProductForm(obj=product)
@@ -55,7 +55,7 @@ def update_product(name):
         flash(f'Product {product.name} updated', 'success')
 
 
-@product_routes.route('/api/product/<str:name>', methods=['POST'])
+@product_routes.route('/api/product/<string:name>', methods=['POST'])
 def delete_product(name):
     product = Product.query.get(name)
     if product:

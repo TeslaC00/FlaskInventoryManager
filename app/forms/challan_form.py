@@ -14,5 +14,5 @@ class PurchaseForm(FlaskForm):
     supplier_name = StringField('Supplier Name', validators=[DataRequired()])   # TODO: it's not in model why here?
     challan_no = StringField('Challan No.', validators=[DataRequired()])
     date = StringField('Date', validators=[DataRequired()])  # Consider using DateField
-    items = FieldList(FormField(ItemForm), min_entries=1)
+    items = FieldList(FormField(ItemForm), min_entries=0)
     submit = SubmitField('Submit')
