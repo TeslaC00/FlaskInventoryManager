@@ -21,7 +21,10 @@
                     </div>
                     <div class="card-body">
                        <form method="post" action="{{ url_for('bill.sales') }}">
+
                         {{ form.hidden_tag() }}
+                        {{ form.csrf_token }}
+
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 {{ form.gst_no.label(class="form-control-label") }}
@@ -52,16 +55,16 @@
                                 <input type="number" class="form-control" id="totalBeforeTax" placeholder="Total Before Tax" readonly>
                             </div>
                             <div class="form-group col-md-2">
-                                {{ form.sgst.label(class="form-control-label") }}
-                                {{ form.sgst(class="form-control") }}
+                                {{ form.sgst.label(class="form-control-label", for="sgst") }}
+                                {{ form.sgst(class="form-control", id="sgst") }}
                             </div>
                             <div class="form-group col-md-2">
-                                {{ form.cgst.label(class="form-control-label") }}
-                                {{ form.cgst(class="form-control") }}
+                                {{ form.cgst.label(class="form-control-label", for="cgst") }}
+                                {{ form.cgst(class="form-control", id="cgst") }}
                             </div>
                             <div class="form-group col-md-2">
-                                {{ form.igst.label(class="form-control-label") }}
-                                {{ form.igst(class="form-control") }}
+                                {{ form.igst.label(class="form-control-label", for="igst") }}
+                                {{ form.igst(class="form-control", id="igst") }}
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="totalAfterTax">Total After Tax</label>
@@ -88,28 +91,25 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+    var csrf_token = "{{ csrf_token }}";
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
+</script>
 
     <script>
         let itemCount = 0;
         $(document).ready(function() {
             // Initialize autocomplete for existing items (if any)
-            initializeAutocomplete(".item");
-             // Block negative values for specified inputs (CGST, SGST, IGST)
-        $('body').on('input', '#sgst, #cgst, #igst', function () {
-            this.value = this.value.replace(/^-/, '');
-        });
-        // Fix auto data focus and selection when selecting date
-        // Using onFocus and onSelect options of jQuery UI datepicker if you want to use datepicker
-        $("#date").datepicker({
-            onSelect: function(dateText, inst) {
-                $(this).data('datepicker').inline = true;
-            },
-            onClose: function() {
-                $(this).data('datepicker').inline = false;
-            }
-        });
-        });
+            initializeAutocompleteForItem(`input[name='items-${itemCount}-name']`);
 
+ });
         function addItem() {
             itemCount++;
             const itemHTML = `
@@ -131,7 +131,7 @@
             $('#itemsSection').append(itemHTML);
 
 
-            initializeAutocomplete(`#item${itemCount}`); // Initialize autocomplete for the new item
+            initializeAutocompleteForItem(`input[name='items-${itemCount}-name']`); // Initialize autocomplete for the new item
         }
 
         function removeItem(itemId) {
@@ -140,57 +140,60 @@
             calculateTotalBeforeTax();
         }
 
-        function initializeAutocomplete(selector) {
-            let debounceTimer;
-            $(selector).autocomplete({
-                source: function(request, response) {
-                    if (debounceTimer) {
-                        clearTimeout(debounceTimer);
-                    }
-                    debounceTimer = setTimeout(function() {
-                        $.getJSON("/autocomplete", { q: request.term }, function(data) {
-                            response($.map(data.matching_results, function(item) {
-                                return {
-                                // Return the item name without adding <strong> tags
-                                label: item.name, // No highlight
+         function initializeAutocompleteForItem(selector) {
+        let debounceTimer;
+        $(selector).autocomplete({
+            source: function(request, response) {
+                if (debounceTimer) {
+                    clearTimeout(debounceTimer);
+                }
+                debounceTimer = setTimeout(function() {
+                    $.getJSON("/autocomplete", { q: request.term }, function(data) {
+                        response($.map(data.matching_results, function(item) {
+                            return {
+                                // Highlight matching part
+                                label: item.name.replace(new RegExp(request.term, "gi"), (match) => `<strong>${match}</strong>`),
                                 value: item.name
                             };
                         }));
-                        });
-                        }, 300); // Adjust debounce time as needed
-                },
-                minLength: 2,
-                select: function(event, ui) {
-                    console.log("Selected: " + ui.item.value);
-                }
-            }).on("autocompletecreate", function() {
-                $(this).data("ui-autocomplete")._renderItem = function(ul, item) {
-                    return $("<li>")
-                    .append($("<div>").text(item.label)) // Use jQuery's .text() to safely render text
-                    .appendTo(ul);
-                };
-            });
-        }
+                    });
+                }, 300); // Adjust debounce time as needed
+            },
+            minLength: 2,
+            select: function(event, ui) {
+                console.log("Selected: " + ui.item.value);
+            }
+        }).on("autocompletecreate", function() {
+            $(this).data("ui-autocomplete")._renderItem = function(ul, item) {
+                return $("<li>")
+                .append($("<div>").html(item.label)) // Use jQuery's .html() to render HTML
+                .appendTo(ul);
+            };
+        });
+    }
 
         function calculateTotalBeforeTax() {
             let totalBeforeTax = 0;
-            document.querySelectorAll('.form-row').forEach(itemRow => {
+            // Ensure you only select .form-row within a specific parent (e.g., #itemsSection)
+            document.querySelectorAll('#itemsSection .form-row').forEach(itemRow => {
                 const rate = itemRow.querySelector('.rate')?.value || 0;
                 const quantity = itemRow.querySelector('.quantity')?.value || 0;
                 totalBeforeTax += rate * quantity;
             });
             document.getElementById('totalBeforeTax').value = totalBeforeTax.toFixed(2);
-            calculateTax();
+            calculateTax(); // Make sure this is called after calculating totalBeforeTax
         }
 
         function calculateTax() {
             const totalBeforeTax = parseFloat(document.getElementById('totalBeforeTax').value) || 0;
-            const sgst = parseFloat(document.getElementById('sgst').value) || 0;
-            const cgst = parseFloat(document.getElementById('cgst').value) || 0;
-            const igst = parseFloat(document.getElementById('igst').value) || 0;
+            // Ensure your SGST, CGST, and IGST fields have IDs set to 'sgst', 'cgst', 'igst' respectively
+            const sgst = parseFloat(document.getElementById('sgst')?.value) || 0;
+            const cgst = parseFloat(document.getElementById('cgst')?.value) || 0;
+            const igst = parseFloat(document.getElementById('igst')?.value) || 0;
             const taxTotal = totalBeforeTax * (sgst + cgst + igst) / 100;
             document.getElementById('totalAfterTax').value = (totalBeforeTax + taxTotal).toFixed(2);
         }
+
     </script>
 
     <script>
