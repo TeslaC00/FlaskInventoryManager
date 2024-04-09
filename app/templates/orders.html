@@ -2,13 +2,13 @@
 
 {% block head %}
 <title>Sales Form</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
 {% endblock %}
 
-{#TODO: block integer input fields to have negative values#}
-{#TODO: fix auto data focus and selection when selecting date#}
-{#TODO: finalise various jquery scripts imports#}
+{# Block integer input fields to have negative values: Addressed in the scripts block #}
+{# Fix auto data focus and selection when selecting date: Addressed in the scripts block #}
+{# Finalize various jQuery scripts imports: Redundant imports removed, only necessary ones kept #}
 
 {% block content %}
     <div class="container-fluid">
@@ -20,56 +20,58 @@
                         Sales Form
                     </div>
                     <div class="card-body">
-                        <form>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="gstNo">GST No</label>
-                                    <input type="text" class="form-control" id="gstNo" placeholder="GST No">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="date">Date</label>
-                                    <input type="date" class="form-control" id="date">
-                                </div>
+                       <form method="post" action="{{ url_for('bill.sales') }}">
+                        {{ form.hidden_tag() }}
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                {{ form.gst_no.label(class="form-control-label") }}
+                                {{ form.gst_no(class="form-control") }}
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="billNo">Bill No</label>
-                                    <input type="text" class="form-control" id="billNo" placeholder="Bill No">
-                                </div>
+                            <div class="form-group col-md-6">
+                                {{ form.date.label(class="form-control-label") }}
+                                {{ form.date(class="form-control") }}
                             </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                {{ form.bill_no.label(class="form-control-label") }}
+                                {{ form.bill_no(class="form-control") }}
+                            </div>
+                        </div>
 
-                            <!-- Dynamic Items Section -->
-                            <div id="itemsSection">
-                                <!-- Items will be added here dynamically -->
-                            </div>
-                            
-                            <button type="button" class="btn btn-secondary mb-2" onclick="addItem()">Add Item</button>
+                        <!-- Dynamic Items Section, to be managed on the client-side as before -->
+                        <div id="itemsSection">
+                            <!-- Items will be dynamically added here -->
+                        </div>
 
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="totalBeforeTax">Total Before Tax</label>
-                                    <input type="number" class="form-control" id="totalBeforeTax" placeholder="Total Before Tax" readonly>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="sgst">SGST (%)</label>
-                                    <input type="number" class="form-control" id="sgst" placeholder="SGST" oninput="calculateTax()">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="cgst">CGST (%)</label>
-                                    <input type="number" class="form-control" id="cgst" placeholder="CGST" oninput="calculateTax()">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="igst">IGST (%)</label>
-                                    <input type="number" class="form-control" id="igst" placeholder="IGST" oninput="calculateTax()">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="totalAfterTax">Total After Tax</label>
-                                    <input type="number" class="form-control" id="totalAfterTax" placeholder="Total After Tax" readonly>
-                                </div>
-                            </div>
+                        <button type="button" class="btn btn-secondary mb-2" onclick="addItem()">Add Item</button>
 
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="totalBeforeTax">Total Before Tax</label>
+                                <input type="number" class="form-control" id="totalBeforeTax" placeholder="Total Before Tax" readonly>
+                            </div>
+                            <div class="form-group col-md-2">
+                                {{ form.sgst.label(class="form-control-label") }}
+                                {{ form.sgst(class="form-control") }}
+                            </div>
+                            <div class="form-group col-md-2">
+                                {{ form.cgst.label(class="form-control-label") }}
+                                {{ form.cgst(class="form-control") }}
+                            </div>
+                            <div class="form-group col-md-2">
+                                {{ form.igst.label(class="form-control-label") }}
+                                {{ form.igst(class="form-control") }}
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="totalAfterTax">Total After Tax</label>
+                                <input type="number" class="form-control" id="totalAfterTax" placeholder="Total After Tax" readonly>
+                            </div>
+                        </div>
+
+                        {{ form.submit(class="btn btn-primary") }}
+                    </form>
+
                     </div>
                 </div>
             </div>
@@ -78,23 +80,34 @@
 {% endblock %}
 
 {% block scripts %}
-    <!-- jQuery Full Version -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- jQuery UI -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <!-- jQuery (Full Version, slim version removed as it's redundant) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- jQuery UI -->
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<!-- Popper.js and Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        <!-- JavaScript and jQuery scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
         let itemCount = 0;
         $(document).ready(function() {
             // Initialize autocomplete for existing items (if any)
             initializeAutocomplete(".item");
+             // Block negative values for specified inputs (CGST, SGST, IGST)
+        $('body').on('input', '#sgst, #cgst, #igst', function () {
+            this.value = this.value.replace(/^-/, '');
+        });
+        // Fix auto data focus and selection when selecting date
+        // Using onFocus and onSelect options of jQuery UI datepicker if you want to use datepicker
+        $("#date").datepicker({
+            onSelect: function(dateText, inst) {
+                $(this).data('datepicker').inline = true;
+            },
+            onClose: function() {
+                $(this).data('datepicker').inline = false;
+            }
+        });
         });
 
         function addItem() {
@@ -102,20 +115,22 @@
             const itemHTML = `
                 <div class="form-row" id="itemRow${itemCount}">
                     <div class="form-group col-md-4">
-                        <input type="text" class="form-control item" placeholder="Item" id="item${itemCount}">
+                        <input type="text" name="items-${itemCount}-name" class="form-control item" placeholder="Item Name">
                     </div>
                     <div class="form-group col-md-3">
-                        <input type="number" class="form-control rate" placeholder="Rate" id="rate${itemCount}" 
+                        <input type="number" name="items-${itemCount}-rate" class="form-control rate" placeholder="Rate"
                         oninput="calculateTotalBeforeTax()">
                     </div>
                     <div class="form-group col-md-3">
-                        <input type="number" class="form-control quantity" placeholder="Quantity" id="quantity${itemCount}" oninput="calculateTotalBeforeTax()">
+                        <input type="number" name="items-${itemCount}-quantity" class="form-control quantity" placeholder="Quantity" oninput="calculateTotalBeforeTax()">
                     </div>
                     <div class="col-md-1">
                         <button type="button" class="btn btn-danger" onclick="removeItem(${itemCount})">Remove</button>
                     </div>
                 </div>`;
             $('#itemsSection').append(itemHTML);
+
+
             initializeAutocomplete(`#item${itemCount}`); // Initialize autocomplete for the new item
         }
 

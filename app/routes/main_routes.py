@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template, request, jsonify
 from flask_login import login_required
 from sqlalchemy import text
+from typing_extensions import deprecated
 
 from app.database import db
 from app.models import Product, Material, User
@@ -39,17 +40,17 @@ def analysis():
     """
     return render_template('analysis.html')
 
-
-@main_routes.route('/orders/')
-@login_required
-def orders():
-    """
-    Serves the orders page of the application. Requires user to be logged in.
-
-    Returns:
-    - The rendered orders.html template.
-    """
-    return render_template('orders.html')
+# @deprecated(1)
+# @main_routes.route('/orders/')
+# @login_required
+# def orders():
+#     """
+#     Serves the orders page of the application. Requires user to be logged in.
+#
+#     Returns:
+#     - The rendered orders.html template.
+#     """
+#     return render_template('orders.html')
 
 
 # TODO: add content to audits page

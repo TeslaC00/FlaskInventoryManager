@@ -1,4 +1,5 @@
 from app.routes.auth import auth_bp
+from app.routes.bill_form_routes import bill
 from app.routes.buyer_routes import buyer_routes
 from app.routes.challan_routes import challan
 from app.routes.inventory_routes import inventory_bp
@@ -41,3 +42,4 @@ def register_routes(app):
     app.register_blueprint(material_routes)
     app.register_blueprint(product_routes)
     app.register_blueprint(challan)
+    app.register_blueprint(bill)
