@@ -15,7 +15,7 @@ def add_challan():
     if request.method == 'POST' and form.validate_on_submit():
         # Process validated form data
         log.info('validated form')
-        c = Challan(
+        challan = Challan(
             challan_no=form.challan_no.data,
             supplier_id=form.supplier_id.data,
             material_name=form.supplier_name.data,
@@ -23,7 +23,7 @@ def add_challan():
             quantity=1,
             date=form.date.data,
         )
-        log.info(c.to_dict())
+        log.info(challan.to_dict())
         for multipleFields in form.items.entries:
             log.info(multipleFields.data)
 
@@ -33,4 +33,8 @@ def add_challan():
 
     return render_template('addentry.html', form=form)
 
-# @challan.
+@challan.route('/api/challan', methods=['GET'])
+def get_challan():
+    challans = Challan.query.all()
+    log.info(f'Fetched all Products')
+    return render_template("show_challans.html", challans=challans)

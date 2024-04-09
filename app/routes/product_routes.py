@@ -1,4 +1,4 @@
-from flask import Blueprint, request, flash, jsonify
+from flask import Blueprint, request, flash, jsonify, render_template, redirect, url_for
 
 from app.database import db
 from app.forms.product_form import ProductForm
@@ -22,13 +22,16 @@ def add_product():
         db.session.commit()
         logger.info(f'Product {product.name} added to database')
         flash(f'Product {product.name} added to database', 'success')
+        return redirect(url_for('product.add_product'))
+    return render_template('product.html', form=form)
 
 
 @product_routes.route('/api/products', methods=['GET'])
 def get_products():
     products = Product.query.all()
     logger.info(f'Fetched all Products')
-    return jsonify(products)
+    return render_template("show_products.html", products=products)
+    # return jsonify(products)
 
 
 @product_routes.route('/api/product/<string:name>', methods=['GET'])

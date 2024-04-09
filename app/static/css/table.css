@@ -1,0 +1,44 @@
+.container {
+    position: relative;
+}
+
+.add-new-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 20px; /* Adjust as needed */
+    margin-right: 20px; /* Adjust as needed */
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px;
+}
+
+table th {
+    padding: 8px;
+    border: 1px solid #ddd;
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tbody tr:hover {
+    background-color: #ddd;
+}

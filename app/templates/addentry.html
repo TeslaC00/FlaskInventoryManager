@@ -124,7 +124,7 @@
                 let itemHTML = `<div class="item-group mb-2" id="item-${itemIndex}">
             <input type="text" name="items-${itemIndex}-name" placeholder="Raw Material" required class="form-control mb-2">
             <input type="number" step="any" name="items-${itemIndex}-price" placeholder="Price" required class="form-control mb-2">
-            <input type="number" name="items-${itemIndex}-quantity" placeholder="Quantity" required class="form-control mb-2">
+            <input type="number" name="items-${itemIndex}-quantity" placeholder="Quantity" required class="form-control mb-5">
             <button type="button" onclick="removeItem(${itemIndex})" class="btn btn-danger">Remove</button>
         </div>`;
                 container.insertAdjacentHTML('beforeend', itemHTML);

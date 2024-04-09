@@ -27,7 +27,8 @@ def add_supplier():
 def get_suppliers():
     suppliers = Supplier.query.all()
     logger.info('Fetched all suppliers')
-    return jsonify(suppliers)
+    return render_template('show_suppliers.html', suppliers=suppliers)
+    # return jsonify(suppliers)
 
 
 @supplier_routes.route('/api/supplier/<int:supplier_id>', methods=['GET'])

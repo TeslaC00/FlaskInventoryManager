@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css')}}">
+    <title>Challan Table</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Challan Table</h1>
+    <a href="{{ url_for('challan.add_challan') }}" class="add-new-btn">Add New Challan</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Supplier ID</th>
+                <th>Supplier Name</th>
+                <th>Challan No.</th>
+                <th>Date</th>
+                <th>Items</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for challan in challans %}
+            <tr>
+                <td>{{ challan.supplier_id }}</td>
+                <td>{{ challan.supplier_name }}</td>
+                <td>{{ challan.challan_no }}</td>
+                <td>{{ challan.date }}</td>
+                <td>
+                    <ul>
+                        {% for item in challan.items %}
+                        <li>{{ item.name }} - {{ item.quantity }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
