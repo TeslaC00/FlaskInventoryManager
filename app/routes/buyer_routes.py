@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, flash
+from flask import Blueprint, jsonify, request, flash, render_template, redirect, url_for
 
 from app.database import db
 from app.forms.buyer_form import BuyerForm
@@ -22,13 +22,16 @@ def add_buyer():
         db.session.commit()
         logger.info(f'Added Buyer {buyer.to_dict()} to buyer table')
         flash(f'New Buyer {buyer.name} Added', 'success')
+        return redirect(url_for('buyer.add_product'))
+    return render_template('buyer.html', form=form)
 
 
 @buyer_routes.route('/api/buyers', methods=['GET'])
 def get_buyers():
     buyers = Buyer.query.all()
     logger.info('Fetched all buyers')
-    return jsonify(buyers)
+    return render_template("show_buyers.html", buyers=buyers)
+    # return jsonify(buyers)
 
 
 @buyer_routes.route('/api/buyer/<int:buyer_id>', methods=['GET'])

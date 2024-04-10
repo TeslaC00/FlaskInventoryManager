@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css')}}">
+    <title>Buyer Table</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Buyer Table</h1>
+    <a href="{{ url_for('buyer.add_buyer') }}" class="add-new-btn">Add New Buyer</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Buyer Name</th>
+                <th>GST No</th>
+                <th>State Code</th>
+                <th>State Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for buyer in buyers %}
+            <tr>
+                <td>{{ buyer.name }}</td>
+                <td>{{ buyer.GST_No }}</td>
+                <td>{{ buyer.state_code }}</td>
+                <td>{{ buyer.state_name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,4 +1,4 @@
-from flask import Blueprint, request, flash, jsonify
+from flask import Blueprint, request, flash, jsonify, render_template, redirect, url_for
 
 from app.database import db
 from app.forms.material_form import MaterialForm
@@ -21,13 +21,16 @@ def add_material():
         db.session.commit()
         logger.info(f'Material {material.to_dict()} added to database')
         flash(f'Material {material.name} added to database', 'success')
+        return redirect(url_for('material.add_product'))
+    return render_template('material.html', form=form)
 
 
 @material_routes.route('/api/materials', methods=['GET'])
 def get_materials():
     materials = Material.query.all()
     logger.info(f'Fetched all materials')
-    return jsonify(materials)
+    return render_template('show_materials.html', materials=materials)
+    # return jsonify(materials)
 
 
 @material_routes.route('/api/material/<string:name>', methods=['GET'])

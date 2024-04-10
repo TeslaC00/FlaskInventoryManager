@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>New Material</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/card.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="container mt-5">
+        <div class="col-md-9 mx-auto col-lg-10 px-md-4">
+            <div class="card">
+                <div class="card-header">New Material</div>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <div class="card-body">
+                    <div class="form-container">
+                        <form method="post" action="{{ url_for('material.add_material') }}">
+                            {{ form.hidden_tag() }}
+                            <div class="mb-3">
+                                <div class="input-container">
+                                    {{ form.name.label(class="form-label") }}
+                                    {{ form.name(class="form-control") }}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="input-container">
+                                    {{ form.unit_type.label(class="form-label") }}
+                                    {{ form.unit_type(class="form-control") }}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="input-container">
+                                    {{ form.quantity.label(class="form-label") }}
+                                    {{ form.quantity(class="form-control") }}
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">{{ form.submit }}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
