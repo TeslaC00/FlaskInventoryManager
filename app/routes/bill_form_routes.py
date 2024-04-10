@@ -29,7 +29,7 @@ def sales():
         for i in items:
             log.info(f"{i['item_id']}: {i['rate']} {i['quantity']}")
 
-        return redirect(url_for('success'))  # Assuming you have a success endpoint
+        return redirect(url_for('bill.sales'))  # Assuming you have a success endpoint
     else:
         log.info(form.errors)
     return render_template('orders.html', form=form,  csrf_token=csrf_token)

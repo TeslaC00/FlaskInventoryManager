@@ -1,9 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, IntegerField, SubmitField, FieldList, FormField, DecimalField
+from wtforms.form import Form
 from wtforms.validators import DataRequired, NumberRange, Optional
 
 
-class ItemForm(FlaskForm):
+class ItemForm(Form):
     # Assuming items have a name, rate, and quantity
     name = StringField('Item Name', validators=[DataRequired()])
     rate = DecimalField('Rate', validators=[DataRequired()])
