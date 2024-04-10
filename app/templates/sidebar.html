@@ -40,44 +40,10 @@
             </a>
         </li>
         <li class="sidebar-item">
-            {#TODO: why is there href here when it is not supposed to lead anywhere#}
-            <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-               data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
+            <a href="{{ url_for('bill.sales') }}" class="sidebar-link">
                 <i class="lni lni-layout"></i>
                 <span>Orders</span>
             </a>
-            <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                <li class="sidebar-item">
-                    {#TODO: why is there href here when it is not supposed to lead anywhere#}
-                    {#TODO: what is new client and existing client, why they both have separate inventory tabs#}
-                    <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
-                       data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
-                        New Client
-                    </a>
-                    <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
-                        <li class="sidebar-item">
-                            <a href="{{ url_for('bill.sales') }}" class="sidebar-link">Incoming</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ url_for('bill.sales') }}" class="sidebar-link">Outgoing</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
-                       data-bs-target="#multi-two1" aria-expanded="false" aria-controls="multi-two1">
-                        Existing Client
-                    </a>
-                    <ul id="multi-two1" class="sidebar-dropdown list-unstyled collapse">
-                        <li class="sidebar-item">
-                            <a href="{{ url_for('bill.sales') }}" class="sidebar-link">Incoming</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ url_for('bill.sales') }}" class="sidebar-link">Outgoing</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
         </li>
         <li class="sidebar-item">
             <a href="{{ url_for('main.write_off') }}" class="sidebar-link">
