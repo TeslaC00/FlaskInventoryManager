@@ -33,8 +33,4 @@ def add_challan():
 
     return render_template('addentry.html', form=form)
 
-@challan.route('/api/challan', methods=['GET'])
-def get_challan():
-    challans = Challan.query.all()
-    log.info(f'Fetched all Products')
-    return render_template("show_challans.html", challans=challans)
+

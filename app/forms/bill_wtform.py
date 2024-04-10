@@ -1,6 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, IntegerField, SubmitField, FieldList, FormField, DecimalField
-from wtforms.form import Form
+from wtforms import StringField, DateField, IntegerField, SubmitField, FieldList, FormField, DecimalField, Form
 from wtforms.validators import DataRequired, NumberRange, Optional
 
 
@@ -19,7 +18,8 @@ class SalesForm(FlaskForm):
     items = FieldList(FormField(ItemForm), min_entries=1)  # Example with a single entry; adjust as needed
     sgst = DecimalField('SGST (%)', validators=[DataRequired(), NumberRange(min=0)])
     cgst = DecimalField('CGST (%)', validators=[DataRequired(), NumberRange(min=0)])
-    igst = DecimalField('IGST (%)', validators=[Optional(), NumberRange(min=-1)])  # Making the field optional when its value is 0
+    igst = DecimalField('IGST (%)',
+                        validators=[Optional(), NumberRange(min=-1)])  # Making the field optional when its value is 0
     submit = SubmitField('Submit')
 
 # Note: You might need to adapt the HTML generation to integrate with Flask-WTForms properly,
