@@ -25,6 +25,19 @@ def add_material():
     return render_template('material.html', form=form)
 
 
+@material_routes.route('/api/material/<string:name>', methods=['GET', 'POST'])
+def edit_material(name):
+    material = Material.query.filter_by(name=name).first_or_404()
+    form = MaterialForm(obj=material)
+    if form.validate_on_submit():
+        form.populate_obj(material)
+        db.session.commit()
+        logger.info(f'Material {material.to_dict()} updated in database')
+        flash(f'Material {material.name} updated in database', 'success')
+        return redirect(url_for('material.add_product'))
+    return render_template('updel.html', form=form)
+
+
 @material_routes.route('/api/materials', methods=['GET'])
 def get_materials():
     materials = Material.query.all()
@@ -44,17 +57,17 @@ def get_material(name):
         flash(f'Materia {name} not found', 'error')
 
 
-@material_routes.route('/api/material/<string:name>', methods=['GET', 'POST'])
-def update_material(name):
-    material = Material.query.get(name)
-    form = MaterialForm(obj=material)
-    form.name.render_kw = {'readonly': True}
-    if form.validate_on_submit() and request.method == 'POST':
-        logger.info(f'Updating material {material.to_dict()}')
-        form.populate_obj(material)
-        db.session.commit()
-        logger.info(f'Material {material.to_dict()} updated')
-        flash(f'Material {material.name} updated', 'success')
+# @material_routes.route('/api/material/<string:name>', methods=['GET', 'POST'])
+# def update_material(name):
+#     material = Material.query.get(name)
+#     form = MaterialForm(obj=material)
+#     form.name.render_kw = {'readonly': True}
+#     if form.validate_on_submit() and request.method == 'POST':
+#         logger.info(f'Updating material {material.to_dict()}')
+#         form.populate_obj(material)
+#         db.session.commit()
+#         logger.info(f'Material {material.to_dict()} updated')
+#         flash(f'Material {material.name} updated', 'success')
 
 
 @material_routes.route('/api/material/<string:name>', methods=['POST'])

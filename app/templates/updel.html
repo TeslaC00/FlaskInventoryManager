@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>New Material</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/card.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="container mt-5">
+            <div class="col-md-9 mx-auto col-lg-10 px-md-4">
+                <div class="card">
+                    <div class="card-header">Material Details</div>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <div class="card-body">
+                        <div class="form-container">
+                            <form method="post" action="{{ url_for('material.add_material') }}">
+                                {{ form.hidden_tag() }}
+                                <div class="mb-3">
+                                    <div class="input-container">
+                                        {{ form.name.label(class="form-label") }}
+                                        {{ form.name(class="form-control") }}
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-container">
+                                        {{ form.unit_type.label(class="form-label") }}
+                                        {{ form.unit_type(class="form-control") }}
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-container">
+                                        {{ form.quantity.label(class="form-label") }}
+                                        {{ form.quantity(class="form-control") }}
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal2">
+                                    Edit
+                                </button>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">
+                                    Delete
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Deletion</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="button" class="btn btn-danger">DELETE!</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="exampleModal2" tabindex="-1"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editing</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="button" class="btn btn-danger">Edit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
