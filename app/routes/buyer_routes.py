@@ -22,7 +22,7 @@ def add_buyer():
         db.session.commit()
         logger.info(f'Added Buyer {buyer.to_dict()} to buyer table')
         flash(f'New Buyer {buyer.name} Added', 'success')
-        return redirect(url_for('buyer.add_product'))
+        return redirect(url_for('buyer.get_buyers'))
     return render_template('buyer.html', form=form)
 
 
@@ -54,7 +54,7 @@ def update_buyer(buyer_id):
         form.populate_obj(buyer)
         db.session.commit()
         logger.info(f'Updated Buyer {buyer.to_dict()}')
-        flash(f'Updated Buyer {buyer.name}', 'success')
+        flash(f'Updated Buyer {buyer.item_name}', 'success')
 
 
 @buyer_routes.route('/api/buyer/<int:buyer_id>', methods=['POST'])
@@ -64,7 +64,7 @@ def delete_buyer(buyer_id):
         db.session.delete(buyer)
         db.session.commit()
         logger.info(f'Deleted Buyer {buyer.to_dict()}')
-        flash(f'Buyer {buyer.name} deleted', 'success')
+        flash(f'Buyer {buyer.item_name} deleted', 'success')
     else:
         logger.error(f'Buyer {buyer_id} not found')
         flash(f'Buyer {buyer_id} not found', 'error')

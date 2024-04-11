@@ -10,12 +10,16 @@ class MaterialScrap(db.Model):
 
     Attributes:
         __tablename__ (str): Specifies the name of the table in the database for the Raw_Materials_Scrap model.
-        date (db.Column): The date on which the scrap was recorded. It is of type Date and cannot be null, providing a temporal reference for scrap records.
-        material_name (db.Column): A foreign key linking to the Raw_Material model based on the raw_material_name. It is a string of maximum length 50, denoting the name of the raw material that generated the scrap, and cannot be null.
-        type_of_scrap (db.Column): Specifies the type of scrap generated. It is a string of maximum length 3, and cannot be null. This might denote different categories or conditions of scrap.
-        quantity (db.Column): Stores the quantity of the scrap generated. It is of type Integer and cannot be null, representing the volume or amount of waste produced.
-        material (db.relationship): Defines a relationship between the Raw_Materials_Scrap and Raw_Material models. This allows navigation from a given Raw_Materials_Scrap instance to its associated Raw_Material.
-        __table_args__ (tuple): Defines additional table options. Here, it specifies a composite primary key consisting of 'date' and 'raw_material_name', ensuring unique scrap records for each raw material on each date.
+        date (Column): The date on which the scrap was recorded. It is of type Date and cannot be null, providing a
+        temporal reference for scrap records.
+        material_name (Column): A foreign key linking to the Raw_Material model based on the raw_material_name. It is a
+        string of maximum length 50, denoting the name of the raw material that generated the scrap, and cannot be null.
+        type_of_scrap (Column): Specifies the type of scrap generated. It is a string of maximum length 3, and cannot
+        be null. This might denote different categories or conditions of scrap.
+        quantity (Column): Stores the quantity of the scrap generated. It is of type Integer and cannot be null,
+        representing the volume or amount of waste produced.
+        __table_args__ (tuple): Defines additional table options. Here, it specifies a composite primary key consisting
+        of 'date' and 'raw_material_name', ensuring unique scrap records for each raw material on each date.
 
     The Raw_Materials_Scrap model includes a method `to_dict` which converts the scrap record into a dictionary,
     facilitating easy JSON serialization for API responses or other purposes.

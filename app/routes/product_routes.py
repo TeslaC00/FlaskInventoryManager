@@ -55,7 +55,7 @@ def update_product(name):
         form.populate_obj(product)
         db.session.commit()
         logger.info(f'Product {product.to_dict()} updated')
-        flash(f'Product {product.name} updated', 'success')
+        flash(f'Product {product.item_name} updated', 'success')
 
 
 @product_routes.route('/api/product/<string:name>', methods=['POST'])
@@ -65,7 +65,7 @@ def delete_product(name):
         db.session.delete(product)
         db.session.commit()
         logger.info(f'Deleted Product {product.to_dict()}')
-        flash(f'Product {product.name} deleted', 'success')
+        flash(f'Product {product.item_name} deleted', 'success')
     else:
         logger.error(f'Product {name} not found')
         flash(f'Product {name} not found', 'error')

@@ -86,7 +86,7 @@ Add the following code to your create_app in init.py.
 ```python
 def create_app():
     # Load local configurations from config.py
-    app.config.from_pyfile('config.py')
+    app.config.from_pyfile()
 
     # Initialize database
     db.init_app(app)

@@ -73,6 +73,7 @@ class AuditLog(db.Model):
                          nullable=False)
     change_timestamp = db.Column(db.DateTime, nullable=False, default=func.now())
     action_type = db.Column(db.Enum(ActionType), nullable=False)
+    remarks = db.Column(db.Text, nullable=True)
 
     def to_dict(self):
         return {
@@ -84,7 +85,8 @@ class AuditLog(db.Model):
             'new_value': self.new_value,
             'username': self.username,
             'change_timestamp': self.change_timestamp,
-            'action_type': self.action_type
+            'action_type': self.action_type,
+            'remarks': self.remarks
         }
 
     @dispatch()

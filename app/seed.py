@@ -1,11 +1,14 @@
 from json import load
 
+from dotenv import load_dotenv
+
 from app import create_app
 from app.database import db
 from app.logger import logger as log
 from app.models import Buyer, Supplier, Material, Product, Bill, Challan, ProductionLog, \
-    ProductReturned, MaterialPartNo, User, WriteOff, ProductScrap, MaterialScrap
+    ProductReturned, MaterialPartNo, User, ProductScrap, MaterialScrap
 
+load_dotenv()
 create_app().app_context().push()
 
 
@@ -89,9 +92,6 @@ def seed():
         db.session.add(record)
 
     log.info(f'Added ProductionLog records')
-
-    record = WriteOff(write_offs="A write off that has written off the inventory")
-    db.session.add(record)
 
     db.session.commit()
 

@@ -34,6 +34,7 @@ class Challan(db.Model):
     price = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     date = db.Column(db.Date, nullable=False)
+    remarks = db.Column(db.Text, nullable=True)
     __table_args__ = (db.PrimaryKeyConstraint(date, supplier_id, material_name, name='pk_challan'),)
 
     def to_dict(self):
@@ -51,4 +52,5 @@ class Challan(db.Model):
             'price': self.price,
             'quantity': self.quantity,
             'date': self.date,
+            'remarks': self.remarks,
         }
