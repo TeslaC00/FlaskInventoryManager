@@ -10,11 +10,11 @@ class Supplier(db.Model):
 
     Attributes:
         __tablename__ (str): Specifies the name of the table in the database for the Supplier model.
-        supplier_name (db.Column): Stores the name of the supplier. It is a string of maximum length 50 characters and cannot be null.
+        name (db.Column): Stores the name of the supplier. It is a string of maximum length 50 characters and cannot be null.
         GST_No (db.Column): Holds the GST (Goods and Services Tax) number of the supplier, which is a unique identifier for businesses in India. It is a string of length 15 characters and cannot be null.
         state_code (db.Column): Contains the state code where the supplier is located. It is an integer representing a specific state within the country, and cannot be null.
         state_name (db.Column): The name of the state where the supplier operates. It is a string of maximum length 30 characters and cannot be null.
-        supplier_id (db.Column): A unique identifier for the supplier within the database. It is an integer and serves as the primary key for the Supplier table.
+        id (db.Column): A unique identifier for the supplier within the database. It is an integer and serves as the primary key for the Supplier table.
 
     The Supplier model includes a method `to_dict` which converts the supplier entity into a dictionary,
     facilitating easy JSON serialization for API responses or other purposes.
@@ -24,12 +24,15 @@ class Supplier(db.Model):
         'supplier_name', 'GST_No', 'state_code', 'state_name', and 'supplier_id'.
     """
 
-    __tablename__ = 'Supplier'
-    supplier_name = db.Column(db.String(50), nullable=False)
+    __tablename__ = 'supplier'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
     GST_No = db.Column(db.String(15), nullable=False)
     state_code = db.Column(db.Integer, nullable=False)
     state_name = db.Column(db.String(30), nullable=False)
-    supplier_id = db.Column(db.Integer, primary_key=True)
+    challans = db.relationship('Challan', backref='supplier')
+    material_part_nos = db.relationship('MaterialPartNo', backref='supplier')
+    material_prices = db.relationship('MaterialPrice', backref='supplier')
 
     def to_dict(self):
         """
@@ -40,9 +43,9 @@ class Supplier(db.Model):
             'supplier_name', 'GST_No', 'state_code', 'state_name', and 'supplier_id'.
         """
         return {
-            'supplier_name': self.supplier_name,
+            'supplier_id': self.id,
+            'supplier_name': self.name,
             'GST_No': self.GST_No,
             'state_code': self.state_code,
             'state_name': self.state_name,
-            'supplier_id': self.supplier_id
         }

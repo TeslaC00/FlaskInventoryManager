@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
+    <title>Material Table</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Material Table</h1>
+        <a href="{{ url_for('material.add_material') }}" class="add-new-btn" style="margin-top: 0">Add New Material</a>
+        <div class="navbar-nav-scroll">
+            <table class="table table-hover">
+                <thead class="table-light sticky-lg-top">
+                <tr>
+                    <th>Material Name</th>
+                    <th>Unit Type</th>
+                    <th>Quantity</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                {% for material in materials %}
+                    <tr>
+                        <td><a class="link-info"
+                               href="{{ url_for('material.edit_material', name=material.name) }}">{{ material.name }}</a></td>
+                        <td>{{ material.unit_type }}</td>
+                        <td>{{ material.quantity }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,6 +1,9 @@
+import warnings
+
 from app.database import db
 
 
+@DeprecationWarning
 class Raw_Material_Records(db.Model):
     """
     Represents a record of raw material usage within a relational database, modeled using SQLAlchemy ORM
@@ -23,12 +26,16 @@ class Raw_Material_Records(db.Model):
         including 'date', 'quantity_used', and 'raw_material_name'.
     """
 
-    __tablename__ = 'Raw_Material_Records'
+    __tablename__ = 'raw_material_records'
     date = db.Column(db.Date, nullable=False)
     quantity_used = db.Column(db.Integer, nullable=False)
-    raw_material_name = db.Column(db.String(50), db.ForeignKey('Raw_Material.raw_material_name'))
-    raw_material = db.relationship('Raw_Material', backref='raw_material_records')
+    raw_material_name = db.Column(db.String(50), db.ForeignKey('raw_material.raw_material_name'))
+    raw_material = db.relationship('raw_material', backref='raw_material_records')
     __table_args__ = (db.PrimaryKeyConstraint('date', 'raw_material_name'),)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        warnings.warn("YourModel is deprecated. Please migrate to a new model.", DeprecationWarning)
 
     def to_dict(self):
         """

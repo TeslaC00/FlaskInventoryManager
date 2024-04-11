@@ -1,0 +1,103 @@
+{#TODO: add hover over icons with their name#}
+{#TODO: stop the logout icon from moving beyond the screen when data on page extends page length#}
+
+<aside id="sidebar">
+    <div class="d-flex">
+        <button class="toggle-btn" type="button">
+            <i class="lni lni-grid-alt"></i>
+        </button>
+        <div class="sidebar-logo">
+            <a href="{{ url_for('main.root') }}">Database</a>
+        </div>
+    </div>
+    <ul class="sidebar-nav">
+        <li class="sidebar-item">
+            <a href="{{ url_for('main.profile') }}" class="sidebar-link">
+                <i class="lni lni-user"></i>
+                <span>Profile</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            {#TODO: why is there href here when it is not supposed to lead anywhere#}
+            <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+               data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                <i class="lni lni-protection"></i>
+                <span>Inventory</span>
+            </a>
+            <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                <li class="sidebar-item">
+                    <a href="{{ url_for('inventory.show_inv_raw') }}" class="sidebar-link">Raw Materials</a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ url_for('inventory.show_inv_prod') }}" class="sidebar-link">Produced Goods</a>
+                </li>
+            </ul>
+        </li>
+        <li class="sidebar-item">
+            <a href="{{ url_for('main.analysis') }}" class="sidebar-link">
+                <i class="lni lni-agenda"></i>
+                <span>Analysis</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{{ url_for('bill.sales') }}" class="sidebar-link">
+                <i class="lni lni-layout"></i>
+                <span>Orders</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{{ url_for('main.write_off') }}" class="sidebar-link">
+                <i class="lni lni-popup"></i>
+                <span>WriteOff Records</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{{ url_for('challan.add_challan') }}" class="sidebar-link">
+                <i class="lni lni-popup"></i>
+                <span>Add Entry</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{{ url_for('supplier.get_suppliers') }}" class="sidebar-link">
+                <i class="lni lni-popup"></i>
+                <span>Supplier</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{{ url_for('buyer.get_buyers') }}" class="sidebar-link">
+                <i class="lni lni-popup"></i>
+                <span>Buyer</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{{ url_for('material.get_materials') }}" class="sidebar-link">
+                <i class="lni lni-popup"></i>
+                <span>Material</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{{ url_for('product.get_products') }}" class="sidebar-link">
+                <i class="lni lni-popup"></i>
+                <span>Product</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{{ url_for('main.audits') }}" class="sidebar-link">
+                <i class="lni lni-popup"></i>
+                <span>Audit Log</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{{ url_for('main.settings') }}" class="sidebar-link">
+                <i class="lni lni-cog"></i>
+                <span>Settings</span>
+            </a>
+        </li>
+    </ul>
+    <div class="sidebar-footer">
+        <a href="{{ url_for('auth.logout') }}" class="sidebar-link">
+            <i class="lni lni-exit"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+</aside>

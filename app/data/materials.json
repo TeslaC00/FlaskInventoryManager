@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Frozen",
+    "unit_type": "S",
+    "quantity": 878
+  },
+  {
+    "name": "Bronze",
+    "unit_type": "sr",
+    "quantity": 303
+  },
+  {
+    "name": "Wooden",
+    "unit_type": "Bq",
+    "quantity": 171
+  },
+  {
+    "name": "Steel",
+    "unit_type": "Wb",
+    "quantity": 801
+  },
+  {
+    "name": "Soft",
+    "unit_type": "W",
+    "quantity": 170
+  },
+  {
+    "name": "Fresh",
+    "unit_type": "T",
+    "quantity": 131
+  },
+  {
+    "name": "Plastic",
+    "unit_type": "N",
+    "quantity": 771
+  },
+  {
+    "name": "Metal",
+    "unit_type": "sr",
+    "quantity": 100
+  },
+  {
+    "name": "Granite",
+    "unit_type": "C",
+    "quantity": 692
+  },
+  {
+    "name": "Concrete",
+    "unit_type": "J",
+    "quantity": 119
+  },
+  {
+    "name": "Rubber",
+    "unit_type": "N",
+    "quantity": 525
+  },
+  {
+    "name": "Cotton",
+    "unit_type": "Gy",
+    "quantity": 524
+  }
+]

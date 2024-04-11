@@ -1,6 +1,12 @@
 from app.routes.auth import auth_bp
+from app.routes.bill_form_routes import bill
+from app.routes.buyer_routes import buyer_routes
+from app.routes.challan_routes import challan
 from app.routes.inventory_routes import inventory_bp
 from app.routes.main_routes import main_routes
+from app.routes.material_route import material_routes
+from app.routes.product_routes import product_routes
+from app.routes.supplier_routes import supplier_routes
 
 
 def register_routes(app):
@@ -30,4 +36,10 @@ def register_routes(app):
     """
     app.register_blueprint(auth_bp)
     app.register_blueprint(main_routes)
-    app.register_blueprint(inventory_bp, url_prefix='/inventory')
+    app.register_blueprint(inventory_bp)
+    app.register_blueprint(supplier_routes)
+    app.register_blueprint(buyer_routes)
+    app.register_blueprint(material_routes)
+    app.register_blueprint(product_routes)
+    app.register_blueprint(challan)
+    app.register_blueprint(bill)
