@@ -24,6 +24,7 @@ class Bill(db.Model):
     product_name = db.Column(db.String(50), db.ForeignKey('product.name', name='fk_bill_product_name'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     date = db.Column(db.Date, nullable=False)
+    remarks = db.Column(db.Text, nullable=True)
     __table_args__ = (db.PrimaryKeyConstraint(date, buyer_id, product_name, name='pk_bill'),)
 
     def to_dict(self):
@@ -33,4 +34,5 @@ class Bill(db.Model):
             'product_name': self.product_name,
             'quantity': self.quantity,
             'date': self.date,
+            'remarks': self.remarks,
         }

@@ -9,28 +9,31 @@ challan = Blueprint('challan', __name__)
 
 @challan.route('/api/add_challan', methods=['GET', 'POST'])
 def add_challan():
-    form = PurchaseForm()
+    purchase_form = PurchaseForm()
     log.info('called Add challan')
 
-    if request.method == 'POST' and form.validate_on_submit():
-        # Process validated form data
-        log.info('validated form')
+    log.info(f'purchase_form submit: {purchase_form.submit}')
+    log.info(f'purchase_form validation: {purchase_form.validate()}')
+    log.info(f'purchase_form validation: {purchase_form.errors}')
+
+    if request.method == 'POST' and purchase_form.validate_on_submit():
+        # Process validated purchase_form data
+        log.info('validated purchase_form')
         challan = Challan(
-            challan_no=form.challan_no.data,
-            supplier_id=form.supplier_id.data,
-            material_name=form.supplier_name.data,
+            challan_no=purchase_form.challan_no.data,
+            supplier_id=purchase_form.supplier_id.data,
+            material_name=purchase_form.supplier_name.data,
             price=1,
             quantity=1,
-            date=form.date.data,
+            date=purchase_form.date.data,
         )
         log.info(challan.to_dict())
-        for multipleFields in form.items.entries:
-            log.info(multipleFields.data)
-
+        form_date = request.form.to_dict(flat=False)
+        log.info(form_date)
 
         # Redirect or inform of successful submission, etc.
         return 'Form Submitted'
 
-    return render_template('addentry.html', form=form)
+    return render_template('addentry.html', form=purchase_form)
 
 
