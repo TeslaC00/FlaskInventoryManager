@@ -1,9 +1,11 @@
 import os
 
 from flask import Flask
-from flask_migrate import Migrate
 
 from app.logger import logger
+
+
+# from flask_migrate import Migrate
 
 
 # Creates flask object
@@ -27,12 +29,12 @@ def create_app():
     db.init_app(app)
     logger.info('Initialized database')
     # Create tables
-    # with app.app_context():
-    #     db.create_all()
+    with app.app_context():
+        db.create_all()
 
     # Initialize database migration tool
-    Migrate(app, db)
-    logger.info('Initialized flask migrate')
+    # Migrate(app, db)
+    # logger.info('Initialized flask migrate')
 
     # Registering blueprints
     from app.routes import register_routes

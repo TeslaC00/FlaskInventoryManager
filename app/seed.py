@@ -1,11 +1,14 @@
 from json import load
 
+from dotenv import load_dotenv
+
 from app import create_app
 from app.database import db
 from app.logger import logger as log
 from app.models import Buyer, Supplier, Material, Product, Bill, Challan, ProductionLog, \
     ProductReturned, MaterialPartNo, User, ProductScrap, MaterialScrap
 
+load_dotenv()
 create_app().app_context().push()
 
 
