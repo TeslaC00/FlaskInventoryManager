@@ -12,6 +12,7 @@ function toggleDarkMode() {
 
 // Function to apply dark mode based on stored preference
 function applyDarkModeFromStorage() {
+    const darkswitch = document.getElementById("flexSwitchCheckDefault")
     const isDarkModeEnabled = JSON.parse(localStorage.getItem("darkModeEnabled"));
     const element = document.body;
     if (isDarkModeEnabled) {
@@ -19,6 +20,7 @@ function applyDarkModeFromStorage() {
     } else {
         element.dataset.bsTheme = "light";
     }
+    darkswitch.checked = isDarkModeEnabled;
 }
 
 // Apply dark mode preference when the page loads
