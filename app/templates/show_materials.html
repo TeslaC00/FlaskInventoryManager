@@ -10,6 +10,10 @@
 {% block content %}
     <div class="container">
         <h1>Material Table</h1>
+        <!-- Search Bar -->
+        <div class="input-group mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search...">
+        </div>
         <a href="{{ url_for('material.add_material') }}" class="add-new-btn" style="margin-top: 0">Add New Material</a>
         <div class="navbar-nav-scroll" style="margin-top: 10px">
             <table class="table table-hover">
@@ -20,7 +24,7 @@
                     <th>Quantity</th>
                 </tr>
                 </thead>
-                <tbody class="table-group-divider">
+                <tbody class="table-group-divider" id="materialTableBody">
                 {% for material in materials %}
                     <tr>
                         <td><a class="link-info"
