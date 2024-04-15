@@ -10,7 +10,7 @@ class Material(db.Model):
     Attributes:
         __tablename__ (str): Specifies the name of the table in the database for the Raw_Material model.
         name (db.Column): The name of the raw material, which serves as the primary key for the Raw_Material table. It is a non-nullable string of maximum length 50.
-        unit_type (db.Column): Specifies the unit of measure for the raw material (e.g., kg, liters). It is a non-nullable string of maximum length 10.
+        unit (db.Column): Specifies the unit of measure for the raw material (e.g., kg, liters). It is a non-nullable string of maximum length 10.
         quantity (db.Column): Represents the current stock quantity of the raw material. It is a non-nullable integer, indicating how much of the material is available.
 
     The Raw_Material model includes a method `to_dict` which converts the raw material record into a dictionary,
@@ -22,14 +22,12 @@ class Material(db.Model):
     """
 
     __tablename__ = 'material'
-    name = db.Column(db.String(50), primary_key=True)
-    unit_type = db.Column(db.String(10), nullable=False)
+    part_no = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False, unique=True)
+    unit = db.Column(db.String(10), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    challans = db.relationship('Challan', backref='material')
-    material_part_nos = db.relationship('MaterialPartNo', backref='material')
-    material_prices = db.relationship('MaterialPrice', backref='material')
-    material_scraps = db.relationship('MaterialScrap', backref='material')
-    production_logs = db.relationship('ProductionLog', backref='material')
+    challan_items = db.relationship('ChallanItem', backref='material')
+    scraps = db.relationship('MaterialScrap', backref='material')
 
     def to_dict(self):
         """
@@ -40,7 +38,8 @@ class Material(db.Model):
             including 'raw_material_name', 'unit_type', and 'quantity'.
         """
         return {
-            'material_name': self.name,
-            'unit_type': self.unit_type,
+            'part_no': self.part_no,
+            'name': self.name,
+            'unit': self.unit,
             'quantity': self.quantity
         }

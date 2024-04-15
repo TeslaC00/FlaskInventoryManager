@@ -1,4 +1,10 @@
 from app.database import db
+from enum import Enum
+
+
+# TODO: add scrap type
+class ProductScrapType(Enum):
+    PRODUCT = 1
 
 
 class ProductScrap(db.Model):
@@ -10,7 +16,7 @@ class ProductScrap(db.Model):
     Attributes:
         __tablename__ (str): Specifies the name of the table in the database for the Goods_Scrap model.
         date (db.Column): The date on which the goods were identified as scrap. It is of type Date and cannot be null.
-        product_name (db.Column): A foreign key linking to the Goods model based on the good_name. It indicates the name of the good that was scrapped. It is a string of maximum length 50 and cannot be null.
+        product_part_no (db.Column): A foreign key linking to the Goods model based on the good_name. It indicates the name of the good that was scrapped. It is a string of maximum length 50 and cannot be null.
         quantity (db.Column): Stores the quantity of the scrapped goods. It is of type Integer and cannot be null, representing how many units of the good were scrapped.
         product (db.relationship): Defines a relationship between the Goods_Scrap and Goods models. This allows navigation from a given Goods_Scrap instance to its associated Goods.
         __table_args__ (tuple): Defines additional table options. Here, it specifies a composite primary key consisting of 'date' and 'good_name' to ensure unique records for each type of good on each date.
@@ -24,11 +30,12 @@ class ProductScrap(db.Model):
     """
 
     __tablename__ = 'product_scrap'
-    product_name = db.Column(db.String(50), db.ForeignKey('product.name', name='fk_product_scrap_product_name'),
-                             nullable=False)
+    product_part_no = db.Column(db.Integer, db.ForeignKey('product.part_no', name='fk_product_scrap_product_part_no'),
+                                nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     date = db.Column(db.Date, nullable=False)
-    __table_args__ = (db.PrimaryKeyConstraint(date, product_name, name='pk_product_scrap'),)
+    scrap_type = db.Column(db.Enum(ProductScrapType), nullable=False)
+    __table_args__ = (db.PrimaryKeyConstraint(date, product_part_no, name='pk_product_scrap'),)
 
     def to_dict(self):
         """
@@ -39,7 +46,8 @@ class ProductScrap(db.Model):
             including 'date', 'good_name', and 'quantity'.
         """
         return {
-            'product_name': self.product_name,
-            'quantity': self.quantity,
+            'part_no': self.product_part_no,
             'date': self.date,
+            'quantity': self.quantity,
+            'scrap_type': self.scrap_type.name
         }

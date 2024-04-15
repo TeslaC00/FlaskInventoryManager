@@ -9,7 +9,7 @@ class Product(db.Model):
     Attributes:
         __tablename__ (str): Specifies the name of the table in the database for the Goods model.
         name (db.Column): The name of the good, which acts as the primary key for the Goods table. It is a non-nullable string of maximum length 50.
-        unit_type (db.Column): Stores the unit type of the goods. It is a non-nullable string of maximum length 10, describing the measurement unit (e.g., kg, liters, etc.).
+        unit (db.Column): Stores the unit type of the goods. It is a non-nullable string of maximum length 10, describing the measurement unit (e.g., kg, liters, etc.).
         quantity (db.Column): Stores the quantity of the goods. It is of type Integer and cannot be null, indicating the current stock quantity.
         part_no (db.Column): Stores the part number of the goods. It is a unique, non-nullable Integer, identifying the specific part.
 
@@ -22,15 +22,16 @@ class Product(db.Model):
     """
 
     __tablename__ = 'product'
-    name = db.Column(db.String(50), primary_key=True)
-    part_no = db.Column(db.Integer, nullable=False, unique=True)
-    unit_type = db.Column(db.String(10), nullable=False)
+    part_no = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True, nullable=False)
+    unit = db.Column(db.String(10), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    bills = db.relationship('Bill', backref='product')
-    product_prices = db.relationship('ProductPrice', backref='product')
-    product_returned = db.relationship('ProductReturned', backref='product')
-    product_scraps = db.relationship('ProductScrap', backref='product')
-    production_logs = db.relationship('ProductionLog', backref='product')
+    price = db.Column(db.Integer, nullable=False)
+    c_gst = db.Column(db.Integer, nullable=False)
+    s_gst = db.Column(db.Integer, nullable=False)
+    i_gst = db.Column(db.Integer, nullable=False)
+    bill_items = db.relationship('BillItem', backref='product')
+    scraps = db.relationship('ProductScrap', backref='product')
 
     def to_dict(self):
         """
@@ -41,8 +42,12 @@ class Product(db.Model):
             including 'good_name', 'unit_type', 'quantity', and 'part_no'.
         """
         return {
-            'product_name': self.name,
             'part_no': self.part_no,
-            'unit_type': self.unit_type,
+            'name': self.name,
+            'unit': self.unit,
             'quantity': self.quantity,
+            'price': self.price,
+            'c_gst': self.c_gst,
+            's_gst': self.s_gst,
+            'i_gst': self.i_gst
         }

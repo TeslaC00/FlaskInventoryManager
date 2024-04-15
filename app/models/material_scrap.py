@@ -1,4 +1,10 @@
 from app.database import db
+from enum import Enum
+
+
+# TODO: add types to scrap
+class MaterialScrapType(Enum):
+    Scrap = 1
 
 
 class MaterialScrap(db.Model):
@@ -12,9 +18,9 @@ class MaterialScrap(db.Model):
         __tablename__ (str): Specifies the name of the table in the database for the Raw_Materials_Scrap model.
         date (Column): The date on which the scrap was recorded. It is of type Date and cannot be null, providing a
         temporal reference for scrap records.
-        material_name (Column): A foreign key linking to the Raw_Material model based on the raw_material_name. It is a
+        material_part_no (Column): A foreign key linking to the Raw_Material model based on the raw_material_name. It is a
         string of maximum length 50, denoting the name of the raw material that generated the scrap, and cannot be null.
-        type_of_scrap (Column): Specifies the type of scrap generated. It is a string of maximum length 3, and cannot
+        scrap_type (Column): Specifies the type of scrap generated. It is a string of maximum length 3, and cannot
         be null. This might denote different categories or conditions of scrap.
         quantity (Column): Stores the quantity of the scrap generated. It is of type Integer and cannot be null,
         representing the volume or amount of waste produced.
@@ -30,12 +36,13 @@ class MaterialScrap(db.Model):
     """
 
     __tablename__ = 'material_scrap'
-    material_name = db.Column(db.String(50), db.ForeignKey('material.name', name='fk_material_scrap_material_name'),
-                              nullable=False)
+    material_part_no = db.Column(db.Integer,
+                                 db.ForeignKey('material.part_no', name='fk_material_scrap_material_part_no'),
+                                 nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    type_of_scrap = db.Column(db.String(3), nullable=False)
+    scrap_type = db.Column(db.Enum(MaterialScrapType), nullable=False)
     date = db.Column(db.Date, nullable=False)
-    __table_args__ = (db.PrimaryKeyConstraint(date, material_name, name='pk_material_scrap'),)
+    __table_args__ = (db.PrimaryKeyConstraint(date, material_part_no, name='pk_material_scrap'),)
 
     def to_dict(self):
         """
@@ -46,8 +53,8 @@ class MaterialScrap(db.Model):
             including 'date', 'raw_material_name', 'type_of_scrap', and 'quantity'.
         """
         return {
-            'material_name': self.material_name,
-            'quantity': self.quantity,
-            'type_of_scrap': self.type_of_scrap,
+            'material_part_no': self.material_part_no,
             'date': self.date,
+            'scrap_type': self.scrap_type,
+            'quantity': self.quantity
         }

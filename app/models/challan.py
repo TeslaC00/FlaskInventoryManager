@@ -8,7 +8,7 @@ class Challan(db.Model):
 
     Attributes:
         __tablename__ (str): Specifies the name of the table in the database for the Challan model.
-        price (db.Column): Stores the price of the raw material in the challan. It is of type Integer and cannot be null.
+        total_price (db.Column): Stores the price of the raw material in the challan. It is of type Integer and cannot be null.
         challan_no (db.Column): Stores the challan number. It is of type Integer and cannot be null.
         date (db.Column): Stores the date on which the challan was issued. It is of type Date and cannot be null.
         quantity (db.Column): Stores the quantity of raw material in the challan. It is of type Integer and cannot be null.
@@ -27,15 +27,13 @@ class Challan(db.Model):
     """
 
     __tablename__ = 'challan'
+    id = db.Column(db.Integer, primary_key=True)
     challan_no = db.Column(db.Integer, nullable=False)
     supplier_id = db.Column(db.Integer, db.ForeignKey('supplier.id', name='fk_challan_supplier_id'), nullable=False)
-    material_name = db.Column(db.String(50), db.ForeignKey('material.name', name='fk_challan_material_name'),
-                              nullable=False)
-    price = db.Column(db.Integer, nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
+    total_price = db.Column(db.Integer, nullable=False)
     date = db.Column(db.Date, nullable=False)
-    remarks = db.Column(db.Text, nullable=True)
-    __table_args__ = (db.PrimaryKeyConstraint(date, supplier_id, material_name, name='pk_challan'),)
+    # remarks = db.Column(db.Text, nullable=True)
+    challan_items = db.relationship('ChallanItem', backref='challan')
 
     def to_dict(self):
         """
@@ -46,11 +44,9 @@ class Challan(db.Model):
             including 'price', 'challan_no', 'date', 'quantity', 'supplier_id', and 'raw_material_name'.
         """
         return {
+            'id': self.id,
             'challan_no': self.challan_no,
             'supplier_id': self.supplier_id,
-            'material_name': self.material_name,
-            'price': self.price,
-            'quantity': self.quantity,
-            'date': self.date,
-            'remarks': self.remarks,
+            'total_price': self.total_price,
+            'date': self.date
         }

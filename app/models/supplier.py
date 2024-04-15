@@ -30,9 +30,8 @@ class Supplier(db.Model):
     GST_No = db.Column(db.String(15), nullable=False)
     state_code = db.Column(db.Integer, nullable=False)
     state_name = db.Column(db.String(30), nullable=False)
+    address = db.Column(db.Text, nullable=False)
     challans = db.relationship('Challan', backref='supplier')
-    material_part_nos = db.relationship('MaterialPartNo', backref='supplier')
-    material_prices = db.relationship('MaterialPrice', backref='supplier')
 
     def to_dict(self):
         """
@@ -43,9 +42,10 @@ class Supplier(db.Model):
             'supplier_name', 'GST_No', 'state_code', 'state_name', and 'supplier_id'.
         """
         return {
-            'supplier_id': self.id,
-            'supplier_name': self.name,
+            'id': self.id,
+            'name': self.name,
             'GST_No': self.GST_No,
             'state_code': self.state_code,
             'state_name': self.state_name,
+            'address': self.address
         }
