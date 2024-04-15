@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, session
 from flask_login import LoginManager, login_user, logout_user, current_user
 
-import app
 from app.forms.login_form import LoginForm
 from app.models import User
+from app.logger import logger
 
 # path for authentication related pages
 auth_bp = Blueprint('auth', __name__)
@@ -26,6 +26,7 @@ def login_page():
     :return: Response: rendered login.html
     """
     if current_user.is_authenticated:
+        logger.info('User already logged in redirecting to base page')
         return redirect(url_for('main.root'))
     form = LoginForm()
     return render_template('auth/login.html', form=form)
@@ -43,12 +44,15 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        app.app.logger.debug(user)
+        logger.debug(f'Provided Username: {form.username.data} and Password: {form.password.data}')
         if user and user.password == form.password.data:
+            logger.info('User authenticated successfully')
             login_user(user)
+            logger.info(f'Logging user: {user.username} and redirecting to base page')
             return redirect(url_for('main.root'))
         else:
             flash('Invalid username or password')
+            logger.warning(f'Invalid Username: {form.username.data} or Password: {form.password.data}')
     return redirect(url_for('auth.login_page'))
 
 
@@ -60,4 +64,5 @@ def logout():
     """
     logout_user()
     session.clear()
+    logger.info('User logged out redirecting to login page')
     return redirect(url_for('auth.login'))

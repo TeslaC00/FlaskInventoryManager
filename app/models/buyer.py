@@ -8,11 +8,11 @@ class Buyer(db.Model):
 
     Attributes:
         __tablename__ (str): Specifies the name of the table in the database for the Buyer model.
-        buyer_name (db.Column): Stores the name of the buyer. It is a non-nullable string of maximum length 50.
+        name (db.Column): Stores the name of the buyer. It is a non-nullable string of maximum length 50.
         GST_No (db.Column): Stores the GST number of the buyer. It is a unique, non-nullable string of maximum length 15.
         state_code (db.Column): Stores the state code associated with the buyer. It is a non-nullable integer.
         state_name (db.Column): Stores the name of the state associated with the buyer. It is a non-nullable string of maximum length 30.
-        buyer_id (db.Column): The primary key for the Buyer table. It is an auto-incrementing integer.
+        id (db.Column): The primary key for the Buyer table. It is an auto-incrementing integer.
 
     The Buyer model includes a method `to_dict` which converts the Buyer record into a dictionary,
     facilitating easy JSON serialization for API responses or other purposes.
@@ -22,12 +22,14 @@ class Buyer(db.Model):
         including buyer_name, GST_No, state_code, state_name, and buyer_id.
     """
 
-    __tablename__ = 'Buyer'
-    buyer_name = db.Column(db.String(50), nullable=False)
+    __tablename__ = 'buyer'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
     GST_No = db.Column(db.String(15), nullable=False)
     state_code = db.Column(db.Integer, nullable=False)
     state_name = db.Column(db.String(30), nullable=False)
-    buyer_id = db.Column(db.Integer, primary_key=True)
+    address = db.Column(db.Text, nullable=False)
+    bills = db.relationship('Bill', backref='buyer', lazy=True)
 
     def to_dict(self):
         """
@@ -38,9 +40,10 @@ class Buyer(db.Model):
             including 'buyer_name', 'GST_No', 'state_code', 'state_name', and 'buyer_id'.
         """
         return {
-            'buyer_name': self.buyer_name,
+            'id': self.id,
+            'name': self.name,
             'GST_No': self.GST_No,
             'state_code': self.state_code,
             'state_name': self.state_name,
-            'buyer_id': self.buyer_id
+            'address': self.address
         }

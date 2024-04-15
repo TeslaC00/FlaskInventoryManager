@@ -1,9 +1,62 @@
 {% extends 'base.html' %}
-
+{#TODO: clean up this page#}
 {% block head %}
-	<title>Profile Page</title>
+    <title>Profile Page</title>
 {% endblock %}
 
 {% block content %}
-	<h1>Your Profile</h1>
-{% endblock %}
+    <h1>Your Profile</h1>
+    <table class="table table-hover">
+        <thead class="table-light">
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+            <th scope="col">Role</th>
+            <th scope="col">Last Login</th>
+            <th scope="col">Edit</th>
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>123</td>
+            <td>admin</td>
+            <td>20 january</td>
+            <td>edit</td>
+        </tr>
+        {% if users %}
+            {% for user in users %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.password }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>{{ user.last_login }}</td>
+                    <td><a class="link-info" href="#">edit</a></td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            No users added to database
+        {% endif %}
+
+        <tr>
+            <th scope="row">2</th>
+            <td>Mark</td>
+            <td>123</td>
+            <td>admin</td>
+            <td>20 january</td>
+            <td>edit available</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Mark</td>
+            <td>123</td>
+            <td>admin</td>
+            <td>20 january</td>
+            <td>edit available</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}k

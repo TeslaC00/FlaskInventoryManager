@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css')}}">
+    <title>Suppliers</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Supplier Table</h1>
+    <a href="{{ url_for('supplier.add_supplier') }}" class="add-new-btn">Add New Supplier</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Supplier Name</th>
+                <th>GST No.</th>
+                <th>State Code</th>
+                <th>State Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for supplier in suppliers %}
+            <tr>
+                <td>{{ supplier.name }}</td>
+                <td>{{ supplier.GST_No }}</td>
+                <td>{{ supplier.state_code }}</td>
+                <td>{{ supplier.state_name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

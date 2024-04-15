@@ -1,3 +1,6 @@
+import random
+from datetime import datetime, timedelta
+
 from flask_login import UserMixin
 
 from app.database import db
@@ -15,7 +18,7 @@ class User(db.Model, UserMixin):
                               It is a string of maximum length 50 characters and acts as the primary key.
         password (db.Column): Holds the user's password. It is stored as a string of maximum length 50
                               characters and cannot be null, implying that every user must have a password.
-        user_type (db.Column): Defines the type or role of the user within the system (e.g., 'admin', 'editor').
+        role (db.Column): Defines the type or role of the user within the system (e.g., 'admin', 'editor').
                                It is a string of maximum length 20 characters and cannot be null.
 
     The model includes a method `to_dict` for converting user entity attributes to a dictionary, suitable
@@ -29,10 +32,20 @@ class User(db.Model, UserMixin):
                       for Flask-Login's user session management.
     """
 
-    __tablename__ = 'User'
+    __tablename__ = 'user'
     username = db.Column(db.String(50), primary_key=True)
     password = db.Column(db.String(50), nullable=False)
-    user_type = db.Column(db.String(20), nullable=False)
+    role = db.Column(db.String(20), nullable=False)
+    last_login = db.Column(db.DateTime, nullable=False)
+    audit_logs = db.relationship('AuditLog', backref='user')
+
+    def __init__(self, username, password, role):
+        self.username = username
+        self.password = password
+        self.role = role
+        # Generate a random date within the past 30 days for last_login
+        # added this for dummy date and time
+        self.last_login = datetime.now() - timedelta(days=random.randint(1, 30))
 
     def to_dict(self):
         """
@@ -44,7 +57,8 @@ class User(db.Model, UserMixin):
         return {
             'username': self.username,
             'password': self.password,
-            'user_type': self.user_type
+            'role': self.role,
+            'last_login': self.last_login,
         }
 
     def get_id(self):

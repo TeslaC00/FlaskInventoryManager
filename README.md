@@ -86,7 +86,7 @@ Add the following code to your create_app in init.py.
 ```python
 def create_app():
     # Load local configurations from config.py
-    app.config.from_pyfile('config.py')
+    app.config.from_pyfile()
 
     # Initialize database
     db.init_app(app)
@@ -208,3 +208,24 @@ Create new branch from terminal
 Push the new branch on GitHub
 
 `git push -u origin <category-name>/<branch-name>`
+
+# Flask Test
+
+###### Setup Test Database
+
+To do testing for this app we need `config_test.py` file which should contain the configurations for testing database.
+Create a new ***test*** database for testing purpose.
+In the `config_test.py` add the configurations
+
+```python
+SQLALCHEMY_DATABASE_URI = 'test_database_uri'
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+```
+
+<font color="green">*Tip: create database with name *test*, and copy the main config Database URI
+and replace database name with *test* '*</font>
+
+###### Run Tests
+
+We need `pytest` package for testing app. Pytest will create the database automatically and delete it after tests.
+To run test just type `pytest` in the terminal and run. Pytest will run the created tests automatically.

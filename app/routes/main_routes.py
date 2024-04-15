@@ -2,9 +2,10 @@
 from flask import Blueprint, render_template, request, jsonify
 from flask_login import login_required
 from sqlalchemy import text
+from typing_extensions import deprecated
 
 from app.database import db
-from app.models import Raw_Material_Records, Goods
+from app.models import Product, Material, User
 
 main_routes = Blueprint('main', __name__)
 
@@ -21,11 +22,11 @@ def root():
     return render_template('base.html')
 
 
-# TODO: add content to profile page
 @main_routes.route('/profile/')
 @login_required
 def profile():
-    return render_template('profile.html')
+    users = User.query.all()
+    return render_template('profile.html', users=users)
 
 
 @main_routes.route('/analysis/')
@@ -39,17 +40,17 @@ def analysis():
     """
     return render_template('analysis.html')
 
-
-@main_routes.route('/orders/')
-@login_required
-def orders():
-    """
-    Serves the orders page of the application. Requires user to be logged in.
-
-    Returns:
-    - The rendered orders.html template.
-    """
-    return render_template('orders.html')
+# @deprecated(1)
+# @main_routes.route('/orders/')
+# @login_required
+# def orders():
+#     """
+#     Serves the orders page of the application. Requires user to be logged in.
+#
+#     Returns:
+#     - The rendered orders.html template.
+#     """
+#     return render_template('orders.html')
 
 
 # TODO: add content to audits page
@@ -59,11 +60,30 @@ def audits():
     return render_template('audits.html')
 
 
+@main_routes.route('/writeOff/')
+@login_required
+def write_off():
+    raw_material_data = Material.query.all()
+    produced_good_data = Product.query.all()
+
+    table1 = [record.to_dict() for record in raw_material_data]
+    table2 = [record.to_dict() for record in produced_good_data]
+
+    return render_template('WriteOff.html', table1=table1, table2=table2)
+
+
 # TODO: add content to settings page
 @main_routes.route('/settings/')
 @login_required
 def settings():
     return render_template('settings.html')
+
+
+@main_routes.route('/addentry/')
+@login_required
+def addentry():
+    return render_template('addentry.html')
+
 
 
 @main_routes.route('/test_database_connection/')
@@ -99,17 +119,18 @@ def update_data():
     return jsonify({"status": "success"})
 
 
-@main_routes.route('/json')
-def json_response():
-    """
-    Retrieves all records from the Raw_Material_Records table and returns them in a JSON format.
-
-    Returns:
-    - A JSON response containing all records from Raw_Material_Records.
-    """
-    records = Raw_Material_Records.query.all()
-    results = [record.to_dict() for record in records]
-    return jsonify(results)
+# TODO: change from records to production log
+# @main_routes.route('/json')
+# def json_response():
+#     """
+#     Retrieves all records from the Raw_Material_Records table and returns them in a JSON format.
+#
+#     Returns:
+#     - A JSON response containing all records from Raw_Material_Records.
+#     """
+#     records = Raw_Material_Records.query.all()
+#     results = [record.to_dict() for record in records]
+#     return jsonify(results)
 
 
 @main_routes.route('/autocomplete', methods=['GET'])
@@ -123,7 +144,24 @@ def autocomplete():
     database.
     """
     search = request.args.get('q')  # Get the search query parameter 'q' from the URL
-    results = Goods.query.filter(Goods.good_name.like(f'%{search}%')).limit(
+    results = Product.query.filter(Product.name.like(f'%{search}%')).limit(
         10).all()  # Query the database for goods names that contain the search term
     # Prepare and return the JSON response with the search results
-    return jsonify(matching_results=[{"id": item.good_name, "name": item.good_name} for item in results])
+    return jsonify(matching_results=[{"id": item.item_name, "name": item.item_name} for item in results])
+
+
+@main_routes.route('/autocomplete_raw', methods=['GET'])
+def autocomplete_raw():
+    """
+    Route to handle autocomplete suggestions.
+    Fetches raw material names from the database that match the user's search query and returns them in a JSON format suitable
+    for autocomplete functionalities.
+
+    :return: A JSON response containing matching results, each with an "id" and "name" derived from raw material names in the
+    database.
+    """
+    search = request.args.get('q')  # Get the search query parameter 'q' from the URL
+    results = Material.query.filter(Material.name.like(f'%{search}%')).limit(
+        10).all()  # Query the database for goods names that contain the search term
+    # Prepare and return the JSON response with the search results
+    return jsonify(matching_results=[{"name": raw.item_name} for raw in results])

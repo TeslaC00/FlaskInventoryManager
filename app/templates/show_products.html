@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
+    <title>Products</title>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Product Table</h1>
+        <a href="{{url_for('product.add_product') }}" class="add-new-btn" style="margin-top: 0">Add New Product</a>
+        <div class="navbar-nav-scroll" style="margin-top: 10px">
+            <table class="table table-hover">
+                <thead class="table-light sticky-lg-top">
+                <tr>
+                    <th>Name</th>
+                    <th>Part Number</th>
+                    <th>Unit Type</th>
+                    <th>Quantity</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.part_no }}</td>
+                        <td>{{ product.unit_type }}</td>
+                        <td>{{ product.quantity }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

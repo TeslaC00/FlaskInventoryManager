@@ -1,32 +1,45 @@
-from flask import Flask
-from flask_login import LoginManager
-from flask_migrate import Migrate
+import os
 
-from app.routes import register_routes
-from .database import db
-from .routes.auth import login_manager
+from flask import Flask
+
+from app.logger import logger
+
+
+# from flask_migrate import Migrate
+
 
 # Creates flask object
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
+    logger.info('Created Flask app object')
 
-# Secret Key
-app.secret_key = 'secret_key'
+    # Loading environment variables
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS')
+    logger.info('Loaded Environment Variables')
 
-# Load local configurations from config.py
-app.config.from_pyfile('config.py')
+    # Initialize login manager
+    from app.routes.auth import login_manager
+    login_manager.init_app(app)
+    logger.info('Initialized login manager')
 
-# Initialize login manager
-login_manager.init_app(app)
+    # Initialize database
+    from app.database import db
+    db.init_app(app)
+    logger.info('Initialized database')
+    # Create tables
+    with app.app_context():
+        db.create_all()
 
-# Initialize database
-db.init_app(app)
+    # Initialize database migration tool
+    # Migrate(app, db)
+    # logger.info('Initialized flask migrate')
 
-# Create tables
-with app.app_context():
-    db.create_all()
+    # Registering blueprints
+    from app.routes import register_routes
+    register_routes(app)
+    logger.info('Registered routes')
 
-# Initialize database migration tool
-Migrate(app, db)
-
-# Registering blueprints
-register_routes(app)
+    logger.info('Finished initializing FlaskInventoryManager')
+    return app

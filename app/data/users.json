@@ -2,56 +2,56 @@
   {
     "username": "vikas",
     "password": "G8&TTZuG1&ndTT!Zw$ZWh63jiJA31U",
-    "user_type": "normal"
+    "role": "normal"
   },
   {
     "username": "admin",
     "password": "admin",
-    "user_type": "admin"
+    "role": "admin"
   },
   {
     "username": "shivesh",
     "password": "Cdh%eH8fZd0R9&9*18^D&8q9^#$H8D",
-    "user_type": "normal"
+    "role": "normal"
   },
   {
     "username": "saumil",
     "password": "30Zf$zLdX3#Q5&1^f@sG4731^*DbjA",
-    "user_type": "normal"
+    "role": "normal"
   },
   {
     "username": "toshan",
     "password": "D*%%m&&&r8h@O1jp93RMWj6BrT$!$U",
-    "user_type": "normal"
+    "role": "normal"
   },
   {
     "username": "saber",
     "password": "a@37Zgj4!59ee%u$9oj#$%H$9g40sK",
-    "user_type": "normal"
+    "role": "normal"
   },
   {
     "username": "miri",
     "password": "S918r*UqATesuq4us2q^Bh^z*hDCwO",
-    "user_type": "normal"
+    "role": "normal"
   },
   {
     "username": "rimuru",
     "password": "x%7^#u340*JRu0H&^!!Lwa#1knwJ*Q",
-    "user_type": "slime"
+    "role": "slime"
   },
   {
     "username": "Chained Soldier",
     "password": "$xb42$taSL@X5s@s3hFX48^v5Lf89Y",
-    "user_type": "hmmm"
+    "role": "hmmm"
   },
   {
     "username": "yamada",
     "password": "Dc6hgX2&80$k0zG0j@866&@h!F6A0F",
-    "user_type": "normal"
+    "role": "normal"
   },
   {
     "username": "cuphead",
     "password": "L%3BjvHE^*43f*nA41T44b$h$8B^RS",
-    "user_type": "normal"
+    "role": "normal"
   }
 ]
