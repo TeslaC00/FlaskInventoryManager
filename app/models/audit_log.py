@@ -69,8 +69,7 @@ class AuditLog(db.Model):
     column_name = db.Column(db.String(100), nullable=False)
     old_value = db.Column(db.String(100), nullable=False)
     new_value = db.Column(db.String(100), nullable=False)
-    username = db.Column(db.String(100), db.ForeignKey('user.username', name='fk_audit_log_user_username'),
-                         nullable=False)
+    username = db.Column(db.String(100), nullable=False)
     change_timestamp = db.Column(db.DateTime, nullable=False, default=func.now())
     action_type = db.Column(db.Enum(ActionType), nullable=False)
     remarks = db.Column(db.Text, nullable=True)

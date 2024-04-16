@@ -24,7 +24,7 @@ class Bill(db.Model):
     total_price = db.Column(db.Integer, nullable=False)
     date = db.Column(db.Date, nullable=False)
     purchase_order = db.Column(db.String(30), nullable=False)
-    # remarks = db.Column(db.Text, nullable=True)
+    remarks = db.Column(db.Text, nullable=True)
     bill_items = db.relationship('BillItem', backref='bill', lazy=True)
 
     def to_dict(self):
