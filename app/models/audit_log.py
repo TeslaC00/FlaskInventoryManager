@@ -17,7 +17,7 @@ from datetime import datetime
 from multipledispatch import dispatch
 from sqlalchemy.sql import func
 
-from app.database import db
+from app.extensions import db
 
 
 class ActionType(enum.Enum):

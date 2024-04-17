@@ -3,13 +3,11 @@ import os
 from flask import Flask
 
 from app.logger import logger
+from app.extensions import initialize_extensions, create_tables
 
 
-# from flask_migrate import Migrate
-
-
-# Creates flask object
 def create_app():
+    # Creates flask object
     app = Flask(__name__)
     logger.info('Created Flask app object')
 
@@ -19,22 +17,11 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS')
     logger.info('Loaded Environment Variables')
 
-    # Initialize login manager
-    from app.routes.auth import login_manager
-    login_manager.init_app(app)
-    logger.info('Initialized login manager')
+    initialize_extensions(app)
+    logger.info('All extensions initialized')
 
-    # Initialize database
-    from app.database import db
-    db.init_app(app)
-    logger.info('Initialized database')
-    # Create tables
-    with app.app_context():
-        db.create_all()
-
-    # Initialize database migration tool
-    # Migrate(app, db)
-    # logger.info('Initialized flask migrate')
+    create_tables(app)
+    logger.info('All tables created with seed')
 
     # Registering blueprints
     from app.routes import register_routes

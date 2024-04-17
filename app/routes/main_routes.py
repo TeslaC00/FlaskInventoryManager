@@ -4,7 +4,7 @@ from flask_login import login_required
 from sqlalchemy import text
 from typing_extensions import deprecated
 
-from app.database import db
+from app.extensions import db
 from app.models import Product, Material, User
 
 main_routes = Blueprint('main', __name__)

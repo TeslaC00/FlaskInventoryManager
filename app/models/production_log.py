@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from app.database import db
+from app.extensions import db
 
 
 class ProductionLog(db.Model):
