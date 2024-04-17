@@ -2,9 +2,10 @@ from app.database import db
 from enum import Enum
 
 
-# TODO: add types to scrap
 class MaterialScrapType(Enum):
-    Scrap = 1
+    OK_MATERIAL = 1
+    NOT_GOOD = 2
+    INTERNAL_REJECTION = 3
 
 
 class MaterialScrap(db.Model):

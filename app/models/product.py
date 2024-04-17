@@ -1,10 +1,18 @@
 from app.database import db
+from enum import Enum
+
+
+class UnitType(Enum):
+    GRAM = 1,
+    CENTIMETER = 2,
+    PIECE = 3
 
 
 class Product(db.Model):
     """
     Represents a Goods record within a relational database, modeled using SQLAlchemy ORM
     as part of the application's database schema.
+    weight-gram,length-cm,pieces
 
     Attributes:
         __tablename__ (str): Specifies the name of the table in the database for the Goods model.
@@ -24,12 +32,12 @@ class Product(db.Model):
     __tablename__ = 'product'
     part_no = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
-    unit = db.Column(db.String(10), nullable=False)
+    unit = db.Column(db.Enum(UnitType), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    price = db.Column(db.Integer, nullable=False)
-    c_gst = db.Column(db.Integer, nullable=False)
-    s_gst = db.Column(db.Integer, nullable=False)
-    i_gst = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    c_gst = db.Column(db.Float, nullable=False)
+    s_gst = db.Column(db.Float, nullable=False)
+    i_gst = db.Column(db.Float, nullable=False)
     bill_items = db.relationship('BillItem', backref='product')
     scraps = db.relationship('ProductScrap', backref='product')
 

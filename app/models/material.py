@@ -1,4 +1,11 @@
 from app.database import db
+from enum import Enum
+
+
+class UnitType(Enum):
+    GRAM = 1,
+    CENTIMETER = 2,
+    PIECE = 3
 
 
 class Material(db.Model):
@@ -24,7 +31,7 @@ class Material(db.Model):
     __tablename__ = 'material'
     part_no = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
-    unit = db.Column(db.String(10), nullable=False)
+    unit = db.Column(db.Enum(UnitType), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     challan_items = db.relationship('ChallanItem', backref='material')
     scraps = db.relationship('MaterialScrap', backref='material')

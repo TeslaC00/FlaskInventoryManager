@@ -21,7 +21,7 @@ class Bill(db.Model):
     __tablename__ = 'bill'
     id = db.Column(db.Integer, primary_key=True)
     buyer_id = db.Column(db.Integer, db.ForeignKey('buyer.id', name='fk_bill_buyer_id'), nullable=False)
-    total_price = db.Column(db.Integer, nullable=False)
+    total_price = db.Column(db.Float, nullable=False)
     date = db.Column(db.Date, nullable=False)
     purchase_order = db.Column(db.String(30), nullable=False)
     remarks = db.Column(db.Text, nullable=True)

@@ -30,7 +30,7 @@ class Challan(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     challan_no = db.Column(db.Integer, nullable=False)
     supplier_id = db.Column(db.Integer, db.ForeignKey('supplier.id', name='fk_challan_supplier_id'), nullable=False)
-    total_price = db.Column(db.Integer, nullable=False)
+    total_price = db.Column(db.Float, nullable=False)
     date = db.Column(db.Date, nullable=False)
     remarks = db.Column(db.Text, nullable=True)
     challan_items = db.relationship('ChallanItem', backref='challan')

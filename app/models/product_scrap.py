@@ -2,9 +2,11 @@ from app.database import db
 from enum import Enum
 
 
-# TODO: add scrap type
 class ProductScrapType(Enum):
-    PRODUCT = 1
+    OK_MATERIAL = 1
+    NOT_GOOD = 2
+    INTERNAL_REJECTION = 3
+    EXTERNAL_REJECTION = 4
 
 
 class ProductScrap(db.Model):
