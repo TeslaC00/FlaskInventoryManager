@@ -1,62 +1,74 @@
 [
-  {
-    "name": "Frozen",
-    "unit_type": "S",
-    "quantity": 878
-  },
-  {
-    "name": "Bronze",
-    "unit_type": "sr",
-    "quantity": 303
-  },
-  {
-    "name": "Wooden",
-    "unit_type": "Bq",
-    "quantity": 171
-  },
-  {
-    "name": "Steel",
-    "unit_type": "Wb",
-    "quantity": 801
-  },
-  {
-    "name": "Soft",
-    "unit_type": "W",
-    "quantity": 170
-  },
-  {
-    "name": "Fresh",
-    "unit_type": "T",
-    "quantity": 131
-  },
-  {
-    "name": "Plastic",
-    "unit_type": "N",
-    "quantity": 771
-  },
-  {
-    "name": "Metal",
-    "unit_type": "sr",
-    "quantity": 100
-  },
-  {
-    "name": "Granite",
-    "unit_type": "C",
-    "quantity": 692
-  },
-  {
-    "name": "Concrete",
-    "unit_type": "J",
-    "quantity": 119
-  },
-  {
-    "name": "Rubber",
-    "unit_type": "N",
-    "quantity": 525
-  },
-  {
-    "name": "Cotton",
-    "unit_type": "Gy",
-    "quantity": 524
-  }
+    {
+        "part_no": 1,
+        "name": "Metal",
+        "unit": "gram",
+        "quantity": 57
+    },
+    {
+        "part_no": 2,
+        "name": "Bronze",
+        "unit": "gram",
+        "quantity": 79
+    },
+    {
+        "part_no": 3,
+        "name": "Plastic",
+        "unit": "centimeter",
+        "quantity": 76
+    },
+    {
+        "part_no": 4,
+        "name": "Rubber",
+        "unit": "centimeter",
+        "quantity": 13
+    },
+    {
+        "part_no": 5,
+        "name": "Cotton",
+        "unit": "centimeter",
+        "quantity": 36
+    },
+    {
+        "part_no": 6,
+        "name": "Granite",
+        "unit": "gram",
+        "quantity": 66
+    },
+    {
+        "part_no": 7,
+        "name": "Fresh",
+        "unit": "gram",
+        "quantity": 79
+    },
+    {
+        "part_no": 8,
+        "name": "Frozen",
+        "unit": "piece",
+        "quantity": 43
+    },
+    {
+        "part_no": 9,
+        "name": "Steel",
+        "unit": "gram",
+        "quantity": 42
+    },
+    {
+        "part_no": 10,
+        "name": "Soft",
+        "unit": "centimeter",
+        "quantity": 37
+    },
+    {
+        "part_no": 11,
+        "name": "Concrete",
+        "unit": "piece",
+        "quantity": 30
+    },
+    {
+        "part_no": 12,
+        "name": "Wooden",
+        "unit": "centimeter",
+        "quantity": 61
+    }
 ]

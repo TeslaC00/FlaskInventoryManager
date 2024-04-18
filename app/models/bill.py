@@ -1,4 +1,6 @@
-from app.database import db
+from sqlalchemy import Column, Integer, String, Text, ForeignKey, Float, Date
+from sqlalchemy.orm import relationship
+from app.extensions import db
 
 
 class Bill(db.Model):
@@ -19,13 +21,13 @@ class Bill(db.Model):
         __table_args__: Additional table options, including a composite primary key('date','buyer_id','good_name').
     """
     __tablename__ = 'bill'
-    id = db.Column(db.Integer, primary_key=True)
-    buyer_id = db.Column(db.Integer, db.ForeignKey('buyer.id', name='fk_bill_buyer_id'), nullable=False)
-    total_price = db.Column(db.Integer, nullable=False)
-    date = db.Column(db.Date, nullable=False)
-    purchase_order = db.Column(db.String(30), nullable=False)
-    # remarks = db.Column(db.Text, nullable=True)
-    bill_items = db.relationship('BillItem', backref='bill', lazy=True)
+    id = Column(Integer, primary_key=True)
+    buyer_id = Column(Integer, ForeignKey('buyer.id', name='fk_bill_buyer_id'), nullable=False)
+    total_price = Column(Float, nullable=False)
+    date = Column(Date, nullable=False)
+    purchase_order = Column(String(30), nullable=False)
+    remarks = Column(Text, nullable=True)
+    bill_items = relationship('BillItem', backref='bill', lazy=True)
 
     def to_dict(self):
         return {

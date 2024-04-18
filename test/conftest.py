@@ -1,7 +1,7 @@
 import pytest
 
 from app import create_app
-from app.database import db
+from app.extensions import db
 
 
 @pytest.fixture

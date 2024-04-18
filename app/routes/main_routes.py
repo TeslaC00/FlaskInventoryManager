@@ -4,14 +4,14 @@ from flask_login import login_required
 from sqlalchemy import text
 from typing_extensions import deprecated
 
-from app.database import db
+from app.extensions import db
 from app.models import Product, Material, User
 
 main_routes = Blueprint('main', __name__)
 
 
 @main_routes.route('/base/')
-@login_required
+# @login_required
 def root():
     """
     Serves the base template of the application. Requires user to be logged in.
@@ -23,14 +23,14 @@ def root():
 
 
 @main_routes.route('/profile/')
-@login_required
+# @login_required
 def profile():
     users = User.query.all()
     return render_template('profile.html', users=users)
 
 
 @main_routes.route('/analysis/')
-@login_required
+# @login_required
 def analysis():
     """
     Serves the analysis page of the application. Requires user to be logged in.
@@ -55,13 +55,13 @@ def analysis():
 
 # TODO: add content to audits page
 @main_routes.route('/audits/')
-@login_required
+# @login_required
 def audits():
     return render_template('audits.html')
 
 
 @main_routes.route('/writeOff/')
-@login_required
+# @login_required
 def write_off():
     raw_material_data = Material.query.all()
     produced_good_data = Product.query.all()
@@ -74,13 +74,13 @@ def write_off():
 
 # TODO: add content to settings page
 @main_routes.route('/settings/')
-@login_required
+# @login_required
 def settings():
     return render_template('settings.html')
 
 
 @main_routes.route('/addentry/')
-@login_required
+# @login_required
 def addentry():
     return render_template('addentry.html')
 

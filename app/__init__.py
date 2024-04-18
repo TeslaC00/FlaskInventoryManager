@@ -1,40 +1,35 @@
 import os
 
 from flask import Flask
+from flask_security import SQLAlchemyUserDatastore, Security
 
 from app.logger import logger
+from app.extensions import initialize_extensions, db
 
 
-# from flask_migrate import Migrate
-
-
-# Creates flask object
 def create_app():
+    # Creates flask object
     app = Flask(__name__)
     logger.info('Created Flask app object')
 
     # Loading environment variables
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+    app.config['SECURITY_PASSWORD_SALT'] = os.environ.get('SECURITY_PASSWORD_SALT')
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS')
+    # what ?
+    # have session and remember cookie be samesite (flask/flask_login)
+    app.config["REMEMBER_COOKIE_SAMESITE"] = "strict"
+    app.config["SESSION_COOKIE_SAMESITE"] = "strict"
     logger.info('Loaded Environment Variables')
 
-    # Initialize login manager
-    from app.routes.auth import login_manager
-    login_manager.init_app(app)
-    logger.info('Initialized login manager')
+    initialize_extensions(app)
+    logger.info('All extensions initialized')
 
-    # Initialize database
-    from app.database import db
-    db.init_app(app)
-    logger.info('Initialized database')
-    # Create tables
-    with app.app_context():
-        db.create_all()
+    init_security(app)
 
-    # Initialize database migration tool
-    # Migrate(app, db)
-    # logger.info('Initialized flask migrate')
+    create_tables(app)
+    logger.info('All tables created with seed')
 
     # Registering blueprints
     from app.routes import register_routes
@@ -43,3 +38,15 @@ def create_app():
 
     logger.info('Finished initializing FlaskInventoryManager')
     return app
+
+
+def create_tables(app):
+    with app.app_context():
+        db.create_all()
+        logger.info('Database tables created (if not existing)')
+
+
+def init_security(app):
+    from app.models.user import User, Role
+    user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+    app.security = Security(app, user_datastore)

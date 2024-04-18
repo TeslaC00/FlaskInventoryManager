@@ -1,16 +1,16 @@
 from datetime import datetime
-
-from app.database import db
+from app.extensions import db
+from sqlalchemy import Column, Integer, ForeignKey, Date
 
 
 class ProductionLog(db.Model):
     __tablename__ = 'production_log'
-    id = db.Column(db.Integer, primary_key=True)
-    production_date = db.Column(db.Date, nullable=False, default=datetime.now)
-    product_part_no = db.Column(db.Integer,
-                                db.ForeignKey('product.part_no', name='fk_production_log_product_part_no'),
-                                nullable=False)
-    quantity_produced = db.Column(db.Integer, nullable=False)
+    id = Column(Integer, primary_key=True)
+    production_date = Column(Date, nullable=False, default=datetime.now)
+    product_part_no = Column(Integer,
+                             ForeignKey('product.part_no', name='fk_production_log_product_part_no'),
+                             nullable=False)
+    quantity_produced = Column(Integer, nullable=False)
 
     def to_dict(self):
         return {

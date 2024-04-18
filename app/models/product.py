@@ -1,17 +1,27 @@
-from app.database import db
+from sqlalchemy import Column, Integer, String, Enum, Float
+from sqlalchemy.orm import relationship
+from app.extensions import db
+import enum
+
+
+class UnitType(enum.Enum):
+    GRAM = 'gram'
+    CENTIMETER = 'centimeter'
+    PIECE = 'piece'
 
 
 class Product(db.Model):
     """
     Represents a Goods record within a relational database, modeled using SQLAlchemy ORM
     as part of the application's database schema.
+    weight-gram,length-cm,pieces
 
     Attributes:
         __tablename__ (str): Specifies the name of the table in the database for the Goods model.
-        name (db.Column): The name of the good, which acts as the primary key for the Goods table. It is a non-nullable string of maximum length 50.
-        unit (db.Column): Stores the unit type of the goods. It is a non-nullable string of maximum length 10, describing the measurement unit (e.g., kg, liters, etc.).
-        quantity (db.Column): Stores the quantity of the goods. It is of type Integer and cannot be null, indicating the current stock quantity.
-        part_no (db.Column): Stores the part number of the goods. It is a unique, non-nullable Integer, identifying the specific part.
+        name (Column): The name of the good, which acts as the primary key for the Goods table. It is a non-nullable string of maximum length 50.
+        unit (Column): Stores the unit type of the goods. It is a non-nullable string of maximum length 10, describing the measurement unit (e.g., kg, liters, etc.).
+        quantity (Column): Stores the quantity of the goods. It is of type Integer and cannot be null, indicating the current stock quantity.
+        part_no (Column): Stores the part number of the goods. It is a unique, non-nullable Integer, identifying the specific part.
 
     The Goods model includes a method `to_dict` which converts the Goods record into a dictionary,
     facilitating easy JSON serialization for API responses or other purposes.
@@ -22,16 +32,16 @@ class Product(db.Model):
     """
 
     __tablename__ = 'product'
-    part_no = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True, nullable=False)
-    unit = db.Column(db.String(10), nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
-    price = db.Column(db.Integer, nullable=False)
-    c_gst = db.Column(db.Integer, nullable=False)
-    s_gst = db.Column(db.Integer, nullable=False)
-    i_gst = db.Column(db.Integer, nullable=False)
-    bill_items = db.relationship('BillItem', backref='product')
-    scraps = db.relationship('ProductScrap', backref='product')
+    part_no = Column(Integer, primary_key=True)
+    name = Column(String(50), unique=True, nullable=False)
+    unit = Column(Enum(UnitType), nullable=False)
+    quantity = Column(Integer, nullable=False)
+    price = Column(Float, nullable=False)
+    c_gst = Column(Float, nullable=False)
+    s_gst = Column(Float, nullable=False)
+    i_gst = Column(Float, nullable=False)
+    bill_items = relationship('BillItem', backref='product')
+    scraps = relationship('ProductScrap', backref='product')
 
     def to_dict(self):
         """

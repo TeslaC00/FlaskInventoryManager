@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, render_template, flash, redirect, url_for
 
-from app.database import db
+from app.extensions import db
 from app.forms.supplier_form import SupplierForm
 from app.logger import logger
 from app.models import Supplier

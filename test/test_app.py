@@ -1,5 +1,5 @@
 # test_app.py
-from app.database import db
+from app.extensions import db
 
 
 def test_base(client):
