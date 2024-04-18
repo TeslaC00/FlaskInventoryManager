@@ -1,22 +1,9 @@
-# Audit_Log
-# (
-#   audit_id BIGINT NOT NULL AUTO_INCREMENT,
-#   table_name VARCHAR(64) NOT NULL,
-#   primary_key_value VARCHAR(255) NOT NULL,
-#   column_name VARCHAR(64),
-#   old_value LONGTEXT,
-#   new_value LONGTEXT,
-#   username VARCHAR(50) NOT NULL,
-#   change_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-#   action_type ENUM('INSERT', 'UPDATE', 'DELETE') NOT NULL,
-#   PRIMARY KEY (audit_id)
-# );
 import enum
 from datetime import datetime
 
 from multipledispatch import dispatch
+from sqlalchemy import Column, Integer, String, DateTime, Enum, Text
 from sqlalchemy.sql import func
-
 from app.extensions import db
 
 
@@ -63,16 +50,16 @@ class AuditLog(db.Model):
         - The action_type column uses the ActionType enum to ensure only valid actions are recorded.
     """
     __tablename__ = 'audit_log'
-    id = db.Column(db.Integer, primary_key=True)
-    table_name = db.Column(db.String(100), nullable=False)
-    table_primary_key = db.Column(db.String(100), nullable=False)
-    column_name = db.Column(db.String(100), nullable=False)
-    old_value = db.Column(db.String(100), nullable=False)
-    new_value = db.Column(db.String(100), nullable=False)
-    username = db.Column(db.String(100), nullable=False)
-    change_timestamp = db.Column(db.DateTime, nullable=False, default=func.now())
-    action_type = db.Column(db.Enum(ActionType), nullable=False)
-    remarks = db.Column(db.Text, nullable=True)
+    id = Column(Integer, primary_key=True)
+    table_name = Column(String(100), nullable=False)
+    table_primary_key = Column(String(100), nullable=False)
+    column_name = Column(String(100), nullable=False)
+    old_value = Column(String(100), nullable=False)
+    new_value = Column(String(100), nullable=False)
+    username = Column(String(100), nullable=False)
+    change_timestamp = Column(DateTime, nullable=False, default=func.now())
+    action_type = Column(Enum(ActionType), nullable=False)
+    remarks = Column(Text, nullable=True)
 
     def to_dict(self):
         return {

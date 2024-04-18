@@ -1,3 +1,5 @@
+from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy.orm import relationship
 from app.extensions import db
 
 
@@ -8,11 +10,11 @@ class Buyer(db.Model):
 
     Attributes:
         __tablename__ (str): Specifies the name of the table in the database for the Buyer model.
-        name (db.Column): Stores the name of the buyer. It is a non-nullable string of maximum length 50.
-        GST_No (db.Column): Stores the GST number of the buyer. It is a unique, non-nullable string of maximum length 15.
-        state_code (db.Column): Stores the state code associated with the buyer. It is a non-nullable integer.
-        state_name (db.Column): Stores the name of the state associated with the buyer. It is a non-nullable string of maximum length 30.
-        id (db.Column): The primary key for the Buyer table. It is an auto-incrementing integer.
+        name (Column): Stores the name of the buyer. It is a non-nullable string of maximum length 50.
+        GST_No (Column): Stores the GST number of the buyer. It is a unique, non-nullable string of maximum length 15.
+        state_code (Column): Stores the state code associated with the buyer. It is a non-nullable integer.
+        state_name (Column): Stores the name of the state associated with the buyer. It is a non-nullable string of maximum length 30.
+        id (Column): The primary key for the Buyer table. It is an auto-incrementing integer.
 
     The Buyer model includes a method `to_dict` which converts the Buyer record into a dictionary,
     facilitating easy JSON serialization for API responses or other purposes.
@@ -23,13 +25,13 @@ class Buyer(db.Model):
     """
 
     __tablename__ = 'buyer'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    GST_No = db.Column(db.String(15), nullable=False)
-    state_code = db.Column(db.Integer, nullable=False)
-    state_name = db.Column(db.String(30), nullable=False)
-    address = db.Column(db.Text, nullable=False)
-    bills = db.relationship('Bill', backref='buyer', lazy=True)
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50), nullable=False)
+    GST_No = Column(String(15), nullable=False)
+    state_code = Column(Integer, nullable=False)
+    state_name = Column(String(30), nullable=False)
+    address = Column(Text, nullable=False)
+    bills = relationship('Bill', backref='buyer', lazy=True)
 
     def to_dict(self):
         """

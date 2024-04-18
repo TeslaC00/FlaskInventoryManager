@@ -1,11 +1,13 @@
+from sqlalchemy import Column, Integer, String, Enum
+from sqlalchemy.orm import relationship
 from app.extensions import db
-from enum import Enum
+import enum
 
 
-class UnitType(Enum):
-    GRAM = 1,
-    CENTIMETER = 2,
-    PIECE = 3
+class UnitType(enum.Enum):
+    GRAM = 'gram'
+    CENTIMETER = 'centimeter'
+    PIECE = 'piece'
 
 
 class Material(db.Model):
@@ -16,9 +18,9 @@ class Material(db.Model):
 
     Attributes:
         __tablename__ (str): Specifies the name of the table in the database for the Raw_Material model.
-        name (db.Column): The name of the raw material, which serves as the primary key for the Raw_Material table. It is a non-nullable string of maximum length 50.
-        unit (db.Column): Specifies the unit of measure for the raw material (e.g., kg, liters). It is a non-nullable string of maximum length 10.
-        quantity (db.Column): Represents the current stock quantity of the raw material. It is a non-nullable integer, indicating how much of the material is available.
+        name (Column): The name of the raw material, which serves as the primary key for the Raw_Material table. It is a non-nullable string of maximum length 50.
+        unit (Column): Specifies the unit of measure for the raw material (e.g., kg, liters). It is a non-nullable string of maximum length 10.
+        quantity (Column): Represents the current stock quantity of the raw material. It is a non-nullable integer, indicating how much of the material is available.
 
     The Raw_Material model includes a method `to_dict` which converts the raw material record into a dictionary,
     facilitating easy JSON serialization for API responses or other purposes.
@@ -29,12 +31,12 @@ class Material(db.Model):
     """
 
     __tablename__ = 'material'
-    part_no = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False, unique=True)
-    unit = db.Column(db.Enum(UnitType), nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
-    challan_items = db.relationship('ChallanItem', backref='material')
-    scraps = db.relationship('MaterialScrap', backref='material')
+    part_no = Column(Integer, primary_key=True)
+    name = Column(String(50), nullable=False, unique=True)
+    unit = Column(Enum(UnitType), nullable=False)
+    quantity = Column(Integer, nullable=False)
+    challan_items = relationship('ChallanItem', backref='material')
+    scraps = relationship('MaterialScrap', backref='material')
 
     def to_dict(self):
         """

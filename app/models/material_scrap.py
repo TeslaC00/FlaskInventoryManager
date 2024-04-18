@@ -1,11 +1,12 @@
+from sqlalchemy import Column, Integer, Enum, ForeignKey, PrimaryKeyConstraint, Date
 from app.extensions import db
-from enum import Enum
+import enum
 
 
-class MaterialScrapType(Enum):
-    OK_MATERIAL = 1
-    NOT_GOOD = 2
-    INTERNAL_REJECTION = 3
+class MaterialScrapType(enum.Enum):
+    OK_MATERIAL = 'ok_material'
+    NOT_GOOD = 'not_good'
+    INTERNAL_REJECTION = 'internal_rejection'
 
 
 class MaterialScrap(db.Model):
@@ -37,13 +38,13 @@ class MaterialScrap(db.Model):
     """
 
     __tablename__ = 'material_scrap'
-    material_part_no = db.Column(db.Integer,
-                                 db.ForeignKey('material.part_no', name='fk_material_scrap_material_part_no'),
-                                 nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
-    scrap_type = db.Column(db.Enum(MaterialScrapType), nullable=False)
-    date = db.Column(db.Date, nullable=False)
-    __table_args__ = (db.PrimaryKeyConstraint(date, material_part_no, name='pk_material_scrap'),)
+    material_part_no = Column(Integer,
+                              ForeignKey('material.part_no', name='fk_material_scrap_material_part_no'),
+                              nullable=False)
+    quantity = Column(Integer, nullable=False)
+    scrap_type = Column(Enum(MaterialScrapType), nullable=False)
+    date = Column(Date, nullable=False)
+    __table_args__ = (PrimaryKeyConstraint('date', 'material_part_no', name='pk_material_scrap'),)
 
     def to_dict(self):
         """

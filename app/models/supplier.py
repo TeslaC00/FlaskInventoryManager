@@ -1,3 +1,5 @@
+from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy.orm import relationship
 from app.extensions import db
 
 
@@ -10,11 +12,11 @@ class Supplier(db.Model):
 
     Attributes:
         __tablename__ (str): Specifies the name of the table in the database for the Supplier model.
-        name (db.Column): Stores the name of the supplier. It is a string of maximum length 50 characters and cannot be null.
-        GST_No (db.Column): Holds the GST (Goods and Services Tax) number of the supplier, which is a unique identifier for businesses in India. It is a string of length 15 characters and cannot be null.
-        state_code (db.Column): Contains the state code where the supplier is located. It is an integer representing a specific state within the country, and cannot be null.
-        state_name (db.Column): The name of the state where the supplier operates. It is a string of maximum length 30 characters and cannot be null.
-        id (db.Column): A unique identifier for the supplier within the database. It is an integer and serves as the primary key for the Supplier table.
+        name (Column): Stores the name of the supplier. It is a string of maximum length 50 characters and cannot be null.
+        GST_No (Column): Holds the GST (Goods and Services Tax) number of the supplier, which is a unique identifier for businesses in India. It is a string of length 15 characters and cannot be null.
+        state_code (Column): Contains the state code where the supplier is located. It is an integer representing a specific state within the country, and cannot be null.
+        state_name (Column): The name of the state where the supplier operates. It is a string of maximum length 30 characters and cannot be null.
+        id (Column): A unique identifier for the supplier within the database. It is an integer and serves as the primary key for the Supplier table.
 
     The Supplier model includes a method `to_dict` which converts the supplier entity into a dictionary,
     facilitating easy JSON serialization for API responses or other purposes.
@@ -25,13 +27,13 @@ class Supplier(db.Model):
     """
 
     __tablename__ = 'supplier'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    GST_No = db.Column(db.String(15), nullable=False)
-    state_code = db.Column(db.Integer, nullable=False)
-    state_name = db.Column(db.String(30), nullable=False)
-    address = db.Column(db.Text, nullable=False)
-    challans = db.relationship('Challan', backref='supplier')
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50), nullable=False)
+    GST_No = Column(String(15), nullable=False)
+    state_code = Column(Integer, nullable=False)
+    state_name = Column(String(30), nullable=False)
+    address = Column(Text, nullable=False)
+    challans = relationship('Challan', backref='supplier')
 
     def to_dict(self):
         """
