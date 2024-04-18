@@ -70,8 +70,6 @@ def seed():
 
     log.info(f'Added ChallanItem records')
 
-    # TODO: add users data
-
     for item in read_json('product_scraps.json'):
         record = ProductScrap(**item)
         db.session.add(record)
@@ -87,6 +85,8 @@ def seed():
     for item in read_json('product_materials.json'):
         record = ProductMaterial(**item)
         db.session.add(record)
+
+    # adding user data
 
     db.session.commit()
 
