@@ -1,352 +1,162 @@
 [
-  {
-    "id": 1,
-    "name": "Carlton Anderson",
-    "GST_No": "kapt6Irj897apSZ",
-    "state_code": 2,
-    "state_name": "California"
-  },
-  {
-    "id": 2,
-    "name": "Veronica Grady-Auer",
-    "GST_No": "R03PNIYmuOWqzcW",
-    "state_code": 30,
-    "state_name": "Nebraska"
-  },
-  {
-    "id": 3,
-    "name": "Bernadette Bergstrom",
-    "GST_No": "a0YpbO8iUEsD8Qn",
-    "state_code": 24,
-    "state_name": "Delaware"
-  },
-  {
-    "id": 4,
-    "name": "William Kub",
-    "GST_No": "vI8rGdqkyJHmlzP",
-    "state_code": 26,
-    "state_name": "Washington"
-  },
-  {
-    "id": 5,
-    "name": "Bessie Wilderman",
-    "GST_No": "edkrAI5OKhqzQVe",
-    "state_code": 2,
-    "state_name": "Kentucky"
-  },
-  {
-    "id": 6,
-    "name": "Linda Koch-Ullrich",
-    "GST_No": "WE7QX1fLvpHLYgc",
-    "state_code": 21,
-    "state_name": "Washington"
-  },
-  {
-    "id": 7,
-    "name": "Whitney Deckow",
-    "GST_No": "At0cj9Nkbk1hY98",
-    "state_code": 24,
-    "state_name": "Wyoming"
-  },
-  {
-    "id": 8,
-    "name": "Jordan Feeney",
-    "GST_No": "OfmelCT12Qp9eYi",
-    "state_code": 4,
-    "state_name": "Vermont"
-  },
-  {
-    "id": 9,
-    "name": "Tommie Collins",
-    "GST_No": "2g7vtKYxvAGGCAD",
-    "state_code": 15,
-    "state_name": "Louisiana"
-  },
-  {
-    "id": 10,
-    "name": "Ginger Veum",
-    "GST_No": "P6tH95HBzGvnvwg",
-    "state_code": 23,
-    "state_name": "Arizona"
-  },
-  {
-    "id": 11,
-    "name": "Abel Swaniawski V",
-    "GST_No": "TIA7760F05WzxKY",
-    "state_code": 25,
-    "state_name": "Maine"
-  },
-  {
-    "id": 12,
-    "name": "Rosa Ankunding",
-    "GST_No": "SEVa4UsbyTCpqLI",
-    "state_code": 12,
-    "state_name": "Alabama"
-  },
-  {
-    "id": 13,
-    "name": "Karl Blanda",
-    "GST_No": "Gw4IwBHckEHfZj4",
-    "state_code": 9,
-    "state_name": "Texas"
-  },
-  {
-    "id": 14,
-    "name": "Juana Labadie",
-    "GST_No": "mhxSdGwBtWCgtHz",
-    "state_code": 13,
-    "state_name": "Mississippi"
-  },
-  {
-    "id": 15,
-    "name": "Dale Heaney",
-    "GST_No": "gNgbGam9eTmMZMi",
-    "state_code": 15,
-    "state_name": "Connecticut"
-  },
-  {
-    "id": 16,
-    "name": "Felix Runolfsson",
-    "GST_No": "PSvs0VgelYhMZe4",
-    "state_code": 15,
-    "state_name": "Arizona"
-  },
-  {
-    "id": 17,
-    "name": "Kristy Kuhn",
-    "GST_No": "w7ZipVoX6BBHI13",
-    "state_code": 15,
-    "state_name": "New York"
-  },
-  {
-    "id": 18,
-    "name": "Nicole Osinski",
-    "GST_No": "tqel9FdXcEOLLRJ",
-    "state_code": 29,
-    "state_name": "Arkansas"
-  },
-  {
-    "id": 19,
-    "name": "Kristina Botsford",
-    "GST_No": "FED8W8md2x4Lp3t",
-    "state_code": 28,
-    "state_name": "Florida"
-  },
-  {
-    "id": 20,
-    "name": "Dr. Lorraine Kilback",
-    "GST_No": "6mDPJRMMNKYd7gD",
-    "state_code": 16,
-    "state_name": "New York"
-  },
-  {
-    "id": 21,
-    "name": "Milton Bauch",
-    "GST_No": "lTv45bYSnvYdnms",
-    "state_code": 5,
-    "state_name": "New Jersey"
-  },
-  {
-    "id": 22,
-    "name": "Jasmine Kunze",
-    "GST_No": "TmhkEW5j9iiQ9eN",
-    "state_code": 8,
-    "state_name": "Pennsylvania"
-  },
-  {
-    "id": 23,
-    "name": "Mr. George Kuhic",
-    "GST_No": "9UqxzJ99CuXAMrO",
-    "state_code": 18,
-    "state_name": "Wisconsin"
-  },
-  {
-    "id": 24,
-    "name": "Judith Emard",
-    "GST_No": "3wm7iQiqSGaWX7E",
-    "state_code": 30,
-    "state_name": "Arizona"
-  },
-  {
-    "id": 25,
-    "name": "Mercedes Hickle",
-    "GST_No": "3hP6wEppy739FeS",
-    "state_code": 24,
-    "state_name": "Virginia"
-  },
-  {
-    "id": 26,
-    "name": "Irving Steuber",
-    "GST_No": "QmwoKqQX4ejlLzv",
-    "state_code": 1,
-    "state_name": "Washington"
-  },
-  {
-    "id": 27,
-    "name": "Teresa Klein",
-    "GST_No": "Vg6kFYtK13d2qTr",
-    "state_code": 7,
-    "state_name": "Kentucky"
-  },
-  {
-    "id": 28,
-    "name": "Jessica Kemmer DDS",
-    "GST_No": "2eFTSY7y8DiDCU4",
-    "state_code": 9,
-    "state_name": "Georgia"
-  },
-  {
-    "id": 29,
-    "name": "Edmund Kozey",
-    "GST_No": "iPoSDaSB21VZXOS",
-    "state_code": 13,
-    "state_name": "Iowa"
-  },
-  {
-    "id": 30,
-    "name": "Tricia Schneider",
-    "GST_No": "xtVmbvM2ZsAdyZM",
-    "state_code": 8,
-    "state_name": "South Dakota"
-  },
-  {
-    "id": 31,
-    "name": "Mr. Jimmie Anderson",
-    "GST_No": "7XGv7Cs5L30xHEo",
-    "state_code": 17,
-    "state_name": "Colorado"
-  },
-  {
-    "id": 32,
-    "name": "Diane Kub",
-    "GST_No": "D5nGCkIvGAtoh0j",
-    "state_code": 28,
-    "state_name": "Missouri"
-  },
-  {
-    "id": 33,
-    "name": "Edmund Welch",
-    "GST_No": "r5wXDgbUKRhULXh",
-    "state_code": 16,
-    "state_name": "Nevada"
-  },
-  {
-    "id": 34,
-    "name": "Shane Stamm",
-    "GST_No": "8sSxRJ4zQ2XZt6N",
-    "state_code": 16,
-    "state_name": "Wisconsin"
-  },
-  {
-    "id": 35,
-    "name": "Sheldon Gulgowski",
-    "GST_No": "qm0dxHkS8OETl7V",
-    "state_code": 25,
-    "state_name": "North Carolina"
-  },
-  {
-    "id": 36,
-    "name": "Harvey Rogahn II",
-    "GST_No": "YrVcHQNsqJNPyz9",
-    "state_code": 9,
-    "state_name": "Florida"
-  },
-  {
-    "id": 37,
-    "name": "Courtney Emard",
-    "GST_No": "QfZ2BvKC1xJ3YkU",
-    "state_code": 6,
-    "state_name": "California"
-  },
-  {
-    "id": 38,
-    "name": "Elizabeth Mayert",
-    "GST_No": "f5GhwdCI9QO4GgU",
-    "state_code": 11,
-    "state_name": "Alabama"
-  },
-  {
-    "id": 39,
-    "name": "Josh Hettinger",
-    "GST_No": "y6z2jyce81jlsUm",
-    "state_code": 1,
-    "state_name": "Delaware"
-  },
-  {
-    "id": 40,
-    "name": "Mr. Gabriel Hintz",
-    "GST_No": "LUanWzQQsYUXfZy",
-    "state_code": 20,
-    "state_name": "Illinois"
-  },
-  {
-    "id": 41,
-    "name": "Mr. Jesus DuBuque",
-    "GST_No": "7X0Vjis2oogR6gx",
-    "state_code": 5,
-    "state_name": "Georgia"
-  },
-  {
-    "id": 42,
-    "name": "Earnest Goyette",
-    "GST_No": "1avgYlkd0UQWK86",
-    "state_code": 4,
-    "state_name": "Maryland"
-  },
-  {
-    "id": 43,
-    "name": "Dr. Andy Schroeder",
-    "GST_No": "DR2xiVjmQlE2IJG",
-    "state_code": 24,
-    "state_name": "Pennsylvania"
-  },
-  {
-    "id": 44,
-    "name": "Mr. Luis Daugherty I",
-    "GST_No": "SjE8FnYaUiny1gc",
-    "state_code": 26,
-    "state_name": "Florida"
-  },
-  {
-    "id": 45,
-    "name": "Angelina Gulgowski",
-    "GST_No": "315Yryn54qHo4EP",
-    "state_code": 20,
-    "state_name": "New Hampshire"
-  },
-  {
-    "id": 46,
-    "name": "Clifton Pollich",
-    "GST_No": "1L9SndHihVoXeP6",
-    "state_code": 30,
-    "state_name": "Mississippi"
-  },
-  {
-    "id": 47,
-    "name": "Melba Gottlieb",
-    "GST_No": "8eI6ffqudmCtkKM",
-    "state_code": 6,
-    "state_name": "Iowa"
-  },
-  {
-    "id": 48,
-    "name": "James Heidenreich IV",
-    "GST_No": "RtU4wdLANMEi0K6",
-    "state_code": 4,
-    "state_name": "Minnesota"
-  },
-  {
-    "id": 49,
-    "name": "Ms. Louise Orn II",
-    "GST_No": "LQRI1irp4XLVgQE",
-    "state_code": 8,
-    "state_name": "Washington"
-  },
-  {
-    "id": 50,
-    "name": "Dennis Little",
-    "GST_No": "oNnKHqWM2ng5bXW",
-    "state_code": 1,
-    "state_name": "Delaware"
-  }
+    {
+        "id": 1,
+        "name": "Dhara Chaturvedi",
+        "GST_No": "3LIiFx9T1r6aTVj",
+        "state_code": 24,
+        "state_name": "Rajasthan",
+        "address": "2816 Bhadrak Hill Suite 666"
+    },
+    {
+        "id": 2,
+        "name": "Paramartha Deshpande Jr.",
+        "GST_No": "gAcFshvVnZndMjW",
+        "state_code": 35,
+        "state_name": "Tripura",
+        "address": "3623 Menon Avenue Suite 261"
+    },
+    {
+        "id": 3,
+        "name": "Krishnadasa Pothuvaal",
+        "GST_No": "7uBY6YMUdzse0Qn",
+        "state_code": 23,
+        "state_name": "Uttar Pradesh",
+        "address": "27651 Deeptimayee Crest Suite 684"
+    },
+    {
+        "id": 4,
+        "name": "Brahmaanand Guha",
+        "GST_No": "zGUNNbRP7xIEJgN",
+        "state_code": 24,
+        "state_name": "Andaman and Nicobar Islands",
+        "address": "883 Khatri Mills Apt. 143"
+    },
+    {
+        "id": 5,
+        "name": "Bhaanumati Joshi",
+        "GST_No": "Cm4YsJ8vzlWzlHU",
+        "state_code": 21,
+        "state_name": "Maharashtra",
+        "address": "30505 Enakshi View Apt. 465"
+    },
+    {
+        "id": 6,
+        "name": "Bhardwaj Mishra I",
+        "GST_No": "o5t09RSN35bM8c6",
+        "state_code": 3,
+        "state_name": "Daman and Diu",
+        "address": "682 Anandamayi Land Apt. 107"
+    },
+    {
+        "id": 7,
+        "name": "Shubhaprada Pillai",
+        "GST_No": "VTiRsJWDUsWwMIs",
+        "state_code": 10,
+        "state_name": "Assam",
+        "address": "8407 Chandra Fall Suite 199"
+    },
+    {
+        "id": 8,
+        "name": "Gitanjali Khanna",
+        "GST_No": "6iKAWMria40zZHQ",
+        "state_code": 23,
+        "state_name": "Uttarakhand",
+        "address": "27401 Dakshayani Landing Apt. 342"
+    },
+    {
+        "id": 9,
+        "name": "Mukul Reddy",
+        "GST_No": "pk1eD5uXr1NG41b",
+        "state_code": 34,
+        "state_name": "Gujarat",
+        "address": "83377 Chinmayanand Crest Suite 396"
+    },
+    {
+        "id": 10,
+        "name": "Darshwana Banerjee",
+        "GST_No": "B5uGQRcOIC8chvB",
+        "state_code": 20,
+        "state_name": "Manipur",
+        "address": "6545 Achari River Apt. 701"
+    },
+    {
+        "id": 11,
+        "name": "Kailash Kaur",
+        "GST_No": "9H2cR7V3CZXd7LP",
+        "state_code": 26,
+        "state_name": "Karnataka",
+        "address": "75255 Asan Forges Apt. 109"
+    },
+    {
+        "id": 12,
+        "name": "Anandamayi Khan Jr.",
+        "GST_No": "A4YRHBrPI43uD4M",
+        "state_code": 25,
+        "state_name": "Rajasthan",
+        "address": "686 Indra Viaduct Apt. 180"
+    },
+    {
+        "id": 13,
+        "name": "Balagopal Somayaji",
+        "GST_No": "V8RNkQU2F5M1iSt",
+        "state_code": 29,
+        "state_name": "Himachal Pradesh",
+        "address": "43690 Menon Pines Apt. 894"
+    },
+    {
+        "id": 14,
+        "name": "Chandani Bandopadhyay",
+        "GST_No": "LFuUBQKC6LGYM8Z",
+        "state_code": 33,
+        "state_name": "Kerala",
+        "address": "613 Satyen Trace Apt. 982"
+    },
+    {
+        "id": 15,
+        "name": "Dr. Dhruv Dutta",
+        "GST_No": "W8KjkJ2lz6kv3xj",
+        "state_code": 3,
+        "state_name": "Uttar Pradesh",
+        "address": "531 Khanna Road Suite 760"
+    },
+    {
+        "id": 16,
+        "name": "Prem Dutta-Bharadwaj",
+        "GST_No": "aOsQulfbMeTH23k",
+        "state_code": 1,
+        "state_name": "Sikkim",
+        "address": "61442 Adripathi Meadows Apt. 732"
+    },
+    {
+        "id": 17,
+        "name": "Dr. Bhadraksh Trivedi II",
+        "GST_No": "eEXVJ9DXTxPKvFD",
+        "state_code": 36,
+        "state_name": "Lakshadweep",
+        "address": "889 Lalita Ville Suite 322"
+    },
+    {
+        "id": 18,
+        "name": "Ravi Malik",
+        "GST_No": "W6nWPl513uM2k7w",
+        "state_code": 30,
+        "state_name": "Manipur",
+        "address": "73065 Vidhur Forge Suite 813"
+    },
+    {
+        "id": 19,
+        "name": "Mr. Deeptendu Bhat",
+        "GST_No": "muyoIjk3n95Cal3",
+        "state_code": 8,
+        "state_name": "Nagaland",
+        "address": "98618 Sloka Club Suite 246"
+    },
+    {
+        "id": 20,
+        "name": "Daevi Gowda",
+        "GST_No": "mujciP8MP4S5Mlw",
+        "state_code": 1,
+        "state_name": "Chandigarh",
+        "address": "3508 Saini Estates Apt. 855"
+    }
 ]

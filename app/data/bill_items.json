@@ -1,0 +1,1502 @@
+[
+    {
+        "id": 1,
+        "bill_id": 1,
+        "product_part_no": 12,
+        "quantity": 4,
+        "price": 654.72,
+        "c_gst": 6.81,
+        "s_gst": 6.01,
+        "i_gst": 4.35
+    },
+    {
+        "id": 2,
+        "bill_id": 1,
+        "product_part_no": 68,
+        "quantity": 9,
+        "price": 665.84,
+        "c_gst": 6.95,
+        "s_gst": 5.21,
+        "i_gst": 5.38
+    },
+    {
+        "id": 3,
+        "bill_id": 1,
+        "product_part_no": 64,
+        "quantity": 5,
+        "price": 947.1,
+        "c_gst": 4.53,
+        "s_gst": 2.48,
+        "i_gst": 5.83
+    },
+    {
+        "id": 4,
+        "bill_id": 2,
+        "product_part_no": 54,
+        "quantity": 6,
+        "price": 256.67,
+        "c_gst": 11.91,
+        "s_gst": 10.85,
+        "i_gst": 7.23
+    },
+    {
+        "id": 5,
+        "bill_id": 2,
+        "product_part_no": 44,
+        "quantity": 6,
+        "price": 396.85,
+        "c_gst": 4.27,
+        "s_gst": 8.4,
+        "i_gst": 5.97
+    },
+    {
+        "id": 6,
+        "bill_id": 2,
+        "product_part_no": 61,
+        "quantity": 4,
+        "price": 753.16,
+        "c_gst": 1.15,
+        "s_gst": 11.12,
+        "i_gst": 6.44
+    },
+    {
+        "id": 7,
+        "bill_id": 3,
+        "product_part_no": 41,
+        "quantity": 9,
+        "price": 805.82,
+        "c_gst": 8.96,
+        "s_gst": 4.97,
+        "i_gst": 4.16
+    },
+    {
+        "id": 8,
+        "bill_id": 3,
+        "product_part_no": 35,
+        "quantity": 8,
+        "price": 134.84,
+        "c_gst": 5.55,
+        "s_gst": 6.74,
+        "i_gst": 4.99
+    },
+    {
+        "id": 9,
+        "bill_id": 3,
+        "product_part_no": 80,
+        "quantity": 6,
+        "price": 679.15,
+        "c_gst": 2.03,
+        "s_gst": 8.25,
+        "i_gst": 2.65
+    },
+    {
+        "id": 10,
+        "bill_id": 4,
+        "product_part_no": 28,
+        "quantity": 8,
+        "price": 384.35,
+        "c_gst": 6.89,
+        "s_gst": 9.07,
+        "i_gst": 4.98
+    },
+    {
+        "id": 11,
+        "bill_id": 4,
+        "product_part_no": 86,
+        "quantity": 1,
+        "price": 903.93,
+        "c_gst": 11.01,
+        "s_gst": 1.75,
+        "i_gst": 5.21
+    },
+    {
+        "id": 12,
+        "bill_id": 4,
+        "product_part_no": 6,
+        "quantity": 4,
+        "price": 785.88,
+        "c_gst": 2.48,
+        "s_gst": 11.55,
+        "i_gst": 5.67
+    },
+    {
+        "id": 13,
+        "bill_id": 5,
+        "product_part_no": 3,
+        "quantity": 9,
+        "price": 105.23,
+        "c_gst": 2.52,
+        "s_gst": 6.91,
+        "i_gst": 2.27
+    },
+    {
+        "id": 14,
+        "bill_id": 5,
+        "product_part_no": 70,
+        "quantity": 2,
+        "price": 417.6,
+        "c_gst": 6.23,
+        "s_gst": 7.47,
+        "i_gst": 6.55
+    },
+    {
+        "id": 15,
+        "bill_id": 5,
+        "product_part_no": 48,
+        "quantity": 6,
+        "price": 555.72,
+        "c_gst": 5.23,
+        "s_gst": 5.35,
+        "i_gst": 5.48
+    },
+    {
+        "id": 16,
+        "bill_id": 6,
+        "product_part_no": 92,
+        "quantity": 8,
+        "price": 468.61,
+        "c_gst": 11.27,
+        "s_gst": 8.94,
+        "i_gst": 7.74
+    },
+    {
+        "id": 17,
+        "bill_id": 6,
+        "product_part_no": 26,
+        "quantity": 8,
+        "price": 472.98,
+        "c_gst": 1.06,
+        "s_gst": 6.76,
+        "i_gst": 4.89
+    },
+    {
+        "id": 18,
+        "bill_id": 6,
+        "product_part_no": 49,
+        "quantity": 6,
+        "price": 532.46,
+        "c_gst": 3.31,
+        "s_gst": 8.69,
+        "i_gst": 2.31
+    },
+    {
+        "id": 19,
+        "bill_id": 7,
+        "product_part_no": 47,
+        "quantity": 9,
+        "price": 718.36,
+        "c_gst": 5.11,
+        "s_gst": 2.03,
+        "i_gst": 2.83
+    },
+    {
+        "id": 20,
+        "bill_id": 7,
+        "product_part_no": 70,
+        "quantity": 6,
+        "price": 433.2,
+        "c_gst": 1.97,
+        "s_gst": 4.52,
+        "i_gst": 3.84
+    },
+    {
+        "id": 21,
+        "bill_id": 7,
+        "product_part_no": 84,
+        "quantity": 10,
+        "price": 561.35,
+        "c_gst": 2.32,
+        "s_gst": 10.58,
+        "i_gst": 4.9
+    },
+    {
+        "id": 22,
+        "bill_id": 8,
+        "product_part_no": 15,
+        "quantity": 6,
+        "price": 377.92,
+        "c_gst": 9.08,
+        "s_gst": 6.45,
+        "i_gst": 7.47
+    },
+    {
+        "id": 23,
+        "bill_id": 8,
+        "product_part_no": 86,
+        "quantity": 6,
+        "price": 136.87,
+        "c_gst": 2.56,
+        "s_gst": 3.08,
+        "i_gst": 4.84
+    },
+    {
+        "id": 24,
+        "bill_id": 8,
+        "product_part_no": 90,
+        "quantity": 6,
+        "price": 197.96,
+        "c_gst": 10.71,
+        "s_gst": 7.33,
+        "i_gst": 4.31
+    },
+    {
+        "id": 25,
+        "bill_id": 9,
+        "product_part_no": 94,
+        "quantity": 9,
+        "price": 781.83,
+        "c_gst": 10.87,
+        "s_gst": 11.48,
+        "i_gst": 1.85
+    },
+    {
+        "id": 26,
+        "bill_id": 9,
+        "product_part_no": 31,
+        "quantity": 2,
+        "price": 757.12,
+        "c_gst": 3.86,
+        "s_gst": 2.38,
+        "i_gst": 2.57
+    },
+    {
+        "id": 27,
+        "bill_id": 9,
+        "product_part_no": 82,
+        "quantity": 9,
+        "price": 603.26,
+        "c_gst": 3.02,
+        "s_gst": 6.21,
+        "i_gst": 3.37
+    },
+    {
+        "id": 28,
+        "bill_id": 10,
+        "product_part_no": 31,
+        "quantity": 4,
+        "price": 452.61,
+        "c_gst": 10.43,
+        "s_gst": 6.37,
+        "i_gst": 1.79
+    },
+    {
+        "id": 29,
+        "bill_id": 10,
+        "product_part_no": 68,
+        "quantity": 2,
+        "price": 795.56,
+        "c_gst": 11.23,
+        "s_gst": 1.09,
+        "i_gst": 2.47
+    },
+    {
+        "id": 30,
+        "bill_id": 10,
+        "product_part_no": 4,
+        "quantity": 8,
+        "price": 716.86,
+        "c_gst": 1.73,
+        "s_gst": 11.04,
+        "i_gst": 2.73
+    },
+    {
+        "id": 31,
+        "bill_id": 11,
+        "product_part_no": 94,
+        "quantity": 3,
+        "price": 868.93,
+        "c_gst": 10.95,
+        "s_gst": 4.67,
+        "i_gst": 3.2
+    },
+    {
+        "id": 32,
+        "bill_id": 11,
+        "product_part_no": 70,
+        "quantity": 6,
+        "price": 325.83,
+        "c_gst": 8.11,
+        "s_gst": 8.72,
+        "i_gst": 4.76
+    },
+    {
+        "id": 33,
+        "bill_id": 11,
+        "product_part_no": 63,
+        "quantity": 8,
+        "price": 402.96,
+        "c_gst": 1.12,
+        "s_gst": 3.89,
+        "i_gst": 5.34
+    },
+    {
+        "id": 34,
+        "bill_id": 12,
+        "product_part_no": 98,
+        "quantity": 8,
+        "price": 579.48,
+        "c_gst": 2.1,
+        "s_gst": 1.2,
+        "i_gst": 7.46
+    },
+    {
+        "id": 35,
+        "bill_id": 12,
+        "product_part_no": 11,
+        "quantity": 8,
+        "price": 769.44,
+        "c_gst": 1.03,
+        "s_gst": 1.2,
+        "i_gst": 4.57
+    },
+    {
+        "id": 36,
+        "bill_id": 12,
+        "product_part_no": 79,
+        "quantity": 6,
+        "price": 934.16,
+        "c_gst": 5.01,
+        "s_gst": 6.13,
+        "i_gst": 2.84
+    },
+    {
+        "id": 37,
+        "bill_id": 13,
+        "product_part_no": 23,
+        "quantity": 10,
+        "price": 744.6,
+        "c_gst": 1.69,
+        "s_gst": 10.37,
+        "i_gst": 6.62
+    },
+    {
+        "id": 38,
+        "bill_id": 13,
+        "product_part_no": 70,
+        "quantity": 1,
+        "price": 482.16,
+        "c_gst": 2.9,
+        "s_gst": 10.45,
+        "i_gst": 4.5
+    },
+    {
+        "id": 39,
+        "bill_id": 13,
+        "product_part_no": 43,
+        "quantity": 6,
+        "price": 184.27,
+        "c_gst": 9.69,
+        "s_gst": 1.31,
+        "i_gst": 7.14
+    },
+    {
+        "id": 40,
+        "bill_id": 14,
+        "product_part_no": 42,
+        "quantity": 9,
+        "price": 274.5,
+        "c_gst": 8.12,
+        "s_gst": 5.66,
+        "i_gst": 1.66
+    },
+    {
+        "id": 41,
+        "bill_id": 14,
+        "product_part_no": 80,
+        "quantity": 5,
+        "price": 822.03,
+        "c_gst": 6.69,
+        "s_gst": 6.43,
+        "i_gst": 4.19
+    },
+    {
+        "id": 42,
+        "bill_id": 14,
+        "product_part_no": 30,
+        "quantity": 9,
+        "price": 581.73,
+        "c_gst": 8.84,
+        "s_gst": 8.54,
+        "i_gst": 4.16
+    },
+    {
+        "id": 43,
+        "bill_id": 15,
+        "product_part_no": 18,
+        "quantity": 7,
+        "price": 535.29,
+        "c_gst": 2.37,
+        "s_gst": 4.58,
+        "i_gst": 4.73
+    },
+    {
+        "id": 44,
+        "bill_id": 15,
+        "product_part_no": 63,
+        "quantity": 8,
+        "price": 379.88,
+        "c_gst": 4.85,
+        "s_gst": 8.62,
+        "i_gst": 5.23
+    },
+    {
+        "id": 45,
+        "bill_id": 15,
+        "product_part_no": 45,
+        "quantity": 6,
+        "price": 437.89,
+        "c_gst": 5.44,
+        "s_gst": 3.68,
+        "i_gst": 5.48
+    },
+    {
+        "id": 46,
+        "bill_id": 16,
+        "product_part_no": 70,
+        "quantity": 6,
+        "price": 728.41,
+        "c_gst": 7.8,
+        "s_gst": 8.49,
+        "i_gst": 5.76
+    },
+    {
+        "id": 47,
+        "bill_id": 16,
+        "product_part_no": 19,
+        "quantity": 8,
+        "price": 767.13,
+        "c_gst": 3.17,
+        "s_gst": 6.66,
+        "i_gst": 5.31
+    },
+    {
+        "id": 48,
+        "bill_id": 16,
+        "product_part_no": 38,
+        "quantity": 10,
+        "price": 259.1,
+        "c_gst": 4.61,
+        "s_gst": 5,
+        "i_gst": 3.81
+    },
+    {
+        "id": 49,
+        "bill_id": 17,
+        "product_part_no": 97,
+        "quantity": 9,
+        "price": 234.08,
+        "c_gst": 5.65,
+        "s_gst": 5.55,
+        "i_gst": 1.63
+    },
+    {
+        "id": 50,
+        "bill_id": 17,
+        "product_part_no": 60,
+        "quantity": 3,
+        "price": 334.32,
+        "c_gst": 1.97,
+        "s_gst": 2.6,
+        "i_gst": 1.59
+    },
+    {
+        "id": 51,
+        "bill_id": 17,
+        "product_part_no": 48,
+        "quantity": 4,
+        "price": 918.09,
+        "c_gst": 3.28,
+        "s_gst": 7.87,
+        "i_gst": 2.27
+    },
+    {
+        "id": 52,
+        "bill_id": 18,
+        "product_part_no": 3,
+        "quantity": 3,
+        "price": 194.14,
+        "c_gst": 5.25,
+        "s_gst": 11.67,
+        "i_gst": 7.1
+    },
+    {
+        "id": 53,
+        "bill_id": 18,
+        "product_part_no": 49,
+        "quantity": 6,
+        "price": 874.27,
+        "c_gst": 6.13,
+        "s_gst": 3.43,
+        "i_gst": 7.4
+    },
+    {
+        "id": 54,
+        "bill_id": 18,
+        "product_part_no": 85,
+        "quantity": 8,
+        "price": 514.9,
+        "c_gst": 10.99,
+        "s_gst": 7.33,
+        "i_gst": 4.03
+    },
+    {
+        "id": 55,
+        "bill_id": 19,
+        "product_part_no": 34,
+        "quantity": 2,
+        "price": 604.15,
+        "c_gst": 7.66,
+        "s_gst": 4.2,
+        "i_gst": 7.52
+    },
+    {
+        "id": 56,
+        "bill_id": 19,
+        "product_part_no": 26,
+        "quantity": 1,
+        "price": 535.1,
+        "c_gst": 5.21,
+        "s_gst": 7.85,
+        "i_gst": 3.75
+    },
+    {
+        "id": 57,
+        "bill_id": 19,
+        "product_part_no": 98,
+        "quantity": 4,
+        "price": 460.36,
+        "c_gst": 1.66,
+        "s_gst": 8.6,
+        "i_gst": 2.83
+    },
+    {
+        "id": 58,
+        "bill_id": 20,
+        "product_part_no": 69,
+        "quantity": 7,
+        "price": 232.6,
+        "c_gst": 3.96,
+        "s_gst": 9.25,
+        "i_gst": 4.42
+    },
+    {
+        "id": 59,
+        "bill_id": 20,
+        "product_part_no": 2,
+        "quantity": 1,
+        "price": 605.02,
+        "c_gst": 8.58,
+        "s_gst": 7.13,
+        "i_gst": 7.5
+    },
+    {
+        "id": 60,
+        "bill_id": 20,
+        "product_part_no": 6,
+        "quantity": 9,
+        "price": 234.63,
+        "c_gst": 6.49,
+        "s_gst": 8.78,
+        "i_gst": 2.81
+    },
+    {
+        "id": 61,
+        "bill_id": 21,
+        "product_part_no": 50,
+        "quantity": 8,
+        "price": 366.88,
+        "c_gst": 3.86,
+        "s_gst": 1.17,
+        "i_gst": 3.46
+    },
+    {
+        "id": 62,
+        "bill_id": 21,
+        "product_part_no": 49,
+        "quantity": 4,
+        "price": 526.77,
+        "c_gst": 5.71,
+        "s_gst": 10.12,
+        "i_gst": 1.68
+    },
+    {
+        "id": 63,
+        "bill_id": 21,
+        "product_part_no": 41,
+        "quantity": 10,
+        "price": 515.24,
+        "c_gst": 8.16,
+        "s_gst": 3.54,
+        "i_gst": 2.19
+    },
+    {
+        "id": 64,
+        "bill_id": 22,
+        "product_part_no": 69,
+        "quantity": 6,
+        "price": 574.81,
+        "c_gst": 10.54,
+        "s_gst": 2.86,
+        "i_gst": 6.63
+    },
+    {
+        "id": 65,
+        "bill_id": 22,
+        "product_part_no": 33,
+        "quantity": 6,
+        "price": 769.63,
+        "c_gst": 11.67,
+        "s_gst": 4.83,
+        "i_gst": 4.56
+    },
+    {
+        "id": 66,
+        "bill_id": 22,
+        "product_part_no": 92,
+        "quantity": 4,
+        "price": 134.67,
+        "c_gst": 7.57,
+        "s_gst": 5.44,
+        "i_gst": 2.46
+    },
+    {
+        "id": 67,
+        "bill_id": 23,
+        "product_part_no": 33,
+        "quantity": 1,
+        "price": 631.96,
+        "c_gst": 4.25,
+        "s_gst": 8.55,
+        "i_gst": 5.33
+    },
+    {
+        "id": 68,
+        "bill_id": 23,
+        "product_part_no": 59,
+        "quantity": 9,
+        "price": 630.12,
+        "c_gst": 1.47,
+        "s_gst": 5.36,
+        "i_gst": 4.57
+    },
+    {
+        "id": 69,
+        "bill_id": 23,
+        "product_part_no": 82,
+        "quantity": 9,
+        "price": 979.15,
+        "c_gst": 6.36,
+        "s_gst": 3.61,
+        "i_gst": 6.64
+    },
+    {
+        "id": 70,
+        "bill_id": 24,
+        "product_part_no": 5,
+        "quantity": 2,
+        "price": 570.98,
+        "c_gst": 5.15,
+        "s_gst": 10.16,
+        "i_gst": 3.34
+    },
+    {
+        "id": 71,
+        "bill_id": 24,
+        "product_part_no": 84,
+        "quantity": 6,
+        "price": 896.44,
+        "c_gst": 9.02,
+        "s_gst": 1.91,
+        "i_gst": 7.08
+    },
+    {
+        "id": 72,
+        "bill_id": 24,
+        "product_part_no": 76,
+        "quantity": 8,
+        "price": 497.79,
+        "c_gst": 7.31,
+        "s_gst": 1.57,
+        "i_gst": 7.6
+    },
+    {
+        "id": 73,
+        "bill_id": 25,
+        "product_part_no": 32,
+        "quantity": 8,
+        "price": 171.35,
+        "c_gst": 2.17,
+        "s_gst": 2.5,
+        "i_gst": 3.65
+    },
+    {
+        "id": 74,
+        "bill_id": 25,
+        "product_part_no": 28,
+        "quantity": 6,
+        "price": 529.09,
+        "c_gst": 5.36,
+        "s_gst": 11.63,
+        "i_gst": 7.44
+    },
+    {
+        "id": 75,
+        "bill_id": 25,
+        "product_part_no": 17,
+        "quantity": 4,
+        "price": 759.45,
+        "c_gst": 9.08,
+        "s_gst": 4.68,
+        "i_gst": 2.91
+    },
+    {
+        "id": 76,
+        "bill_id": 26,
+        "product_part_no": 18,
+        "quantity": 1,
+        "price": 626.08,
+        "c_gst": 9.42,
+        "s_gst": 11.86,
+        "i_gst": 2.02
+    },
+    {
+        "id": 77,
+        "bill_id": 26,
+        "product_part_no": 85,
+        "quantity": 3,
+        "price": 601.13,
+        "c_gst": 10.19,
+        "s_gst": 1.08,
+        "i_gst": 1.46
+    },
+    {
+        "id": 78,
+        "bill_id": 26,
+        "product_part_no": 62,
+        "quantity": 3,
+        "price": 271.07,
+        "c_gst": 11.21,
+        "s_gst": 7.1,
+        "i_gst": 1.06
+    },
+    {
+        "id": 79,
+        "bill_id": 27,
+        "product_part_no": 89,
+        "quantity": 6,
+        "price": 370.52,
+        "c_gst": 8.32,
+        "s_gst": 9.97,
+        "i_gst": 6.93
+    },
+    {
+        "id": 80,
+        "bill_id": 27,
+        "product_part_no": 65,
+        "quantity": 9,
+        "price": 545.7,
+        "c_gst": 10.24,
+        "s_gst": 3.96,
+        "i_gst": 2.21
+    },
+    {
+        "id": 81,
+        "bill_id": 27,
+        "product_part_no": 11,
+        "quantity": 7,
+        "price": 108.45,
+        "c_gst": 8.21,
+        "s_gst": 9.23,
+        "i_gst": 6.6
+    },
+    {
+        "id": 82,
+        "bill_id": 28,
+        "product_part_no": 87,
+        "quantity": 4,
+        "price": 595.67,
+        "c_gst": 9.67,
+        "s_gst": 6.3,
+        "i_gst": 5.3
+    },
+    {
+        "id": 83,
+        "bill_id": 28,
+        "product_part_no": 32,
+        "quantity": 4,
+        "price": 884.72,
+        "c_gst": 2.79,
+        "s_gst": 3.55,
+        "i_gst": 4.18
+    },
+    {
+        "id": 84,
+        "bill_id": 28,
+        "product_part_no": 26,
+        "quantity": 10,
+        "price": 156.95,
+        "c_gst": 6.8,
+        "s_gst": 2.18,
+        "i_gst": 1.08
+    },
+    {
+        "id": 85,
+        "bill_id": 29,
+        "product_part_no": 54,
+        "quantity": 9,
+        "price": 211.14,
+        "c_gst": 9.53,
+        "s_gst": 7.29,
+        "i_gst": 2.95
+    },
+    {
+        "id": 86,
+        "bill_id": 29,
+        "product_part_no": 57,
+        "quantity": 9,
+        "price": 836.55,
+        "c_gst": 1.42,
+        "s_gst": 10.54,
+        "i_gst": 1.67
+    },
+    {
+        "id": 87,
+        "bill_id": 29,
+        "product_part_no": 56,
+        "quantity": 8,
+        "price": 356.42,
+        "c_gst": 8.51,
+        "s_gst": 6.05,
+        "i_gst": 6.36
+    },
+    {
+        "id": 88,
+        "bill_id": 30,
+        "product_part_no": 7,
+        "quantity": 8,
+        "price": 647.59,
+        "c_gst": 3.12,
+        "s_gst": 8.02,
+        "i_gst": 5.71
+    },
+    {
+        "id": 89,
+        "bill_id": 30,
+        "product_part_no": 82,
+        "quantity": 5,
+        "price": 845.89,
+        "c_gst": 2.63,
+        "s_gst": 11.78,
+        "i_gst": 3.69
+    },
+    {
+        "id": 90,
+        "bill_id": 30,
+        "product_part_no": 45,
+        "quantity": 3,
+        "price": 394.58,
+        "c_gst": 4.01,
+        "s_gst": 9.3,
+        "i_gst": 6.89
+    },
+    {
+        "id": 91,
+        "bill_id": 31,
+        "product_part_no": 41,
+        "quantity": 3,
+        "price": 959.33,
+        "c_gst": 1.09,
+        "s_gst": 8.46,
+        "i_gst": 3.89
+    },
+    {
+        "id": 92,
+        "bill_id": 31,
+        "product_part_no": 45,
+        "quantity": 10,
+        "price": 336.3,
+        "c_gst": 2.16,
+        "s_gst": 5.09,
+        "i_gst": 7.13
+    },
+    {
+        "id": 93,
+        "bill_id": 31,
+        "product_part_no": 40,
+        "quantity": 3,
+        "price": 209.94,
+        "c_gst": 8.99,
+        "s_gst": 4.09,
+        "i_gst": 3.46
+    },
+    {
+        "id": 94,
+        "bill_id": 32,
+        "product_part_no": 67,
+        "quantity": 6,
+        "price": 313.45,
+        "c_gst": 6.92,
+        "s_gst": 1.65,
+        "i_gst": 6.1
+    },
+    {
+        "id": 95,
+        "bill_id": 32,
+        "product_part_no": 95,
+        "quantity": 10,
+        "price": 520.14,
+        "c_gst": 5.98,
+        "s_gst": 11.02,
+        "i_gst": 5.1
+    },
+    {
+        "id": 96,
+        "bill_id": 32,
+        "product_part_no": 45,
+        "quantity": 5,
+        "price": 179.62,
+        "c_gst": 11.93,
+        "s_gst": 8.85,
+        "i_gst": 3.46
+    },
+    {
+        "id": 97,
+        "bill_id": 33,
+        "product_part_no": 5,
+        "quantity": 10,
+        "price": 150.65,
+        "c_gst": 11.61,
+        "s_gst": 1.74,
+        "i_gst": 4.49
+    },
+    {
+        "id": 98,
+        "bill_id": 33,
+        "product_part_no": 1,
+        "quantity": 10,
+        "price": 345.45,
+        "c_gst": 11.77,
+        "s_gst": 8.57,
+        "i_gst": 5.69
+    },
+    {
+        "id": 99,
+        "bill_id": 33,
+        "product_part_no": 59,
+        "quantity": 6,
+        "price": 731.21,
+        "c_gst": 4.47,
+        "s_gst": 2.18,
+        "i_gst": 1.62
+    },
+    {
+        "id": 100,
+        "bill_id": 34,
+        "product_part_no": 65,
+        "quantity": 6,
+        "price": 227.01,
+        "c_gst": 3.84,
+        "s_gst": 9.59,
+        "i_gst": 3.22
+    },
+    {
+        "id": 101,
+        "bill_id": 34,
+        "product_part_no": 62,
+        "quantity": 10,
+        "price": 783.15,
+        "c_gst": 2,
+        "s_gst": 3.03,
+        "i_gst": 1.67
+    },
+    {
+        "id": 102,
+        "bill_id": 34,
+        "product_part_no": 82,
+        "quantity": 2,
+        "price": 774.14,
+        "c_gst": 10.34,
+        "s_gst": 10.8,
+        "i_gst": 2.78
+    },
+    {
+        "id": 103,
+        "bill_id": 35,
+        "product_part_no": 95,
+        "quantity": 4,
+        "price": 909.57,
+        "c_gst": 9.64,
+        "s_gst": 10.86,
+        "i_gst": 6.64
+    },
+    {
+        "id": 104,
+        "bill_id": 35,
+        "product_part_no": 76,
+        "quantity": 10,
+        "price": 721.23,
+        "c_gst": 3.09,
+        "s_gst": 8.99,
+        "i_gst": 6.57
+    },
+    {
+        "id": 105,
+        "bill_id": 35,
+        "product_part_no": 55,
+        "quantity": 1,
+        "price": 203.26,
+        "c_gst": 7.86,
+        "s_gst": 2.62,
+        "i_gst": 4.08
+    },
+    {
+        "id": 106,
+        "bill_id": 36,
+        "product_part_no": 74,
+        "quantity": 5,
+        "price": 200.57,
+        "c_gst": 11.26,
+        "s_gst": 1.2,
+        "i_gst": 4.56
+    },
+    {
+        "id": 107,
+        "bill_id": 36,
+        "product_part_no": 87,
+        "quantity": 9,
+        "price": 296.94,
+        "c_gst": 11.9,
+        "s_gst": 9.8,
+        "i_gst": 5.06
+    },
+    {
+        "id": 108,
+        "bill_id": 36,
+        "product_part_no": 13,
+        "quantity": 3,
+        "price": 595.67,
+        "c_gst": 5.66,
+        "s_gst": 6.33,
+        "i_gst": 7.58
+    },
+    {
+        "id": 109,
+        "bill_id": 37,
+        "product_part_no": 51,
+        "quantity": 8,
+        "price": 508.32,
+        "c_gst": 7.63,
+        "s_gst": 3.07,
+        "i_gst": 6.41
+    },
+    {
+        "id": 110,
+        "bill_id": 37,
+        "product_part_no": 23,
+        "quantity": 2,
+        "price": 788.51,
+        "c_gst": 3.4,
+        "s_gst": 11.95,
+        "i_gst": 4.24
+    },
+    {
+        "id": 111,
+        "bill_id": 37,
+        "product_part_no": 50,
+        "quantity": 3,
+        "price": 190.74,
+        "c_gst": 7.57,
+        "s_gst": 4.88,
+        "i_gst": 1.36
+    },
+    {
+        "id": 112,
+        "bill_id": 38,
+        "product_part_no": 46,
+        "quantity": 1,
+        "price": 858.27,
+        "c_gst": 2.86,
+        "s_gst": 4.1,
+        "i_gst": 4.35
+    },
+    {
+        "id": 113,
+        "bill_id": 38,
+        "product_part_no": 31,
+        "quantity": 6,
+        "price": 961.96,
+        "c_gst": 7.21,
+        "s_gst": 8.66,
+        "i_gst": 6.53
+    },
+    {
+        "id": 114,
+        "bill_id": 38,
+        "product_part_no": 73,
+        "quantity": 7,
+        "price": 944.53,
+        "c_gst": 11.08,
+        "s_gst": 3.22,
+        "i_gst": 4.04
+    },
+    {
+        "id": 115,
+        "bill_id": 39,
+        "product_part_no": 46,
+        "quantity": 9,
+        "price": 848.82,
+        "c_gst": 4.17,
+        "s_gst": 1.25,
+        "i_gst": 3.54
+    },
+    {
+        "id": 116,
+        "bill_id": 39,
+        "product_part_no": 71,
+        "quantity": 7,
+        "price": 760.64,
+        "c_gst": 7.21,
+        "s_gst": 11.15,
+        "i_gst": 4.6
+    },
+    {
+        "id": 117,
+        "bill_id": 39,
+        "product_part_no": 60,
+        "quantity": 3,
+        "price": 164.63,
+        "c_gst": 1.38,
+        "s_gst": 1.2,
+        "i_gst": 3
+    },
+    {
+        "id": 118,
+        "bill_id": 40,
+        "product_part_no": 28,
+        "quantity": 2,
+        "price": 370.48,
+        "c_gst": 10.9,
+        "s_gst": 8.42,
+        "i_gst": 2.27
+    },
+    {
+        "id": 119,
+        "bill_id": 40,
+        "product_part_no": 91,
+        "quantity": 3,
+        "price": 614.04,
+        "c_gst": 6,
+        "s_gst": 7.35,
+        "i_gst": 4.44
+    },
+    {
+        "id": 120,
+        "bill_id": 40,
+        "product_part_no": 12,
+        "quantity": 10,
+        "price": 324.57,
+        "c_gst": 5.43,
+        "s_gst": 5.65,
+        "i_gst": 5.63
+    },
+    {
+        "id": 121,
+        "bill_id": 41,
+        "product_part_no": 94,
+        "quantity": 2,
+        "price": 398.24,
+        "c_gst": 7.9,
+        "s_gst": 3.41,
+        "i_gst": 1.18
+    },
+    {
+        "id": 122,
+        "bill_id": 41,
+        "product_part_no": 96,
+        "quantity": 8,
+        "price": 463.15,
+        "c_gst": 9.47,
+        "s_gst": 5.33,
+        "i_gst": 1.85
+    },
+    {
+        "id": 123,
+        "bill_id": 41,
+        "product_part_no": 27,
+        "quantity": 3,
+        "price": 859.2,
+        "c_gst": 7.91,
+        "s_gst": 8.1,
+        "i_gst": 2.73
+    },
+    {
+        "id": 124,
+        "bill_id": 42,
+        "product_part_no": 65,
+        "quantity": 7,
+        "price": 568.78,
+        "c_gst": 10.51,
+        "s_gst": 2.22,
+        "i_gst": 7.26
+    },
+    {
+        "id": 125,
+        "bill_id": 42,
+        "product_part_no": 89,
+        "quantity": 1,
+        "price": 409.71,
+        "c_gst": 3.43,
+        "s_gst": 3.68,
+        "i_gst": 6.04
+    },
+    {
+        "id": 126,
+        "bill_id": 42,
+        "product_part_no": 3,
+        "quantity": 4,
+        "price": 899.02,
+        "c_gst": 7.17,
+        "s_gst": 8.62,
+        "i_gst": 8
+    },
+    {
+        "id": 127,
+        "bill_id": 43,
+        "product_part_no": 46,
+        "quantity": 10,
+        "price": 879.6,
+        "c_gst": 10.76,
+        "s_gst": 5.25,
+        "i_gst": 1.88
+    },
+    {
+        "id": 128,
+        "bill_id": 43,
+        "product_part_no": 7,
+        "quantity": 1,
+        "price": 167.13,
+        "c_gst": 1.65,
+        "s_gst": 7.14,
+        "i_gst": 1.92
+    },
+    {
+        "id": 129,
+        "bill_id": 43,
+        "product_part_no": 1,
+        "quantity": 2,
+        "price": 963.17,
+        "c_gst": 4.95,
+        "s_gst": 2.25,
+        "i_gst": 4.82
+    },
+    {
+        "id": 130,
+        "bill_id": 44,
+        "product_part_no": 41,
+        "quantity": 2,
+        "price": 965.21,
+        "c_gst": 10.32,
+        "s_gst": 10.62,
+        "i_gst": 3.05
+    },
+    {
+        "id": 131,
+        "bill_id": 44,
+        "product_part_no": 17,
+        "quantity": 4,
+        "price": 142.28,
+        "c_gst": 5.76,
+        "s_gst": 4.98,
+        "i_gst": 5.15
+    },
+    {
+        "id": 132,
+        "bill_id": 44,
+        "product_part_no": 89,
+        "quantity": 1,
+        "price": 960.08,
+        "c_gst": 9.3,
+        "s_gst": 9.47,
+        "i_gst": 5.83
+    },
+    {
+        "id": 133,
+        "bill_id": 45,
+        "product_part_no": 22,
+        "quantity": 5,
+        "price": 185.68,
+        "c_gst": 11.15,
+        "s_gst": 2.84,
+        "i_gst": 3.52
+    },
+    {
+        "id": 134,
+        "bill_id": 45,
+        "product_part_no": 66,
+        "quantity": 4,
+        "price": 946.59,
+        "c_gst": 10.27,
+        "s_gst": 4.92,
+        "i_gst": 5.35
+    },
+    {
+        "id": 135,
+        "bill_id": 45,
+        "product_part_no": 14,
+        "quantity": 10,
+        "price": 231.67,
+        "c_gst": 6.15,
+        "s_gst": 5.38,
+        "i_gst": 5.47
+    },
+    {
+        "id": 136,
+        "bill_id": 46,
+        "product_part_no": 27,
+        "quantity": 8,
+        "price": 543.79,
+        "c_gst": 7.76,
+        "s_gst": 6.75,
+        "i_gst": 3.7
+    },
+    {
+        "id": 137,
+        "bill_id": 46,
+        "product_part_no": 43,
+        "quantity": 6,
+        "price": 459.79,
+        "c_gst": 10.59,
+        "s_gst": 7.05,
+        "i_gst": 2.58
+    },
+    {
+        "id": 138,
+        "bill_id": 46,
+        "product_part_no": 28,
+        "quantity": 5,
+        "price": 873.63,
+        "c_gst": 6.7,
+        "s_gst": 6.15,
+        "i_gst": 7.65
+    },
+    {
+        "id": 139,
+        "bill_id": 47,
+        "product_part_no": 93,
+        "quantity": 8,
+        "price": 197.6,
+        "c_gst": 1.01,
+        "s_gst": 4.81,
+        "i_gst": 7.93
+    },
+    {
+        "id": 140,
+        "bill_id": 47,
+        "product_part_no": 85,
+        "quantity": 6,
+        "price": 102.72,
+        "c_gst": 5.91,
+        "s_gst": 7.06,
+        "i_gst": 6.09
+    },
+    {
+        "id": 141,
+        "bill_id": 47,
+        "product_part_no": 6,
+        "quantity": 3,
+        "price": 604.5,
+        "c_gst": 2.19,
+        "s_gst": 6.81,
+        "i_gst": 2.58
+    },
+    {
+        "id": 142,
+        "bill_id": 48,
+        "product_part_no": 70,
+        "quantity": 8,
+        "price": 139.36,
+        "c_gst": 11.68,
+        "s_gst": 4.12,
+        "i_gst": 5.07
+    },
+    {
+        "id": 143,
+        "bill_id": 48,
+        "product_part_no": 6,
+        "quantity": 1,
+        "price": 983.91,
+        "c_gst": 2.87,
+        "s_gst": 2.6,
+        "i_gst": 7.98
+    },
+    {
+        "id": 144,
+        "bill_id": 48,
+        "product_part_no": 56,
+        "quantity": 9,
+        "price": 605.73,
+        "c_gst": 6.2,
+        "s_gst": 6.39,
+        "i_gst": 3.13
+    },
+    {
+        "id": 145,
+        "bill_id": 49,
+        "product_part_no": 75,
+        "quantity": 8,
+        "price": 497.75,
+        "c_gst": 11.1,
+        "s_gst": 10.7,
+        "i_gst": 2.61
+    },
+    {
+        "id": 146,
+        "bill_id": 49,
+        "product_part_no": 68,
+        "quantity": 5,
+        "price": 348.06,
+        "c_gst": 5.65,
+        "s_gst": 11.97,
+        "i_gst": 7.67
+    },
+    {
+        "id": 147,
+        "bill_id": 49,
+        "product_part_no": 87,
+        "quantity": 3,
+        "price": 947.3,
+        "c_gst": 6.68,
+        "s_gst": 9.69,
+        "i_gst": 1.01
+    },
+    {
+        "id": 148,
+        "bill_id": 50,
+        "product_part_no": 69,
+        "quantity": 6,
+        "price": 268.78,
+        "c_gst": 2.56,
+        "s_gst": 11.84,
+        "i_gst": 3.08
+    },
+    {
+        "id": 149,
+        "bill_id": 50,
+        "product_part_no": 57,
+        "quantity": 1,
+        "price": 791.9,
+        "c_gst": 11.14,
+        "s_gst": 1.21,
+        "i_gst": 5.94
+    },
+    {
+        "id": 150,
+        "bill_id": 50,
+        "product_part_no": 62,
+        "quantity": 9,
+        "price": 643.67,
+        "c_gst": 11.69,
+        "s_gst": 1.74,
+        "i_gst": 3.38
+    }
+]
