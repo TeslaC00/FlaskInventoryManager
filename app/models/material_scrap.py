@@ -1,12 +1,7 @@
 from sqlalchemy import Column, Integer, Enum, ForeignKey, PrimaryKeyConstraint, Date
 from app.extensions import db
-import enum
 
-
-class MaterialScrapType(enum.Enum):
-    OK_MATERIAL = 'ok_material'
-    NOT_GOOD = 'not_good'
-    INTERNAL_REJECTION = 'internal_rejection'
+from app.models.enums import MaterialScrapType
 
 
 class MaterialScrap(db.Model):
@@ -23,6 +18,6 @@ class MaterialScrap(db.Model):
         return {
             'material_part_no': self.material_part_no,
             'date': self.date,
-            'scrap_type': self.scrap_type,
+            'scrap_type': self.scrap_type.value,
             'quantity': self.quantity
         }
