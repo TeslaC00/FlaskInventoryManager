@@ -1,13 +1,7 @@
 from app.extensions import db
 from sqlalchemy import Column, Integer, Enum, ForeignKey, PrimaryKeyConstraint, Date
-import enum
 
-
-class ProductScrapType(enum.Enum):
-    OK_MATERIAL = 'ok_material'
-    NOT_GOOD = 'not_good'
-    INTERNAL_REJECTION = 'internal_rejection'
-    EXTERNAL_REJECTION = 'external_rejection'
+from app.models.enums import ProductScrapType
 
 
 class ProductScrap(db.Model):
@@ -52,5 +46,5 @@ class ProductScrap(db.Model):
             'part_no': self.product_part_no,
             'date': self.date,
             'quantity': self.quantity,
-            'scrap_type': self.scrap_type.name
+            'scrap_type': self.scrap_type.value
         }

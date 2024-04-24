@@ -1,13 +1,8 @@
 from sqlalchemy import Column, Integer, String, Enum, Float
 from sqlalchemy.orm import relationship
 from app.extensions import db
-import enum
 
-
-class UnitType(enum.Enum):
-    GRAM = 'gram'
-    CENTIMETER = 'centimeter'
-    PIECE = 'piece'
+from app.models.enums import UnitType
 
 
 class Product(db.Model):
@@ -54,7 +49,7 @@ class Product(db.Model):
         return {
             'part_no': self.part_no,
             'name': self.name,
-            'unit': self.unit,
+            'unit': self.unit.value,
             'quantity': self.quantity,
             'price': self.price,
             'c_gst': self.c_gst,

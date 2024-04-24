@@ -1,13 +1,7 @@
 from sqlalchemy import Column, Integer, String, Enum
 from sqlalchemy.orm import relationship
 from app.extensions import db
-import enum
-
-
-class UnitType(enum.Enum):
-    GRAM = 'gram'
-    CENTIMETER = 'centimeter'
-    PIECE = 'piece'
+from app.models.enums import UnitType
 
 
 class Material(db.Model):
@@ -49,6 +43,6 @@ class Material(db.Model):
         return {
             'part_no': self.part_no,
             'name': self.name,
-            'unit': self.unit,
+            'unit': self.unit.value,
             'quantity': self.quantity
         }
