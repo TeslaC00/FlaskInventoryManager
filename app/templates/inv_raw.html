@@ -19,8 +19,8 @@
         const rawMaterialData = {{ table1|tojson }};
 
         const reorderedData = rawMaterialData.map(item => ({
-            Part_Name: item.material_name,
-            Unit_Type: item.unit_type,
+            Part_Name: item.name,
+            Unit_Type: item.unit,
             Quantity: item.quantity
         }));
 
