@@ -221,8 +221,8 @@
                                 response($.map(data.matching_results, function(item) {
                                     return {
                                         // Highlight matching part
-                                        label: item.name.replace(new RegExp(request.term, "gi"), (match) => `<strong>${match}</strong>`),
-                                        value: item.name
+                                        label: item.name.replace(new RegExp(request.term, "gi"), (match) => match),
+
                                     };
                                 }));
                             });
