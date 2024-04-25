@@ -147,7 +147,7 @@ def autocomplete():
     results = Product.query.filter(Product.name.like(f'%{search}%')).limit(
         10).all()  # Query the database for goods names that contain the search term
     # Prepare and return the JSON response with the search results
-    return jsonify(matching_results=[{"id": item.item_name, "name": item.item_name} for item in results])
+    return jsonify(matching_results=[{"name": item.name} for item in results])
 
 
 @main_routes.route('/autocomplete_raw', methods=['GET'])
