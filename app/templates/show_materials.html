@@ -11,20 +11,20 @@
     <div class="container">
         <h1>Material Table</h1>
         <!-- Search Bar -->
-        <div class="input-group mb-3">
+        <div class="input-group mb-3" style="padding-bottom: 3px">
             <input type="text" id="searchInput" class="form-control" placeholder="Search...">
         </div>
         <a href="{{ url_for('material.add_material') }}" class="add-new-btn" style="margin-top: 0">Add New Material</a>
-        <div class="navbar-nav-scroll" style="margin-top: 10px">
-            <table class="table table-hover">
-                <thead class="table-light sticky-lg-top">
+        <div class="table-responsive" style="max-height: 500px">
+            <table class="table table-hover" style="padding: 0; margin-top: 0">
+                <thead class="table-light" style="border-color: black; border-width: 2px; position: sticky; top: 0; z-index: 1">
                 <tr>
                     <th>Material Name</th>
                     <th>Unit Type</th>
                     <th>Quantity</th>
                 </tr>
                 </thead>
-                <tbody class="table-group-divider" id="materialTableBody">
+                <tbody id="materialTableBody">
                 {% for material in materials %}
                     <tr>
                         <td><a class="link-info"
