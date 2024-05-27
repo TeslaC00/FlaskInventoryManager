@@ -3,7 +3,7 @@ function searchTable() {
     // Declare variables
     var input, filter, table, tr, td, i, j, txtValue;
     input = document.getElementById("searchInput");
-    filter = input.value.toUpperCase();
+    filter = input.value.toLowerCase();  // convert input to lowercase for case-insensitive search
     table = document.getElementById("materialTableBody");
     tr = table.getElementsByTagName("tr");
 
@@ -14,9 +14,12 @@ function searchTable() {
         for (j = 0; j < td.length; j++) {
             if (td[j]) {
                 txtValue = td[j].textContent || td[j].innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = ""; // show the row if the search term is found in any column
-                    break; // break out of the inner loop once a match is found
+                let words = txtValue.toLowerCase().split(" ");
+                for (let word of words) {
+                    if (word.indexOf(filter) === 0) {  // match at the beginning of a word
+                        tr[i].style.display = "";  // show the row if the search term is found at the start of any word
+                        break;  // break out of the inner loop once a match is found
+                    }
                 }
             }
         }
