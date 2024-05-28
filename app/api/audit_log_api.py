@@ -1,6 +1,5 @@
-from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
+from flask_restful import Resource, reqparse, abort, fields, marshal_with
 from datetime import datetime
-from app import create_app
 from app.extensions import db
 from app.models import AuditLog, ActionType
 
@@ -17,8 +16,6 @@ audit_log_fields = {
     'action_type': fields.String(attribute='action_type.name'),
     'remarks': fields.String
 }
-
-api = Api(create_app)
 
 
 def abort_if_audit_log_not_found(audit_log_id):
@@ -86,6 +83,6 @@ class AuditLogFilterResource(Resource):
 
         return logs, 200
 
-
-api.add_resource(AuditLogResource, '/audit_logs', '/audit_logs/<int:id>')
-api.add_resource(AuditLogFilterResource, '/audit_logs/filter')
+# TODO: add resources in init file
+# api.add_resource(AuditLogResource, '/audit_logs', '/audit_logs/<int:id>')
+# api.add_resource(AuditLogFilterResource, '/audit_logs/filter')

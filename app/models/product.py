@@ -19,7 +19,7 @@ class Product(db.Model):
         part_no (Column): Stores the part number of the goods. It is a unique, non-nullable Integer, identifying the specific part.
 
     The Goods model includes a method `to_dict` which converts the Goods record into a dictionary,
-    facilitating easy JSON serialization for API responses or other purposes.
+    facilitating easy JSON serialization for api responses or other purposes.
 
     Methods:
         to_dict(self): Returns a dictionary representation of the Goods instance,

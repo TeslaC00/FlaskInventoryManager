@@ -1,5 +1,4 @@
-from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
-import app
+from flask_restful import Resource, reqparse, abort, fields, marshal_with
 from app.extensions import db
 from app.models import BillItem
 
@@ -15,13 +14,13 @@ bill_item_fields = {
     'product_part_no': fields.Integer
 }
 
-api = Api(app.create_app())
 
 def abort_if_bill_item_not_found(item_id):
     bill_item = BillItem.query.get(item_id)
     if not bill_item:
         abort(404, message="Bill item not found")
     return bill_item
+
 
 class BillItemResource(Resource):
     @marshal_with(bill_item_fields)
@@ -97,5 +96,5 @@ class BillItemResource(Resource):
         db.session.delete(item)
         db.session.commit()
         return {'message': 'Bill item deleted'}, 200
-
-api.add_resource(BillItemResource, '/bill_items', '/bill_items/<int:id>')
+# TODO: add resources in init file
+# api.add_resource(BillItemResource, '/bill_items', '/bill_items/<int:id>')

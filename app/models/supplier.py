@@ -19,7 +19,7 @@ class Supplier(db.Model):
         id (Column): A unique identifier for the supplier within the database. It is an integer and serves as the primary key for the Supplier table.
 
     The Supplier model includes a method `to_dict` which converts the supplier entity into a dictionary,
-    facilitating easy JSON serialization for API responses or other purposes.
+    facilitating easy JSON serialization for api responses or other purposes.
 
     Methods:
         to_dict(self): Returns a dictionary representation of the Supplier instance, including

@@ -1,6 +1,5 @@
-from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
+from flask_restful import Resource, reqparse, abort, fields, marshal_with
 from datetime import datetime
-from app import create_app
 from app.extensions import db
 from app.models import Bill
 
@@ -13,8 +12,6 @@ bill_fields = {
     'purchase_order': fields.String,
     'remarks': fields.String
 }
-
-api = Api(create_app)
 
 
 def abort_if_bill_not_found(bill_id):
@@ -98,5 +95,5 @@ delete(self, id): Deletes a bill by id.'''
         db.session.commit()
         return {'message': 'Bill deleted'}, 200
 
-
-api.add_resource(BillResource, '/bills', '/bills/<int:id>')
+# TODO: add resources in init file
+# api.add_resource(BillResource, '/bills', '/bills/<int:id>')

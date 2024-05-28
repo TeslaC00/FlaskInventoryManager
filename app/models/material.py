@@ -17,7 +17,7 @@ class Material(db.Model):
         quantity (Column): Represents the current stock quantity of the raw material. It is a non-nullable integer, indicating how much of the material is available.
 
     The Raw_Material model includes a method `to_dict` which converts the raw material record into a dictionary,
-    facilitating easy JSON serialization for API responses or other purposes.
+    facilitating easy JSON serialization for api responses or other purposes.
 
     Methods:
         to_dict(self): Returns a dictionary representation of the Raw_Material instance,

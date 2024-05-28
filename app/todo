@@ -6,4 +6,5 @@ Backend
 5. decide cascading on update
 
 Frontend
-1.
+1. create custom request builder for sorting and filtering
+2. functions to call api and update table contents

@@ -1,6 +1,5 @@
-from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
+from flask_restful import Resource, reqparse, abort, fields, marshal_with
 from datetime import datetime
-import app
 from app.extensions import db
 from app.models import Challan
 
@@ -12,8 +11,6 @@ challan_fields = {
     'date': fields.DateTime(dt_format='iso8601'),
     'remarks': fields.String
 }
-
-api = Api(app.create_app())
 
 
 def abort_if_challan_not_found(challan_no):
@@ -90,5 +87,5 @@ class ChallanResource(Resource):
         db.session.commit()
         return {'message': 'Challan deleted'}, 200
 
-
-api.add_resource(ChallanResource, '/challans', '/challans/<int:challan_no>')
+# TODO: add resources in init file
+# api.add_resource(ChallanResource, '/challans', '/challans/<int:challan_no>')
