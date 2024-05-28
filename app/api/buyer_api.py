@@ -16,27 +16,36 @@ buyer_fields = {
 }
 
 
+# filter - name, state_code, state_name
+# sort - name, state_code, state_name
+
+
 class BuyerListResource(Resource):
     @marshal_with(buyer_fields)
     def get(self):
         logger.info("GET /buyers called")
+
         # for filtering
+        name = request.args.get('name')
         state_code = request.args.get('state_code')
         state_name = request.args.get('state_name')
+
         # for sorting
         sort_by = request.args.get('sort_by', 'name')
         limit = request.args.get('limit', 20, type=int)
         offset = request.args.get('offset', 0, type=int)
 
-        logger.debug(f"Filtering with state_code={state_code}, state_name={state_name}")
+        logger.debug(f"Filtering with name={name}, state_code={state_code}, state_name={state_name}")
         logger.debug(f"Sorting by {sort_by}, limit={limit}, offset={offset}")
 
         query = Buyer.query
 
+        if name:
+            query = query.filter(Buyer.name.like(f"%{name}%"))
         if state_code:
-            query = query.filter_by(state_code == state_code)
+            query = query.filter_by(state_code=state_code)
         if state_name:
-            query = query.filter_by(state_name == state_name)
+            query = query.filter(Buyer.state_name.like(f"%{state_name}%"))
 
         query.order_by(text(sort_by)).limit(limit).offset(offset)
 

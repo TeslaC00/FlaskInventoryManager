@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse, abort, fields, marshal_with
 from datetime import datetime
 from app.extensions import db
-from app.models import AuditLog, ActionType
+from app.models.audit_log import AuditLog, ActionType
 
 # Define output fields for marshalling
 audit_log_fields = {
