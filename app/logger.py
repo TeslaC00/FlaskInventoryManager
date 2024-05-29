@@ -1,5 +1,6 @@
 import logging
 from logging.handlers import RotatingFileHandler
+from colorlog import ColoredFormatter  # Import ColoredFormatter from colorlog
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -14,10 +15,22 @@ file_handler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 file_handler.setFormatter(formatter)
 
-# Configure the logger to print to terminal
+# Configure the logger to print to terminal with color
 stream_handler = logging.StreamHandler()
 stream_handler.setLevel(logging.INFO)
-stream_handler.setFormatter(formatter)
+
+# Use ColoredFormatter to add colors to log messages based on their severity level
+color_formatter = ColoredFormatter(
+    '%(log_color)s%(asctime)s - %(levelname)s - %(message)s',
+    log_colors={
+        'DEBUG': 'cyan',
+        'INFO': 'green',
+        'WARNING': 'yellow',
+        'ERROR': 'red',
+        'CRITICAL': 'red,bg_white',
+    }
+)
+stream_handler.setFormatter(color_formatter)
 
 # Add both handlers to the logger
 logger.addHandler(file_handler)
