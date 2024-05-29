@@ -22,8 +22,8 @@
         const rawMaterialData = {{ table1|tojson }};
 
         const reorderedData = rawMaterialData.map(item => ({
-        Part_Name: item.raw_material_name,
-        Unit_Type: item.unit_type,
+        Part_Name: item.name,
+        Unit_Type: item.unit,
         Quantity: item.quantity
     }));
 
@@ -34,7 +34,7 @@
             filters: true,
             licenseKey: 'non-commercial-and-evaluation',
             rowHeaders: true,
-            colHeaders: ['Part_Name', 'Unit_Type', "Quantity"],
+            colHeaders: ['Part Name', 'Unit Type', "Quantity"],
             dropdownMenu: true,
             contextMenu: true,
             stretchH: 'all',
@@ -51,7 +51,7 @@
             filters: true,
             licenseKey: 'non-commercial-and-evaluation',
             rowHeaders: true,
-            colHeaders: ["Good_name", "Unit_type", "Quantity", "Part_no"],
+            colHeaders: ["Good name", "Unit type", "Quantity", "Part no"],
             dropdownMenu: true,
             stretchH: 'all',
             height: 500,
