@@ -24,12 +24,15 @@ def create_app():
     logger.info('Loaded Environment Variables')
 
     initialize_extensions(app)
+    from app.api import api
+    api.init_app(app)
+    logger.info('Initialized Flask restful api')
     logger.info('All extensions initialized')
 
     init_security(app)
 
     create_tables(app)
-    logger.info('All tables created with seed')
+    logger.info('All tables created')
 
     # Registering blueprints
     from app.routes import register_routes

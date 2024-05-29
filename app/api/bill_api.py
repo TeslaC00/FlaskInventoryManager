@@ -60,9 +60,7 @@ class BillListResource(Resource):
         if max_total_price:
             query = query.filter(Bill.total_price <= float(max_total_price))
 
-        query.order_by(text(sort_by)).limit(limit).offset(offset)
-
-        bills = query.all()
+        bills = query.order_by(text(sort_by)).offset(offset).limit(limit).all()
         logger.info(f"Found {len(bills)} bills")
         return bills, 200
 

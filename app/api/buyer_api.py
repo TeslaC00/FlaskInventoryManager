@@ -47,9 +47,7 @@ class BuyerListResource(Resource):
         if state_name:
             query = query.filter(Buyer.state_name.like(f"%{state_name}%"))
 
-        query.order_by(text(sort_by)).limit(limit).offset(offset)
-
-        buyers = query.all()
+        buyers = query.order_by(text(sort_by)).offset(offset).limit(limit).all()
         logger.info(f"Found {len(buyers)} buyers")
         return buyers, 200
 
