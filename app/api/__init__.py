@@ -1,6 +1,8 @@
 from flask_restful import Api
 from app.api.buyer_api import BuyerResource, BuyerListResource
 from app.api.bill_api import BillResource, BillListResource
+from app.api.challan_item_api import ChallanItemListResource, ChallanItemResource
+from app.api.material_scrap_api import MaterialScrapListResource, MaterialScrapResource
 from app.api.materials_api import MaterialListResource, MaterialResource
 from app.api.product_material_api import ProductMaterialListResource, ProductMaterialResource
 from app.api.product_scrap_api import ProductScrapListResource, ProductScrapResource
@@ -31,3 +33,9 @@ api.add_resource(ProductionLogResource, '/production_logs/<int:production_log_id
 
 api.add_resource(SupplierListResource, '/suppliers')
 api.add_resource(SupplierResource, '/suppliers/<int:supplier_id>')
+
+api.add_resource(MaterialScrapListResource, '/material_scrap')
+api.add_resource(MaterialScrapResource, '/material_scrap/<string:date>/<int:material_part_no>')
+
+api.add_resource(ChallanItemListResource, '/challan_items')
+api.add_resource(ChallanItemResource, '/challan_items/<int:id>')
