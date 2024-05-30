@@ -19,23 +19,30 @@ api.add_resource(BuyerResource, '/api/v1/buyers/<int:buyer_id>')
 api.add_resource(BillListResource, '/api/v1/bills')
 api.add_resource(BillResource, '/api/v1/bills/<int:bill_id>')
 
-api.add_resource(MaterialListResource, '/materials')
-api.add_resource(MaterialResource, '/materials/<int:part_no>')
+# materials api
+api.add_resource(MaterialListResource, '/api/v1/materials')
+api.add_resource(MaterialResource, '/api/v1/materials/<int:part_no>')
 
-api.add_resource(ProductMaterialListResource, '/product_materials')
-api.add_resource(ProductMaterialResource, '/product_materials/<int:product_part_no>/<int:material_part_no>')
+# product materials api
+api.add_resource(ProductMaterialListResource, '/api/v1/product_materials')
+api.add_resource(ProductMaterialResource, '/api/v1/product_materials/<int:product_part_no>/<int:material_part_no>')
 
-api.add_resource(ProductScrapListResource, '/product_scraps')
-api.add_resource(ProductScrapResource, '/product_scraps/<int:product_part_no>/<string:date>')
+# product scraps api
+api.add_resource(ProductScrapListResource, '/api/v1/product_scraps')
+api.add_resource(ProductScrapResource, '/api/v1/product_scraps/<int:product_part_no>/<string:date>')
 
-api.add_resource(ProductionLogListResource, '/production_logs')
-api.add_resource(ProductionLogResource, '/production_logs/<int:production_log_id>')
+# production logs api
+api.add_resource(ProductionLogListResource, '/api/v1/production_logs')
+api.add_resource(ProductionLogResource, '/api/v1/production_logs/<int:production_log_id>')
 
-api.add_resource(SupplierListResource, '/suppliers')
-api.add_resource(SupplierResource, '/suppliers/<int:supplier_id>')
+# suppliers api
+api.add_resource(SupplierListResource, '/api/v1/suppliers')
+api.add_resource(SupplierResource, '/api/v1/suppliers/<int:supplier_id>')
 
-api.add_resource(MaterialScrapListResource, '/material_scrap')
-api.add_resource(MaterialScrapResource, '/material_scrap/<string:date>/<int:material_part_no>')
+# material scrap api
+api.add_resource(MaterialScrapListResource, '/api/v1/material_scrap')
+api.add_resource(MaterialScrapResource, '/api/v1/material_scrap/<string:date>/<int:material_part_no>')
 
-api.add_resource(ChallanItemListResource, '/challan_items')
-api.add_resource(ChallanItemResource, '/challan_items/<int:id>')
+# challan items api
+api.add_resource(ChallanItemListResource, '/api/v1/challan_items')
+api.add_resource(ChallanItemResource, '/api/v1/challan_items/<int:id>')
