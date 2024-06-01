@@ -19,6 +19,10 @@ product_fields = {
 }
 
 
+# filter - name, unit, quantity(min,max), price(min,max)
+# sort - part_no, name, quantity, price, c_gst, s_gst, i_gst
+
+
 class ProductListResource(Resource):
     @marshal_with(product_fields)
     def get(self):
@@ -39,7 +43,7 @@ class ProductListResource(Resource):
 
         query = Product.query
         if name:
-            query = query.filter(Product.name.ilike(f"%{name}%"))
+            query = query.filter(Product.name.like(f"%{name}%"))
         if unit:
             query = query.filter_by(unit=unit)
         if min_quantity is not None:
@@ -119,15 +123,15 @@ class ProductResource(Resource):
             product.name = args['name']
         if args['unit']:
             product.unit = args['unit']
-        if args['quantity'] is not None:
+        if args['quantity']:
             product.quantity = args['quantity']
-        if args['price'] is not None:
+        if args['price']:
             product.price = args['price']
-        if args['c_gst'] is not None:
+        if args['c_gst']:
             product.c_gst = args['c_gst']
-        if args['s_gst'] is not None:
+        if args['s_gst']:
             product.s_gst = args['s_gst']
-        if args['i_gst'] is not None:
+        if args['i_gst']:
             product.i_gst = args['i_gst']
 
         try:

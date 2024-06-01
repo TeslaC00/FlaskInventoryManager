@@ -4,6 +4,7 @@ from app.extensions import db
 from app.models import Supplier
 from app.logger import logger
 from flask_restful import fields
+from sqlalchemy import text
 
 supplier_fields = {
     'id': fields.Integer,
@@ -15,11 +16,38 @@ supplier_fields = {
 }
 
 
+# filter - name, state_code, state_name
+# sort - name, state_code, state_name
+
+
 class SupplierListResource(Resource):
     @marshal_with(supplier_fields)
     def get(self):
         logger.info('GET /suppliers called')
-        suppliers = Supplier.query.all()
+
+        # for filtering
+        name = request.args.get('name')
+        state_code = request.args.get('state_code')
+        state_name = request.args.get('state_name')
+
+        # for sorting
+        sort_by = request.args.get('sort_by', 'name')
+        limit = request.args.get('limit', 20, type=int)
+        offset = request.args.get('offset', 0, type=int)
+
+        logger.debug(f"Filtering with name={name}, state_code={state_code}, state_name={state_name}")
+        logger.debug(f"Sorting by {sort_by}, limit={limit}, offset={offset}")
+
+        query = Supplier.query
+
+        if name:
+            query = query.filter(Supplier.name.like(f"%{name}%"))
+        if state_code:
+            query = query.filter_by(state_code=state_code)
+        if state_name:
+            query = query.filter(Supplier.state_name.like(f"%{state_name}%"))
+
+        suppliers = query.order_by(text(sort_by)).offset(offset).limit(limit).all()
         logger.info(f"Found {len(suppliers)} suppliers")
         return suppliers, 200
 

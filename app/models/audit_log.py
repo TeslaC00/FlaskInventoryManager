@@ -45,6 +45,7 @@ class AuditLog(db.Model):
                 ordered by change_timestamp in descending order.
 
     Notes:
+        - ReadOnly for all the users
         - The username attribute is linked to the 'User.username' column, establishing a foreign key relationship.
         - The change_timestamp defaults to the current time when the log entry is created.
         - The action_type column uses the ActionType enum to ensure only valid actions are recorded.

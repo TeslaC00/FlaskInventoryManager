@@ -1,9 +1,12 @@
+from datetime import datetime
+
 from flask import request
 from flask_restful import Resource, reqparse, marshal_with, abort
 from app.extensions import db
 from app.models import ProductionLog
 from app.logger import logger
 from flask_restful import fields
+from sqlalchemy import text
 
 production_log_fields = {
     'id': fields.Integer,
@@ -22,6 +25,8 @@ class ProductionLogListResource(Resource):
         product_part_no = request.args.get('product_part_no', type=int)
         start_date = request.args.get('start_date')
         end_date = request.args.get('end_date')
+        min_quantity = request.args.get('min_quantity')
+        max_quantity = request.args.get('max_quantity')
 
         # for sorting
         sort_by = request.args.get('sort_by', 'production_date')
@@ -29,14 +34,18 @@ class ProductionLogListResource(Resource):
         offset = request.args.get('offset', type=int, default=0)
 
         query = ProductionLog.query
-        if product_part_no is not None:
+        if product_part_no:
             query = query.filter_by(product_part_no=product_part_no)
-        if start_date is not None:
+        if start_date:
             query = query.filter(ProductionLog.production_date >= start_date)
-        if end_date is not None:
+        if end_date:
             query = query.filter(ProductionLog.production_date <= end_date)
+        if min_quantity:
+            query = query.filter(ProductionLog.quantity_produced >= min_quantity)
+        if max_quantity:
+            query = query.filter(ProductionLog.quantity_produced <= max_quantity)
 
-        production_logs = query.order_by(sort_by).offset(offset).limit(limit).all()
+        production_logs = query.order_by(text(sort_by)).offset(offset).limit(limit).all()
         logger.info(f"Found {len(production_logs)} production logs")
         return production_logs, 200
 
@@ -89,11 +98,11 @@ class ProductionLogResource(Resource):
 
         production_log = ProductionLog.query.get_or_404(production_log_id, description="Production log not found")
 
-        if args['production_date'] is not None:
+        if args['production_date']:
             production_log.production_date = args['production_date']
-        if args['product_part_no'] is not None:
+        if args['product_part_no']:
             production_log.product_part_no = args['product_part_no']
-        if args['quantity_produced'] is not None:
+        if args['quantity_produced']:
             production_log.quantity_produced = args['quantity_produced']
 
         try:

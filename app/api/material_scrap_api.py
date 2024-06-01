@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import request
 from flask_restful import Resource, reqparse, marshal_with, abort
 from app.extensions import db
@@ -53,22 +55,22 @@ class MaterialScrapListResource(Resource):
 
 class MaterialScrapResource(Resource):
     @marshal_with(material_scrap_fields)
-    def get(self, date, material_part_no):
-        logger.info(f"GET /material_scrap/{date}/{material_part_no} called")
+    def get(self, material_part_no, date):
+        logger.info(f"GET /material_scrap/{material_part_no}/{date} called")
         scrap = MaterialScrap.query.filter_by(date=date, material_part_no=material_part_no).first_or_404(
             description="Material scrap not found")
         logger.info(f"Found material scrap with date {date} and material_part_no {material_part_no}")
         return scrap, 200
 
     @marshal_with(material_scrap_fields)
-    def put(self, date, material_part_no):
-        logger.info(f"PUT /material_scrap/{date}/{material_part_no} called")
+    def put(self, material_part_no, date):
+        logger.info(f"PUT /material_scrap/{material_part_no}/{date} called")
         parser = reqparse.RequestParser()
         parser.add_argument('quantity', type=int)
         parser.add_argument('scrap_type', type=str)
         args = parser.parse_args()
 
-        logger.debug(f"Updating material scrap {date} {material_part_no} with args: {args}")
+        logger.debug(f"Updating material scrap {material_part_no}/{date} with args: {args}")
 
         scrap = MaterialScrap.query.filter_by(date=date, material_part_no=material_part_no).first_or_404(
             description="Material scrap not found")
@@ -80,21 +82,21 @@ class MaterialScrapResource(Resource):
 
         try:
             db.session.commit()
-            logger.info(f"Material scrap {date} {material_part_no} updated")
+            logger.info(f"Material scrap {material_part_no}/{date} updated")
             return scrap, 200
         except Exception as e:
-            logger.error(f"Error updating material scrap {date} {material_part_no}: {e}")
+            logger.error(f"Error updating material scrap {material_part_no}/{date}: {e}")
             abort(500, message="An error occurred while updating the material scrap")
 
-    def delete(self, date, material_part_no):
-        logger.info(f"DELETE /material_scrap/{date}/{material_part_no} called")
+    def delete(self, material_part_no, date):
+        logger.info(f"DELETE /material_scrap/{material_part_no}/{date} called")
         scrap = MaterialScrap.query.filter_by(date=date, material_part_no=material_part_no).first_or_404(
             description="Material scrap not found")
         try:
             db.session.delete(scrap)
             db.session.commit()
-            logger.info(f"Material scrap {date} {material_part_no} deleted")
+            logger.info(f"Material scrap {material_part_no}/{date} deleted")
             return {'message': 'Material scrap deleted'}, 200
         except Exception as e:
-            logger.error(f"Error deleting material scrap {date} {material_part_no}: {e}")
+            logger.error(f"Error deleting material scrap {material_part_no}/{date}: {e}")
             abort(500, message="An error occurred while deleting the material scrap")
