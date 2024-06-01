@@ -15,12 +15,14 @@
         <div class="input-group mb-3" style="padding-bottom: 3px">
             <input type="text" id="searchInput" class="form-control" placeholder="Search...">
         </div>
-        <a href="#" class="add-new-btn" style="margin-top: 0" data-bs-toggle="modal" data-bs-target="#addMaterialModal">Add New Material</a>
+        <a href="#" class="add-new-btn" style="margin-top: 0" data-bs-toggle="modal" data-bs-target="#addMaterialModal">Add
+            New Material</a>
         <div class="table-responsive" style="max-height: 500px">
             <table class="table table-hover" style="padding: 0; margin-top: 0">
                 <thead class="table-light"
                        style="border-color: black; border-width: 2px; position: sticky; top: 0; z-index: 1">
                 <tr>
+                    <th>Part No.</th>
                     <th>Material Name</th>
                     <th>Unit Type</th>
                     <th>Quantity</th>
@@ -28,12 +30,13 @@
                 </tr>
                 </thead>
                 <tbody class="searchableTable" id="materialTableBody">
-                    <!-- Dynamic content will be inserted here -->
+                <!-- Dynamic content will be inserted here -->
                 </tbody>
             </table>
         </div>
         <!-- Add Material Modal -->
-        <div class="modal fade" id="addMaterialModal" tabindex="-1" aria-labelledby="addMaterialModalLabel" aria-hidden="true">
+        <div class="modal fade" id="addMaterialModal" tabindex="-1" aria-labelledby="addMaterialModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -52,7 +55,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="materialQuantity" class="form-label">Quantity</label>
-                                <input type="number" class="form-control" id="materialQuantity" name="quantity" required>
+                                <input type="number" class="form-control" id="materialQuantity" name="quantity"
+                                       required>
                             </div>
                             <button type="submit" class="btn btn-primary">Add Material</button>
                         </form>
@@ -61,7 +65,8 @@
             </div>
         </div>
         <!-- Edit Material Modal -->
-        <div class="modal fade" id="editMaterialModal" tabindex="-1" aria-labelledby="editMaterialModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editMaterialModal" tabindex="-1" aria-labelledby="editMaterialModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -81,7 +86,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="editMaterialQuantity" class="form-label">Quantity</label>
-                                <input type="number" class="form-control" id="editMaterialQuantity" name="quantity" required>
+                                <input type="number" class="form-control" id="editMaterialQuantity" name="quantity"
+                                       required>
                             </div>
                             <button type="submit" class="btn btn-primary">Save Changes</button>
                         </form>
@@ -92,17 +98,17 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             fetchMaterials();
 
             const addMaterialForm = document.getElementById('addMaterialForm');
-            addMaterialForm.addEventListener('submit', function(event) {
+            addMaterialForm.addEventListener('submit', function (event) {
                 event.preventDefault();
                 addMaterial();
             });
 
             const editMaterialForm = document.getElementById('editMaterialForm');
-            editMaterialForm.addEventListener('submit', function(event) {
+            editMaterialForm.addEventListener('submit', function (event) {
                 event.preventDefault();
                 updateMaterial();
             });
@@ -117,18 +123,27 @@
                     data.forEach(material => {
                         const row = document.createElement('tr');
                         row.innerHTML = `
-                            <td><a class="link-info" href="{{ url_for('material.edit_material', name='') }}${material.name}">${material.name}</a></td>
+                            <td style="width: 20px" ">${material.part_no}</td>
+                            <td>${material.name}</td>
                             <td>${material.unit}</td>
                             <td>${material.quantity}</td>
-                            <td><i class="lni lni-pencil" data-id="${material.part_no}" data-bs-toggle="modal" data-bs-target="#editMaterialModal"></i></td>
+                            <td style="width: 10px"><i class="lni lni-pencil" data-id="${material.part_no}" data-bs-toggle="modal" data-bs-target="#editMaterialModal" style="color: #0dcaf0; padding-right: 15px; padding-left: 5px"></i><i class="lni lni-trash-can" data-id="${material.part_no}" style="color: red"></i></td>
+
                         `;
                         materialsTableBody.appendChild(row);
                     });
 
                     document.querySelectorAll('.lni-pencil').forEach(icon => {
-                        icon.addEventListener('click', function() {
+                        icon.addEventListener('click', function () {
                             const partNo = this.getAttribute('data-id');
                             fetchMaterial(partNo);
+                        });
+                    });
+
+                    document.querySelectorAll('.lni-trash-can').forEach(icon => {
+                        icon.addEventListener('click', function () {
+                            const partNo = this.getAttribute('data-id');
+                            deleteMaterial(partNo);
                         });
                     });
                 })
@@ -155,22 +170,22 @@
                 quantity: formData.get('quantity')
             };
 
-            fetch('/materials', {
+            fetch('/api/v1/materials', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
             })
-            .then(response => {
-                if (response.ok) {
-                    $('#addMaterialModal').modal('hide');
-                    fetchMaterials();
-                } else {
-                    console.error('Error adding material');
-                }
-            })
-            .catch(error => console.error('Error adding material:', error));
+                .then(response => {
+                    if (response.ok) {
+                        $('#addMaterialModal').modal('hide');
+                        fetchMaterials();
+                    } else {
+                        console.error('Error adding material');
+                    }
+                })
+                .catch(error => console.error('Error adding material:', error));
         }
 
         function updateMaterial() {
@@ -189,15 +204,31 @@
                 },
                 body: JSON.stringify(data)
             })
-            .then(response => {
-                if (response.ok) {
-                    $('#editMaterialModal').modal('hide');
-                    fetchMaterials();
-                } else {
-                    console.error('Error updating material');
-                }
-            })
-            .catch(error => console.error('Error updating material:', error));
+                .then(response => {
+                    if (response.ok) {
+                        $('#editMaterialModal').modal('hide');
+                        fetchMaterials();
+                    } else {
+                        console.error('Error updating material');
+                    }
+                })
+                .catch(error => console.error('Error updating material:', error));
+        }
+
+        function deleteMaterial(partNo) {
+            if (confirm('Are you sure?')) {
+                fetch(`/api/v1/materials/${partNo}`, {
+                    method: 'DELETE'
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            fetchMaterials();
+                        } else {
+                            console.error('Error deleting material');
+                        }
+                    })
+                    .catch(error => console.error('Error deleting material:', error));
+            }
         }
     </script>
 {% endblock %}
