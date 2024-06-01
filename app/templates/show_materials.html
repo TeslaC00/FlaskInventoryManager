@@ -22,7 +22,7 @@
                 <thead class="table-light"
                        style="border-color: black; border-width: 2px; position: sticky; top: 0; z-index: 1">
                 <tr>
-                    <th>Part No.</th>
+                    <th class=part-no>Part No.</th>
                     <th>Material Name</th>
                     <th>Unit Type</th>
                     <th>Quantity</th>
@@ -123,7 +123,7 @@
                     data.forEach(material => {
                         const row = document.createElement('tr');
                         row.innerHTML = `
-                            <td style="width: 20px" ">${material.part_no}</td>
+                            <td class=part-no>${material.part_no}</td>
                             <td>${material.name}</td>
                             <td>${material.unit}</td>
                             <td>${material.quantity}</td>

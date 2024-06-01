@@ -42,3 +42,13 @@ table tbody tr:nth-child(even) {
 table tbody tr:hover {
     background-color: #ddd;
 }
+
+.part-no{
+    width: 85px !important;
+    max-width: 85px !important;
+    min-width: 85px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
