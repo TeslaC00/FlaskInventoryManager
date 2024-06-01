@@ -27,9 +27,9 @@ def abort_if_audit_log_not_found(audit_log_id):
 
 class AuditLogResource(Resource):
     @marshal_with(audit_log_fields)
-    def get(self, id=None):
-        if id:
-            audit_log = abort_if_audit_log_not_found(id)
+    def get(self, audit_id=None):
+        if audit_id:
+            audit_log = abort_if_audit_log_not_found(audit_id)
             return audit_log, 200
         logs = AuditLog.query.order_by(AuditLog.change_timestamp.desc()).all()
         return logs, 200

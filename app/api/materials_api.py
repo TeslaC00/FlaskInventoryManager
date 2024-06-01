@@ -13,6 +13,9 @@ material_fields = {
     'quantity': fields.Integer
 }
 
+# filter - name, unit, quantity(min,max)
+# sort - name, quantity, part_no
+
 
 class MaterialListResource(Resource):
     @marshal_with(material_fields)
@@ -35,9 +38,9 @@ class MaterialListResource(Resource):
             query = query.filter(Material.name.like(f"%{name}%"))
         if unit:
             query = query.filter_by(unit=unit)
-        if min_quantity is not None:
+        if min_quantity:
             query = query.filter(Material.quantity >= min_quantity)
-        if max_quantity is not None:
+        if max_quantity:
             query = query.filter(Material.quantity <= max_quantity)
 
         materials = query.order_by(text(sort_by)).offset(offset).limit(limit).all()

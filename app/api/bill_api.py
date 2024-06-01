@@ -37,8 +37,8 @@ class BillListResource(Resource):
 
         # for sorting
         sort_by = request.args.get('sort_by', 'date')
-        limit = request.args.get('limit', 20, type=int)
-        offset = request.args.get('offset', 0, type=int)
+        limit = request.args.get('limit', default=20, type=int)
+        offset = request.args.get('offset', default=0, type=int)
 
         logger.debug(f"Filtering with buyer_id={buyer_id}, purchase_order={purchase_order}, start_date={start_date}, "
                      f"end_date={end_date}, min_total_price={min_total_price}, max_total_price={max_total_price}, ")

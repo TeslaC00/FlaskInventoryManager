@@ -1,6 +1,12 @@
 from datetime import datetime
 
 from flask_restful import fields
+from flask import request
+from flask_restful import Resource, reqparse, marshal_with, abort
+from app.extensions import db
+from app.models import ProductScrap
+from app.logger import logger
+from sqlalchemy import text
 
 product_scrap_fields = {
     'part_no': fields.Integer(attribute='product_part_no'),
@@ -8,12 +14,10 @@ product_scrap_fields = {
     'quantity': fields.Integer,
     'scrap_type': fields.String(attribute='scrap_type.value')
 }
-from flask import request
-from flask_restful import Resource, reqparse, marshal_with, abort
-from app.extensions import db
-from app.models import ProductScrap
-from app.logger import logger
 
+
+# filter - part_no, date(start,end), quantity(min,max), scrap_type
+# sort - part_no, date, quantity
 
 class ProductScrapListResource(Resource):
     @marshal_with(product_scrap_fields)
@@ -24,6 +28,8 @@ class ProductScrapListResource(Resource):
         product_part_no = request.args.get('product_part_no', type=int)
         start_date = request.args.get('start_date')
         end_date = request.args.get('end_date')
+        min_quantity = request.args.get('min_quantity')
+        max_quantity = request.args.get('max_quantity')
         scrap_type = request.args.get('scrap_type')
 
         # for sorting
@@ -32,16 +38,20 @@ class ProductScrapListResource(Resource):
         offset = request.args.get('offset', type=int, default=0)
 
         query = ProductScrap.query
-        if product_part_no is not None:
+        if product_part_no:
             query = query.filter_by(product_part_no=product_part_no)
-        if start_date is not None:
+        if start_date:
             query = query.filter(ProductScrap.date >= start_date)
-        if end_date is not None:
+        if end_date:
             query = query.filter(ProductScrap.date <= end_date)
-        if scrap_type is not None:
+        if min_quantity:
+            query = query.filter(ProductScrap.quantity >= min_quantity)
+        if max_quantity:
+            query = query.filter(ProductScrap.quantity <= max_quantity)
+        if scrap_type:
             query = query.filter_by(scrap_type=scrap_type)
 
-        product_scraps = query.order_by(sort_by).offset(offset).limit(limit).all()
+        product_scraps = query.order_by(text(sort_by)).offset(offset).limit(limit).all()
         logger.info(f"Found {len(product_scraps)} product scraps")
         return product_scraps, 200
 
@@ -68,8 +78,8 @@ class ProductScrapListResource(Resource):
         try:
             db.session.add(new_product_scrap)
             db.session.commit()
-            logger.info(
-                f"New product scrap created with product_part_no {new_product_scrap.product_part_no} and date {new_product_scrap.date}")
+            logger.info(f"New product scrap created with product_part_no {new_product_scrap.product_part_no} and date "
+                        f"{new_product_scrap.date}")
             return new_product_scrap, 201
         except Exception as e:
             logger.error(f"Error creating product scrap: {e}")
@@ -98,9 +108,9 @@ class ProductScrapResource(Resource):
         product_scrap = ProductScrap.query.filter_by(product_part_no=product_part_no, date=date).first_or_404(
             description="Product scrap not found")
 
-        if args['quantity'] is not None:
+        if args['quantity']:
             product_scrap.quantity = args['quantity']
-        if args['scrap_type'] is not None:
+        if args['scrap_type']:
             product_scrap.scrap_type = args['scrap_type']
 
         try:

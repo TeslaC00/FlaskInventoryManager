@@ -15,6 +15,7 @@ product_material_fields = {
 
 
 class ProductMaterialListResource(Resource):
+    # TODO: needs to redefined with discussion
     @marshal_with(product_material_fields)
     def get(self):
         logger.info('GET /product_materials called')
@@ -29,9 +30,9 @@ class ProductMaterialListResource(Resource):
         offset = request.args.get('offset', type=int, default=0)
 
         query = ProductMaterial.query
-        if product_part_no is not None:
+        if product_part_no:
             query = query.filter_by(product_part_no=product_part_no)
-        if material_part_no is not None:
+        if material_part_no:
             query = query.filter_by(material_part_no=material_part_no)
 
         product_materials = query.order_by(text(sort_by)).offset(offset).limit(limit).all()
@@ -90,7 +91,7 @@ class ProductMaterialResource(Resource):
                                                            material_part_no=material_part_no).first_or_404(
             description="Product material not found")
 
-        if args['quantity'] is not None:
+        if args['quantity']:
             product_material.quantity = args['quantity']
 
         try:
