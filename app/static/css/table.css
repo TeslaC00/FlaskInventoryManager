@@ -44,11 +44,28 @@ table tbody tr:hover {
 }
 
 .part-no{
-    width: 85px !important;
-    max-width: 85px !important;
-    min-width: 85px !important;
+    width: 60px ;
+    max-width: 60px ;
+    min-width: 60px ;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
 
+.checkbox{
+    width: 10px ;
+    max-width: 10px ;
+    min-width: 10px ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.action{
+    width: 40px ;
+    max-width: 40px ;
+    min-width: 40px ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

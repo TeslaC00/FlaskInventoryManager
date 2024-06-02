@@ -44,12 +44,12 @@
                 <thead class="table-light"
                        style="border-color: black; border-width: 2px; position: sticky; top: 0; z-index: 1">
                 <tr>
-                    <th><input type="checkbox" id="selectAll"></th>
-                    <th>Part No.</th>
+                    <th class="checkbox"><input type="checkbox" id="selectAll"></th>
+                    <th class="part-no">Part No.</th>
                     <th>Material Name</th>
                     <th>Unit Type</th>
                     <th>Quantity</th>
-                    <th></th>
+                    <th class="action"></th>
                 </tr>
                 </thead>
                 <tbody id="materialTableBody">
@@ -161,12 +161,12 @@
                     data.forEach(material => {
                         const row = document.createElement('tr');
                         row.innerHTML = `
-                            <td><input type="checkbox" class="select-checkbox" data-id="${material.part_no}"></td>
-                            <td>${material.part_no}</td>
+                            <td class=checkbox><input type="checkbox" class="select-checkbox" data-id="${material.part_no}"></td>
+                            <td class="part-no">${material.part_no}</td>
                             <td>${material.name}</td>
                             <td>${material.unit}</td>
                             <td>${material.quantity}</td>
-                            <td>
+                            <td class="action">
                                 <i class="lni lni-pencil" data-id="${material.part_no}" data-bs-toggle="modal" data-bs-target="#editMaterialModal" style="color: #0dcaf0; padding-right: 15px; padding-left: 5px"></i>
                                 <i class="lni lni-trash-can" data-id="${material.part_no}" style="color: red"></i>
                             </td>
