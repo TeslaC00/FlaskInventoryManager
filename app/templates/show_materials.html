@@ -5,31 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet"/>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <title>Material Table</title>
+    <style>
+        /* Custom padding for the search bar */
+        .dataTables_filter {
+            padding-bottom: 0px;
+        }
+
+        /* Adjust the layout for search bar and delete button */
+        .dataTables_filter label {
+            margin-top: 13px;
+            float: left;
+            margin-right: 20px;
+        }
+
+        #addMaterialBtn {
+            float: right;
+        }
+
+        #deleteSelectedBtn {
+            float: right;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
     <div class="container">
         <h1>Material Table</h1>
-        <!-- Search Bar -->
-        <div class="input-group mb-3" style="padding-bottom: 3px">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search...">
-        </div>
-        <a href="#" class="add-new-btn" style="margin-top: 0" data-bs-toggle="modal" data-bs-target="#addMaterialModal">Add
-            New Material</a>
-        <div class="table-responsive" style="max-height: 500px">
-            <table class="table table-hover" style="padding: 0; margin-top: 0">
+
+        <button id="deleteSelectedBtn" class="btn btn-danger" style="margin: 10px 0;">Delete Selected</button>
+        <div class="table-responsive">
+            <button id="addMaterialBtn" class="btn btn-primary" style="margin: 10px 0" data-bs-toggle="modal"
+                    data-bs-target="#addMaterialModal">Add New Material
+            </button>
+            <table id="materialTable" class="table table-hover">
                 <thead class="table-light"
                        style="border-color: black; border-width: 2px; position: sticky; top: 0; z-index: 1">
                 <tr>
-                    <th class=part-no>Part No.</th>
+                    <th><input type="checkbox" id="selectAll"></th>
+                    <th>Part No.</th>
                     <th>Material Name</th>
                     <th>Unit Type</th>
                     <th>Quantity</th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
                 </thead>
-                <tbody class="searchableTable" id="materialTableBody">
+                <tbody id="materialTableBody">
                 <!-- Dynamic content will be inserted here -->
                 </tbody>
             </table>
@@ -97,6 +120,10 @@
         </div>
     </div>
 
+    <!-- jQuery and DataTables JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             fetchMaterials();
@@ -112,6 +139,17 @@
                 event.preventDefault();
                 updateMaterial();
             });
+
+            document.getElementById('selectAll').addEventListener('change', function () {
+                const checkboxes = document.querySelectorAll('.select-checkbox');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+            });
+
+            document.getElementById('deleteSelectedBtn').addEventListener('click', function () {
+                deleteSelectedMaterials();
+            });
         });
 
         function fetchMaterials() {
@@ -123,14 +161,31 @@
                     data.forEach(material => {
                         const row = document.createElement('tr');
                         row.innerHTML = `
-                            <td class=part-no>${material.part_no}</td>
+                            <td><input type="checkbox" class="select-checkbox" data-id="${material.part_no}"></td>
+                            <td>${material.part_no}</td>
                             <td>${material.name}</td>
                             <td>${material.unit}</td>
                             <td>${material.quantity}</td>
-                            <td style="width: 10px"><i class="lni lni-pencil" data-id="${material.part_no}" data-bs-toggle="modal" data-bs-target="#editMaterialModal" style="color: #0dcaf0; padding-right: 15px; padding-left: 5px"></i><i class="lni lni-trash-can" data-id="${material.part_no}" style="color: red"></i></td>
-
+                            <td>
+                                <i class="lni lni-pencil" data-id="${material.part_no}" data-bs-toggle="modal" data-bs-target="#editMaterialModal" style="color: #0dcaf0; padding-right: 15px; padding-left: 5px"></i>
+                                <i class="lni lni-trash-can" data-id="${material.part_no}" style="color: red"></i>
+                            </td>
                         `;
                         materialsTableBody.appendChild(row);
+                    });
+
+                    // Initialize DataTable without length change option
+                    $('#materialTable').DataTable({
+                        lengthChange: false,
+                        pageLength: 10,
+                        dom: '<"top"f>rt<"bottom"ip>',
+                        initComplete: function () {
+                            const filter = $('#materialTable_filter');
+                            filter.css('float', 'left');
+                            const addbtn = $('#addMaterialBtn');
+                            $('#addMaterialBtn').insertAfter(filter);
+                            $('#deleteSelectedBtn').insertAfter(addbtn);
+                        }
                     });
 
                     document.querySelectorAll('.lni-pencil').forEach(icon => {
@@ -228,6 +283,27 @@
                         }
                     })
                     .catch(error => console.error('Error deleting material:', error));
+            }
+        }
+
+        function deleteSelectedMaterials() {
+            const selectedCheckboxes = document.querySelectorAll('.select-checkbox:checked');
+            const selectedIds = Array.from(selectedCheckboxes).map(checkbox => checkbox.getAttribute('data-id'));
+
+            if (selectedIds.length > 0 && confirm('Are you sure you want to delete the selected materials?')) {
+                Promise.all(selectedIds.map(partNo => {
+                    return fetch(`/api/v1/materials/${partNo}`, {
+                        method: 'DELETE'
+                    });
+                }))
+                    .then(responses => {
+                        if (responses.every(response => response.ok)) {
+                            fetchMaterials();
+                        } else {
+                            console.error('Error deleting one or more materials');
+                        }
+                    })
+                    .catch(error => console.error('Error deleting materials:', error));
             }
         }
     </script>
