@@ -9,10 +9,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <title>Material Table</title>
     <style>
-        /* Custom padding for the search bar */
-        .dataTables_filter {
-            padding-bottom: 0px;
-        }
 
         /* Adjust the layout for search bar and delete button */
         .dataTables_filter label {
@@ -27,6 +23,7 @@
 
         #deleteSelectedBtn {
             float: right;
+            background-color: red;
         }
     </style>
 {% endblock %}
@@ -124,43 +121,43 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        fetchMaterials();
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchMaterials();
 
-        const addMaterialForm = document.getElementById('addMaterialForm');
-        addMaterialForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-            addMaterial();
-        });
-
-        const editMaterialForm = document.getElementById('editMaterialForm');
-        editMaterialForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-            updateMaterial();
-        });
-
-        document.getElementById('selectAll').addEventListener('change', function () {
-            const checkboxes = document.querySelectorAll('.select-checkbox');
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = this.checked;
+            const addMaterialForm = document.getElementById('addMaterialForm');
+            addMaterialForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                addMaterial();
             });
-        });
 
-        document.getElementById('deleteSelectedBtn').addEventListener('click', function () {
-            deleteSelectedMaterials();
-        });
+            const editMaterialForm = document.getElementById('editMaterialForm');
+            editMaterialForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                updateMaterial();
+            });
 
-        function fetchMaterials() {
-            fetch('/api/v1/materials')
-                .then(response => response.json())
-                .then(data => {
-                    const materialsTableBody = document.getElementById('materialTableBody');
-                    materialsTableBody.innerHTML = '';
-                    data.forEach(material => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td class="checkbox"><input type="checkbox" class="select-checkbox" data-id="${material.part_no}"></td>
+            document.getElementById('selectAll').addEventListener('change', function () {
+                const checkboxes = document.querySelectorAll('.select-checkbox');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+            });
+
+            document.getElementById('deleteSelectedBtn').addEventListener('click', function () {
+                deleteSelectedMaterials();
+            });
+
+            function fetchMaterials() {
+                fetch('/api/v1/materials')
+                    .then(response => response.json())
+                    .then(data => {
+                        const materialsTableBody = document.getElementById('materialTableBody');
+                        materialsTableBody.innerHTML = '';
+                        data.forEach(material => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                            <td class="checkbox"><input type="checkbox" class="select-checkbox" data-id="${material.part_no}" style="margin-left: 8px"></td>
                             <td class="part-no">${material.part_no}</td>
                             <td>${material.name}</td>
                             <td>${material.unit}</td>
@@ -170,150 +167,152 @@
                                 <i class="lni lni-trash-can" data-id="${material.part_no}" style="color: red"></i>
                             </td>
                         `;
-                        materialsTableBody.appendChild(row);
-                    });
+                            materialsTableBody.appendChild(row);
+                        });
 
-                    // Initialize DataTable without length change option and disable sorting on specific columns
-                    const table = $('#materialTable').DataTable({
-                        lengthChange: false,
-                        pageLength: 10,
-                        dom: '<"top"f>rt<"bottom"ip>',
-                        columnDefs: [
-                            { orderable: false, targets: [0, 5] } // Disable sorting on the first and last columns
-                        ],
-                        initComplete: function () {
-                            const filter = $('#materialTable_filter');
-                            filter.css('float', 'left');
-                            const addbtn = $('#addMaterialBtn');
-                            $('#addMaterialBtn').insertAfter(filter);
-                            $('#deleteSelectedBtn').insertAfter(addbtn);
-                        }
-                    });
+                        // Initialize DataTable without length change option and disable sorting on specific columns
+                        const table = $('#materialTable').DataTable({
+                            order: [[1, 'asc']], // Default sorting by the "Part No." column in ascending order
+                            lengthChange: false,
+                            pageLength: 10,
+                            dom: '<"top"f>rt<"bottom"ip>',
+                            columnDefs: [
+                                {orderable: false, targets: [0, 5]} // Disable sorting on the first and last columns
+                            ],
+                            initComplete: function () {
+                                const filter = $('#materialTable_filter');
+                                filter.css('float', 'left');
+                                const addbtn = $('#addMaterialBtn');
+                                $('#addMaterialBtn').insertAfter(filter);
+                                $('#deleteSelectedBtn').insertAfter(addbtn);
+                            }
 
-                    // Add event listeners for edit and delete buttons
-                    $('#materialTable').on('draw.dt', function () {
-                        document.querySelectorAll('.lni-pencil').forEach(icon => {
-                            icon.addEventListener('click', function () {
-                                const partNo = this.getAttribute('data-id');
-                                fetchMaterial(partNo);
+                        });
+
+                        // Add event listeners for edit and delete buttons
+                        $('#materialTable').on('draw.dt', function () {
+                            document.querySelectorAll('.lni-pencil').forEach(icon => {
+                                icon.addEventListener('click', function () {
+                                    const partNo = this.getAttribute('data-id');
+                                    fetchMaterial(partNo);
+                                });
+                            });
+
+                            document.querySelectorAll('.lni-trash-can').forEach(icon => {
+                                icon.addEventListener('click', function () {
+                                    const partNo = this.getAttribute('data-id');
+                                    deleteMaterial(partNo);
+                                });
                             });
                         });
 
-                        document.querySelectorAll('.lni-trash-can').forEach(icon => {
-                            icon.addEventListener('click', function () {
-                                const partNo = this.getAttribute('data-id');
-                                deleteMaterial(partNo);
-                            });
-                        });
-                    });
+                        // Trigger the draw event to set initial listeners
+                        table.draw();
+                    })
+                    .catch(error => console.error('Error fetching materials:', error));
+            }
 
-                    // Trigger the draw event to set initial listeners
-                    table.draw();
-                })
-                .catch(error => console.error('Error fetching materials:', error));
-        }
+            function fetchMaterial(partNo) {
+                fetch(`/api/v1/materials/${partNo}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('editMaterialId').value = data.part_no;
+                        document.getElementById('editMaterialName').value = data.name;
+                        document.getElementById('editMaterialUnit').value = data.unit;
+                        document.getElementById('editMaterialQuantity').value = data.quantity;
+                    })
+                    .catch(error => console.error('Error fetching material:', error));
+            }
 
-        function fetchMaterial(partNo) {
-            fetch(`/api/v1/materials/${partNo}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('editMaterialId').value = data.part_no;
-                    document.getElementById('editMaterialName').value = data.name;
-                    document.getElementById('editMaterialUnit').value = data.unit;
-                    document.getElementById('editMaterialQuantity').value = data.quantity;
-                })
-                .catch(error => console.error('Error fetching material:', error));
-        }
+            function addMaterial() {
+                const formData = new FormData(document.getElementById('addMaterialForm'));
+                const data = {
+                    name: formData.get('name'),
+                    unit: formData.get('unit'),
+                    quantity: formData.get('quantity')
+                };
 
-        function addMaterial() {
-            const formData = new FormData(document.getElementById('addMaterialForm'));
-            const data = {
-                name: formData.get('name'),
-                unit: formData.get('unit'),
-                quantity: formData.get('quantity')
-            };
-
-            fetch('/api/v1/materials', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-                .then(response => {
-                    if (response.ok) {
-                        $('#addMaterialModal').modal('hide');
-                        fetchMaterials();
-                    } else {
-                        console.error('Error adding material');
-                    }
-                })
-                .catch(error => console.error('Error adding material:', error));
-        }
-
-        function updateMaterial() {
-            const formData = new FormData(document.getElementById('editMaterialForm'));
-            const partNo = formData.get('part_no');
-            const data = {
-                name: formData.get('name'),
-                unit: formData.get('unit'),
-                quantity: formData.get('quantity')
-            };
-
-            fetch(`/api/v1/materials/${partNo}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-                .then(response => {
-                    if (response.ok) {
-                        $('#editMaterialModal').modal('hide');
-                        fetchMaterials();
-                    } else {
-                        console.error('Error updating material');
-                    }
-                })
-                .catch(error => console.error('Error updating material:', error));
-        }
-
-        function deleteMaterial(partNo) {
-            if (confirm('Are you sure?')) {
-                fetch(`/api/v1/materials/${partNo}`, {
-                    method: 'DELETE'
+                fetch('/api/v1/materials', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
                 })
                     .then(response => {
                         if (response.ok) {
+                            $('#addMaterialModal').modal('hide');
                             fetchMaterials();
                         } else {
-                            console.error('Error deleting material');
+                            console.error('Error adding material');
                         }
                     })
-                    .catch(error => console.error('Error deleting material:', error));
+                    .catch(error => console.error('Error adding material:', error));
             }
-        }
 
-        function deleteSelectedMaterials() {
-            const selectedCheckboxes = document.querySelectorAll('.select-checkbox:checked');
-            const selectedIds = Array.from(selectedCheckboxes).map(checkbox => checkbox.getAttribute('data-id'));
+            function updateMaterial() {
+                const formData = new FormData(document.getElementById('editMaterialForm'));
+                const partNo = formData.get('part_no');
+                const data = {
+                    name: formData.get('name'),
+                    unit: formData.get('unit'),
+                    quantity: formData.get('quantity')
+                };
 
-            if (selectedIds.length > 0 && confirm('Are you sure you want to delete the selected materials?')) {
-                Promise.all(selectedIds.map(partNo => {
-                    return fetch(`/api/v1/materials/${partNo}`, {
+                fetch(`/api/v1/materials/${partNo}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            $('#editMaterialModal').modal('hide');
+                            fetchMaterials();
+                        } else {
+                            console.error('Error updating material');
+                        }
+                    })
+                    .catch(error => console.error('Error updating material:', error));
+            }
+
+            function deleteMaterial(partNo) {
+                if (confirm('Are you sure?')) {
+                    fetch(`/api/v1/materials/${partNo}`, {
                         method: 'DELETE'
-                    });
-                }))
-                    .then(responses => {
-                        if (responses.every(response => response.ok)) {
-                            fetchMaterials();
-                        } else {
-                            console.error('Error deleting one or more materials');
-                        }
                     })
-                    .catch(error => console.error('Error deleting materials:', error));
+                        .then(response => {
+                            if (response.ok) {
+                                fetchMaterials();
+                            } else {
+                                console.error('Error deleting material');
+                            }
+                        })
+                        .catch(error => console.error('Error deleting material:', error));
+                }
             }
-        }
-    });
-</script>
+
+            function deleteSelectedMaterials() {
+                const selectedCheckboxes = document.querySelectorAll('.select-checkbox:checked');
+                const selectedIds = Array.from(selectedCheckboxes).map(checkbox => checkbox.getAttribute('data-id'));
+
+                if (selectedIds.length > 0 && confirm('Are you sure you want to delete the selected materials?')) {
+                    Promise.all(selectedIds.map(partNo => {
+                        return fetch(`/api/v1/materials/${partNo}`, {
+                            method: 'DELETE'
+                        });
+                    }))
+                        .then(responses => {
+                            if (responses.every(response => response.ok)) {
+                                fetchMaterials();
+                            } else {
+                                console.error('Error deleting one or more materials');
+                            }
+                        })
+                        .catch(error => console.error('Error deleting materials:', error));
+                }
+            }
+        });
+    </script>
 {% endblock %}
