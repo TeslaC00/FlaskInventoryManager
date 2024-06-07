@@ -12,7 +12,7 @@ product_scrap_fields = {
     'part_no': fields.Integer(attribute='product_part_no'),
     'date': fields.DateTime(dt_format='iso8601'),
     'quantity': fields.Integer,
-    'scrap_type': fields.String(attribute='scrap_type.value')
+    'scrap_type': fields.String(attribute=lambda x: x.scrap_type.value),
 }
 
 

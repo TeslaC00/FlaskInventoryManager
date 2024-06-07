@@ -1,16 +1,10 @@
-import enum
 from datetime import datetime
 
 from multipledispatch import dispatch
 from sqlalchemy import Column, Integer, String, DateTime, Enum, Text
 from sqlalchemy.sql import func
 from app.extensions import db
-
-
-class ActionType(enum.Enum):
-    INSERT = 1
-    UPDATE = 2
-    DELETE = 3
+from app.models.enums import ActionType
 
 
 class AuditLog(db.Model):
@@ -26,7 +20,7 @@ class AuditLog(db.Model):
         new_value (str): The value of the column after the change.
         username (str): The username of the user who made the change. References the 'User.username' column.
         change_timestamp (datetime): The timestamp when the change was made.
-        action_type (ActionType): The type of action performed (e.g., INSERT, UPDATE, DELETE).
+        action_type (app.models.enums.ActionType): The type of action performed (e.g., INSERT, UPDATE, DELETE).
         user (User): A relationship to the User model, back referenced by 'user'.
 
     Methods:
@@ -72,7 +66,7 @@ class AuditLog(db.Model):
             'new_value': self.new_value,
             'username': self.username,
             'change_timestamp': self.change_timestamp,
-            'action_type': self.action_type,
+            'action_type': self.action_type.value,
             'remarks': self.remarks
         }
 

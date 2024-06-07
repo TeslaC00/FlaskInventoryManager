@@ -10,7 +10,7 @@ from flask_restful import fields
 material_scrap_fields = {
     'material_part_no': fields.Integer,
     'date': fields.DateTime(dt_format='iso8601'),
-    'scrap_type': fields.String,
+    'scrap_type': fields.String(attribute=lambda x: x.scrap_type.value),
     'quantity': fields.Integer
 }
 

@@ -40,8 +40,8 @@ api.add_resource(SupplierListResource, '/api/v1/suppliers')
 api.add_resource(SupplierResource, '/api/v1/suppliers/<int:supplier_id>')
 
 # material scrap api
-api.add_resource(MaterialScrapListResource, '/api/v1/material_scrap')
-api.add_resource(MaterialScrapResource, '/api/v1/material_scrap/<int:material_part_no>/<string:date>')
+api.add_resource(MaterialScrapListResource, '/api/v1/material_scraps')
+api.add_resource(MaterialScrapResource, '/api/v1/material_scraps/<int:material_part_no>/<string:date>')
 
 # challan items api
 api.add_resource(ChallanItemListResource, '/api/v1/challan_items')

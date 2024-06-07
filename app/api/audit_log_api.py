@@ -1,7 +1,10 @@
 from flask_restful import Resource, reqparse, abort, fields, marshal_with
 from datetime import datetime
 from app.extensions import db
-from app.models.audit_log import AuditLog, ActionType
+from app.models.audit_log import AuditLog
+from app.models.enums import ActionType
+
+# TODO: api not created
 
 # Define output fields for marshalling
 audit_log_fields = {
@@ -13,7 +16,7 @@ audit_log_fields = {
     'new_value': fields.String,
     'username': fields.String,
     'change_timestamp': fields.DateTime,
-    'action_type': fields.String(attribute='action_type.name'),
+    'action_type': fields.String(attribute=lambda x: x.action_type.value),
     'remarks': fields.String
 }
 
@@ -83,6 +86,5 @@ class AuditLogFilterResource(Resource):
 
         return logs, 200
 
-# TODO: add resources in init file
 # api.add_resource(AuditLogResource, '/audit_logs', '/audit_logs/<int:id>')
 # api.add_resource(AuditLogFilterResource, '/audit_logs/filter')

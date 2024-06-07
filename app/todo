@@ -8,3 +8,8 @@ Backend
 Frontend
 1. create custom request builder for sorting and filtering
 2. functions to call api and update table contents
+
+API
+1. create api with small response for GET of list
+2. create api to send detail response with ID
+3. create query params and path variables in code and postman

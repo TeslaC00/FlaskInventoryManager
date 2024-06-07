@@ -9,7 +9,7 @@ from app.logger import logger
 material_fields = {
     'part_no': fields.Integer,
     'name': fields.String,
-    'unit': fields.String,
+    'unit': fields.String(attribute=lambda x: x.unit.value),
     'quantity': fields.Integer
 }
 
