@@ -1,5 +1,9 @@
+# TODO: add date automatically or manually?
+
+# filter - buyer_id, purchase_order, date(start,end), total_price(min,max)
+# sort - buyer_id, date(default), total_price
 from flask import request
-from flask_restful import Resource, reqparse, fields, marshal_with
+from flask_restful import Resource, fields, marshal_with, abort
 from datetime import datetime
 from sqlalchemy import text
 from app.extensions import db
@@ -17,31 +21,26 @@ bill_fields = {
 }
 
 
-# TODO: add date automatically or manually?
-
-# filter - buyer_id, purchase_order, date(start,end), total_price(min,max)
-# sort - buyer_id, date(default), total_price
-
 class BillListResource(Resource):
     @marshal_with(bill_fields)
     def get(self):
         logger.info('GET /bills called')
 
-        # for filtering
-        buyer_id = request.args.get('buyer_id')
+        # Extract filtering parameters
+        buyer_id = request.args.get('buyer_id', type=int)
         purchase_order = request.args.get('purchase_order')
         start_date = request.args.get('start_date')
         end_date = request.args.get('end_date')
-        min_total_price = request.args.get('min_total_price')
-        max_total_price = request.args.get('max_total_price')
+        min_total_price = request.args.get('min_total_price', type=float)
+        max_total_price = request.args.get('max_total_price', type=float)
 
-        # for sorting
+        # Extract sorting and pagination parameters
         sort_by = request.args.get('sort_by', 'date')
         limit = request.args.get('limit', default=20, type=int)
         offset = request.args.get('offset', default=0, type=int)
 
         logger.debug(f"Filtering with buyer_id={buyer_id}, purchase_order={purchase_order}, start_date={start_date}, "
-                     f"end_date={end_date}, min_total_price={min_total_price}, max_total_price={max_total_price}, ")
+                     f"end_date={end_date}, min_total_price={min_total_price}, max_total_price={max_total_price}")
         logger.debug(f"Sorting by {sort_by}, limit={limit}, offset={offset}")
 
         query = Bill.query
@@ -50,15 +49,21 @@ class BillListResource(Resource):
         if purchase_order:
             query = query.filter_by(purchase_order=purchase_order)
         if start_date:
-            start_date_obj = datetime.strptime(start_date, '%Y-%m-%d')
-            query = query.filter(Bill.date >= start_date_obj)
+            try:
+                start_date_obj = datetime.strptime(start_date, '%Y-%m-%d')
+                query = query.filter(Bill.date >= start_date_obj)
+            except ValueError:
+                abort(400, message="Start date must be in YYYY-MM-DD format")
         if end_date:
-            end_date_obj = datetime.strptime(end_date, '%Y-%m-%d')
-            query = query.filter(Bill.date <= end_date_obj)
+            try:
+                end_date_obj = datetime.strptime(end_date, '%Y-%m-%d')
+                query = query.filter(Bill.date <= end_date_obj)
+            except ValueError:
+                abort(400, message="End date must be in YYYY-MM-DD format")
         if min_total_price:
-            query = query.filter(Bill.total_price >= float(min_total_price))
+            query = query.filter(Bill.total_price >= min_total_price)
         if max_total_price:
-            query = query.filter(Bill.total_price <= float(max_total_price))
+            query = query.filter(Bill.total_price <= max_total_price)
 
         bills = query.order_by(text(sort_by)).offset(offset).limit(limit).all()
         logger.info(f"Found {len(bills)} bills")
@@ -67,40 +72,36 @@ class BillListResource(Resource):
     @marshal_with(bill_fields)
     def post(self):
         logger.info('POST /bills called')
-        parser = reqparse.RequestParser()
-        parser.add_argument('buyer_id', type=int, required=True, hint='Buyer ID missing')
-        parser.add_argument('total_price', type=float, required=True, hint='Total price missing')
-        parser.add_argument('date', type=lambda x: datetime.strptime(x, '%Y-%m-%d'), required=True,
-                            help='Date missing')
-        parser.add_argument('purchase_order', type=str, required=True, help='Purchase order missing')
-        parser.add_argument('remarks', type=str, required=False, help='Remarks missing')
-        args = parser.parse_args()
-
-        logger.debug(f"Creating new bill with args: {args}")
+        json_data = request.get_json(force=True)
+        if not json_data:
+            logger.error("No input data provided")
+            return {"message": "No input data provided"}, 400
 
         try:
             new_bill = Bill(
-                buyer_id=args['buyer_id'],
-                total_price=args['total_price'],
-                date=args['date'],
-                purchase_order=args['purchase_order'],
-                remarks=args['remarks']
+                buyer_id=json_data['buyer_id'],
+                total_price=json_data['total_price'],
+                date=datetime.strptime(json_data['date'], '%Y-%m-%d'),
+                purchase_order=json_data['purchase_order'],
+                remarks=json_data.get('remarks')
             )
             db.session.add(new_bill)
             db.session.commit()
             logger.info(f"New bill created with ID {new_bill.id}")
             return new_bill, 201
+        except KeyError as e:
+            logger.error(f"Missing required field: {e}")
+            return {"message": f"Missing required field: {e}"}, 400
+        except ValueError as e:
+            logger.error(f"Invalid date format: {e}")
+            return {"message": "Date must be in YYYY-MM-DD format"}, 400
         except Exception as e:
-            logger.error(f"Error creating bill: {e}")
+            logger.error(f"Error creating bill: {e}", exc_info=True)
+            db.session.rollback()
             return {"message": "An error occurred while creating the bill"}, 500
 
 
 class BillResource(Resource):
-    '''get(self, id=None): Fetches either a specific bill by id or 10 bills if no id is provided.
-post(self): Adds a new bill entry to the database. Ensures the date is in the correct format.
-put(self, id): Updates an existing bill by id. Checks each argument and updates if provided.
-delete(self, id): Deletes a bill by id.'''
-
     @marshal_with(bill_fields)
     def get(self, bill_id):
         logger.info(f"GET /bills/{bill_id} called")
@@ -111,35 +112,33 @@ delete(self, id): Deletes a bill by id.'''
     @marshal_with(bill_fields)
     def put(self, bill_id):
         logger.info(f"PUT /bills/{bill_id} called")
-        parser = reqparse.RequestParser()
-        parser.add_argument('buyer_id', type=int)
-        parser.add_argument('total_price', type=float)
-        parser.add_argument('date', type=lambda x: datetime.strptime(x, '%Y-%m-%d'))
-        parser.add_argument('purchase_order', type=str)
-        parser.add_argument('remarks', type=str)
-        args = parser.parse_args()
-
-        logger.debug(f"Updating bill {bill_id} with args: {args}")
+        json_data = request.get_json(force=True)
+        if not json_data:
+            logger.error("No input data provided")
+            return {"message": "No input data provided"}, 400
 
         bill = Bill.query.get_or_404(bill_id)
-
-        if args['buyer_id']:
-            bill.buyer_id = args['buyer_id']
-        if args['total_price']:
-            bill.total_price = args['total_price']
-        if args['date']:
-            bill.date = args['date']
-        if args['purchase_order']:
-            bill.purchase_order = args['purchase_order']
-        if args['remarks']:
-            bill.remarks = args['remarks']
-
         try:
+            if 'buyer_id' in json_data:
+                bill.buyer_id = json_data['buyer_id']
+            if 'total_price' in json_data:
+                bill.total_price = json_data['total_price']
+            if 'date' in json_data:
+                bill.date = datetime.strptime(json_data['date'], '%Y-%m-%d')
+            if 'purchase_order' in json_data:
+                bill.purchase_order = json_data['purchase_order']
+            if 'remarks' in json_data:
+                bill.remarks = json_data['remarks']
+
             db.session.commit()
             logger.info(f"Bill {bill_id} updated")
             return bill, 200
+        except ValueError as e:
+            logger.error(f"Invalid date format: {e}")
+            return {"message": "Date must be in YYYY-MM-DD format"}, 400
         except Exception as e:
-            logger.error(f"Error updating bill {bill_id}: {e}")
+            logger.error(f"Error updating bill {bill_id}: {e}", exc_info=True)
+            db.session.rollback()
             return {"message": "An error occurred while updating the bill"}, 500
 
     def delete(self, bill_id):
@@ -151,5 +150,10 @@ delete(self, id): Deletes a bill by id.'''
             logger.info(f"Bill {bill_id} deleted")
             return {'message': 'Bill deleted'}, 200
         except Exception as e:
-            logger.error(f"Error deleting bill {bill_id}: {e}")
+            logger.error(f"Error deleting bill {bill_id}: {e}", exc_info=True)
+            db.session.rollback()
             return {"message": "An error occurred while deleting the bill"}, 500
+
+# resource routes are--
+# api.add_resource(BillListResource, '/bills')
+# api.add_resource(BillResource, '/bills/<int:bill_id>')
