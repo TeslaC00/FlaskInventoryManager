@@ -1,9 +1,10 @@
 from flask import request
-from flask_restful import Resource, reqparse, fields, marshal_with
+from flask_restful import Resource, fields, marshal_with
 from sqlalchemy import text
 from app.extensions import db
 from app.models import Buyer
 from app.logger import logger
+from werkzeug.exceptions import BadRequest
 
 # Define output fields for marshalling
 buyer_fields = {
@@ -16,24 +17,23 @@ buyer_fields = {
 }
 
 
-# filter - name, state_code, state_name
-# sort - name, state_code, state_name
-
-
 class BuyerListResource(Resource):
     @marshal_with(buyer_fields)
     def get(self):
         logger.info("GET /buyers called")
 
-        # for filtering
+        # Filtering parameters
         name = request.args.get('name')
         state_code = request.args.get('state_code')
         state_name = request.args.get('state_name')
 
-        # for sorting
+        # Sorting and pagination parameters
         sort_by = request.args.get('sort_by', 'name')
-        limit = request.args.get('limit', 20, type=int)
-        offset = request.args.get('offset', 0, type=int)
+        limit = request.args.get('limit', default=20, type=int)
+        offset = request.args.get('offset', default=0, type=int)
+
+        if sort_by not in ['name', 'state_code', 'state_name']:
+            raise BadRequest(f"Invalid sort_by parameter: {sort_by}")
 
         logger.debug(f"Filtering with name={name}, state_code={state_code}, state_name={state_name}")
         logger.debug(f"Sorting by {sort_by}, limit={limit}, offset={offset}")
@@ -41,44 +41,44 @@ class BuyerListResource(Resource):
         query = Buyer.query
 
         if name:
-            query = query.filter(Buyer.name.like(f"%{name}%"))
+            query = query.filter(Buyer.name.ilike(f"%{name}%"))
         if state_code:
             query = query.filter_by(state_code=state_code)
         if state_name:
-            query = query.filter(Buyer.state_name.like(f"%{state_name}%"))
+            query = query.filter(Buyer.state_name.ilike(f"%{state_name}%"))
 
         buyers = query.order_by(text(sort_by)).offset(offset).limit(limit).all()
         logger.info(f"Found {len(buyers)} buyers")
         return buyers, 200
 
     @marshal_with(buyer_fields)
-    # TODO: check if fails
     def post(self):
         logger.info("POST /buyers called")
-        parser = reqparse.RequestParser()
-        parser.add_argument('name', type=str, required=True, help='Name is required')
-        parser.add_argument('GST_No', type=str, required=True, help='GST No is required')
-        parser.add_argument('state_code', type=int, required=True, help='State code is required')
-        parser.add_argument('state_name', type=str, required=True, help='State name is required')
-        parser.add_argument('address', type=str, required=True, help='Address is required')
-        args = parser.parse_args()
 
-        logger.debug(f"Creating new buyer with args: {args}")
+        json_data = request.get_json()
+        if not json_data:
+            return {"message": "No input data provided"}, 400
+
+        required_fields = ['name', 'GST_No', 'state_code', 'state_name', 'address']
+        for field in required_fields:
+            if field not in json_data:
+                return {"message": f"{field} is required"}, 400
 
         try:
             new_buyer = Buyer(
-                name=args['name'],
-                GST_No=args['GST_No'],
-                state_code=args['state_code'],
-                state_name=args['state_name'],
-                address=args['address']
+                name=json_data['name'],
+                GST_No=json_data['GST_No'],
+                state_code=json_data['state_code'],
+                state_name=json_data['state_name'],
+                address=json_data['address']
             )
             db.session.add(new_buyer)
             db.session.commit()
             logger.info(f"New buyer created with ID {new_buyer.id}")
             return new_buyer, 201
         except Exception as e:
-            logger.error(f"Error creating buyer: {e}")
+            logger.error(f"Error creating buyer: {e}", exc_info=True)
+            db.session.rollback()
             return {"message": "An error occurred while creating the buyer"}, 500
 
 
@@ -93,35 +93,23 @@ class BuyerResource(Resource):
     @marshal_with(buyer_fields)
     def put(self, buyer_id):
         logger.info(f"PUT /buyers/{buyer_id} called")
-        parser = reqparse.RequestParser()
-        parser.add_argument('name', type=str)
-        parser.add_argument('GST_No', type=str)
-        parser.add_argument('state_code', type=int)
-        parser.add_argument('state_name', type=str)
-        parser.add_argument('address', type=str)
-        args = parser.parse_args()
 
-        logger.debug(f"Updating buyer {buyer_id} with args: {args}")
+        json_data = request.get_json()
+        if not json_data:
+            return {"message": "No input data provided"}, 400
 
         buyer = Buyer.query.get_or_404(buyer_id)
-
-        if args['name']:
-            buyer.name = args['name']
-        if args['GST_No']:
-            buyer.GST_No = args['GST_No']
-        if args['state_code']:
-            buyer.state_code = args['state_code']
-        if args['state_name']:
-            buyer.state_name = args['state_name']
-        if args['address']:
-            buyer.address = args['address']
+        for key, value in json_data.items():
+            if key in ['name', 'GST_No', 'state_code', 'state_name', 'address']:
+                setattr(buyer, key, value)
 
         try:
             db.session.commit()
             logger.info(f"Buyer {buyer_id} updated")
             return buyer, 200
         except Exception as e:
-            logger.error(f"Error updating buyer {buyer_id}: {e}")
+            logger.error(f"Error updating buyer {buyer_id}: {e}", exc_info=True)
+            db.session.rollback()
             return {"message": "An error occurred while updating the buyer"}, 500
 
     def delete(self, buyer_id):
@@ -133,5 +121,6 @@ class BuyerResource(Resource):
             logger.info(f"Buyer {buyer_id} deleted")
             return {'message': 'Buyer deleted'}, 200
         except Exception as e:
-            logger.error(f"Error deleting buyer {buyer_id}: {e}")
+            logger.error(f"Error deleting buyer {buyer_id}: {e}", exc_info=True)
+            db.session.rollback()
             return {"message": "An error occurred while deleting the buyer"}, 500
