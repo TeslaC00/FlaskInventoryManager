@@ -21,9 +21,9 @@ class BillListResource(Resource):
         query = Bill.query
         # for filtering
         if 'buyer_id' in query_args:
-            query = query.filter_by(buyer_id=query_args['buyer_id'])
+            query = query.filter(Bill.buyer_id.like(f"%{query_args['buyer_id']}%"))
         if 'purchase_order' in query_args:
-            query = query.filter_by(purchase_order=query_args['purchase_order'])
+            query = query.filter(Bill.purchase_order.like(f"%{query_args['purchase_order']}%"))
         if 'start_date' in query_args:
             query = query.filter(Bill.date >= query_args['start_date'])
         if 'end_date' in query_args:
