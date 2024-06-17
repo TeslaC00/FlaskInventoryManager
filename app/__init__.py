@@ -3,6 +3,7 @@ import os
 from flask import Flask
 from flask_security import SQLAlchemyUserDatastore, Security
 
+from app.config import APIConfig
 from app.logger import logger
 from app.extensions import initialize_extensions, db
 
@@ -22,11 +23,13 @@ def create_app():
     app.config["REMEMBER_COOKIE_SAMESITE"] = "strict"
     app.config["SESSION_COOKIE_SAMESITE"] = "strict"
     logger.info('Loaded Environment Variables')
+    app.config.from_object(APIConfig)
+    logger.info('Loaded Api configurations')
 
     initialize_extensions(app)
-    from app.api import api
-    api.init_app(app)
-    logger.info('Initialized Flask restful api')
+    # shows registered urls
+    # for rule in app.url_map.iter_rules():
+    #     print(f"{rule.endpoint} {rule.rule}")
     logger.info('All extensions initialized')
 
     init_security(app)
