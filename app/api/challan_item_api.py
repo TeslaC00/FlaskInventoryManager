@@ -1,103 +1,100 @@
-from flask import request
-from flask_restful import Resource, reqparse, marshal_with, abort
+from flask.views import MethodView
+from flask_smorest import Blueprint, abort
+from sqlalchemy import or_
+
+from app.api.utils import apply_sorting, generate_meta
 from app.extensions import db
-from app.models import ChallanItem
 from app.logger import logger
-from flask_restful import fields
+from app.models import ChallanItem
+from app.schemas.challan_item_schema import ChallanItemSchema, ChallanQuerySchema, ChallanItemUpdateSchema
 
-challan_item_fields = {
-    'id': fields.Integer,
-    'price': fields.Float,
-    'quantity': fields.Integer,
-    'challan_id': fields.Integer,
-    'material_part_no': fields.Integer
-}
+challan_item_bp = Blueprint('challan_item_bp', __name__)
 
 
-class ChallanItemListResource(Resource):
-    @marshal_with(challan_item_fields)
-    def get(self):
+@challan_item_bp.route('/challan_item')
+class ChallanItemListResource(MethodView):
+    @challan_item_bp.response(200, ChallanItemSchema(many=True))
+    @challan_item_bp.arguments(ChallanQuerySchema, location='query')
+    def get(self, query_args):
         logger.info('GET /challan_items called')
-        challan_items = ChallanItem.query.all()
-        logger.info(f"Found {len(challan_items)} challan items")
-        return challan_items, 200
+        logger.debug(f"Query Arguments={query_args}")
 
-    @marshal_with(challan_item_fields)
-    def post(self):
+        query = ChallanItem.query
+        # for filtering
+        if 'challan_id' in query_args:
+            query = query.filter(ChallanItem.challan_id.like(f"%{query_args['challan_id']}%"))
+        if 'material_part_no' in query_args:
+            query = query.filter(ChallanItem.material_part_no.like(f"%{query_args['material_part_no']}%"))
+        # for searching
+        if 'search' in query_args:
+            search = f"%{query_args['search']}%"
+            query = query.filter(or_(
+                ChallanItem.price.like(search),
+                ChallanItem.quantity.like(search),
+                ChallanItem.challan_id.like(search),
+                ChallanItem.material_part_no.like(search)
+            ))
+        # for sorting
+        challan_items, records_count = apply_sorting(query, query_args)
+        logger.info(f"Found {records_count} challan_items")
+        logger.debug(f"Returned challan_items: {challan_items}")
+
+        meta = generate_meta(records_count, query_args)
+        return challan_items, {'meta': meta}
+
+    @challan_item_bp.response(201, ChallanItemSchema)
+    @challan_item_bp.arguments(ChallanItemSchema)
+    def post(self, new_challan_item_data):
         logger.info('POST /challan_items called')
-        parser = reqparse.RequestParser()
-        parser.add_argument('price', type=float, required=True, help='Price is required')
-        parser.add_argument('quantity', type=int, required=True, help='Quantity is required')
-        parser.add_argument('challan_id', type=int, required=True, help='Challan ID is required')
-        parser.add_argument('material_part_no', type=int, required=True, help='Material part number is required')
-        args = parser.parse_args()
-
-        logger.debug(f"Creating new challan item with args: {args}")
-
-        new_challan_item = ChallanItem(
-            price=args['price'],
-            quantity=args['quantity'],
-            challan_id=args['challan_id'],
-            material_part_no=args['material_part_no']
-        )
+        logger.debug(f"Creating new challan items with args: {new_challan_item_data}")
 
         try:
+            new_challan_item = ChallanItem(new_challan_item_data)
             db.session.add(new_challan_item)
             db.session.commit()
             logger.info(f"New challan item created with ID {new_challan_item.id}")
-            return new_challan_item, 201
+            return new_challan_item
         except Exception as e:
             logger.error(f"Error creating challan item: {e}")
             abort(500, message="An error occurred while creating the challan item")
 
 
-class ChallanItemResource(Resource):
-    @marshal_with(challan_item_fields)
-    def get(self, id):
-        logger.info(f"GET /challan_items/{id} called")
-        challan_item = ChallanItem.query.get_or_404(id, description="Challan item not found")
-        logger.info(f"Found challan item with ID {id}")
-        return challan_item, 200
+@challan_item_bp.route('/challan_item/<int:challan_item_id>')
+class ChallanItemResource(MethodView):
+    @challan_item_bp.response(200, ChallanItemSchema)
+    def get(self, challan_item_id):
+        logger.info(f"GET /challan_items/{challan_item_id} called")
+        challan_item = ChallanItem.query.get_or_404(challan_item_id, description="Challan item not found")
+        logger.info(f"Found challan item with ID {challan_item_id}")
+        return challan_item
 
-    @marshal_with(challan_item_fields)
-    def put(self, id):
-        logger.info(f"PUT /challan_items/{id} called")
-        parser = reqparse.RequestParser()
-        parser.add_argument('price', type=float)
-        parser.add_argument('quantity', type=int)
-        parser.add_argument('challan_id', type=int)
-        parser.add_argument('material_part_no', type=int)
-        args = parser.parse_args()
+    @challan_item_bp.response(200, ChallanItemSchema)
+    @challan_item_bp.arguments(ChallanItemUpdateSchema)
+    def put(self, update_challan_item_data, challan_item_id):
+        logger.info(f"PUT /challan_items/{challan_item_id} called")
+        logger.debug(f"Updating challan item {challan_item_id} with args: {update_challan_item_data}")
 
-        logger.debug(f"Updating challan item {id} with args: {args}")
-
-        challan_item = ChallanItem.query.get_or_404(id, description="Challan item not found")
-
-        if args['price'] is not None:
-            challan_item.price = args['price']
-        if args['quantity'] is not None:
-            challan_item.quantity = args['quantity']
-        if args['challan_id'] is not None:
-            challan_item.challan_id = args['challan_id']
-        if args['material_part_no'] is not None:
-            challan_item.material_part_no = args['material_part_no']
+        challan_item = ChallanItem.query.get_or_404(challan_item_id, description="Challan item not found")
+        for key, value in update_challan_item_data.items():
+            setattr(challan_item, key, value)
 
         try:
             db.session.commit()
-            logger.info(f"Challan item {id} updated")
-            return challan_item, 200
+            logger.info(f"Challan item {challan_item_id} updated")
+            return challan_item
         except Exception as e:
-            logger.error(f"Error updating challan item {id}: {e}")
+            logger.error(f"Error updating challan item {challan_item_id}: {e}")
             abort(500, message="An error occurred while updating the challan item")
 
-    def delete(self, id):
-        logger.info(f"DELETE /challan_items/{id} called")
-        challan_item = ChallanItem.query.get_or_404(id, description="Challan item not found")
+    @challan_item_bp.response(204)
+    def delete(self, challan_item_id):
+        logger.info(f"DELETE /challan_items/{challan_item_id} called")
+        challan_item = ChallanItem.query.get_or_404(challan_item_id, description="Challan item not found")
         try:
             db.session.delete(challan_item)
             db.session.commit()
-            logger.info(f"Challan item {id} deleted")
-            return {'message': 'Challan item deleted'}, 200
+            logger.info(f"Challan item {challan_item_id} deleted")
+            return {'message': 'Challan item deleted'}
         except Exception as e:
-            logger.error(f"Error deleting challan item {id}: {e}")
+            logger.error(f"Error deleting challan item {challan_item_id}: {e}")
             abort(500, message="An error occurred while deleting the challan item")

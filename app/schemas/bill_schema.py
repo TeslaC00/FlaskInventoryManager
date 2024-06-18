@@ -11,7 +11,7 @@ class BillSchema(Schema):
 
 
 class BillUpdateSchema(Schema):
-    total_price = fields.Int(required=True)
+    total_price = fields.Int()
     remarks = fields.Str()
 
 

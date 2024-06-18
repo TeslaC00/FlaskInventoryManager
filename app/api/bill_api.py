@@ -1,7 +1,8 @@
-from flask_restful import Resource
+from flask.views import MethodView
 from flask_smorest import Blueprint, abort
-from sqlalchemy import text, or_
+from sqlalchemy import or_
 
+from app.api.utils import apply_sorting, generate_meta
 from app.extensions import db
 from app.logger import logger
 from app.models import Bill
@@ -11,12 +12,12 @@ bills_bp = Blueprint('bills_bp', __name__, description='Operations on bills')
 
 
 @bills_bp.route('/bills')
-class BillListResource(Resource):
+class BillListResource(MethodView):
     @bills_bp.response(200, BillSchema(many=True))
     @bills_bp.arguments(BillQuerySchema, location='query')
     def get(self, query_args):
         logger.info('GET /bills called')
-        logger.debug(f"Filtering with buyer_id={query_args}")
+        logger.debug(f"Query Arguments={query_args}")
 
         query = Bill.query
         # for filtering
@@ -39,21 +40,11 @@ class BillListResource(Resource):
                 Bill.remarks.like(f"%{query_args['search']}%")
             ))
         # for sorting
-        if 'sort_order' in query_args == 'desc':
-            query = query.order_by(text(f"{query_args['sort_by']} DESC"))
-        else:
-            query = query.order_by(text(f"{query_args['sort_by']} ASC"))
-
-        records_count = query.count()
-        bills = query.offset(query_args['offset']).limit(query_args['limit']).all()
+        bills, records_count = apply_sorting(query, query_args)
         logger.info(f"Found {records_count} bills")
         logger.debug(f"Returned bills: {bills}")
 
-        meta = {
-            'records_count': records_count,
-            'page': query_args['offset'] // query_args['limit'],
-            'per_page': query_args['limit'],
-        }
+        meta = generate_meta(records_count, query_args)
         return bills, {'meta': meta}
 
     @bills_bp.response(201, BillSchema)
@@ -74,7 +65,7 @@ class BillListResource(Resource):
 
 
 @bills_bp.route('bills/<int:bill_id>')
-class BillResource(Resource):
+class BillResource(MethodView):
 
     @bills_bp.response(200, BillSchema)
     def get(self, bill_id):
@@ -83,7 +74,8 @@ class BillResource(Resource):
         logger.info(f"Found bill with ID {bill_id}")
         return bill
 
-    @bills_bp.response(200, BillUpdateSchema)
+    @bills_bp.response(200, BillSchema)
+    @bills_bp.arguments(BillUpdateSchema)
     def put(self, update_bill_data, bill_id):
         logger.info(f"PUT /bills/{bill_id} called")
         logger.debug(f"Updating bill {bill_id} with args: {update_bill_data}")

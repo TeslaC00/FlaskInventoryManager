@@ -1,118 +1,90 @@
-from datetime import datetime
+from flask.views import MethodView
+from flask_smorest import Blueprint, abort
 
-from flask import request
-from flask_restful import Resource, reqparse, marshal_with, abort
+from app.api.utils import apply_sorting, generate_meta
 from app.extensions import db
-from app.models import ProductionLog
 from app.logger import logger
-from flask_restful import fields
-from sqlalchemy import text
+from app.models import ProductionLog
+from app.schemas.production_log_schema import ProductionLogSchema, ProductionLogQuerySchema, ProductionLogUpdateSchema
 
-production_log_fields = {
-    'id': fields.Integer,
-    'production_date': fields.DateTime(dt_format='iso8601'),
-    'product_part_no': fields.Integer,
-    'quantity_produced': fields.Integer
-}
+production_log_bp = Blueprint('production_log_bp', __name__)
 
 
-class ProductionLogListResource(Resource):
-    @marshal_with(production_log_fields)
-    def get(self):
+@production_log_bp.route('/production_log')
+class ProductionLogListResource(MethodView):
+    @production_log_bp.response(200, ProductionLogSchema(many=True))
+    @production_log_bp.arguments(ProductionLogQuerySchema, location='query')
+    def get(self, query_args):
         logger.info('GET /production_logs called')
-
-        # for filtering
-        product_part_no = request.args.get('product_part_no', type=int)
-        start_date = request.args.get('start_date')
-        end_date = request.args.get('end_date')
-        min_quantity = request.args.get('min_quantity')
-        max_quantity = request.args.get('max_quantity')
-
-        # for sorting
-        sort_by = request.args.get('sort_by', 'production_date')
-        limit = request.args.get('limit', type=int, default=20)
-        offset = request.args.get('offset', type=int, default=0)
+        logger.debug(f"Query Arguments={query_args}")
 
         query = ProductionLog.query
-        if product_part_no:
-            query = query.filter_by(product_part_no=product_part_no)
-        if start_date:
-            query = query.filter(ProductionLog.production_date >= start_date)
-        if end_date:
-            query = query.filter(ProductionLog.production_date <= end_date)
-        if min_quantity:
-            query = query.filter(ProductionLog.quantity_produced >= min_quantity)
-        if max_quantity:
-            query = query.filter(ProductionLog.quantity_produced <= max_quantity)
 
-        production_logs = query.order_by(text(sort_by)).offset(offset).limit(limit).all()
-        logger.info(f"Found {len(production_logs)} production logs")
-        return production_logs, 200
+        # for filtering
+        if 'product_part_no' in query_args:
+            query = query.filter(ProductionLog.product_part_no.like(f"%{query_args['product_part_no']}%"))
+        if 'start_date' in query_args:
+            query = query.filter(ProductionLog.production_date >= query_args['start_date'])
+        if 'end_date' in query_args:
+            query = query.filter(ProductionLog.production_date <= query_args['end_date'])
+        if 'min_quantity' in query_args:
+            query = query.filter(ProductionLog.quantity_produced >= query_args['min_quantity'])
+        if 'max_quantity' in query_args:
+            query = query.filter(ProductionLog.quantity_produced <= query_args['max_quantity'])
+        # for searching
+        # for sorting
+        production_logs, records_count = apply_sorting(query, query_args)
+        logger.info(f"Found {records_count} production_logs")
+        logger.debug(f"Returned production_logs: {production_logs}")
 
-    @marshal_with(production_log_fields)
-    def post(self):
+        meta = generate_meta(records_count, query_args)
+        return production_logs, {'meta': meta}
+
+    @production_log_bp.response(201, ProductionLogSchema)
+    @production_log_bp.arguments(ProductionLogSchema)
+    def post(self, new_production_log_data):
         logger.info('POST /production_logs called')
-        parser = reqparse.RequestParser()
-        parser.add_argument('production_date', type=lambda x: datetime.strptime(x, '%Y-%m-%d'), required=True,
-                            help='Production date missing or incorrect format')
-        parser.add_argument('product_part_no', type=int, required=True, help='Product part number missing')
-        parser.add_argument('quantity_produced', type=int, required=True, help='Quantity produced missing')
-        args = parser.parse_args()
-
-        logger.debug(f"Creating new production log with args: {args}")
-
-        new_production_log = ProductionLog(
-            production_date=args['production_date'],
-            product_part_no=args['product_part_no'],
-            quantity_produced=args['quantity_produced']
-        )
+        logger.debug(f"Creating new production log with args: {new_production_log_data}")
 
         try:
+            new_production_log = ProductionLog(new_production_log_data)
             db.session.add(new_production_log)
             db.session.commit()
             logger.info(f"New production log created with ID {new_production_log.id}")
-            return new_production_log, 201
+            return new_production_log
         except Exception as e:
             logger.error(f"Error creating production log: {e}")
             abort(500, message="An error occurred while creating the production log")
 
 
-class ProductionLogResource(Resource):
-    @marshal_with(production_log_fields)
+@production_log_bp.route('/production_log/<int:production_log_id>')
+class ProductionLogResource(MethodView):
+    @production_log_bp.response(200, ProductionLogSchema)
     def get(self, production_log_id):
         logger.info(f"GET /production_logs/{production_log_id} called")
         production_log = ProductionLog.query.get_or_404(production_log_id, description="Production log not found")
         logger.info(f"Found production log with ID {production_log_id}")
-        return production_log, 200
+        return production_log
 
-    @marshal_with(production_log_fields)
-    def put(self, production_log_id):
+    @production_log_bp.response(200, ProductionLogSchema)
+    @production_log_bp.arguments(ProductionLogUpdateSchema)
+    def put(self, update_production_log_data, production_log_id):
         logger.info(f"PUT /production_logs/{production_log_id} called")
-        parser = reqparse.RequestParser()
-        parser.add_argument('production_date', type=lambda x: datetime.strptime(x, '%Y-%m-%d'))
-        parser.add_argument('product_part_no', type=int)
-        parser.add_argument('quantity_produced', type=int)
-        args = parser.parse_args()
-
-        logger.debug(f"Updating production log {production_log_id} with args: {args}")
+        logger.debug(f"Updating production log {production_log_id} with args: {update_production_log_data}")
 
         production_log = ProductionLog.query.get_or_404(production_log_id, description="Production log not found")
-
-        if args['production_date']:
-            production_log.production_date = args['production_date']
-        if args['product_part_no']:
-            production_log.product_part_no = args['product_part_no']
-        if args['quantity_produced']:
-            production_log.quantity_produced = args['quantity_produced']
+        for key, value in update_production_log_data.items():
+            setattr(production_log, key, value)
 
         try:
             db.session.commit()
             logger.info(f"Production log {production_log_id} updated")
-            return production_log, 200
+            return production_log
         except Exception as e:
             logger.error(f"Error updating production log {production_log_id}: {e}")
             abort(500, message="An error occurred while updating the production log")
 
+    @production_log_bp.response(204)
     def delete(self, production_log_id):
         logger.info(f"DELETE /production_logs/{production_log_id} called")
         production_log = ProductionLog.query.get_or_404(production_log_id, description="Production log not found")
@@ -120,7 +92,7 @@ class ProductionLogResource(Resource):
             db.session.delete(production_log)
             db.session.commit()
             logger.info(f"Production log {production_log_id} deleted")
-            return {'message': 'Production log deleted'}, 200
+            return {'message': 'Production log deleted'}
         except Exception as e:
             logger.error(f"Error deleting production log {production_log_id}: {e}")
             abort(500, message="An error occurred while deleting the production log")

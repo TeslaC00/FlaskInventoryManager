@@ -1,147 +1,105 @@
-from flask_restful import fields
-from flask import request
-from flask_restful import Resource, reqparse, marshal_with, abort
-from sqlalchemy import text
+from flask.views import MethodView
+from flask_smorest import Blueprint, abort
 
+from app.api.utils import apply_sorting, generate_meta
 from app.extensions import db
-from app.models import Product
 from app.logger import logger
+from app.models import Product
+from app.schemas.product_schema import ProductSchema, ProductQuerySchema, ProductUpdateSchema
 
-product_fields = {
-    'part_no': fields.Integer,
-    'name': fields.String,
-    'unit': fields.String,  # Assuming UnitType can be serialized as a string
-    'quantity': fields.Integer,
-    'price': fields.Float,
-    'c_gst': fields.Float,
-    's_gst': fields.Float,
-    'i_gst': fields.Float
-}
+product_bp = Blueprint('product_bp', __name__)
 
 
-# filter - name, unit, quantity(min,max), price(min,max)
-# sort - part_no, name, quantity, price, c_gst, s_gst, i_gst
-
-
-class ProductListResource(Resource):
-    @marshal_with(product_fields)
-    def get(self):
+@product_bp.route('/product')
+class ProductListResource(MethodView):
+    @product_bp.response(200, ProductSchema(many=True))
+    @product_bp.arguments(ProductQuerySchema, location='query')
+    def get(self, query_args):
         logger.info('GET /products called')
-
-        # for filtering
-        name = request.args.get('name')
-        unit = request.args.get('unit')
-        min_quantity = request.args.get('min_quantity', type=int)
-        max_quantity = request.args.get('max_quantity', type=int)
-        min_price = request.args.get('min_price', type=float)
-        max_price = request.args.get('max_price', type=float)
-
-        # for sorting
-        sort_by = request.args.get('sort_by', 'part_no')
-        limit = request.args.get('limit', type=int, default=20)
-        offset = request.args.get('offset', type=int, default=0)
+        logger.debug(f"Query Arguments={query_args}")
 
         query = Product.query
-        if name:
-            query = query.filter(Product.name.like(f"%{name}%"))
-        if unit:
-            query = query.filter_by(unit=unit)
-        if min_quantity is not None:
-            query = query.filter(Product.quantity >= min_quantity)
-        if max_quantity is not None:
-            query = query.filter(Product.quantity <= max_quantity)
-        if min_price is not None:
-            query = query.filter(Product.price >= min_price)
-        if max_price is not None:
-            query = query.filter(Product.price <= max_price)
+        # for filtering
+        if 'name' in query_args:
+            query = query.filter(Product.name.like(f"%{query_args['name']}%"))
+        if 'unit' in query_args:
+            query = query.filter(Product.units.like(f"%{query_args['unit']}%"))
+        if 'min_quantity' in query_args:
+            query = query.filter(Product.quantity >= query_args['min_quantity'])
+        if 'max_quantity' in query_args:
+            query = query.filter(Product.quantity <= query_args['max_quantity'])
+        if 'min_price' in query_args:
+            query = query.filter(Product.price >= query_args['min_price'])
+        if 'max_price' in query_args:
+            query = query.filter(Product.price <= query_args['max_price'])
+        if 'min_c_gst' in query_args:
+            query = query.filter(Product.c_gst >= query_args['min_c_gst'])
+        if 'max_c_gst' in query_args:
+            query = query.filter(Product.c_gst <= query_args['max_c_gst'])
+        if 'min_s_gst' in query_args:
+            query = query.filter(Product.s_gst >= query_args['min_s_gst'])
+        if 'max_s_gst' in query_args:
+            query = query.filter(Product.s_gst <= query_args['max_s_gst'])
+        if 'min_i_gst' in query_args:
+            query = query.filter(Product.i_gst >= query_args['min_i_gst'])
+        if 'max_i_gst' in query_args:
+            query = query.filter(Product.i_gst <= query_args['max_i_gst'])
+        # for searching
+        if 'search' in query_args:
+            query = query.filter(Product.name.like(f"%{query_args['search']}%"))
+        # for sorting
+        products, records_count = apply_sorting(query, query_args)
+        logger.info(f"Found {records_count} products")
+        logger.debug(f"Returned products: {products}")
 
-        products = query.order_by(text(sort_by)).offset(offset).limit(limit).all()
-        logger.info(f"Found {len(products)} products")
-        return products, 200
+        meta = generate_meta(records_count, query_args)
+        return products, {'meta': meta}
 
-    @marshal_with(product_fields)
-    def post(self):
+    @product_bp.response(201, ProductSchema)
+    @product_bp.arguments(ProductSchema)
+    def post(self, new_product_data):
         logger.info('POST /products called')
-        parser = reqparse.RequestParser()
-        parser.add_argument('name', type=str, required=True, help='Name missing')
-        parser.add_argument('unit', type=str, required=True, help='Unit missing')
-        parser.add_argument('quantity', type=int, required=True, help='Quantity missing')
-        parser.add_argument('price', type=float, required=True, help='Price missing')
-        parser.add_argument('c_gst', type=float, required=True, help='C-GST missing')
-        parser.add_argument('s_gst', type=float, required=True, help='S-GST missing')
-        parser.add_argument('i_gst', type=float, required=True, help='I-GST missing')
-        args = parser.parse_args()
-
-        logger.debug(f"Creating new product with args: {args}")
-
-        new_product = Product(
-            name=args['name'],
-            unit=args['unit'],
-            quantity=args['quantity'],
-            price=args['price'],
-            c_gst=args['c_gst'],
-            s_gst=args['s_gst'],
-            i_gst=args['i_gst']
-        )
+        logger.debug(f"Creating new product with args: {new_product_data}")
 
         try:
+            new_product = Product(new_product_data)
             db.session.add(new_product)
             db.session.commit()
             logger.info(f"New product created with part_no {new_product.part_no}")
-            return new_product, 201
+            return new_product
         except Exception as e:
             logger.error(f"Error creating product: {e}")
             abort(500, message="An error occurred while creating the product")
 
 
-class ProductResource(Resource):
-    @marshal_with(product_fields)
+@product_bp.route('/product/<int:part_no>')
+class ProductResource(MethodView):
+    @product_bp.response(200, ProductSchema)
     def get(self, part_no):
         logger.info(f"GET /products/{part_no} called")
         product = Product.query.get_or_404(part_no, description="Product not found")
         logger.info(f"Found product with part_no {part_no}")
-        return product, 200
+        return product
 
-    @marshal_with(product_fields)
-    def put(self, part_no):
+    @product_bp.response(200, ProductSchema)
+    @product_bp.arguments(ProductUpdateSchema)
+    def put(self, update_product_data, part_no):
         logger.info(f"PUT /products/{part_no} called")
-        parser = reqparse.RequestParser()
-        parser.add_argument('name', type=str)
-        parser.add_argument('unit', type=str)
-        parser.add_argument('quantity', type=int)
-        parser.add_argument('price', type=float)
-        parser.add_argument('c_gst', type=float)
-        parser.add_argument('s_gst', type=float)
-        parser.add_argument('i_gst', type=float)
-        args = parser.parse_args()
-
-        logger.debug(f"Updating product {part_no} with args: {args}")
+        logger.debug(f"Updating product {part_no} with args: {update_product_data}")
 
         product = Product.query.get_or_404(part_no, description="Product not found")
-
-        if args['name']:
-            product.name = args['name']
-        if args['unit']:
-            product.unit = args['unit']
-        if args['quantity']:
-            product.quantity = args['quantity']
-        if args['price']:
-            product.price = args['price']
-        if args['c_gst']:
-            product.c_gst = args['c_gst']
-        if args['s_gst']:
-            product.s_gst = args['s_gst']
-        if args['i_gst']:
-            product.i_gst = args['i_gst']
+        for key, value in update_product_data.items():
+            setattr(product, key, value)
 
         try:
             db.session.commit()
             logger.info(f"Product {part_no} updated")
-            return product, 200
+            return product
         except Exception as e:
             logger.error(f"Error updating product {part_no}: {e}")
             abort(500, message="An error occurred while updating the product")
 
+    @product_bp.response(204)
     def delete(self, part_no):
         logger.info(f"DELETE /products/{part_no} called")
         product = Product.query.get_or_404(part_no, description="Product not found")
@@ -149,7 +107,7 @@ class ProductResource(Resource):
             db.session.delete(product)
             db.session.commit()
             logger.info(f"Product {part_no} deleted")
-            return {'message': 'Product deleted'}, 200
+            return {'message': 'Product deleted'}
         except Exception as e:
             logger.error(f"Error deleting product {part_no}: {e}")
             abort(500, message="An error occurred while deleting the product")
