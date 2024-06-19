@@ -3,6 +3,8 @@ import os
 from flask import Flask
 from flask_security import SQLAlchemyUserDatastore, Security
 
+from app.config import APIConfig
+from app.converters import DateConverter
 from app.logger import logger
 from app.extensions import initialize_extensions, db
 
@@ -11,6 +13,8 @@ def create_app():
     # Creates flask object
     app = Flask(__name__)
     logger.info('Created Flask app object')
+
+    app.url_map.converters['date'] = DateConverter
 
     # Loading environment variables
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
@@ -22,6 +26,8 @@ def create_app():
     app.config["REMEMBER_COOKIE_SAMESITE"] = "strict"
     app.config["SESSION_COOKIE_SAMESITE"] = "strict"
     logger.info('Loaded Environment Variables')
+    app.config.from_object(APIConfig)
+    logger.info('Loaded Api configurations')
 
     initialize_extensions(app)
     logger.info('All extensions initialized')
@@ -29,7 +35,7 @@ def create_app():
     init_security(app)
 
     create_tables(app)
-    logger.info('All tables created with seed')
+    logger.info('All tables created')
 
     # Registering blueprints
     from app.routes import register_routes

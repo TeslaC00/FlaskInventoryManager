@@ -4,37 +4,377 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet"/>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <title>Material Table</title>
+    <style>
+
+        /* Adjust the layout for search bar and delete button */
+        #filter {
+            text-align: center;
+            border-radius: 12px;
+        }
+
+        .btn {
+            border-radius: 15px;
+        }
+
+        #left-foot {
+            border-bottom-left-radius: 25px;
+        }
+
+        #left-head {
+            border-top-left-radius: 25px;
+        }
+
+        #right-foot {
+            border-bottom-right-radius: 25px;
+        }
+
+        #right-head {
+            border-top-right-radius: 25px;
+        }
+
+        .dataTables_filter label {
+            margin-top: 13px;
+            float: left;
+            margin-right: 20px;
+        }
+
+        #addMaterialBtn {
+            float: right;
+        }
+
+        #deleteSelectedBtn {
+            float: right;
+            background-color: red;
+        }
+
+        .dataTables_paginate .paginate_button {
+            border-radius: 12px;
+            border: 1px solid transparent;
+            padding: 5px 10px;
+            margin: 2px;
+        }
+
+        .dataTables_paginate .paginate_button:hover {
+            border-color: #ddd;
+            background-color: #f7f7f7;
+        }
+
+        .dataTables_paginate .paginate_button.current {
+            border-color: #007bff;
+            background-color: #007bff;
+            color: white !important;
+        }
+
+    </style>
 {% endblock %}
 
 {% block content %}
     <div class="container">
         <h1>Material Table</h1>
-        <!-- Search Bar -->
-        <div class="input-group mb-3">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search...">
-        </div>
-        <a href="{{ url_for('material.add_material') }}" class="add-new-btn" style="margin-top: 0">Add New Material</a>
-        <div class="navbar-nav-scroll" style="margin-top: 10px">
-            <table class="table table-hover">
-                <thead class="table-light sticky-lg-top">
+
+        <button id="deleteSelectedBtn" class="btn btn-danger" style="margin: 10px 0;">Delete Selected</button>
+        <div class="table-responsive">
+            <button id="addMaterialBtn" class="btn btn-primary" style="margin: 10px" data-bs-toggle="modal"
+                    data-bs-target="#addMaterialModal">Add New Material
+            </button>
+            <table id="materialTable" class="table table-hover">
+                <thead class="table-light"
+                       style="border-color: black; border-width: 2px; position: sticky; top: 0; z-index: 1">
                 <tr>
+                    <th class="checkbox" id="left-head"><input type="checkbox" id="selectAll"></th>
+                    <th class="part-no">Part No.</th>
                     <th>Material Name</th>
                     <th>Unit Type</th>
                     <th>Quantity</th>
+                    <th class="action" id="right-head"></th>
                 </tr>
                 </thead>
-                <tbody class="table-group-divider" id="materialTableBody">
-                {% for material in materials %}
-                    <tr>
-                        <td><a class="link-info"
-                               href="{{ url_for('material.edit_material', name=material.name) }}">{{ material.name }}</a></td>
-                        <td>{{ material.unit_type }}</td>
-                        <td>{{ material.quantity }}</td>
-                    </tr>
-                {% endfor %}
+                <tfoot>
+                <tr>
+                    <th id="left-foot"></th>
+                    <th style="text-align: center;"><input type="text" id="filter" placeholder="Filter Part No."/></th>
+                    <th style="text-align: center;"><input type="text" id="filter" placeholder="Filter Material Name"/>
+                    </th>
+                    <th style="text-align: center;"><input type="text" id="filter" placeholder="Filter Unit Type"/></th>
+                    <th style="text-align: center;"><input type="text" id="filter" placeholder="Filter Quantity"/></th>
+                    <th id="right-foot"></th>
+                </tr>
+                </tfoot>
+                <tbody id="materialTableBody">
+                <!-- Dynamic content will be inserted here -->
                 </tbody>
             </table>
         </div>
+        <!-- Add Material Modal -->
+        <div class="modal fade" id="addMaterialModal" tabindex="-1" aria-labelledby="addMaterialModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addMaterialModalLabel">Add New Material</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addMaterialForm">
+                            <div class="mb-3">
+                                <label for="materialName" class="form-label">Material Name</label>
+                                <input type="text" class="form-control" id="materialName" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="materialUnit" class="form-label">Unit Type</label>
+                                <input type="text" class="form-control" id="materialUnit" name="unit" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="materialQuantity" class="form-label">Quantity</label>
+                                <input type="number" class="form-control" id="materialQuantity" name="quantity"
+                                       required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Material</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Edit Material Modal -->
+        <div class="modal fade" id="editMaterialModal" tabindex="-1" aria-labelledby="editMaterialModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editMaterialModalLabel">Edit Material</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editMaterialForm">
+                            <input type="hidden" id="editMaterialId" name="part_no">
+                            <div class="mb-3">
+                                <label for="editMaterialName" class="form-label">Material Name</label>
+                                <input type="text" class="form-control" id="editMaterialName" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editMaterialUnit" class="form-label">Unit Type</label>
+                                <input type="text" class="form-control" id="editMaterialUnit" name="unit" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editMaterialQuantity" class="form-label">Quantity</label>
+                                <input type="number" class="form-control" id="editMaterialQuantity" name="quantity"
+                                       required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- jQuery and DataTables JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchMaterials();
+
+            const addMaterialForm = document.getElementById('addMaterialForm');
+            addMaterialForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                addMaterial();
+            });
+
+            const editMaterialForm = document.getElementById('editMaterialForm');
+            editMaterialForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                updateMaterial();
+            });
+
+            document.getElementById('selectAll').addEventListener('change', function () {
+                const checkboxes = document.querySelectorAll('.select-checkbox');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+            });
+
+            document.getElementById('deleteSelectedBtn').addEventListener('click', function () {
+                deleteSelectedMaterials();
+            });
+
+            function fetchMaterials() {
+                fetch('/api/v1/materials')
+                    .then(response => response.json())
+                    .then(data => {
+                        const materialsTableBody = document.getElementById('materialTableBody');
+                        materialsTableBody.innerHTML = '';
+                        data.forEach(material => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                        <td class="checkbox"><input type="checkbox" class="select-checkbox" data-id="${material.part_no}" style="margin-left: 8px"></td>
+                        <td class="part-no">${material.part_no}</td>
+                        <td>${material.name}</td>
+                        <td>${material.unit}</td>
+                        <td>${material.quantity}</td>
+                        <td class="action">
+                            <i class="lni lni-pencil" data-id="${material.part_no}" data-bs-toggle="modal" data-bs-target="#editMaterialModal" style="color: #0dcaf0; padding-right: 15px; padding-left: 5px"></i>
+                            <i class="lni lni-trash-can" data-id="${material.part_no}" style="color: red"></i>
+                        </td>
+                    `;
+                            materialsTableBody.appendChild(row);
+                        });
+
+                        const table = $('#materialTable').DataTable({
+                            order: [[1, 'asc']], // Default sorting by the "Part No." column in ascending order
+                            lengthChange: false,
+                            pageLength: 10,
+                            dom: '<"top"f>rt<"bottom"ip>',
+                            columnDefs: [
+                                {orderable: false, targets: [0, 5]} // Disable sorting on the first and last columns
+                            ],
+                            initComplete: function () {
+                                this.api().columns().every(function () {
+                                    var column = this;
+                                    $('input', this.footer()).on('keyup change clear', function () {
+                                        if (column.search() !== this.value) {
+                                            column.search(this.value).draw();
+                                        }
+                                    });
+                                });
+
+                                const filter = $('#materialTable_filter');
+                                filter.css('float', 'left');
+                                const addbtn = $('#addMaterialBtn');
+                                const delbtn = $('#deleteSelectedBtn');
+                                $(delbtn).insertAfter(filter);
+                                $(addbtn).insertAfter(delbtn);
+                            }
+                        });
+
+                        $('#materialTable').on('draw.dt', function () {
+                            document.querySelectorAll('.lni-pencil').forEach(icon => {
+                                icon.addEventListener('click', function () {
+                                    const partNo = this.getAttribute('data-id');
+                                    fetchMaterial(partNo);
+                                });
+                            });
+
+                            document.querySelectorAll('.lni-trash-can').forEach(icon => {
+                                icon.addEventListener('click', function () {
+                                    const partNo = this.getAttribute('data-id');
+                                    deleteMaterial(partNo);
+                                });
+                            });
+                        });
+
+                        table.draw();
+                    })
+                    .catch(error => console.error('Error fetching materials:', error));
+            }
+
+            function fetchMaterial(partNo) {
+                fetch(`/api/v1/materials/${partNo}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('editMaterialId').value = data.part_no;
+                        document.getElementById('editMaterialName').value = data.name;
+                        document.getElementById('editMaterialUnit').value = data.unit;
+                        document.getElementById('editMaterialQuantity').value = data.quantity;
+                    })
+                    .catch(error => console.error('Error fetching material:', error));
+            }
+
+            function addMaterial() {
+                const formData = new FormData(document.getElementById('addMaterialForm'));
+                const data = {
+                    name: formData.get('name'),
+                    unit: formData.get('unit'),
+                    quantity: formData.get('quantity')
+                };
+
+                fetch('/api/v1/materials', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            $('#addMaterialModal').modal('hide');
+                            fetchMaterials();
+                        } else {
+                            console.error('Error adding material');
+                        }
+                    })
+                    .catch(error => console.error('Error adding material:', error));
+            }
+
+            function updateMaterial() {
+                const formData = new FormData(document.getElementById('editMaterialForm'));
+                const partNo = formData.get('part_no');
+                const data = {
+                    name: formData.get('name'),
+                    unit: formData.get('unit'),
+                    quantity: formData.get('quantity')
+                };
+
+                fetch(`/api/v1/materials/${partNo}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            $('#editMaterialModal').modal('hide');
+                            fetchMaterials();
+                        } else {
+                            console.error('Error updating material');
+                        }
+                    })
+                    .catch(error => console.error('Error updating material:', error));
+            }
+
+            function deleteMaterial(partNo) {
+                if (confirm('Are you sure?')) {
+                    fetch(`/api/v1/materials/${partNo}`, {
+                        method: 'DELETE'
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                fetchMaterials();
+                            } else {
+                                console.error('Error deleting material');
+                            }
+                        })
+                        .catch(error => console.error('Error deleting material:', error));
+                }
+            }
+
+            function deleteSelectedMaterials() {
+                const selectedCheckboxes = document.querySelectorAll('.select-checkbox:checked');
+                const selectedIds = Array.from(selectedCheckboxes).map(checkbox => checkbox.getAttribute('data-id'));
+
+                if (selectedIds.length > 0 && confirm('Are you sure you want to delete the selected materials?')) {
+                    Promise.all(selectedIds.map(partNo => {
+                        return fetch(`/api/v1/materials/${partNo}`, {
+                            method: 'DELETE'
+                        });
+                    }))
+                        .then(responses => {
+                            if (responses.every(response => response.ok)) {
+                                fetchMaterials();
+                            } else {
+                                console.error('Error deleting one or more materials');
+                            }
+                        })
+                        .catch(error => console.error('Error deleting materials:', error));
+                }
+            }
+        });
+    </script>
+
 {% endblock %}

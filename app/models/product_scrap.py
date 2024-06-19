@@ -19,7 +19,7 @@ class ProductScrap(db.Model):
         __table_args__ (tuple): Defines additional table options. Here, it specifies a composite primary key consisting of 'date' and 'good_name' to ensure unique records for each type of good on each date.
 
     The Goods_Scrap model includes a method `to_dict` which converts the record into a dictionary,
-    facilitating easy JSON serialization for API responses or other purposes.
+    facilitating easy JSON serialization for api responses or other purposes.
 
     Methods:
         to_dict(self): Returns a dictionary representation of the Goods_Scrap instance,

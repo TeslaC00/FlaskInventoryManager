@@ -17,7 +17,7 @@ class Buyer(db.Model):
         id (Column): The primary key for the Buyer table. It is an auto-incrementing integer.
 
     The Buyer model includes a method `to_dict` which converts the Buyer record into a dictionary,
-    facilitating easy JSON serialization for API responses or other purposes.
+    facilitating easy JSON serialization for api responses or other purposes.
 
     Methods:
         to_dict(self): Returns a dictionary representation of the Buyer instance,

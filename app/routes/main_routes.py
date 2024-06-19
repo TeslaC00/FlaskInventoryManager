@@ -60,18 +60,6 @@ def audits():
     return render_template('audits.html')
 
 
-@main_routes.route('/writeOff/')
-# @login_required
-def write_off():
-    raw_material_data = Material.query.all()
-    produced_good_data = Product.query.all()
-
-    table1 = [record.to_dict() for record in raw_material_data]
-    table2 = [record.to_dict() for record in produced_good_data]
-
-    return render_template('WriteOff.html', table1=table1, table2=table2)
-
-
 # TODO: add content to settings page
 @main_routes.route('/settings/')
 # @login_required
