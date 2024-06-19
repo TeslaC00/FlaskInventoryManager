@@ -1,81 +1,59 @@
-from datetime import datetime
+from flask.views import MethodView
+from flask_smorest import Blueprint, abort
+from sqlalchemy import or_
 
-from flask_restful import fields
-from flask import request
-from flask_restful import Resource, reqparse, marshal_with, abort
+from app.api.utils import apply_sorting
 from app.extensions import db
-from app.models import ProductScrap
 from app.logger import logger
-from sqlalchemy import text
+from app.models import ProductScrap
+from app.schemas.product_scrap_schema import ProductScrapSchema, ProductScrapQuerySchema, ProductScrapUpdateSchema
 
-product_scrap_fields = {
-    'part_no': fields.Integer(attribute='product_part_no'),
-    'date': fields.DateTime(dt_format='iso8601'),
-    'quantity': fields.Integer,
-    'scrap_type': fields.String(attribute=lambda x: x.scrap_type.value),
-}
+product_scrap_bp = Blueprint('product_scrap_bp', __name__)
 
 
-# filter - part_no, date(start,end), quantity(min,max), scrap_type
-# sort - part_no, date, quantity
-
-class ProductScrapListResource(Resource):
-    @marshal_with(product_scrap_fields)
-    def get(self):
+@product_scrap_bp.route('/product_scrap/')
+class ProductScrapListResource(MethodView):
+    @product_scrap_bp.response(200, ProductScrapSchema(many=True))
+    @product_scrap_bp.arguments(ProductScrapQuerySchema, location='query')
+    @product_scrap_bp.paginate()
+    def get(self, query_args, pagination_parameters):
         logger.info('GET /product_scraps called')
-
-        # for filtering
-        product_part_no = request.args.get('product_part_no', type=int)
-        start_date = request.args.get('start_date')
-        end_date = request.args.get('end_date')
-        min_quantity = request.args.get('min_quantity')
-        max_quantity = request.args.get('max_quantity')
-        scrap_type = request.args.get('scrap_type')
-
-        # for sorting
-        sort_by = request.args.get('sort_by', 'date')
-        limit = request.args.get('limit', type=int, default=20)
-        offset = request.args.get('offset', type=int, default=0)
+        logger.debug(f"Query Arguments={query_args}")
 
         query = ProductScrap.query
-        if product_part_no:
-            query = query.filter_by(product_part_no=product_part_no)
-        if start_date:
-            query = query.filter(ProductScrap.date >= start_date)
-        if end_date:
-            query = query.filter(ProductScrap.date <= end_date)
-        if min_quantity:
-            query = query.filter(ProductScrap.quantity >= min_quantity)
-        if max_quantity:
-            query = query.filter(ProductScrap.quantity <= max_quantity)
-        if scrap_type:
-            query = query.filter_by(scrap_type=scrap_type)
+        # for filtering
+        if 'product_part_no' in query_args:
+            query = query.filter(ProductScrap.product_part_no.like(f"%{query_args['product_part_no']}%"))
+        if 'start_date' in query_args:
+            query = query.filter(ProductScrap.date >= query_args['start_date'])
+        if 'end_date' in query_args:
+            query = query.filter(ProductScrap.date <= query_args['end_date'])
+        if 'min_quantity' in query_args:
+            query = query.filter(ProductScrap.quantity >= query_args['min_quantity'])
+        if 'max_quantity' in query_args:
+            query = query.filter(ProductScrap.quantity <= query_args['max_quantity'])
+        if 'scrap_type' in query_args:
+            query = query.filter(ProductScrap.scrap_type.like(f"%{query_args['scrap_type']}%"))
+        # for searching
+        if 'search' in query_args:
+            search = f"%{query_args['search']}%"
+            query = query.filter(or_(
+                ProductScrap.product_part_no.like(search),
+                ProductScrap.scrap_type.like(search)
+            ))
+        # for sorting
+        product_scraps = apply_sorting(query, query_args, pagination_parameters)
+        logger.info(f"Found {pagination_parameters.item_count} product scraps")
+        logger.debug(f"Returned product scraps: {product_scraps}")
+        return product_scraps
 
-        product_scraps = query.order_by(text(sort_by)).offset(offset).limit(limit).all()
-        logger.info(f"Found {len(product_scraps)} product scraps")
-        return product_scraps, 200
-
-    @marshal_with(product_scrap_fields)
-    def post(self):
-        logger.info('POST /product_scraps called')
-        parser = reqparse.RequestParser()
-        parser.add_argument('product_part_no', type=int, required=True, help='Product part number missing')
-        parser.add_argument('quantity', type=int, required=True, help='Quantity missing')
-        parser.add_argument('date', type=lambda x: datetime.strptime(x, '%Y-%m-%d'), required=True,
-                            help='Date missing or incorrect format')
-        parser.add_argument('scrap_type', type=str, required=True, help='Scrap type missing')
-        args = parser.parse_args()
-
-        logger.debug(f"Creating new product scrap with args: {args}")
-
-        new_product_scrap = ProductScrap(
-            product_part_no=args['product_part_no'],
-            quantity=args['quantity'],
-            date=args['date'],
-            scrap_type=args['scrap_type']
-        )
+    @product_scrap_bp.response(201, ProductScrapSchema)
+    @product_scrap_bp.arguments(ProductScrapSchema)
+    def post(self, new_product_scrap_data):
+        logger.debug(f"Creating new product scrap with args: {new_product_scrap_data}")
 
         try:
+            new_product_scrap = ProductScrap(**new_product_scrap_data)
             db.session.add(new_product_scrap)
             db.session.commit()
             logger.info(f"New product scrap created with product_part_no {new_product_scrap.product_part_no} and date "
@@ -86,41 +64,36 @@ class ProductScrapListResource(Resource):
             abort(500, message="An error occurred while creating the product scrap")
 
 
-class ProductScrapResource(Resource):
-    @marshal_with(product_scrap_fields)
+@product_scrap_bp.route('/product_scrap/<int:product_part_no>/<date:date>')
+class ProductScrapResource(MethodView):
+    @product_scrap_bp.response(200, ProductScrapSchema)
     def get(self, product_part_no, date):
         logger.info(f"GET /product_scraps/{product_part_no}/{date} called")
         product_scrap = ProductScrap.query.filter_by(product_part_no=product_part_no, date=date).first_or_404(
             description="Product scrap not found")
         logger.info(f"Found product scrap with product_part_no {product_part_no} and date {date}")
-        return product_scrap, 200
+        return product_scrap
 
-    @marshal_with(product_scrap_fields)
-    def put(self, product_part_no, date):
+    @product_scrap_bp.response(200, ProductScrapSchema)
+    @product_scrap_bp.arguments(ProductScrapUpdateSchema)
+    def put(self, update_product_scrap_data, product_part_no, date):
         logger.info(f"PUT /product_scraps/{product_part_no}/{date} called")
-        parser = reqparse.RequestParser()
-        parser.add_argument('quantity', type=int)
-        parser.add_argument('scrap_type', type=str)
-        args = parser.parse_args()
-
-        logger.debug(f"Updating product scrap {product_part_no}/{date} with args: {args}")
+        logger.debug(f"Updating product scrap {product_part_no}/{date} with args: {update_product_scrap_data}")
 
         product_scrap = ProductScrap.query.filter_by(product_part_no=product_part_no, date=date).first_or_404(
             description="Product scrap not found")
-
-        if args['quantity']:
-            product_scrap.quantity = args['quantity']
-        if args['scrap_type']:
-            product_scrap.scrap_type = args['scrap_type']
+        for key, value in update_product_scrap_data.items():
+            setattr(product_scrap, key, value)
 
         try:
             db.session.commit()
             logger.info(f"Product scrap {product_part_no}/{date} updated")
-            return product_scrap, 200
+            return product_scrap
         except Exception as e:
             logger.error(f"Error updating product scrap {product_part_no}/{date}: {e}")
             abort(500, message="An error occurred while updating the product scrap")
 
+    @product_scrap_bp.response(204)
     def delete(self, product_part_no, date):
         logger.info(f"DELETE /product_scraps/{product_part_no}/{date} called")
         product_scrap = ProductScrap.query.filter_by(product_part_no=product_part_no, date=date).first_or_404(
@@ -129,7 +102,7 @@ class ProductScrapResource(Resource):
             db.session.delete(product_scrap)
             db.session.commit()
             logger.info(f"Product scrap {product_part_no}/{date} deleted")
-            return {'message': 'Product scrap deleted'}, 200
+            return {'message': 'Product scrap deleted'}
         except Exception as e:
             logger.error(f"Error deleting product scrap {product_part_no}/{date}: {e}")
             abort(500, message="An error occurred while deleting the product scrap")

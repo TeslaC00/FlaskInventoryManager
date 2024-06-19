@@ -1,93 +1,98 @@
-from datetime import datetime
+from flask.views import MethodView
+from flask_smorest import Blueprint, abort
+from sqlalchemy import or_
 
-from flask import request
-from flask_restful import Resource, reqparse, marshal_with, abort
+from app.api.utils import apply_sorting
 from app.extensions import db
-from app.models import MaterialScrap
 from app.logger import logger
-from flask_restful import fields
+from app.models import MaterialScrap
+from app.schemas.material_scrap_schema import MaterialScrapSchema, MaterialScrapQuerySchema, MaterialScrapUpdateSchema
 
-material_scrap_fields = {
-    'material_part_no': fields.Integer,
-    'date': fields.DateTime(dt_format='iso8601'),
-    'scrap_type': fields.String(attribute=lambda x: x.scrap_type.value),
-    'quantity': fields.Integer
-}
+material_scrap_bp = Blueprint('material_scrap_bp', __name__)
 
 
-class MaterialScrapListResource(Resource):
-    @marshal_with(material_scrap_fields)
-    def get(self):
+@material_scrap_bp.route('/material_scrap')
+class MaterialScrapListResource(MethodView):
+    @material_scrap_bp.response(200, MaterialScrapSchema(many=True))
+    @material_scrap_bp.arguments(MaterialScrapQuerySchema, location='query')
+    @material_scrap_bp.paginate()
+    def get(self, query_args, pagination_parameters):
         logger.info('GET /material_scrap called')
-        scraps = MaterialScrap.query.all()
-        logger.info(f"Found {len(scraps)} material scraps")
-        return scraps, 200
+        logger.debug(f"Query Arguments={query_args}")
 
-    @marshal_with(material_scrap_fields)
-    def post(self):
+        query = MaterialScrap.query
+        # for filtering
+        if 'material_part_no' in query_args:
+            query = query.filter(MaterialScrap.material_part_no.like(f"%{query_args['material_part_no']}%"))
+        if 'start_date' in query_args:
+            query = query.filter(MaterialScrap.date >= query_args['start_date'])
+        if 'end_date' in query_args:
+            query = query.filter(MaterialScrap.date <= query_args['end_date'])
+        if 'min_quantity' in query_args:
+            query = query.filter(MaterialScrap.quantity >= query_args['min_quantity'])
+        if 'max_quantity' in query_args:
+            query = query.filter(MaterialScrap.quantity <= query_args['max_quantity'])
+        if 'scrap_type' in query_args:
+            query = query.filter(MaterialScrap.scrap_type.like(f"%{query_args['scrap_type']}%"))
+        # for searching
+        if 'search' in query_args:
+            search = f"%{query_args['search']}%"
+            query = query.filter(or_(
+                MaterialScrap.material_part_no.like(search),
+                MaterialScrap.scrap_type.like(search)
+            ))
+        # for sorting
+        material_scraps = apply_sorting(query, query_args, pagination_parameters)
+        logger.info(f"Found {pagination_parameters.item_count} material scraps")
+        logger.debug(f"Returned material scraps: {material_scraps}")
+        return material_scraps
+
+    @material_scrap_bp.response(201, MaterialScrapSchema)
+    @material_scrap_bp.arguments(MaterialScrapSchema)
+    def post(self, new_material_scrap_data):
         logger.info('POST /material_scrap called')
-        parser = reqparse.RequestParser()
-        parser.add_argument('material_part_no', type=int, required=True, help='Material part number is required')
-        parser.add_argument('quantity', type=int, required=True, help='Quantity is required')
-        parser.add_argument('scrap_type', type=str, required=True, help='Scrap type is required')
-        parser.add_argument('date', type=lambda x: datetime.strptime(x, '%Y-%m-%d'), required=True,
-                            help='Date is required')
-        args = parser.parse_args()
-
-        logger.debug(f"Creating new material scrap with args: {args}")
-
-        new_scrap = MaterialScrap(
-            material_part_no=args['material_part_no'],
-            quantity=args['quantity'],
-            scrap_type=args['scrap_type'],
-            date=args['date']
-        )
+        logger.debug(f"Creating new material scrap with args: {new_material_scrap_data}")
 
         try:
+            new_scrap = MaterialScrap(**new_material_scrap_data)
             db.session.add(new_scrap)
             db.session.commit()
             logger.info(f"New material scrap created with material_part_no {new_scrap.material_part_no}")
-            return new_scrap, 201
+            return new_scrap
         except Exception as e:
             logger.error(f"Error creating material scrap: {e}")
             abort(500, message="An error occurred while creating the material scrap")
 
 
-class MaterialScrapResource(Resource):
-    @marshal_with(material_scrap_fields)
+@material_scrap_bp.route('/material_scrap/<int:material_part_no>/<date:date>')
+class MaterialScrapResource(MethodView):
+    @material_scrap_bp.response(200, MaterialScrapSchema)
     def get(self, material_part_no, date):
         logger.info(f"GET /material_scrap/{material_part_no}/{date} called")
         scrap = MaterialScrap.query.filter_by(date=date, material_part_no=material_part_no).first_or_404(
             description="Material scrap not found")
         logger.info(f"Found material scrap with date {date} and material_part_no {material_part_no}")
-        return scrap, 200
+        return scrap
 
-    @marshal_with(material_scrap_fields)
-    def put(self, material_part_no, date):
+    @material_scrap_bp.response(200, MaterialScrapSchema)
+    @material_scrap_bp.arguments(MaterialScrapUpdateSchema)
+    def put(self, update_material_scrap_data, material_part_no, date):
         logger.info(f"PUT /material_scrap/{material_part_no}/{date} called")
-        parser = reqparse.RequestParser()
-        parser.add_argument('quantity', type=int)
-        parser.add_argument('scrap_type', type=str)
-        args = parser.parse_args()
-
-        logger.debug(f"Updating material scrap {material_part_no}/{date} with args: {args}")
+        logger.debug(f"Updating material scrap {material_part_no}/{date} with args: {update_material_scrap_data}")
 
         scrap = MaterialScrap.query.filter_by(date=date, material_part_no=material_part_no).first_or_404(
             description="Material scrap not found")
-
-        if args['quantity']:
-            scrap.quantity = args['quantity']
-        if args['scrap_type']:
-            scrap.scrap_type = args['scrap_type']
-
+        for key, value in update_material_scrap_data.items():
+            setattr(scrap, key, value)
         try:
             db.session.commit()
             logger.info(f"Material scrap {material_part_no}/{date} updated")
-            return scrap, 200
+            return scrap
         except Exception as e:
             logger.error(f"Error updating material scrap {material_part_no}/{date}: {e}")
             abort(500, message="An error occurred while updating the material scrap")
 
+    @material_scrap_bp.response(204)
     def delete(self, material_part_no, date):
         logger.info(f"DELETE /material_scrap/{material_part_no}/{date} called")
         scrap = MaterialScrap.query.filter_by(date=date, material_part_no=material_part_no).first_or_404(
@@ -96,7 +101,7 @@ class MaterialScrapResource(Resource):
             db.session.delete(scrap)
             db.session.commit()
             logger.info(f"Material scrap {material_part_no}/{date} deleted")
-            return {'message': 'Material scrap deleted'}, 200
+            return {'message': 'Material scrap deleted'}
         except Exception as e:
             logger.error(f"Error deleting material scrap {material_part_no}/{date}: {e}")
             abort(500, message="An error occurred while deleting the material scrap")
