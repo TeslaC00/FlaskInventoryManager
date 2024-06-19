@@ -55,7 +55,7 @@ class MaterialScrapListResource(MethodView):
         logger.debug(f"Creating new material scrap with args: {new_material_scrap_data}")
 
         try:
-            new_scrap = MaterialScrap(new_material_scrap_data)
+            new_scrap = MaterialScrap(**new_material_scrap_data)
             db.session.add(new_scrap)
             db.session.commit()
             logger.info(f"New material scrap created with material_part_no {new_scrap.material_part_no}")

@@ -56,7 +56,7 @@ class ChallanResource(MethodView):
         logger.info('POST /challans called')
         logger.debug(f"Creating new challan with args: {new_challan_data}")
         try:
-            new_challan = Challan(new_challan_data)
+            new_challan = Challan(**new_challan_data)
             db.session.add(new_challan)
             db.session.commit()
             return new_challan

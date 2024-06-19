@@ -49,7 +49,7 @@ class ChallanItemListResource(MethodView):
         logger.debug(f"Creating new challan items with args: {new_challan_item_data}")
 
         try:
-            new_challan_item = ChallanItem(new_challan_item_data)
+            new_challan_item = ChallanItem(**new_challan_item_data)
             db.session.add(new_challan_item)
             db.session.commit()
             logger.info(f"New challan item created with ID {new_challan_item.id}")

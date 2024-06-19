@@ -53,7 +53,7 @@ class BuyerListResource(MethodView):
         logger.debug(f"Creating new buyer with args: {new_buyer_data}")
 
         try:
-            new_buyer = Buyer(new_buyer_data)
+            new_buyer = Buyer(**new_buyer_data)
             db.session.add(new_buyer)
             db.session.commit()
             logger.info(f"New buyer created with ID {new_buyer.id}")

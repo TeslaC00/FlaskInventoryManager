@@ -48,7 +48,7 @@ class BillItemListResource(MethodView):
         logger.info('POST /bill_item called')
         logger.debug(f"Creating new bill item with args: {new_bill_item_data}")
         try:
-            new_bill_item = BillItem(new_bill_item_data)
+            new_bill_item = BillItem(**new_bill_item_data)
             db.session.add(new_bill_item)
             db.session.commit()
             logger.info(f"New bill item created with ID {new_bill_item.id}")

@@ -19,7 +19,7 @@ class ProductMaterialListResource(MethodView):
         logger.debug(f"Creating new product material with args: {new_product_material_data}")
 
         try:
-            new_product_material = ProductMaterial(new_product_material_data)
+            new_product_material = ProductMaterial(**new_product_material_data)
             db.session.add(new_product_material)
             db.session.commit()
             logger.info(

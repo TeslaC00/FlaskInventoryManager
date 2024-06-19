@@ -62,7 +62,7 @@ class ProductListResource(MethodView):
         logger.debug(f"Creating new product with args: {new_product_data}")
 
         try:
-            new_product = Product(new_product_data)
+            new_product = Product(**new_product_data)
             db.session.add(new_product)
             db.session.commit()
             logger.info(f"New product created with part_no {new_product.part_no}")

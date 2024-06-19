@@ -46,7 +46,7 @@ class MaterialListResource(MethodView):
         logger.debug(f"Creating new material with args: {new_material_data}")
 
         try:
-            new_material = Material(new_material_data)
+            new_material = Material(**new_material_data)
             db.session.add(new_material)
             db.session.commit()
             logger.info(f"New material created with part_no {new_material.part_no}")

@@ -53,7 +53,7 @@ class SupplierListResource(MethodView):
         logger.debug(f"Creating new supplier with args: {new_supplier_data}")
 
         try:
-            new_supplier = Supplier(new_supplier_data)
+            new_supplier = Supplier(**new_supplier_data)
             db.session.add(new_supplier)
             db.session.commit()
             logger.info(f"New supplier created with ID {new_supplier.id}")

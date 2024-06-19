@@ -54,7 +54,7 @@ class BillListResource(MethodView):
         logger.debug(f"Creating new bill with args: {new_bill_data}")
 
         try:
-            new_bill = Bill(new_bill_data)
+            new_bill = Bill(**new_bill_data)
             db.session.add(new_bill)
             db.session.commit()
             logger.info(f"New bill created with ID {new_bill.id}")

@@ -60,7 +60,7 @@ class AuditLogListResource(MethodView):
         logger.info('POST /audit_log called')
         logger.debug(f"Creating new bill with args: {new_audit_log_data}")
         try:
-            new_log = AuditLog(new_audit_log_data)
+            new_log = AuditLog(**new_audit_log_data)
             db.session.add(new_log)
             db.session.commit()
             logger.info(f"New bill created with ID {new_log.id}")

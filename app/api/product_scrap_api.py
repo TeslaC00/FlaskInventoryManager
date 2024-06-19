@@ -54,7 +54,7 @@ class ProductScrapListResource(MethodView):
         logger.debug(f"Creating new product scrap with args: {new_product_scrap_data}")
 
         try:
-            new_product_scrap = ProductScrap(new_product_scrap_data)
+            new_product_scrap = ProductScrap(**new_product_scrap_data)
             db.session.add(new_product_scrap)
             db.session.commit()
             logger.info(f"New product scrap created with product_part_no {new_product_scrap.product_part_no} and date "

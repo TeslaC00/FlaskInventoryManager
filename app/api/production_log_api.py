@@ -47,7 +47,7 @@ class ProductionLogListResource(MethodView):
         logger.debug(f"Creating new production log with args: {new_production_log_data}")
 
         try:
-            new_production_log = ProductionLog(new_production_log_data)
+            new_production_log = ProductionLog(**new_production_log_data)
             db.session.add(new_production_log)
             db.session.commit()
             logger.info(f"New production log created with ID {new_production_log.id}")
