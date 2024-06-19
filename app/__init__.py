@@ -4,6 +4,7 @@ from flask import Flask
 from flask_security import SQLAlchemyUserDatastore, Security
 
 from app.config import APIConfig
+from app.converters import DateConverter
 from app.logger import logger
 from app.extensions import initialize_extensions, db
 
@@ -12,6 +13,8 @@ def create_app():
     # Creates flask object
     app = Flask(__name__)
     logger.info('Created Flask app object')
+
+    app.url_map.converters['date'] = DateConverter
 
     # Loading environment variables
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
