@@ -1,0 +1,137 @@
+class Supplier(db.Model):
+    __tablename__ = 'supplier'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50), nullable=False)
+    GST_No = Column(String(15), nullable=False)
+    state_code = Column(Integer, nullable=False)
+    state_name = Column(String(30), nullable=False)
+    address = Column(Text, nullable=False)
+    challans = relationship('Challan', backref='supplier')
+
+class ProductionLog(db.Model):
+    __tablename__ = 'production_log'
+    id = Column(Integer, primary_key=True)
+    production_date = Column(Date, nullable=False, default=datetime.now)
+    product_part_no = Column(Integer,
+                             ForeignKey('product.part_no', name='fk_production_log_product_part_no'),
+                             nullable=False)
+    quantity_produced = Column(Integer, nullable=False)
+
+class ProductScrap(db.Model):
+    __tablename__ = 'product_scrap'
+    product_part_no = Column(Integer, ForeignKey('product.part_no', name='fk_product_scrap_product_part_no'),
+                             nullable=False)
+    quantity = Column(Integer, nullable=False)
+    date = Column(Date, nullable=False)
+    scrap_type = Column(Enum(ProductScrapType), nullable=False)
+    __table_args__ = (PrimaryKeyConstraint('date', 'product_part_no', name='pk_product_scrap'),)
+
+class ProductMaterial(db.Model):
+    __tablename__ = 'product_material'
+    product_part_no = Column(Integer,
+                             ForeignKey('product.part_no', name='fk_product_material_product_part_no'),
+                             nullable=False)
+    material_part_no = Column(Integer,
+                              ForeignKey('material.part_no', name='fk_product_material_material_part_no'),
+                              nullable=False)
+    quantity = Column(Integer, nullable=False)
+    __table_args__ = (PrimaryKeyConstraint('product_part_no', 'material_part_no', name='pk_product_material'),)
+
+class Product(db.Model):
+    __tablename__ = 'product'
+    part_no = Column(Integer, primary_key=True)
+    name = Column(String(50), unique=True, nullable=False)
+    unit = Column(Enum(UnitType), nullable=False)
+    quantity = Column(Integer, nullable=False)
+    price = Column(Float, nullable=False)
+    c_gst = Column(Float, nullable=False)
+    s_gst = Column(Float, nullable=False)
+    i_gst = Column(Float, nullable=False)
+    bill_items = relationship('BillItem', backref='product')
+    scraps = relationship('ProductScrap', backref='product')
+
+
+class MaterialScrap(db.Model):
+    __tablename__ = 'material_scrap'
+    material_part_no = Column(Integer,
+                              ForeignKey('material.part_no', name='fk_material_scrap_material_part_no'),
+                              nullable=False)
+    quantity = Column(Integer, nullable=False)
+    scrap_type = Column(Enum(MaterialScrapType), nullable=False)
+    date = Column(Date, nullable=False)
+    __table_args__ = (PrimaryKeyConstraint('date', 'material_part_no', name='pk_material_scrap'),)
+
+class Material(db.Model):
+    __tablename__ = 'material'
+    part_no = Column(Integer, primary_key=True)
+    name = Column(String(50), nullable=False, unique=True)
+    unit = Column(Enum(UnitType), nullable=False)
+    quantity = Column(Integer, nullable=False)
+    challan_items = relationship('ChallanItem', backref='material')
+    scraps = relationship('MaterialScrap', backref='material')
+
+
+class ChallanItem(db.Model):
+    __tablename__ = 'challan_item'
+    id = Column(Integer, primary_key=True)
+    price = Column(Float, nullable=False)
+    quantity = Column(Integer, nullable=False)
+    challan_id = Column(Integer, ForeignKey('challan.id'), nullable=False)
+    material_part_no = Column(Integer, ForeignKey('material.part_no', name='fk_challan_item_material_part_no'),
+                              nullable=False)
+
+class Challan(db.Model):
+    __tablename__ = 'challan'
+    id = Column(Integer, primary_key=True)
+    challan_no = Column(Integer, nullable=False)
+    supplier_id = Column(Integer, ForeignKey('supplier.id', name='fk_challan_supplier_id'), nullable=False)
+    total_price = Column(Float, nullable=False)
+    date = Column(Date, nullable=False)
+    remarks = Column(Text, nullable=True)
+    challan_items = relationship('ChallanItem', backref='challan')
+
+class Buyer(db.Model):
+    __tablename__ = 'buyer'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50), nullable=False)
+    GST_No = Column(String(15), nullable=False)
+    state_code = Column(Integer, nullable=False)
+    state_name = Column(String(30), nullable=False)
+    address = Column(Text, nullable=False)
+    bills = relationship('Bill', backref='buyer', lazy=True)
+
+
+class BillItem(db.Model):
+    __tablename__ = 'bill_item'
+    id = Column(Integer, primary_key=True)
+    quantity = Column(Integer, nullable=False)
+    price = Column(Float, nullable=False)
+    c_gst = Column(Float, nullable=False)
+    s_gst = Column(Float, nullable=False)
+    i_gst = Column(Float, nullable=False, default=0)
+    bill_id = Column(Integer, ForeignKey('bill.id'), nullable=False)
+    product_part_no = Column(Integer, ForeignKey('product.part_no', name='fk_bill_item_product_part_no'),
+                             nullable=False)
+
+class Bill(db.Model):
+    __tablename__ = 'bill'
+    id = Column(Integer, primary_key=True)
+    buyer_id = Column(Integer, ForeignKey('buyer.id', name='fk_bill_buyer_id'), nullable=False)
+    total_price = Column(Float, nullable=False)
+    date = Column(Date, nullable=False)
+    purchase_order = Column(String(30), nullable=False)
+    remarks = Column(Text, nullable=True)
+    bill_items = relationship('BillItem', backref='bill', lazy=True)
+
+class AuditLog(db.Model):
+    __tablename__ = 'audit_log'
+    id = Column(Integer, primary_key=True)
+    table_name = Column(String(100), nullable=False)
+    table_primary_key = Column(String(100), nullable=False)
+    column_name = Column(String(100), nullable=False)
+    old_value = Column(String(100), nullable=False)
+    new_value = Column(String(100), nullable=False)
+    username = Column(String(100), nullable=False)
+    change_timestamp = Column(DateTime, nullable=False, default=func.now())
+    action_type = Column(Enum(ActionType), nullable=False)
+    remarks = Column(Text, nullable=True)

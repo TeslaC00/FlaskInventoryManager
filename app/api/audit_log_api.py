@@ -1,119 +1,79 @@
-from flask import request
-from flask_restful import Resource, abort, fields, marshal_with
-from datetime import datetime
+from flask.views import MethodView
+from flask_smorest import Blueprint, abort
+from sqlalchemy import or_
+
+from app import logger
+from app.api.utils import apply_sorting
 from app.extensions import db
 from app.models.audit_log import AuditLog
-from app.models.enums import ActionType
-from app.logger import logger
+from app.schemas.audit_log_schema import AuditLogSchema, AuditLogQuerySchema
 
-# Define output fields for marshalling
-audit_log_fields = {
-    'audit_id': fields.Integer(attribute='id'),
-    'table_name': fields.String,
-    'table_primary_key': fields.String,
-    'column_name': fields.String,
-    'old_value': fields.String,
-    'new_value': fields.String,
-    'username': fields.String,
-    'change_timestamp': fields.DateTime,
-    'action_type': fields.String(attribute=lambda x: x.action_type.value),
-    'remarks': fields.String
-}
+audit_log_bp = Blueprint('audit_log', __name__, description='Operations on audit log')
 
 
-def abort_if_audit_log_not_found(audit_log_id):
-    audit_log = AuditLog.query.get(audit_log_id)
-    if not audit_log:
-        logger.error(f"Audit log with ID {audit_log_id} not found")
-        abort(404, message="Audit log not found")
-    return audit_log
+@audit_log_bp.route('/audit_log')
+class AuditLogListResource(MethodView):
+    @audit_log_bp.response(200, AuditLogSchema(many=True))
+    @audit_log_bp.arguments(AuditLogQuerySchema, location='query')
+    @audit_log_bp.paginate()
+    def get(self, query_args, pagination_parameters):
+        logger.info('GET /audit_log called')
+        logger.info(f'query_args: {query_args}')
 
+        query = AuditLog.query
+        # for filtering
+        if 'table_name' in query_args:
+            query = query.filter(AuditLog.table_name.like(f"%{query_args['table_name']}%"))
+        if 'table_primary_key' in query_args:
+            query = query.filter(AuditLog.table_primary_key.like(f"%{query_args['table_primary_key']}%"))
+        if 'column_name' in query_args:
+            query = query.filter(AuditLog.column_name.like(f"%{query_args['column_name']}%"))
+        if 'old_value' in query_args:
+            query = query.filter(AuditLog.old_value.like(f"%{query_args['old_value']}%"))
+        if 'new_value' in query_args:
+            query = query.filter(AuditLog.new_value.like(f"%{query_args['new_value']}%"))
+        if 'username' in query_args:
+            query = query.filter(AuditLog.username.like(f"%{query_args['username']}%"))
+        if 'start_timestamp' in query_args:
+            query = query.filter(AuditLog.change_timestamp >= query_args['start_timestamp'])
+        if 'end_timestamp' in query_args:
+            query = query.filter(AuditLog.change_timestamp <= query_args['end_timestamp'])
+        if 'action_type' in query_args:
+            query = query.filter(AuditLog.action_type.like(f"%{query_args['action_type']}%"))
+        # for searching
+        if 'search' in query_args:
+            search = f"%{query_args['search']}%"
+            query = query.filter(or_(
+                AuditLog.table_name.like(search),
+                AuditLog.username.like(search),
+                AuditLog.remarks.like(search)
+            ))
+        # for sorting
+        audit_logs = apply_sorting(query, query_args, pagination_parameters)
+        logger.info(f'Found {pagination_parameters.item_count} audit logs')
+        return audit_logs
 
-class AuditLogResource(Resource):
-    @marshal_with(audit_log_fields)
-    def get(self, audit_id=None):
-        if audit_id:
-            audit_log = abort_if_audit_log_not_found(audit_id)
-            return audit_log, 200
-
-        # Handle pagination
-        limit = request.args.get('limit', default=20, type=int)
-        offset = request.args.get('offset', default=0, type=int)
-
-        logs = AuditLog.query.order_by(AuditLog.change_timestamp.desc()).offset(offset).limit(limit).all()
-        logger.info(f"Retrieved {len(logs)} audit logs with limit={limit} and offset={offset}")
-        return logs, 200
-
-    @marshal_with(audit_log_fields)
-    def post(self):
-        json_data = request.get_json()
-        if not json_data:
-            logger.error("No input data provided")
-            return {"message": "No input data provided"}, 400
-
-        required_fields = ['table_name', 'table_primary_key', 'column_name', 'old_value', 'new_value', 'username',
-                           'action_type']
-        for field in required_fields:
-            if field not in json_data:
-                logger.error(f"{field} is required")
-                return {"message": f"{field} is required"}, 400
-
+    @audit_log_bp.response(201, AuditLogSchema)
+    @audit_log_bp.arguments(AuditLogSchema)
+    def post(self, new_audit_log_data):
+        logger.info('POST /audit_log called')
+        logger.debug(f"Creating new bill with args: {new_audit_log_data}")
         try:
-            new_log = AuditLog(
-                table_name=json_data['table_name'],
-                table_primary_key=json_data['table_primary_key'],
-                column_name=json_data['column_name'],
-                old_value=json_data['old_value'],
-                new_value=json_data['new_value'],
-                username=json_data['username'],
-                action_type=ActionType(json_data['action_type']),
-                remarks=json_data.get('remarks')
-            )
+            new_log = AuditLog(**new_audit_log_data)
             db.session.add(new_log)
             db.session.commit()
-            logger.info(f"New audit log created with ID {new_log.id}")
-            return new_log, 201
+            logger.info(f"New bill created with ID {new_log.id}")
+            return new_log
         except Exception as e:
-            logger.error(f"Error creating audit log: {e}", exc_info=True)
-            db.session.rollback()
-            return {"message": "An error occurred while creating the audit log"}, 500
+            logger.error(f"Error creating audit log: {e}")
+            abort(500, message="An error occurred while creating the audit log")
 
 
-class AuditLogFilterResource(Resource):
-    @marshal_with(audit_log_fields)
-    def get(self):
-        json_data = request.get_json()
-        if not json_data:
-            logger.error("No input data provided")
-            return {"message": "No input data provided"}, 400
-
-        if 'start_date' not in json_data or 'end_date' not in json_data:
-            logger.error("Start date and end date are required")
-            return {"message": "Start date and end date are required"}, 400
-
-        try:
-            start_date = datetime.strptime(json_data['start_date'], '%Y-%m-%d')
-            end_date = datetime.strptime(json_data['end_date'], '%Y-%m-%d')
-        except ValueError:
-            logger.error("Dates must be in YYYY-MM-DD format")
-            return {"message": "Dates must be in YYYY-MM-DD format"}, 400
-
-        # Handle pagination
-        limit = request.args.get('limit', default=20, type=int)
-        offset = request.args.get('offset', default=0, type=int)
-
-        logs = AuditLog.query \
-            .filter(AuditLog.change_timestamp >= start_date) \
-            .filter(AuditLog.change_timestamp <= end_date) \
-            .order_by(AuditLog.change_timestamp.desc()) \
-            .offset(offset) \
-            .limit(limit) \
-            .all()
-
-        logger.info(
-            f"Retrieved {len(logs)} audit logs between {start_date} and {end_date} with limit={limit} and offset={offset}")
-        return logs, 200
-
-# Add resource routes
-# api.add_resource(AuditLogResource, '/audit_logs', '/audit_logs/<int:audit_id>')
-# api.add_resource(AuditLogFilterResource, '/audit_logs/filter')
+@audit_log_bp.route('/audit_log/<int:audit_log_id>')
+class AuditLogResource(MethodView):
+    @audit_log_bp.response(200, AuditLogSchema)
+    def get(self, audit_log_id):
+        logger.info(f'GET /audit_log/{audit_log_id} called')
+        audit_log = AuditLog.query.get_or_404(audit_log_id)
+        logger.info(f"Found audit log with ID {audit_log_id}")
+        return audit_log

@@ -1,100 +1,99 @@
-from flask_restful import Resource, reqparse, abort, fields, marshal_with
+from flask.views import MethodView
+from flask_smorest import Blueprint, abort
+from sqlalchemy import or_
+
+from app import logger
+from app.api.utils import apply_sorting
 from app.extensions import db
 from app.models import BillItem
+from app.schemas.bill_item_schema import BillItemSchema, BillItemQuerySchema, BillItemUpdateSchema
 
-# Define output fields for marshalling
-bill_item_fields = {
-    'id': fields.Integer,
-    'quantity': fields.Integer,
-    'price': fields.Float,
-    'c_gst': fields.Float,
-    's_gst': fields.Float,
-    'i_gst': fields.Float,
-    'bill_id': fields.Integer,
-    'product_part_no': fields.Integer
-}
+bill_item_bp = Blueprint('bill_item_bp', __name__, description='Operations on bill items')
 
 
-def abort_if_bill_item_not_found(item_id):
-    bill_item = BillItem.query.get(item_id)
-    if not bill_item:
-        abort(404, message="Bill item not found")
-    return bill_item
+@bill_item_bp.route('/bill_item')
+class BillItemListResource(MethodView):
+    @bill_item_bp.response(200, BillItemSchema(many=True))
+    @bill_item_bp.arguments(BillItemQuerySchema, location='query')
+    @bill_item_bp.paginate()
+    def get(self, query_args, pagination_parameters):
+        logger.info('GET /bill_item called')
+        logger.debug(f"Query Arguments={query_args}")
+
+        query = BillItem.query
+        # for filtering
+        if 'bill_id' in query_args:
+            query = query.filter(BillItem.bill_id == query_args['bill_id'])
+        if 'product_part_no' in query_args:
+            query = query.filter(BillItem.product_part_no == query_args['product_part_no'])
+        # for searching
+        if 'search' in query_args:
+            search = f"%{query_args['search']}%"
+            query = query.filter(or_(
+                BillItem.quantity.like(search),
+                BillItem.price.like(search),
+                BillItem.bill_id.like(search),
+                BillItem.product_part_no.like(search)
+            ))
+        # for sorting
+        bill_items = apply_sorting(query, query_args, pagination_parameters)
+        logger.info(f"Found {pagination_parameters.item_count} bills")
+        logger.debug(f"Returned bills: {bill_items}")
+        return bill_items
+
+    @bill_item_bp.response(201, BillItemSchema)
+    @bill_item_bp.arguments(BillItemSchema)
+    def post(self, new_bill_item_data):
+        logger.info('POST /bill_item called')
+        logger.debug(f"Creating new bill item with args: {new_bill_item_data}")
+        try:
+            new_bill_item = BillItem(**new_bill_item_data)
+            db.session.add(new_bill_item)
+            db.session.commit()
+            logger.info(f"New bill item created with ID {new_bill_item.id}")
+            return new_bill_item
+        except Exception as e:
+            logger.error(f"Error creating bill item: {e}")
+            abort(500, message="An error occurred while creating the bill item")
 
 
-class BillItemResource(Resource):
-    @marshal_with(bill_item_fields)
-    def get(self, id=None, bill_id=None):
-        if id:
-            item = abort_if_bill_item_not_found(id)
-            return item, 200
-        elif bill_id:
-            items = BillItem.query.filter_by(bill_id=bill_id).all()
-            return items, 200
-        else:
-            abort(400, message="Please provide either item id or bill id")
+@bill_item_bp.route('/bill_item/<int:bill_item_id>')
+class BillItemResource(MethodView):
+    @bill_item_bp.response(200, BillItemSchema)
+    def get(self, bill_item_id):
+        logger.info(f'GET /bill_item/{bill_item_id} called')
+        bill_item = BillItem.query.get_or_404(bill_item_id)
+        logger.info(f"Found bill with ID {bill_item}")
+        return bill_item
 
-    @marshal_with(bill_item_fields)
-    def post(self):
-        parser = reqparse.RequestParser()
-        parser.add_argument('quantity', type=int, required=True, help='Quantity is required')
-        parser.add_argument('price', type=float, required=True, help='Price is required')
-        parser.add_argument('c_gst', type=float, required=True, help='C GST is required')
-        parser.add_argument('s_gst', type=float, required=True, help='S GST is required')
-        parser.add_argument('i_gst', type=float, required=True, help='I GST is required')
-        parser.add_argument('bill_id', type=int, required=True, help='Bill ID is required')
-        parser.add_argument('product_part_no', type=int, required=True, help='Product part number is required')
-        args = parser.parse_args()
+    @bill_item_bp.response(200, BillItemSchema)
+    @bill_item_bp.arguments(BillItemUpdateSchema)
+    def put(self, update_bill_item_data, bill_item_id):
 
-        new_item = BillItem(
-            quantity=args['quantity'],
-            price=args['price'],
-            c_gst=args['c_gst'],
-            s_gst=args['s_gst'],
-            i_gst=args['i_gst'],
-            bill_id=args['bill_id'],
-            product_part_no=args['product_part_no']
-        )
-        db.session.add(new_item)
-        db.session.commit()
-        return new_item, 201
+        logger.info(f"PUT /bill_item/{bill_item_id} called")
+        logger.debug(f"Updating bill item {bill_item_id} with args: {update_bill_item_data}")
 
-    @marshal_with(bill_item_fields)
-    def put(self, id):
-        parser = reqparse.RequestParser()
-        parser.add_argument('quantity', type=int)
-        parser.add_argument('price', type=float)
-        parser.add_argument('c_gst', type=float)
-        parser.add_argument('s_gst', type=float)
-        parser.add_argument('i_gst', type=float)
-        parser.add_argument('bill_id', type=int)
-        parser.add_argument('product_part_no', type=int)
-        args = parser.parse_args()
+        bill_item = BillItem.query.get_or_404(bill_item_id)
+        for key, value in update_bill_item_data.items():
+            setattr(bill_item, key, value)
 
-        item = abort_if_bill_item_not_found(id)
+        try:
+            db.session.commit()
+            logger.info(f"Bill item {bill_item_id} updated")
+            return bill_item
+        except Exception as e:
+            logger.error(f"Error updating bill item {bill_item_id}: {e}")
+            abort(500, message="An error occurred while updating the bill item")
 
-        if args['quantity']:
-            item.quantity = args['quantity']
-        if args['price']:
-            item.price = args['price']
-        if args['c_gst']:
-            item.c_gst = args['c_gst']
-        if args['s_gst']:
-            item.s_gst = args['s_gst']
-        if args['i_gst']:
-            item.i_gst = args['i_gst']
-        if args['bill_id']:
-            item.bill_id = args['bill_id']
-        if args['product_part_no']:
-            item.product_part_no = args['product_part_no']
-
-        db.session.commit()
-        return item, 200
-
-    def delete(self, id):
-        item = abort_if_bill_item_not_found(id)
-        db.session.delete(item)
-        db.session.commit()
-        return {'message': 'Bill item deleted'}, 200
-# TODO: add resources in init file
-# api.add_resource(BillItemResource, '/bill_items', '/bill_items/<int:id>')
+    @bill_item_bp.response(204)
+    def delete(self, bill_item_id):
+        logger.info(f"DELETE /bill_item/{bill_item_id} called")
+        bill_item = BillItem.query.get_or_404(bill_item_id)
+        try:
+            db.session.delete(bill_item)
+            db.session.commit()
+            logger.info(f"Bill item {bill_item_id} deleted")
+            return {'message': 'Bill item deleted'}
+        except Exception as e:
+            logger.error(f"Error deleting bill item {bill_item_id}: {e}")
+            abort(500, message="An error occurred while deleting the bill item")
