@@ -3,7 +3,7 @@ from flask_smorest import Blueprint, abort
 from sqlalchemy import or_
 
 from app import logger
-from app.api.utils import apply_sorting, generate_meta
+from app.api.utils import apply_sorting
 from app.extensions import db
 from app.models import BillItem
 from app.schemas.bill_item_schema import BillItemSchema, BillItemQuerySchema, BillItemUpdateSchema
@@ -15,7 +15,8 @@ bill_item_bp = Blueprint('bill_item_bp', __name__, description='Operations on bi
 class BillItemListResource(MethodView):
     @bill_item_bp.response(200, BillItemSchema(many=True))
     @bill_item_bp.arguments(BillItemQuerySchema, location='query')
-    def get(self, query_args):
+    @bill_item_bp.paginate()
+    def get(self, query_args, pagination_parameters):
         logger.info('GET /bill_item called')
         logger.debug(f"Query Arguments={query_args}")
 
@@ -35,12 +36,10 @@ class BillItemListResource(MethodView):
                 BillItem.product_part_no.like(search)
             ))
         # for sorting
-        bill_items, records_count = apply_sorting(query, query_args)
-        logger.info(f"Found {records_count} bills")
+        bill_items = apply_sorting(query, query_args, pagination_parameters)
+        logger.info(f"Found {pagination_parameters.item_count} bills")
         logger.debug(f"Returned bills: {bill_items}")
-
-        meta = generate_meta(records_count, query_args)
-        return bill_items, {'meta': meta}
+        return bill_items
 
     @bill_item_bp.response(201, BillItemSchema)
     @bill_item_bp.arguments(BillItemSchema)

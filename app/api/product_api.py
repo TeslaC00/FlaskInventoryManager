@@ -1,7 +1,7 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 
-from app.api.utils import apply_sorting, generate_meta
+from app.api.utils import apply_sorting
 from app.extensions import db
 from app.logger import logger
 from app.models import Product
@@ -14,7 +14,8 @@ product_bp = Blueprint('product_bp', __name__)
 class ProductListResource(MethodView):
     @product_bp.response(200, ProductSchema(many=True))
     @product_bp.arguments(ProductQuerySchema, location='query')
-    def get(self, query_args):
+    @product_bp.paginate()
+    def get(self, query_args, pagination_parameters):
         logger.info('GET /products called')
         logger.debug(f"Query Arguments={query_args}")
 
@@ -48,12 +49,10 @@ class ProductListResource(MethodView):
         if 'search' in query_args:
             query = query.filter(Product.name.like(f"%{query_args['search']}%"))
         # for sorting
-        products, records_count = apply_sorting(query, query_args)
-        logger.info(f"Found {records_count} products")
+        products = apply_sorting(query, query_args, pagination_parameters)
+        logger.info(f"Found {pagination_parameters.item_count} products")
         logger.debug(f"Returned products: {products}")
-
-        meta = generate_meta(records_count, query_args)
-        return products, {'meta': meta}
+        return products
 
     @product_bp.response(201, ProductSchema)
     @product_bp.arguments(ProductSchema)

@@ -2,7 +2,7 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from sqlalchemy import or_
 
-from app.api.utils import apply_sorting, generate_meta
+from app.api.utils import apply_sorting
 from app.extensions import db
 from app.logger import logger
 from app.models import ChallanItem
@@ -15,7 +15,8 @@ challan_item_bp = Blueprint('challan_item_bp', __name__)
 class ChallanItemListResource(MethodView):
     @challan_item_bp.response(200, ChallanItemSchema(many=True))
     @challan_item_bp.arguments(ChallanQuerySchema, location='query')
-    def get(self, query_args):
+    @challan_item_bp.paginate()
+    def get(self, query_args, pagination_parameters):
         logger.info('GET /challan_items called')
         logger.debug(f"Query Arguments={query_args}")
 
@@ -35,12 +36,10 @@ class ChallanItemListResource(MethodView):
                 ChallanItem.material_part_no.like(search)
             ))
         # for sorting
-        challan_items, records_count = apply_sorting(query, query_args)
-        logger.info(f"Found {records_count} challan_items")
+        challan_items = apply_sorting(query, query_args, pagination_parameters)
+        logger.info(f"Found {pagination_parameters.item_count} challan_items")
         logger.debug(f"Returned challan_items: {challan_items}")
-
-        meta = generate_meta(records_count, query_args)
-        return challan_items, {'meta': meta}
+        return challan_items
 
     @challan_item_bp.response(201, ChallanItemSchema)
     @challan_item_bp.arguments(ChallanItemSchema)

@@ -1,19 +1,13 @@
 from sqlalchemy import text
 
 
-def apply_sorting(query, query_args):
+def apply_sorting(query, query_args, pagination_parameters):
     if 'sort_order' in query_args == 'desc':
         query = query.order_by(text(f"{query_args['sort_by']} DESC"))
     else:
         query = query.order_by(text(f"{query_args['sort_by']} ASC"))
-    records_count = query.count()
-    records = query.offset(query_args['page']*query_args['limit']).limit(query_args['limit']).all()
-    return records, records_count
-
-
-def generate_meta(records_count, query_args):
-    return {
-        'records_count': records_count,
-        'page': query_args['page'],
-        'per_page': query_args['limit'],
-    }
+    pagination_parameters.item_count = query.count()
+    page = pagination_parameters.page
+    per_page = pagination_parameters.page_size
+    records = query.offset((page - 1) * per_page).limit(per_page).all()
+    return records

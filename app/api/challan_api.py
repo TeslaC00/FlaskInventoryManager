@@ -3,7 +3,7 @@ from flask_smorest import Blueprint, abort
 from sqlalchemy import or_
 
 from app import logger
-from app.api.utils import apply_sorting, generate_meta
+from app.api.utils import apply_sorting
 from app.extensions import db
 from app.models import Challan
 from app.schemas.challan_schema import ChallanSchema, ChallanQuerySchema, ChallanUpdateSchema
@@ -15,7 +15,8 @@ challan_bp = Blueprint('challan_bp', __name__)
 class ChallanResource(MethodView):
     @challan_bp.response(200, ChallanSchema(many=True))
     @challan_bp.arguments(ChallanQuerySchema, location='query')
-    def get(self, query_args):
+    @challan_bp.paginate()
+    def get(self, query_args,pagination_parameters):
         logger.info('GET /challans called')
         logger.debug(f"Query Arguments={query_args}")
 
@@ -43,12 +44,10 @@ class ChallanResource(MethodView):
                 Challan.remarks.like(search)
             ))
         # for sorting
-        buyers, records_count = apply_sorting(query, query_args)
-        logger.info(f"Found {records_count} buyers")
+        buyers = apply_sorting(query, query_args,pagination_parameters)
+        logger.info(f"Found {pagination_parameters.item_count} buyers")
         logger.debug(f"Returned buyers: {buyers}")
-
-        meta = generate_meta(records_count, query_args)
-        return buyers, {'meta': meta}
+        return buyers
 
     @challan_bp.response(201, ChallanSchema)
     @challan_bp.arguments(ChallanSchema)

@@ -2,7 +2,7 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from sqlalchemy import or_
 
-from app.api.utils import apply_sorting, generate_meta
+from app.api.utils import apply_sorting
 from app.extensions import db
 from app.logger import logger
 from app.models import Buyer
@@ -15,9 +15,10 @@ buyer_bp = Blueprint('buyer_bp', __name__)
 class BuyerListResource(MethodView):
     @buyer_bp.response(200, PersonSchema(many=True))
     @buyer_bp.arguments(PersonQuerySchema, location='query')
-    def get(self, query_args):
+    @buyer_bp.paginate()
+    def get(self, query_args, pagination_parameters):
         logger.info("GET /buyers called")
-        logger.debug(f"Query Arguments={query_args}")
+        logger.debug(f"Query Arguments={query_args}, pagination={pagination_parameters}")
 
         query = Buyer.query
         # for filtering
@@ -39,12 +40,10 @@ class BuyerListResource(MethodView):
                 Buyer.address.like(search)
             ))
         # for sorting
-        buyers, records_count = apply_sorting(query, query_args)
-        logger.info(f"Found {records_count} buyers")
+        buyers = apply_sorting(query, query_args, pagination_parameters)
+        logger.info(f"Found {pagination_parameters.item_count} buyers")
         logger.debug(f"Returned buyers: {buyers}")
-
-        meta = generate_meta(records_count, query_args)
-        return buyers, {'meta': meta}
+        return buyers
 
     @buyer_bp.response(201, PersonSchema)
     @buyer_bp.arguments(PersonSchema)

@@ -2,7 +2,7 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from sqlalchemy import or_
 
-from app.api.utils import apply_sorting, generate_meta
+from app.api.utils import apply_sorting
 from app.extensions import db
 from app.logger import logger
 from app.models import ProductScrap
@@ -15,7 +15,8 @@ product_scrap_bp = Blueprint('product_scrap_bp', __name__)
 class ProductScrapListResource(MethodView):
     @product_scrap_bp.response(200, ProductScrapSchema(many=True))
     @product_scrap_bp.arguments(ProductScrapQuerySchema, location='query')
-    def get(self, query_args):
+    @product_scrap_bp.paginate()
+    def get(self, query_args, pagination_parameters):
         logger.info('GET /product_scraps called')
         logger.debug(f"Query Arguments={query_args}")
 
@@ -41,12 +42,10 @@ class ProductScrapListResource(MethodView):
                 ProductScrap.scrap_type.like(search)
             ))
         # for sorting
-        product_scraps, records_count = apply_sorting(query, query_args)
-        logger.info(f"Found {records_count} product scraps")
+        product_scraps = apply_sorting(query, query_args, pagination_parameters)
+        logger.info(f"Found {pagination_parameters.item_count} product scraps")
         logger.debug(f"Returned product scraps: {product_scraps}")
-
-        meta = generate_meta(records_count, query_args)
-        return product_scraps, {'meta': meta}
+        return product_scraps
 
     @product_scrap_bp.response(201, ProductScrapSchema)
     @product_scrap_bp.arguments(ProductScrapSchema)

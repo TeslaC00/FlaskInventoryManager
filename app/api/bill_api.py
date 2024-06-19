@@ -2,7 +2,7 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from sqlalchemy import or_
 
-from app.api.utils import apply_sorting, generate_meta
+from app.api.utils import apply_sorting
 from app.extensions import db
 from app.logger import logger
 from app.models import Bill
@@ -15,7 +15,8 @@ bills_bp = Blueprint('bills_bp', __name__, description='Operations on bills')
 class BillListResource(MethodView):
     @bills_bp.response(200, BillSchema(many=True))
     @bills_bp.arguments(BillQuerySchema, location='query')
-    def get(self, query_args):
+    @bills_bp.paginate()
+    def get(self, query_args, pagination_parameters):
         logger.info('GET /bills called')
         logger.debug(f"Query Arguments={query_args}")
 
@@ -40,12 +41,10 @@ class BillListResource(MethodView):
                 Bill.remarks.like(f"%{query_args['search']}%")
             ))
         # for sorting
-        bills, records_count = apply_sorting(query, query_args)
-        logger.info(f"Found {records_count} bills")
+        bills = apply_sorting(query, query_args, pagination_parameters)
+        logger.info(f"Found {pagination_parameters.item_count} bills")
         logger.debug(f"Returned bills: {bills}")
-
-        meta = generate_meta(records_count, query_args)
-        return bills, {'meta': meta}
+        return bills
 
     @bills_bp.response(201, BillSchema)
     @bills_bp.arguments(BillSchema)

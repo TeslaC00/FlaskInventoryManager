@@ -2,7 +2,7 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from sqlalchemy import or_
 
-from app.api.utils import apply_sorting, generate_meta
+from app.api.utils import apply_sorting
 from app.extensions import db
 from app.logger import logger
 from app.models import MaterialScrap
@@ -15,7 +15,8 @@ material_scrap_bp = Blueprint('material_scrap_bp', __name__)
 class MaterialScrapListResource(MethodView):
     @material_scrap_bp.response(200, MaterialScrapSchema(many=True))
     @material_scrap_bp.arguments(MaterialScrapQuerySchema, location='query')
-    def get(self, query_args):
+    @material_scrap_bp.paginate()
+    def get(self, query_args, pagination_parameters):
         logger.info('GET /material_scrap called')
         logger.debug(f"Query Arguments={query_args}")
 
@@ -41,12 +42,10 @@ class MaterialScrapListResource(MethodView):
                 MaterialScrap.scrap_type.like(search)
             ))
         # for sorting
-        material_scraps, records_count = apply_sorting(query, query_args)
-        logger.info(f"Found {records_count} material scraps")
+        material_scraps = apply_sorting(query, query_args, pagination_parameters)
+        logger.info(f"Found {pagination_parameters.item_count} material scraps")
         logger.debug(f"Returned material scraps: {material_scraps}")
-
-        meta = generate_meta(records_count, query_args)
-        return material_scraps, {'meta': meta}
+        return material_scraps
 
     @material_scrap_bp.response(201, MaterialScrapSchema)
     @material_scrap_bp.arguments(MaterialScrapSchema)

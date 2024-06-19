@@ -1,7 +1,7 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 
-from app.api.utils import apply_sorting, generate_meta
+from app.api.utils import apply_sorting
 from app.extensions import db
 from app.logger import logger
 from app.models import ProductionLog
@@ -14,7 +14,8 @@ production_log_bp = Blueprint('production_log_bp', __name__)
 class ProductionLogListResource(MethodView):
     @production_log_bp.response(200, ProductionLogSchema(many=True))
     @production_log_bp.arguments(ProductionLogQuerySchema, location='query')
-    def get(self, query_args):
+    @production_log_bp.paginate()
+    def get(self, query_args, pagination_parameters):
         logger.info('GET /production_logs called')
         logger.debug(f"Query Arguments={query_args}")
 
@@ -33,12 +34,10 @@ class ProductionLogListResource(MethodView):
             query = query.filter(ProductionLog.quantity_produced <= query_args['max_quantity'])
         # for searching
         # for sorting
-        production_logs, records_count = apply_sorting(query, query_args)
-        logger.info(f"Found {records_count} production_logs")
+        production_logs = apply_sorting(query, query_args, pagination_parameters)
+        logger.info(f"Found {pagination_parameters.item_count} production_logs")
         logger.debug(f"Returned production_logs: {production_logs}")
-
-        meta = generate_meta(records_count, query_args)
-        return production_logs, {'meta': meta}
+        return production_logs
 
     @production_log_bp.response(201, ProductionLogSchema)
     @production_log_bp.arguments(ProductionLogSchema)

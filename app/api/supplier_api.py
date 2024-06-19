@@ -2,7 +2,7 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from sqlalchemy import or_
 
-from app.api.utils import apply_sorting, generate_meta
+from app.api.utils import apply_sorting
 from app.extensions import db
 from app.logger import logger
 from app.models import Supplier
@@ -15,7 +15,8 @@ supplier_bp = Blueprint('supplier_bp', __name__)
 class SupplierListResource(MethodView):
     @supplier_bp.response(200, PersonSchema(many=True))
     @supplier_bp.arguments(PersonQuerySchema, location='query')
-    def get(self, query_args):
+    @supplier_bp.paginate()
+    def get(self, query_args, pagination_parameters):
         logger.info("GET /suppliers called")
         logger.debug(f"Query Arguments={query_args}")
 
@@ -39,12 +40,10 @@ class SupplierListResource(MethodView):
                 Supplier.address.like(search)
             ))
         # for sorting
-        suppliers, records_count = apply_sorting(query, query_args)
-        logger.info(f"Found {records_count} suppliers")
+        suppliers = apply_sorting(query, query_args, pagination_parameters)
+        logger.info(f"Found {pagination_parameters.item_count} suppliers")
         logger.debug(f"Returned suppliers: {suppliers}")
-
-        meta = generate_meta(records_count, query_args)
-        return suppliers, {'meta': meta}
+        return suppliers
 
     @supplier_bp.response(201, PersonSchema)
     @supplier_bp.arguments(PersonSchema)

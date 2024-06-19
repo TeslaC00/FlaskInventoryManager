@@ -3,7 +3,7 @@ from flask_smorest import Blueprint, abort
 from sqlalchemy import or_
 
 from app import logger
-from app.api.utils import apply_sorting, generate_meta
+from app.api.utils import apply_sorting
 from app.extensions import db
 from app.models.audit_log import AuditLog
 from app.schemas.audit_log_schema import AuditLogSchema, AuditLogQuerySchema
@@ -15,7 +15,8 @@ audit_log_bp = Blueprint('audit_log', __name__, description='Operations on audit
 class AuditLogListResource(MethodView):
     @audit_log_bp.response(200, AuditLogSchema(many=True))
     @audit_log_bp.arguments(AuditLogQuerySchema, location='query')
-    def get(self, query_args):
+    @audit_log_bp.paginate()
+    def get(self, query_args, pagination_parameters):
         logger.info('GET /audit_log called')
         logger.info(f'query_args: {query_args}')
 
@@ -48,11 +49,9 @@ class AuditLogListResource(MethodView):
                 AuditLog.remarks.like(search)
             ))
         # for sorting
-        audit_logs, records_count = apply_sorting(query, query_args)
-        logger.info(f'Found {records_count} audit logs')
-
-        meta = generate_meta(records_count, query_args)
-        return audit_logs, {'meta': meta}
+        audit_logs = apply_sorting(query, query_args, pagination_parameters)
+        logger.info(f'Found {pagination_parameters.item_count} audit logs')
+        return audit_logs
 
     @audit_log_bp.response(201, AuditLogSchema)
     @audit_log_bp.arguments(AuditLogSchema)
