@@ -13,7 +13,7 @@ def show_inv_raw():
     Route to display the inventory page, showing tables for both raw materials and produced goods.
     Fetches data from the database for raw materials and goods, converting them to dictionaries for easy rendering in templates.
 
-    :return: Rendered 'inventory.html' template with raw material and produced goods data passed as context.
+    :return: Rendered 'inv_raw.html' template with raw material and produced goods data passed as context.
     """
     try:
         # Query all raw material records from the database
@@ -24,7 +24,7 @@ def show_inv_raw():
         table1 = [record.to_dict() for record in raw_material_data]
 
         logger.info('Queried Raw Material table from database')
-        # Render the 'inventory.html' template, passing the raw material and produced goods data for display
+        # Render the 'inv_raw.html' template, passing the raw material and produced goods data for display
         return render_template('inv_raw.html', table1=table1)
     except Exception as e:
         # TODO: add error page to show errors
@@ -39,7 +39,7 @@ def show_inv_prod():
     Route to display the inventory page, showing tables for both raw materials and produced goods.
     Fetches data from the database for raw materials and goods, converting them to dictionaries for easy rendering in templates.
 
-    :return: Rendered 'inventory.html' template with raw material and produced goods data passed as context.
+    :return: Rendered 'inv_prod.html' template with raw material and produced goods data passed as context.
     """
     try:
 
@@ -51,7 +51,7 @@ def show_inv_prod():
         table2 = [record.to_dict() for record in produced_good_data]
 
         logger.info('Queried Goods table from database')
-        # Render the 'inventory.html' template, passing the raw material and produced goods data for display
+        # Render the 'inv_prod.html' template, passing the raw material and produced goods data for display
         return render_template('inv_prod.html', table2=table2)
     except Exception as e:
         # TODO: add error page to show errors
