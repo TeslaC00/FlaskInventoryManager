@@ -29,4 +29,4 @@ class AuditLogQuerySchema(QuerySchema):
     action_type = fields.String(validate=validate.OneOf([action.value for action in ActionType]))
     sort_by = fields.String(validate=validate.OneOf(
         ['change_timestamp', 'table_name', 'table_primary_key', 'column_name', 'old_value', 'new_value', 'username']),
-                            missing='change_timestamp')
+                            load_default='change_timestamp')

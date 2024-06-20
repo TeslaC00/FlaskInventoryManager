@@ -22,4 +22,4 @@ class ProductScrapQuerySchema(QuerySchema):
     start_date = fields.Date(format='%Y-%m-%d')
     end_date = fields.Date(format='%Y-%m-%d')
     scrap_type = fields.String(validate=validate.OneOf([type.value for type in MaterialScrapType]))
-    sort_by = fields.String(validate=validate.OneOf(['quantity', 'date', 'scrap_type']), missing='date')
+    sort_by = fields.String(validate=validate.OneOf(['quantity', 'date', 'scrap_type']), load_default='date')
