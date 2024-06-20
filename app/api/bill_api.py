@@ -1,6 +1,6 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
-from sqlalchemy import or_
+from sqlalchemy import or_, extract
 
 from app.api.utils import apply_sorting
 from app.extensions import db
@@ -9,6 +9,15 @@ from app.models import Bill
 from app.schemas.bill_schema import BillSchema, BillQuerySchema, BillUpdateSchema
 
 bills_bp = Blueprint('bills_bp', __name__, description='Operations on bills')
+
+# app/schemas/sales_analysis_schema.py
+from marshmallow import Schema, fields
+
+
+class SalesAnalysisQuerySchema(Schema):
+    start_date = fields.Date(required=False)
+    end_date = fields.Date(required=False)
+    buyer_id = fields.String(required=False)
 
 
 @bills_bp.route('/bills')
@@ -103,3 +112,81 @@ class BillResource(MethodView):
         except Exception as e:
             logger.error(f"Error deleting bill {bill_id}: {e}")
             abort(500, message="An error occurred while deleting the bill")
+
+
+@bills_bp.route('/bills/analysis')
+class SalesAnalysisResource(MethodView):
+
+    @bills_bp.arguments(SalesAnalysisQuerySchema, location='query')
+    def get(self, query_args):
+        logger.info('GET /bills/analysis called')
+        logger.debug(f"Query Arguments={query_args}")
+
+        # Base query for summary statistics
+        summary_query = db.session.query(
+            func.sum(Bill.total_price).label('total_sales'),
+            func.avg(Bill.total_price).label('average_sales'),
+            func.count(Bill.id).label('total_bills')
+        )
+
+        # Base query for time-series data
+        timeseries_query = db.session.query(
+            extract('year', Bill.date).label('year'),
+            func.sum(Bill.total_price).label('total_sales')
+        )
+
+        if 'interval' in query_args:
+            interval = query_args['interval']
+            if interval == 'month':
+                timeseries_query = timeseries_query.add_columns(extract('month', Bill.date).label('month'))
+            elif interval == 'day':
+                timeseries_query = timeseries_query.add_columns(extract('month', Bill.date).label('month'),
+                                                                extract('day', Bill.date).label('day'))
+
+        if 'start_date' in query_args:
+            summary_query = summary_query.filter(Bill.date >= query_args['start_date'])
+            timeseries_query = timeseries_query.filter(Bill.date >= query_args['start_date'])
+        if 'end_date' in query_args:
+            summary_query = summary_query.filter(Bill.date <= query_args['end_date'])
+            timeseries_query = timeseries_query.filter(Bill.date <= query_args['end_date'])
+        if 'buyer_id' in query_args:
+            summary_query = summary_query.filter(Bill.buyer_id.like(f"%{query_args['buyer_id']}%"))
+            timeseries_query = timeseries_query.filter(Bill.buyer_id.like(f"%{query_args['buyer_id']}%"))
+
+        # Group by year (and optionally month/day)
+        if 'interval' in query_args:
+            interval = query_args['interval']
+            if interval == 'month':
+                timeseries_query = timeseries_query.group_by('year', 'month').order_by('year', 'month')
+            elif interval == 'day':
+                timeseries_query = timeseries_query.group_by('year', 'month', 'day').order_by('year', 'month', 'day')
+            else:
+                timeseries_query = timeseries_query.group_by('year').order_by('year')
+        else:
+            timeseries_query = timeseries_query.group_by('year').order_by('year')
+
+        summary_result = summary_query.one()
+        timeseries_result = timeseries_query.all()
+
+        # Transform time-series data for plotting
+        timeseries_data = []
+        for row in timeseries_result:
+            data_point = {
+                'year': row.year,
+                'total_sales': row.total_sales
+            }
+            if 'interval' in query_args:
+                if query_args['interval'] == 'month':
+                    data_point['month'] = row.month
+                elif query_args['interval'] == 'day':
+                    data_point['month'] = row.month
+                    data_point['day'] = row.day
+            timeseries_data.append(data_point)
+
+        logger.info(f"Sales analysis: {summary_result}, Time-series data points: {len(timeseries_data)}")
+        return {
+            'total_sales': summary_result.total_sales or 0,
+            'average_sales': summary_result.average_sales or 0,
+            'total_bills': summary_result.total_bills or 0,
+            'timeseries_data': timeseries_data
+        }
