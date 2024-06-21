@@ -30,9 +30,6 @@ def create_app():
     logger.info('Loaded Api configurations')
 
     initialize_extensions(app)
-    # shows registered urls
-    # for rule in app.url_map.iter_rules():
-    #     print(f"{rule.endpoint} {rule.rule}")
     logger.info('All extensions initialized')
 
     init_security(app)

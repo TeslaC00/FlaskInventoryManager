@@ -34,6 +34,10 @@ body {
 }
 
 #sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
     width: 70px;
     min-width: 70px;
     z-index: 1000;
@@ -125,10 +129,7 @@ a.sidebar-link:hover {
     top: 0;
     left: 70px;
     background-color: #17365b;
-    padding-top: 11px;
-    padding-right: 11px;
-    padding-left: 11px;
-    padding-bottom: 11px;
+    padding: 11px;
     min-width: 10rem;
     display: none;
 }
