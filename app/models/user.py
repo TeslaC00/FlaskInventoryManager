@@ -4,7 +4,7 @@ from app.extensions import db
 from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey
 from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship, backref
-from app.extensions import bcrypt
+# from app.extensions import bcrypt
 
 
 class RolesUsers(db.Model):
