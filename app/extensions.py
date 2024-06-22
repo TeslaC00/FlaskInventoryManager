@@ -4,12 +4,12 @@ from flask_smorest import Api
 
 from app.logger import logger
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
+# from flask_login import LoginManager
 
 logger.info('Creating extensions objects')
 # bcrypt = Bcrypt()
 db = SQLAlchemy()
-login_manager = LoginManager()
+# login_manager = LoginManager()
 api = Api()
 
 
@@ -23,7 +23,7 @@ def initialize_extensions(app):
     db.init_app(app)
     logger.info('Initialized Database')
 
-    login_manager.init_app(app)
+    # login_manager.init_app(app)
     logger.info('Initialized Login Manager')
 
     api.init_app(app)

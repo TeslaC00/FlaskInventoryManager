@@ -66,10 +66,18 @@ def create_tables(app):
     with app.app_context():
         db.create_all()
         logger.info('Database tables created (if not existing)')
+        app.security.datastore.find_or_create_role(
+            name="user", permissions={"user-read", "user-write"}, password="user"
+        )
+        db.session.commit()
+        if not app.security.datastore.find_user(username="user"):
+            from flask_security import hash_password
+            app.security.datastore.create_user(username="user",
+                                               password=hash_password("password"), roles=["user"])
+        db.session.commit()
 
 
 def init_security(app):
-    print(f"SECRET_KEY in app config: {app.config['SECRET_KEY']}")
     from app.models.user import User, Role
     user_datastore = SQLAlchemyUserDatastore(db, User, Role)
     app.security = Security(app, user_datastore)
