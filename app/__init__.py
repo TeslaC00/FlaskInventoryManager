@@ -66,7 +66,7 @@ def create_tables(app):
             name="user", permissions={"user-read", "user-write"}
         )
         db.session.commit()
-        if not app.security.datastore.find_user(username="user"):
+        if not app.security.datastore.find_user(email="user@gmail.com"):
             from flask_security import hash_password
             app.security.datastore.create_user(email="user@gmail.com",
                                                password=hash_password("password"), roles=["user"])
