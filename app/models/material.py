@@ -27,7 +27,9 @@ class Material(db.Model):
     __tablename__ = 'material'
     part_no = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False, unique=True)
-    unit = Column(Enum(UnitType), nullable=False)
+    # TODO: Temporary fix need to be replaced with below code in stage and production
+    # unit = Column(Enum(UnitType), nullable=False)
+    unit = Column(Enum(UnitType, values_callable=lambda obj: [enum.value for enum in obj]), nullable=False)
     quantity = Column(Integer, nullable=False)
     challan_items = relationship('ChallanItem', backref='material')
     scraps = relationship('MaterialScrap', backref='material')
