@@ -27,4 +27,4 @@ class BillItemQuerySchema(QuerySchema):
     product_part_no = fields.Integer()
     sort_by = fields.String(
         validate=validate.OneOf(['quantity', 'price', 'c_gst', 's_gst', 'i_gst', 'bill_id', 'product_part_no']),
-        missing='id')
+        load_default='id')

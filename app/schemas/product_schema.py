@@ -37,4 +37,4 @@ class ProductQuerySchema(QuerySchema):
     min_i_gst = fields.Float()
     max_i_gst = fields.Float()
     sort_by = fields.String(validate=validate.OneOf(['name', 'unit', 'quantity', 'price', 'c_gst', 's_gst', 'i_gst']),
-                            missing='name')
+                            load_default='name')

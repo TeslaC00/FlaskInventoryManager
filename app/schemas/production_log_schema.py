@@ -21,4 +21,4 @@ class ProductionLogQuerySchema(QuerySchema):
     min_quantity = fields.Integer()
     max_quantity = fields.Integer()
     sort_by = fields.Str(validate=validate.OneOf(['production_date', 'product_part_no', 'quantity_produced']),
-                         missing='production_date')
+                         load_default='production_date')

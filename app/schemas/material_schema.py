@@ -20,4 +20,4 @@ class MaterialQuerySchema(QuerySchema):
     unit = fields.String(validate=validate.OneOf([unit.value for unit in UnitType]))
     min_quantity = fields.Integer()
     max_quantity = fields.Integer()
-    sort_by = fields.String(validate=validate.OneOf(['name', 'quantity', 'unit']), missing='name')
+    sort_by = fields.String(validate=validate.OneOf(['name', 'quantity', 'unit']), load_default='name')

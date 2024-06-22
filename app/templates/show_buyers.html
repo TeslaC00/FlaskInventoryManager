@@ -3,33 +3,161 @@
 {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
     <title>Buyer Table</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        th.sortable:hover {
+            cursor: pointer;
+            background-color: #f1f1f1;
+        }
+
+        .filter-input {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1 class="mt-4 mb-4">Buyer Table</h1>
+        <label for="globalSearch"></label>
+        <input type="text" id="globalSearch" class="form-control mb-3" placeholder="Global Search">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th class="sortable" data-sort="name">Name</th>
+                <th class="sortable" data-sort="GST_No">GST No</th>
+                <th class="sortable" data-sort="state_code">State Code</th>
+                <th class="sortable" data-sort="state_name">State Name</th>
+                <th class="sortable" data-sort="address">Address</th>
+            </tr>
+            <tr>
+                <th><input type="text" id="filterName" class="filter-input" placeholder="Search Name"></th>
+                <th><input type="text" id="filterGSTNo" class="filter-input" placeholder="Search GST No"></th>
+                <th><input type="number" id="filterStateCode" class="filter-input" placeholder="Search State Code"></th>
+                <th><input type="text" id="filterStateName" class="filter-input" placeholder="Search State Name"></th>
+                <th>
+                    <input type="number" id="filterQuantityMin" class="filter-input" placeholder="Min">
+                    <input type="number" id="filterQuantityMax" class="filter-input" placeholder="Max">
+                </th>
+                <th>
+                    <input type="number" id="filterPriceMin" class="filter-input" placeholder="Min">
+                    <input type="number" id="filterPriceMax" class="filter-input" placeholder="Max">
+                </th>
+            </tr>
+            </thead>
+            <tbody id="inventoryTableBody">
+            <!-- Data will be inserted here -->
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center" id="pagination">
+                <!-- Pagination will be inserted here -->
+            </ul>
+        </nav>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        let sortOrder = 'asc';
+        let sortBy = 'name';
+        let currentPage = 1;
+        let perPage = 10;
+
+        function fetchData(page = 1) {
+            const search = $('#globalSearch').val() || '';
+            const name = $('#filterName').val() || '';
+            const GST_No = $('#filterGSTNo').val() || '';
+            const state_code = $('#filterStateCode').val() || '';
+            const state_name = $('#filterStateName').val() || '';
+
+            const data = {
+                sort_by: sortBy,
+                sort_order: sortOrder,
+                page: page,
+                per_page: perPage,
+            };
+
+            if (search) data.search = search;
+            if (name) data.name = name;
+            if (GST_No) data.GST_No = GST_No;
+            if (state_code) data.state_code = state_code;
+            if (state_name) data.state_name = state_name;
+
+            $.ajax({
+                url: '/api/v1/buyer',
+                method: 'GET',
+                data: data,
+                success: function (data) {
+                    const tbody = $('#inventoryTableBody');
+                    tbody.empty();
+                    data.forEach(item => {
+                        const row = `<tr>
+                            <td>${item.name}</td>
+                            <td>${item.GST_No}</td>
+                            <td>${item.state_code}</td>
+                            <td>${item.state_name}</td>
+                            <td>${item.address}</td>
+                        </tr>`;
+                        tbody.append(row);
+                    });
+                    {#PAGINATION IS NOT WORKING#}
+
+                    // Check if X-Pagination header exists
+                    const paginationHeader = xhr.getResponseHeader('X-Pagination');
+                    if (paginationHeader) {
+                        const pagination = JSON.parse(paginationHeader);
+                        const totalPages = pagination.total_pages;
+
+                        // Update pagination
+                        const paginationContainer = $('#pagination');
+                        paginationContainer.empty();
+                        for (let i = 1; i <= totalPages; i++) {
+                            paginationContainer.append(`<li class="page-item ${i === page ? 'active' : ''}">
+                                <a class="page-link" href="#">${i}</a>
+                            </li>`);
+                        }
+
+                        // Add click event for pagination
+                        $('.page-link').on('click', function (e) {
+                            e.preventDefault();
+                            currentPage = parseInt($(this).text());
+                            fetchData(currentPage);
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('AJAX Error:', status, error);
+                    console.error('Response:', xhr.responseText);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            fetchData();
+
+            $('#globalSearch').on('keyup', function () {
+                fetchData(1);
+            });
+
+            $('.filter-input').on('keyup change', function () {
+                fetchData(1);
+            });
+
+            $('.sortable').on('click', function () {
+                const newSortBy = $(this).data('sort');
+                if (sortBy === newSortBy) {
+                    sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+                } else {
+                    sortBy = newSortBy;
+                    sortOrder = 'asc';
+                }
+                fetchData(1);
+            });
+        });
+    </script>
 {% endblock %}
 
-{% block content %}
-<div class="container">
-    <h1>Buyer Table</h1>
-    <a href="{{ url_for('buyer.add_buyer') }}" class="add-new-btn">Add New Buyer</a>
-    <table>
-        <thead>
-            <tr>
-                <th>Buyer Name</th>
-                <th>GST No</th>
-                <th>State Code</th>
-                <th>State Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for buyer in buyers %}
-            <tr>
-                <td>{{ buyer.name }}</td>
-                <td>{{ buyer.GST_No }}</td>
-                <td>{{ buyer.state_code }}</td>
-                <td>{{ buyer.state_name }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-{% endblock %}

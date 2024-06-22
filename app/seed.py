@@ -1,4 +1,5 @@
 # seed.py
+from datetime import datetime
 from json import load
 
 from dotenv import load_dotenv
@@ -15,6 +16,11 @@ def read_json(filename):
     with open('data/' + filename, 'r') as file:
         data = load(file)
     return data
+
+
+def convert_date(date_string):
+    date_format = '%y/%m/%d'  # Adjust format as needed
+    return datetime.strptime(date_string, date_format).date()
 
 
 def seed():
@@ -47,6 +53,8 @@ def seed():
     log.info(f'Added Product records')
 
     for item in read_json('bills.json'):
+        # to remove in production
+        item['date'] = convert_date(item['date'])
         record = Bill(**item)
         db.session.add(record)
 
@@ -59,6 +67,8 @@ def seed():
     log.info(f'Added BillItem records')
 
     for item in read_json('challans.json'):
+        # to remove in production
+        item['date'] = convert_date(item['date'])
         record = Challan(**item)
         db.session.add(record)
 
@@ -71,12 +81,16 @@ def seed():
     log.info(f'Added ChallanItem records')
 
     for item in read_json('product_scraps.json'):
+        # to remove in production
+        item['date'] = convert_date(item['date'])
         record = ProductScrap(**item)
         db.session.add(record)
 
     log.info(f'Added ProductScrap records')
 
     for item in read_json('material_scraps.json'):
+        # to remove in production
+        item['date'] = convert_date(item['date'])
         record = MaterialScrap(**item)
         db.session.add(record)
 

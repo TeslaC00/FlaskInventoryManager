@@ -25,4 +25,4 @@ class ChallanQuerySchema(QuerySchema):
     min_total_price = fields.Float()
     max_total_price = fields.Float()
     sort_by = fields.String(validate=validate.OneOf(['challan_no', 'supplier_id', 'total_price', 'date']),
-                            missing='date')
+                            load_default='date')

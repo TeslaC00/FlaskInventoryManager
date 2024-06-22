@@ -21,4 +21,4 @@ class ChallanQuerySchema(QuerySchema):
     material_part_no = fields.Integer()
     sort_by = fields.String(
         validate=validate.OneOf(['quantity', 'price', 'challan_id', 'material_part_no']),
-        missing='id')
+        load_default='id')
