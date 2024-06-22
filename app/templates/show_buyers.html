@@ -961,7 +961,7 @@
         }
 
         function editBuyer(id) {
-            fetch(`/api/v1/buyers/${id}`)
+            fetch(`/api/v1/buyer/${id}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -995,7 +995,7 @@
         async function deleteBuyer(id) {
             if (confirm(`Are you sure you want to delete this buyer?`)) {
                 try {
-                    await fetch(`/api/v1/buyers/${id}`, {
+                    await fetch(`/api/v1/buyer/${id}`, {
                         method: 'DELETE',
                     });
                     fetchData(currentPage, currentSortBy, currentSortOrder);
@@ -1049,7 +1049,7 @@
             try {
                 if (editBuyerId) {
                     // If editBuyerId is set, send a PUT request to update the buyer
-                    await fetch(`/api/v1/buyers/${editBuyerId}`, {
+                    await fetch(`/api/v1/buyer/${editBuyerId}`, {
                         method: 'PUT',
                         body: JSON.stringify(data),
                         headers: {
@@ -1059,7 +1059,7 @@
                     editBuyerId = null;
                 } else {
                     // Otherwise, it's a POST request to add new buyer
-                    await fetch('/api/v1/buyers', {
+                    await fetch('/api/v1/buyer', {
                         method: 'POST',
                         body: JSON.stringify(data),
                         headers: {
@@ -1083,7 +1083,7 @@
             if (confirm(`Are you sure you want to delete selected buyers?`)) {
                 try {
                     await Promise.all(selectedItems.map(id =>
-                        fetch(`/api/v1/buyers/${id}`, {
+                        fetch(`/api/v1/buyer/${id}`, {
                             method: 'DELETE'
                         })
                     ));
