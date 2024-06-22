@@ -132,6 +132,7 @@
         }
 
         h2 {
+            margin-top: 30px;
             border-bottom: 2px solid gray;
         }
 
@@ -238,8 +239,8 @@
                         <option value="piece">Piece</option>
                     </select>
                 </div>
-                <a>Quantity: <input type="number" id="minQuantity" placeholder="Min" oninput="fetchData(1)">
-                    <input type="number" id="maxQuantity" placeholder="Max" oninput="fetchData(1)"></a>
+                <a>Quantity: <input type="number" min="0" id="minQuantity" placeholder="Min" oninput="fetchData(1)">
+                    <input type="number" min="0" id="maxQuantity" placeholder="Max" oninput="fetchData(1)"></a>
                 <button onclick="clearFilters()">Clear Filters</button>
             </div>
             <div class="button-container">
