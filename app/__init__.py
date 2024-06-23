@@ -47,8 +47,8 @@ def create_app():
     initialize_extensions(app)
     logger.info('All extensions initialized')
 
-    init_security(app)
     create_tables(app)
+    init_security(app)
 
     # Registering blueprints
     from app.routes import register_routes
