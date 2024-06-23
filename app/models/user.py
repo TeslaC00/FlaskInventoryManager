@@ -29,6 +29,8 @@ class User(db.Model, UserMixin):
     username = Column(String(255), unique=True, nullable=True)
     email = Column(String(255), unique=True)
     password = Column(String(255), nullable=False)
+    security_question = Column(String(255))
+    security_answer = Column(String(255))
     last_login_at = Column(DateTime())
     current_login_at = Column(DateTime())
     last_login_ip = Column(String(100))
