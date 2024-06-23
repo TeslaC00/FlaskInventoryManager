@@ -1,163 +1,1120 @@
-{% extends "base.html" %}
+{#{% extends "base.html" %}#}
+{#{% block head %}#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Buyer Data Table</title>#}
+{#    <style>#}
+{#        table {#}
+{#            width: 100%;#}
+{#            border-collapse: separate;#}
+{#            border-spacing: 0;#}
+{#            border-radius: 25px;#}
+{#            overflow: hidden;#}
+{#            border: 1px solid black;#}
+{#        }#}
+{##}
+{#        th, td {#}
+{#            border: 1px solid black;#}
+{#            padding: 8px;#}
+{#            text-align: left;#}
+{#        }#}
+{##}
+{#        th:first-child {#}
+{#            border-top-left-radius: 25px;#}
+{#        }#}
+{##}
+{#        th:last-child {#}
+{#            border-top-right-radius: 25px;#}
+{#        }#}
+{##}
+{#        tr:last-child td:first-child {#}
+{#            border-bottom-left-radius: 25px;#}
+{#        }#}
+{##}
+{#        tr:last-child td:last-child {#}
+{#            border-bottom-right-radius: 25px;#}
+{#        }#}
+{##}
+{#        th {#}
+{#            background-color: #f2f2f2;#}
+{#            cursor: pointer;#}
+{#            position: relative;#}
+{#        }#}
+{##}
+{#        th .sort-icon {#}
+{#            position: absolute;#}
+{#            top: 50%;#}
+{#            right: 10px;#}
+{#            transform: translateY(-50%);#}
+{#        }#}
+{##}
+{#        .checkbox-column {#}
+{#            width: 5%;#}
+{#            text-align: center;#}
+{#            cursor: default;#}
+{#        }#}
+{##}
+{#        .part-no-column {#}
+{#            width: 10%;#}
+{#            cursor: default;#}
+{#        }#}
+{##}
+{#        .name-column {#}
+{#            width: 25%;#}
+{#        }#}
+{##}
+{#        .quantity-column {#}
+{#            width: 15%;#}
+{#        }#}
+{##}
+{#        .unit-column {#}
+{#            width: 40%;#}
+{#        }#}
+{##}
+{#        .actions-column {#}
+{#            width: 5%;#}
+{#            text-align: center;#}
+{#            cursor: default;#}
+{#        }#}
+{##}
+{#        .pagination {#}
+{#            display: flex;#}
+{#            align-items: center;#}
+{#            justify-content: center;#}
+{#        }#}
+{##}
+{#        .pagination button {#}
+{#            padding-top: 6px;#}
+{#            margin: 0 5px;#}
+{#            cursor: pointer;#}
+{#            background: none;#}
+{#            border: none;#}
+{#            color: #0d6efd;#}
+{#        }#}
+{##}
+{#        .pagination button.disabled {#}
+{#            color: #c0c0c0;#}
+{#            cursor: not-allowed;#}
+{#        }#}
+{##}
+{#        .pagination .page-number {#}
+{#            margin: 0;#}
+{#            font-size: 16px;#}
+{#        }#}
+{##}
+{#        .pagination i {#}
+{#            font-size: 24px;#}
+{#            cursor: pointer;#}
+{#        }#}
+{##}
+{#        .actions-column i {#}
+{#            font-size: 100%;#}
+{#            cursor: pointer;#}
+{#        }#}
+{##}
+{#        .lni-pencil {#}
+{#            color: blue;#}
+{#        }#}
+{##}
+{#        .lni-trash-can {#}
+{#            color: red;#}
+{#        }#}
+{##}
+{#        .actions-column i:hover {#}
+{#            color: gray;#}
+{#        }#}
+{#        .controls-container {#}
+{#            display: flex;#}
+{#            justify-content: space-between;#}
+{#            align-items: center;#}
+{#            margin-bottom: 0px;#}
+{#        }#}
+{#        #searchBar {#}
+{#            padding: 5px;#}
+{#            width: 250px;#}
+{#        }#}
+{##}
+{#        .button-container button {#}
+{#            margin-left: 10px;#}
+{#            padding: 5px 10px;#}
+{#            cursor: pointer;#}
+{#            background-color: #0d6efd;#}
+{#            color: white;#}
+{#            border: none;#}
+{#            border-radius: 15px;#}
+{#        }#}
+{##}
+{#        .button-container #addBtn:hover {#}
+{#            transition: background-color 500ms;#}
+{#            background-color: #85ec85;#}
+{#        }#}
+{##}
+{#        .button-container #delBtn:hover {#}
+{#            transition: background-color 500ms;#}
+{#            background-color: red;#}
+{#        }#}
+{##}
+{#        .actions-column i {#}
+{#            cursor: pointer;#}
+{#        }#}
+{##}
+{#        .dropdown {#}
+{#            position: relative;#}
+{#            display: inline-block;#}
+{#            padding-left: 2px;#}
+{#        }#}
+{#        .dropdown-content {#}
+{#            display: none;#}
+{#            position: absolute;#}
+{#            background-color: white;#}
+{#            min-width: 160px;#}
+{#            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);#}
+{#            z-index: 2;#}
+{#        }#}
+{#        .dropdown-content a {#}
+{#            color: black;#}
+{#            padding: 12px 16px;#}
+{#            text-decoration: none;#}
+{#            display: block;#}
+{#        }#}
+{#        .dropdown-content a:hover {background-color: #ddd;}#}
+{#        .dropdown:hover .dropdown-content {display: block;}#}
+{#        .dropdown:hover .dropbtn {background-color: #69e66d;}#}
+{##}
+{#    </style>#}
+{#{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#    <h2 style="margin: 0px;font-size: 50px">Buyer Table</h2>#}
+{#    <div class="controls-container">#}
+{#        <div style="display: flex; align-items: center;">#}
+{#            <input type="text" id="searchBar" placeholder="Search...">#}
+{#            <div class="dropdown">#}
+{#                <button class="dropbtn" >Filter</button>#}
+{#                <div class="dropdown-content">#}
+{#                    <a href="#" onclick="setFilter('name')">Name</a>#}
+{#                    <a href="#" onclick="setFilter('GST_No')">GST No</a>#}
+{#                    <a href="#" onclick="setFilter('state_code')">State Code</a>#}
+{#                    <a href="#" onclick="setFilter('state_name')">State Name</a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="button-container">#}
+{#            <button id="addBuyerBtn" class="btn btn-primary" style="margin: 10px" data-bs-toggle="modal" data-bs-target="#addBuyerModal">Add New Buyer</button>#}
+{#            <button id="deleteSelectedBtn" class="btn btn-danger" style="margin: 10px 0;">Delete Selected</button>#}
+{#        </div>#}
+{#    </div>#}
+{#    <table id="dataTable" class="table table-hover">#}
+{#        <thead class="table-light" style="border-color: black; border-width: 2px; position: sticky; top: 0; z-index: 1">#}
+{#        <tr>#}
+{#            <th class="checkbox-column"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()"></th>#}
+{#            <th class="gst-column">GST No.</th>#}
+{#            <th class="name-column" data-sort-by="name">Name <span class="sort-icon"></span> </th>#}
+{#            <th class="state_code-column" data-sort-by="state_code">State Code <span class="sort-icon"></span></th>#}
+{#            <th class="state_name-column" data-sort-by="state_name">State Name <span class="sort-icon"></span></th>#}
+{#            <th class="actions-column">Actions</th>#}
+{#        </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        <!-- Rows will be inserted here dynamically -->#}
+{#        </tbody>#}
+{#    </table>#}
+{##}
+{#    <div class="modal fade" id="addBuyerModal" tabindex="-1" aria-labelledby="addBuyerModalLabel"#}
+{#             aria-hidden="true">#}
+{#            <div class="modal-dialog modal-dialog-centered">#}
+{#                <div class="modal-content">#}
+{#                    <div class="modal-header">#}
+{#                        <h5 class="modal-title" id="addBuyerModalLabel">Add New Buyer</h5>#}
+{#                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+{#                    </div>#}
+{#                    <div class="modal-body">#}
+{#                        <form id="addBuyerForm">#}
+{#                            <div class="mb-3">#}
+{#                                <label for="buyerName" class="form-label">Buyer Name</label>#}
+{#                                <input type="text" class="form-control" id="buyerName" name="name" required>#}
+{#                            </div>#}
+{#                            <div class="mb-3">#}
+{#                                <label for="buyerUnit" class="form-label">GST No.</label>#}
+{#                                <input type="number" class="form-control" id="buyerUnit" name="gst_no." required>#}
+{#                            </div>#}
+{#                            <div class="mb-3">#}
+{#                                <label for="buyerStateCode" class="form-label">State Code</label>#}
+{#                                <input type="number" class="form-control" id="buyerQuantity" name="state_code" required>#}
+{#                            </div>#}
+{#                            <div class="mb-3">#}
+{#                                <label for="buyerStateName" class="form-label">State Name</label>#}
+{#                                <input type="text" class="form-control" id="buyerQuantity" name="state_name" required>#}
+{#                            </div>#}
+{#                            <button type="submit" class="btn btn-primary">Add Material</button>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <!-- Edit Material Modal -->#}
+{#        <div class="modal fade" id="editBuyerModal" tabindex="-1" aria-labelledby="editBuyerModalLabel"#}
+{#             aria-hidden="true">#}
+{#            <div class="modal-dialog modal-dialog-centered">#}
+{#                <div class="modal-content">#}
+{#                    <div class="modal-header">#}
+{#                        <h5 class="modal-title" id="editBuyerModalLabel">Edit Buyer</h5>#}
+{#                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+{#                    </div>#}
+{#                    <div class="modal-body">#}
+{#                        <form id="editBuyerForm">#}
+{#                            <input type="hidden" id="editBuyerId" name="part_no">#}
+{#                            <div class="mb-3">#}
+{#                                <label for="editBuyerName" class="form-label">Buyer Name</label>#}
+{#                                <input type="text" class="form-control" id="editBuyerName" name="name" required>#}
+{#                            </div>#}
+{#                            <div class="mb-3">#}
+{#                                <label for="editBuyerUnit" class="form-label">GST No.</label>#}
+{#                                <input type="number" class="form-control" id="editBuyerUnit" name="unit" required>#}
+{#                            </div>#}
+{#                            <div class="mb-3">#}
+{#                                <label for="editBuyerStateCode" class="form-label">State Code</label>#}
+{#                                <input type="number" class="form-control" id="editBuyerStateCode" name="quantity"#}
+{#                                       required>#}
+{#                            </div>#}
+{#                            <div class="mb-3">#}
+{#                                <label for="editBuyerStateName" class="form-label">State Name</label>#}
+{#                                <input type="text" class="form-control" id="editBuyerStateName" name="quantity"#}
+{#                                       required>#}
+{#                            </div>#}
+{#                            <button type="submit" class="btn btn-primary">Save Changes</button>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#    <div class="pagination" id="pagination">#}
+{#        <!-- Pagination buttons will be inserted here dynamically -->#}
+{#    </div>#}
+{##}
+{#    <script>#}
+{#        let currentPage = 1;#}
+{#        let currentSortBy = 'name';#}
+{#        let currentSortOrder = 'asc';#}
+{#        let sortOrders = {'name': 'asc', 'state_code': 'asc', 'state_name': 'asc'};#}
+{##}
+{#        async function fetchData(page, sortBy = 'name', sortOrder = 'asc') {#}
+{#            try {#}
+{#                const response = await fetch(`/api/v1/buyer?sort_order=${sortOrder}&sort_by=${sortBy}&page=${page}&page_size=10`);#}
+{#                const data = await response.json();#}
+{#                const pagination = JSON.parse(response.headers.get('x-pagination'));#}
+{##}
+{#                populateTable(data);#}
+{#                setupPagination(pagination);#}
+{#                updateSortIcons();#}
+{#            } catch (error) {#}
+{#                console.error('Error fetching data:', error);#}
+{#            }#}
+{#        }#}
+{##}
+{#        function populateTable(data) {#}
+{#            const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];#}
+{##}
+{#            // Clear existing rows#}
+{#            tableBody.innerHTML = '';#}
+{##}
+{#            data.forEach(item => {#}
+{#                const row = tableBody.insertRow();#}
+{#                const cellCheckbox = row.insertCell(0);#}
+{#                const cellGSTNo = row.insertCell(1);#}
+{#                const cellName = row.insertCell(2);#}
+{#                const cellStateCode = row.insertCell(3);#}
+{#                const cellStateName = row.insertCell(4);#}
+{#                const cellActions = row.insertCell(5);#}
+{##}
+{#                cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" style="margin-left: 35%">`;#}
+{#                cellGSTNo.textContent = item.GST_No;#}
+{#                cellName.textContent = item.name;#}
+{#                cellStateCode.textContent = item.state_code;#}
+{#                cellStateName.textContent = item.state_name;#}
+{#                cellActions.innerHTML = `#}
+{#                    <i class="lni lni-pencil" onclick="editRow(${item.part_no})" style="padding-right: 2px"></i>#}
+{#                    <i class="lni lni-trash-can" onclick="deleteRow(${item.part_no})" style="padding-left: 2px"></i>#}
+{#                `;#}
+{#                cellActions.className = "actions-column";#}
+{#            });#}
+{#        }#}
+{##}
+{#        function setupPagination(pagination) {#}
+{#            const paginationDiv = document.getElementById('pagination');#}
+{##}
+{#            // Clear existing buttons#}
+{#            paginationDiv.innerHTML = '';#}
+{##}
+{#            const prevButton = document.createElement('button');#}
+{#            prevButton.innerHTML = '<i class="peepo lni lni-chevron-left"></i>';#}
+{#            if (pagination.page > 1) {#}
+{#                prevButton.onclick = () => fetchData(pagination.page - 1, currentSortBy, currentSortOrder);#}
+{#                prevButton.classList.remove('disabled');#}
+{#            } else {#}
+{#                prevButton.classList.add('disabled');#}
+{#            }#}
+{#            paginationDiv.appendChild(prevButton);#}
+{##}
+{#            const pageNumber = document.createElement('span');#}
+{#            pageNumber.className = 'page-number';#}
+{#            pageNumber.textContent = `Page ${pagination.page} of ${pagination.total_pages}`;#}
+{#            paginationDiv.appendChild(pageNumber);#}
+{##}
+{#            const nextButton = document.createElement('button');#}
+{#            nextButton.innerHTML = '<i class="peepo lni lni-chevron-right"></i>';#}
+{#            if (pagination.page < pagination.total_pages) {#}
+{#                nextButton.onclick = () => fetchData(pagination.page + 1, currentSortBy, currentSortOrder);#}
+{#                nextButton.classList.remove('disabled');#}
+{#            } else {#}
+{#                nextButton.classList.add('disabled');#}
+{#            }#}
+{#            paginationDiv.appendChild(nextButton);#}
+{#        }#}
+{##}
+{#        function handleCheckboxClick(checkbox) {#}
+{#            const itemId = checkbox.getAttribute('data-id');#}
+{##}
+{#            if (checkbox.checked && !selectedItems.includes(itemId)) {#}
+{#                selectedItems.push(itemId); // Add item ID to selectedItems if checkbox is checked#}
+{#            } else if (!checkbox.checked) {#}
+{#                selectedItems = selectedItems.filter(item => item !== itemId); // Remove item ID if checkbox is unchecked#}
+{#            }#}
+{#        }#}
+{##}
+{#        function toggleSelectAll() {#}
+{#            const selectAllCheckbox = document.getElementById('selectAll');#}
+{#            const rowCheckboxes = document.querySelectorAll('.rowCheckbox');#}
+{#            rowCheckboxes.forEach(checkbox => {#}
+{#                checkbox.checked = selectAllCheckbox.checked;#}
+{#                handleCheckboxClick(checkbox);#}
+{#            });#}
+{#        }#}
+{##}
+{##}
+{##}
+{##}
+{#        // Fetch initial data;#}
+{#         fetchData(currentPage)#}
+{#        // script.js#}
+{#        let currentFilter = '';#}
+{##}
+{#        function setFilter(filter) {#}
+{#            currentFilter = filter;#}
+{#            document.querySelector('.dropbtn').textContent = `Filter: ${filter}`;#}
+{#            fetchAndDisplayData();#}
+{#        }#}
+{##}
+{#        // Debounce function to limit the rate of function calls#}
+{#        function debounce(func, delay) {#}
+{#            let debounceTimer;#}
+{#            return function() {#}
+{#                const context = this;#}
+{#                const args = arguments;#}
+{#                clearTimeout(debounceTimer);#}
+{#                debounceTimer = setTimeout(() => func.apply(context, args), delay);#}
+{#            };#}
+{#        }#}
+{##}
+{#        // Function to fetch data from the API#}
+{#        async function fetchAndDisplayData() {#}
+{#            const searchQuery = document.getElementById('searchBar').value;#}
+{#            const apiUrl = `/api/v1/buyer?search=${searchQuery}`;#}
+{##}
+{#            try {#}
+{#                const response = await fetch(apiUrl);#}
+{#                if (!response.ok) {#}
+{#                    throw new Error('Network response was not ok');#}
+{#                }#}
+{#                const data = await response.json();#}
+{#                displayData(data);#}
+{#            } catch (error) {#}
+{#                console.error('There has been a problem with your fetch operation:', error);#}
+{#            }#}
+{#        }#}
+{##}
+{#        // Function to display data in the table#}
+{#        function displayData(data) {#}
+{#            const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];#}
+{#            tableBody.innerHTML = ''; // Clear previous data#}
+{##}
+{#            data.forEach(item => {#}
+{#                const row = tableBody.insertRow();#}
+{##}
+{#                const cellCheckbox = row.insertCell(0);#}
+{#                const cellGSTNo = row.insertCell(1);#}
+{#                const cellName = row.insertCell(2);#}
+{#                const cellStateCode = row.insertCell(3);#}
+{#                const cellStateName = row.insertCell(4);#}
+{#                const cellActions = row.insertCell(5);#}
+{##}
+{#                cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" style="margin-left: 35%">`;#}
+{#                cellGSTNo.textContent = item.GST_No;#}
+{#                cellName.textContent = item.name;#}
+{#                cellStateCode.textContent = item.state_code;#}
+{#                cellStateName.textContent = item.state_name;#}
+{#                cellActions.innerHTML = `#}
+{#                    <i class="lni lni-pencil" onclick="editRow(${item.part_no})" style="padding-right: 2px"></i>#}
+{#                    <i class="lni lni-trash-can" onclick="deleteRow(${item.part_no})" style="padding-left: 2px"></i>#}
+{#                `;#}
+{#                cellActions.className = "actions-column";#}
+{#            });#}
+{#        }#}
+{##}
+{#        // Add an event listener to the search bar to fetch data as the user types#}
+{#        document.getElementById('searchBar').addEventListener('input', debounce(fetchAndDisplayData, 300));#}
+{##}
+{#        // Dummy functions for editRow and deleteRow to avoid reference errors#}
+{#        function editRow(partNo) {#}
+{#            console.log(`Edit row with part_no: ${partNo}`);#}
+{#        }#}
+{##}
+{#        function deleteRow(partNo) {#}
+{#            console.log(`Delete row with part_no: ${partNo}`);#}
+{#        }#}
+{##}
+{#    </script>#}
+{#{% endblock %}#}
 
+
+
+
+
+{% extends "base.html" %}
 {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
-    <title>Buyer Table</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Buyer Data Table</title>
     <style>
-        th.sortable:hover {
-            cursor: pointer;
-            background-color: #f1f1f1;
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 25px;
+            overflow: hidden;
+            border-bottom: 5px solid grey;
         }
 
-        .filter-input {
-            width: 100%;
-            padding: 5px;
-            box-sizing: border-box;
+        th, td {
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            padding: 8px;
+            text-align: left;
         }
+
+        th:first-child {
+            border-top-left-radius: 25px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 25px;
+        }
+
+        tr:last-child td:first-child {
+            border-bottom-left-radius: 25px;
+        }
+
+        tr:last-child td:last-child {
+            border-bottom-right-radius: 25px;
+        }
+
+        th {
+            background-color: #d0f0ff;
+            cursor: pointer;
+            position: relative;
+        }
+
+        th .sort-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            padding-top: 5px;
+        }
+
+        .sort-icon.active {
+            border: 1px solid blue; /* Add blue border */
+            border-radius: 10px;
+        }
+
+        .checkbox-column {
+            width: 5%;
+            text-align: center;
+            cursor: default;
+        }
+
+        .gst-no-column {
+            width: 20%;
+            cursor: default;
+        }
+
+        .name-column {
+            width: 20%;
+        }
+
+        .state-code-column {
+            width: 10%;
+        }
+
+        .state-name-column {
+            width: 20%;
+        }
+
+        .address-column {
+            width: 25%;
+        }
+
+        .actions-column {
+            width: 5%;
+            text-align: center;
+            cursor: default;
+        }
+
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagination button {
+            padding-top: 6px;
+            margin: 0 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #0d6efd;
+        }
+
+        .pagination button.disabled {
+            color: #c0c0c0;
+            cursor: not-allowed;
+        }
+
+        .pagination .page-number {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .pagination i {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .actions-column i {
+            font-size: 100%;
+            cursor: pointer;
+        }
+
+        .lni-pencil {
+            color: blue;
+        }
+
+        .lni-trash-can {
+            color: red;
+        }
+
+        .actions-column i:hover {
+            color: gray;
+        }
+
+        h2 {
+            margin-top: 30px;
+            border-bottom: 2px solid gray;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-container input,
+        .filter-container select,
+        .filter-container button {
+            outline: none;
+            border: 1px solid gray;
+            border-radius: 20px;
+            padding: 5px;
+        }
+
+        .filter-container button {
+            color: white;
+            background-color: #17365a;
+        }
+
+        #stateCodeFilter {
+            width: 60px;
+        }
+
+        .searchbar {
+            border: 1px solid gray;
+            border-radius: 25px;
+        }
+
+        .searchbar input {
+            outline: none;
+            border: 0;
+            border-radius: 25px;
+        }
+
+        .searchbar select {
+            width: 122px;
+            outline: none;
+            border: 0;
+            border-left: 1px solid gray;
+            margin-right: 5px;
+        }
+
+        .button-container button {
+            padding: 5px 10px;
+            margin-left: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .button-container button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #17365a;
+            color: white;
+            border: none;
+            border-radius: 15px;
+        }
+
+        .button-container #addBtn:hover {
+            transition: background-color 300ms;
+            background-color: #63be63;
+        }
+
+        .button-container #delBtn:hover {
+            transition: background-color 300ms;
+            background-color: red;
+        }
+
     </style>
 {% endblock %}
+
 {% block content %}
-    <div class="container">
-        <h1 class="mt-4 mb-4">Buyer Table</h1>
-        <label for="globalSearch"></label>
-        <input type="text" id="globalSearch" class="form-control mb-3" placeholder="Global Search">
-        <table class="table table-bordered">
-            <thead>
+    <div class="container" style="margin-left: 30px">
+        <h2>Buyer Data</h2>
+
+        <!-- Wrapper for search bar and buttons -->
+        <div class="top-bar">
+            <div class="filter-container">
+                <div class="searchbar">
+                    <input type="text" id="searchInput" placeholder="Search by name... " oninput="fetchData(1)">
+                </div>
+                <input type="number" min="0" id="stateCodeFilter" placeholder="State Code" oninput="fetchData(1)">
+                <button onclick="clearFilters()">Clear Filters</button>
+            </div>
+            <div class="button-container">
+                <button id="addBtn" onclick="openModal()">Add New Buyer</button>
+                <button id="delBtn" onclick="deleteSelected()">Delete Selected</button>
+            </div>
+        </div>
+
+        <table id="dataTable" class="table table-hover">
+            <thead class="table-light" style="border-color: black; border-width: 2px">
             <tr>
-                <th class="sortable" data-sort="name">Name</th>
-                <th class="sortable" data-sort="GST_No">GST No</th>
-                <th class="sortable" data-sort="state_code">State Code</th>
-                <th class="sortable" data-sort="state_name">State Name</th>
-                <th class="sortable" data-sort="address">Address</th>
-            </tr>
-            <tr>
-                <th><input type="text" id="filterName" class="filter-input" placeholder="Search Name"></th>
-                <th><input type="text" id="filterGSTNo" class="filter-input" placeholder="Search GST No"></th>
-                <th><input type="number" id="filterStateCode" class="filter-input" placeholder="Search State Code"></th>
-                <th><input type="text" id="filterStateName" class="filter-input" placeholder="Search State Name"></th>
-                <th>
-                    <input type="number" id="filterQuantityMin" class="filter-input" placeholder="Min">
-                    <input type="number" id="filterQuantityMax" class="filter-input" placeholder="Max">
+                <th class="checkbox-column"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()"></th>
+                <th class="gst-no-column">GST No.</th>
+                <th class="name-column" data-sort-by="name" onclick="sortTable(this)">Name <span
+                        class="sort-icon"></span>
                 </th>
-                <th>
-                    <input type="number" id="filterPriceMin" class="filter-input" placeholder="Min">
-                    <input type="number" id="filterPriceMax" class="filter-input" placeholder="Max">
+                <th class="state-code-column" data-sort-by="state_code" onclick="sortTable(this)">State Code <span
+                        class="sort-icon"></span></th>
+                <th class="state-name-column" data-sort-by="state_name" onclick="sortTable(this)">State Name <span
+                        class="sort-icon"></span>
                 </th>
+                <th class="address-column" data-sort-by="address" onclick="sortTable(this)">Address <span
+                        class="sort-icon"></span>
+                </th>
+                <th class="actions-column">Actions</th>
             </tr>
             </thead>
-            <tbody id="inventoryTableBody">
-            <!-- Data will be inserted here -->
+            <tbody>
+            <!-- Rows will be inserted here dynamically -->
             </tbody>
         </table>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center" id="pagination">
-                <!-- Pagination will be inserted here -->
-            </ul>
-        </nav>
+
+        <div class="pagination" id="pagination">
+            <!-- Pagination buttons will be inserted here dynamically -->
+        </div>
+
+        <!-- Add Buyer Modal -->
+        <div class="modal fade" id="addBuyerModal" tabindex="-1" aria-labelledby="addBuyerModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addBuyerModalLabel">Add New Buyer</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addBuyerForm">
+                            <div class="mb-3">
+                                <label for="buyerGSTNo" class="form-label">GST No.</label>
+                                <input type="text" class="form-control" id="buyerGSTNo" name="gst_no" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="buyerName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="buyerName" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="buyerStateCode" class="form-label">State Code</label>
+                                <input type="number" class="form-control" id="buyerStateCode" name="state_code" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="buyerStateName" class="form-label">State Name</label>
+                                <input type="text" class="form-control" id="buyerStateName" name="state_name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="buyerAddress" class="form-label">Address</label>
+                                <textarea class="form-control" id="buyerAddress" name="address" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="submitBtn">Add Buyer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-{% endblock %}
-{% block scripts %}
+
     <script>
-        let sortOrder = 'asc';
-        let sortBy = 'name';
         let currentPage = 1;
-        let perPage = 10;
+        let currentSortBy = 'name';
+        let currentSortOrder = 'asc';
+        let sortOrders = { 'gst_no': 'asc', 'name': 'asc', 'state_code': 'asc', 'state_name': 'asc', 'address': 'asc' };
+        let editBuyerId = null;
+        let selectedItems = [];
 
-        function fetchData(page = 1) {
-            const search = $('#globalSearch').val() || '';
-            const name = $('#filterName').val() || '';
-            const GST_No = $('#filterGSTNo').val() || '';
-            const state_code = $('#filterStateCode').val() || '';
-            const state_name = $('#filterStateName').val() || '';
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchData(currentPage);
+        });
 
-            const data = {
-                sort_by: sortBy,
-                sort_order: sortOrder,
-                page: page,
-                per_page: perPage,
-            };
+        async function fetchData(page, sortBy = 'name', sortOrder = 'asc') {
+            try {
+                const searchQuery = document.getElementById('searchInput').value;
+                const stateCodeFilter = document.getElementById('stateCodeFilter').value;
 
-            if (search) data.search = search;
-            if (name) data.name = name;
-            if (GST_No) data.GST_No = GST_No;
-            if (state_code) data.state_code = state_code;
-            if (state_name) data.state_name = state_name;
+                const queryParams = new URLSearchParams({
+                    sort_order: sortOrder,
+                    sort_by: sortBy,
+                    page: page,
+                    page_size: 11,
+                });
 
-            $.ajax({
-                url: '/api/v1/buyer',
-                method: 'GET',
-                data: data,
-                success: function (data) {
-                    const tbody = $('#inventoryTableBody');
-                    tbody.empty();
-                    data.forEach(item => {
-                        const row = `<tr>
-                            <td>${item.name}</td>
-                            <td>${item.GST_No}</td>
-                            <td>${item.state_code}</td>
-                            <td>${item.state_name}</td>
-                            <td>${item.address}</td>
-                        </tr>`;
-                        tbody.append(row);
-                    });
-                    {#PAGINATION IS NOT WORKING#}
+                if (searchQuery) {
+                    queryParams.append('search', searchQuery);
+                }
+                if (stateCodeFilter) {
+                    queryParams.append('state_code', stateCodeFilter);
+                }
 
-                    // Check if X-Pagination header exists
-                    const paginationHeader = xhr.getResponseHeader('X-Pagination');
-                    if (paginationHeader) {
-                        const pagination = JSON.parse(paginationHeader);
-                        const totalPages = pagination.total_pages;
+                const response = await fetch(`/api/v1/buyer?${queryParams.toString()}`);
+                const data = await response.json();
+                const pagination = JSON.parse(response.headers.get('x-pagination'));
 
-                        // Update pagination
-                        const paginationContainer = $('#pagination');
-                        paginationContainer.empty();
-                        for (let i = 1; i <= totalPages; i++) {
-                            paginationContainer.append(`<li class="page-item ${i === page ? 'active' : ''}">
-                                <a class="page-link" href="#">${i}</a>
-                            </li>`);
-                        }
+                populateTable(data);
+                setupPagination(pagination);
+                updateSortIcons();
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
 
-                        // Add click event for pagination
-                        $('.page-link').on('click', function (e) {
-                            e.preventDefault();
-                            currentPage = parseInt($(this).text());
-                            fetchData(currentPage);
-                        });
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error('AJAX Error:', status, error);
-                    console.error('Response:', xhr.responseText);
+        function clearFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('stateCodeFilter').value = '';
+            fetchData(1);
+        }
+
+        function populateTable(data) {
+            const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = '';
+
+            data.forEach(buyer => {
+                const row = tableBody.insertRow();
+                const cellCheckbox = row.insertCell(0);
+                const cellGstNo = row.insertCell(1);
+                const cellName = row.insertCell(2);
+                const cellStateCode = row.insertCell(3);
+                const cellStateName = row.insertCell(4);
+                const cellAddress = row.insertCell(5);
+                const cellActions = row.insertCell(6);
+
+                cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" data-id="${buyer.id}" style="margin-left: 35%">`;
+                cellGstNo.textContent = buyer.GST_No;
+                cellName.textContent = buyer.name;
+                cellStateCode.textContent = buyer.state_code;
+                cellStateName.textContent = buyer.state_name;
+                cellAddress.textContent = buyer.address;
+                cellActions.innerHTML = `
+                    <i class="lni lni-pencil" onclick="editBuyer(${buyer.id})" style="padding-right: 2px"></i>
+                    <i class="lni lni-trash-can" onclick="deleteBuyer(${buyer.id})" style="padding-left: 2px"></i>
+                `;
+                cellActions.className = "actions-column";
+
+                if (selectedItems.includes(buyer.id)) {
+                    cellCheckbox.firstChild.checked = true;
                 }
             });
         }
 
-        $(document).ready(function () {
-            fetchData();
+        function setupPagination(pagination) {
+            const paginationDiv = document.getElementById('pagination');
+            paginationDiv.innerHTML = '';
 
-            $('#globalSearch').on('keyup', function () {
-                fetchData(1);
-            });
+            const prevButton = document.createElement('button');
+            prevButton.innerHTML = '<i class="peepo lni lni-chevron-left"></i>';
+            if (pagination.page > 1) {
+                prevButton.onclick = () => fetchData(pagination.page - 1, currentSortBy, currentSortOrder);
+                prevButton.classList.remove('disabled');
+            } else {
+                prevButton.classList.add('disabled');
+            }
+            paginationDiv.appendChild(prevButton);
 
-            $('.filter-input').on('keyup change', function () {
-                fetchData(1);
-            });
+            const pageNumber = document.createElement('span');
+            pageNumber.className = 'page-number';
+            pageNumber.textContent = `Page ${pagination.page} of ${pagination.total_pages}`;
+            paginationDiv.appendChild(pageNumber);
 
-            $('.sortable').on('click', function () {
-                const newSortBy = $(this).data('sort');
-                if (sortBy === newSortBy) {
-                    sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
-                } else {
-                    sortBy = newSortBy;
-                    sortOrder = 'asc';
-                }
-                fetchData(1);
+            const nextButton = document.createElement('button');
+            nextButton.innerHTML = '<i class="peepo lni lni-chevron-right"></i>';
+            if (pagination.page < pagination.total_pages) {
+                nextButton.onclick = () => fetchData(pagination.page + 1, currentSortBy, currentSortOrder);
+                nextButton.classList.remove('disabled');
+            } else {
+                nextButton.classList.add('disabled');
+            }
+            paginationDiv.appendChild(nextButton);
+        }
+
+        function handleCheckboxClick(checkbox) {
+            const itemId = checkbox.getAttribute('data-id');
+
+            if (checkbox.checked && !selectedItems.includes(itemId)) {
+                selectedItems.push(itemId);
+            } else if (!checkbox.checked) {
+                selectedItems = selectedItems.filter(item => item !== itemId);
+            }
+        }
+
+        function toggleSelectAll() {
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const rowCheckboxes = document.querySelectorAll('.rowCheckbox');
+
+            rowCheckboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+                handleCheckboxClick(checkbox);
             });
+        }
+
+        document.addEventListener('change', function (event) {
+            if (event.target.classList.contains('rowCheckbox')) {
+                handleCheckboxClick(event.target);
+            }
         });
+
+        function sortTable(header) {
+            const sortBy = header.getAttribute('data-sort-by');
+            if (currentSortBy === sortBy) {
+                sortOrders[sortBy] = sortOrders[sortBy] === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSortBy = sortBy;
+                sortOrders[currentSortBy] = 'asc';
+            }
+            currentSortOrder = sortOrders[currentSortBy];
+            fetchData(currentPage, currentSortBy, currentSortOrder);
+        }
+
+        function updateSortIcons() {
+            const headers = document.querySelectorAll('th[data-sort-by]');
+            headers.forEach(header => {
+                const sortBy = header.getAttribute('data-sort-by');
+                const sortIconElem = header.querySelector('.sort-icon');
+
+                sortIconElem.innerHTML = `
+                    <i class="lni lni-chevron-up"></i>
+                `;
+                sortIconElem.classList.remove('active');
+
+                if (sortBy === currentSortBy) {
+                    const icon = currentSortOrder === 'asc' ? '<i class="lni lni-chevron-up"></i>' : '<i class="lni lni-chevron-down"></i>';
+                    sortIconElem.innerHTML = icon;
+                    sortIconElem.classList.add('active');
+                }
+            });
+        }
+
+        function editBuyer(id) {
+            fetch(`/api/v1/buyer/${id}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('buyerGstNo').value = data.gst_no;
+                    document.getElementById('buyerName').value = data.name;
+                    document.getElementById('buyerStateCode').value = data.state_code;
+                    document.getElementById('buyerStateName').value = data.state_name;
+                    document.getElementById('buyerAddress').value = data.address;
+
+                    document.getElementById('buyerGstNo').disabled = true;
+
+                    editBuyerId = id;
+
+                    document.getElementById('addBuyerModalLabel').textContent = 'Edit Buyer';
+                    document.getElementById('submitBtn').textContent = 'Update Buyer';
+
+                    openEditModal();
+                })
+                .catch(error => console.error('Error fetching buyer details:', error));
+        }
+
+        function openEditModal() {
+            const modal = new bootstrap.Modal(document.getElementById('addBuyerModal'));
+            modal.show();
+        }
+
+        async function deleteBuyer(id) {
+            if (confirm(`Are you sure you want to delete this buyer?`)) {
+                try {
+                    await fetch(`/api/v1/buyer/${id}`, {
+                        method: 'DELETE',
+                    });
+                    fetchData(currentPage, currentSortBy, currentSortOrder);
+                } catch (error) {
+                    console.error('Error deleting buyer:', error);
+                }
+            }
+        }
+
+        function openModal() {
+            const modal = new bootstrap.Modal(document.getElementById('addBuyerModal'));
+            modal.show();
+
+            document.getElementById('addBuyerForm').reset();
+            document.getElementById('buyerGstNo').disabled = false;
+            editBuyerId = null;
+            document.getElementById('addBuyerModalLabel').textContent = 'Add New Buyer';
+            document.getElementById('submitBtn').textContent = 'Add Buyer';
+        }
+
+        function closeModal() {
+            const modalElement = document.getElementById('addBuyerModal');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            modal.hide();
+
+            document.getElementById('addBuyerForm').reset();
+            editBuyerId = null;
+            document.getElementById('addBuyerModalLabel').textContent = 'Add New Buyer';
+            document.getElementById('submitBtn').textContent = 'Add Buyer';
+        }
+
+        document.getElementById('addBuyerModal').addEventListener('hidden.bs.modal', function () {
+            document.getElementById('addBuyerForm').reset();
+            editBuyerId = null;
+            document.getElementById('addBuyerModalLabel').textContent = 'Add New Buyer';
+            document.getElementById('submitBtn').textContent = 'Add Buyer';
+        });
+
+        document.getElementById('addBuyerForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+
+            const data = {
+                gst_no: formData.get('gst_no'),
+                name: formData.get('name'),
+                state_code: formData.get('state_code'),
+                state_name: formData.get('state_name'),
+                address: formData.get('address')
+            };
+
+            try {
+                if (editBuyerId) {
+                    // If editBuyerId is set, send a PUT request to update the buyer
+                    await fetch(`/api/v1/buyer/${editBuyerId}`, {
+                        method: 'PUT',
+                        body: JSON.stringify(data),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    editBuyerId = null;
+                } else {
+                    // Otherwise, it's a POST request to add new buyer
+                    await fetch('/api/v1/buyer', {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                }
+                closeModal();
+                fetchData(currentPage);
+            } catch (error) {
+                console.error('Error adding/updating buyer:', error);
+            }
+        });
+
+        async function deleteSelected() {
+            if (selectedItems.length === 0) {
+                alert('No rows selected');
+                return;
+            }
+
+            if (confirm(`Are you sure you want to delete selected buyers?`)) {
+                try {
+                    await Promise.all(selectedItems.map(id =>
+                        fetch(`/api/v1/buyer/${id}`, {
+                            method: 'DELETE'
+                        })
+                    ));
+                    selectedItems = [];
+                    fetchData(currentPage);
+                } catch (error) {
+                    console.error('Error deleting selected buyers:', error);
+                }
+            }
+        }
+
+        function updateSortIcons() {
+            const headers = document.querySelectorAll('th[data-sort-by]');
+            headers.forEach(header => {
+                const sortBy = header.getAttribute('data-sort-by');
+                const sortIconElem = header.querySelector('.sort-icon');
+
+                sortIconElem.innerHTML = `
+                    <i class="lni lni-chevron-up"></i>
+                `;
+                sortIconElem.classList.remove('active');
+
+                if (sortBy === currentSortBy) {
+                    const icon = currentSortOrder === 'asc' ? '<i class="lni lni-chevron-up"></i>' : '<i class="lni lni-chevron-down"></i>';
+                    sortIconElem.innerHTML = icon;
+                    sortIconElem.classList.add('active');
+                }
+            });
+        }
     </script>
+
+
 {% endblock %}
 

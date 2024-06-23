@@ -40,9 +40,9 @@ def edit_material(name):
 
 @material_routes.route('/api/materials', methods=['GET'])
 def get_materials():
-    materials = Material.query.all()
+    # materials = Material.query.all()
     logger.info(f'Fetched all materials')
-    return render_template('show_materials.html', materials=materials)
+    return render_template('show_materials.html')
     # return jsonify(materials)
 
 

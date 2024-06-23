@@ -1,8 +1,7 @@
 # Blueprint object to define routes
 from flask import Blueprint, render_template, request, jsonify
-from flask_login import login_required
+from flask_security import auth_required, permissions_accepted, roles_required
 from sqlalchemy import text
-from typing_extensions import deprecated
 
 from app.extensions import db
 from app.models import Product, Material, User
@@ -11,6 +10,9 @@ main_routes = Blueprint('main', __name__)
 
 
 @main_routes.route('/base/')
+@auth_required()
+@permissions_accepted("user-read")
+@roles_required('user')
 # @login_required
 def root():
     """
@@ -39,6 +41,7 @@ def analysis():
     - The rendered analysis.html template.
     """
     return render_template('analysis.html')
+
 
 # @deprecated(1)
 # @main_routes.route('/orders/')
@@ -71,7 +74,6 @@ def settings():
 # @login_required
 def addentry():
     return render_template('addentry.html')
-
 
 
 @main_routes.route('/test_database_connection/')
