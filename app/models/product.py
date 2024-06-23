@@ -29,7 +29,7 @@ class Product(db.Model):
     __tablename__ = 'product'
     part_no = Column(Integer, primary_key=True)
     name = Column(String(50), unique=True, nullable=False)
-    unit = Column(Enum(UnitType), nullable=False)
+    unit = Column(Enum(UnitType,values_callable=lambda obj: [enum.value for enum in obj]), nullable=False)
     quantity = Column(Integer, nullable=False)
     price = Column(Float, nullable=False)
     c_gst = Column(Float, nullable=False)

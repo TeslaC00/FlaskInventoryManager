@@ -2,11 +2,12 @@ import os
 
 from dotenv import load_dotenv
 from flask import Flask
-from flask_security import SQLAlchemyUserDatastore, Security
 
 from app.converters import DateConverter
-from app.extensions import initialize_extensions, db
+from app.extensions import initialize_extensions
 from app.logger import logger
+from app.security import init_security
+from app.extensions import db
 
 
 def create_app():
@@ -46,8 +47,8 @@ def create_app():
     initialize_extensions(app)
     logger.info('All extensions initialized')
 
-    init_security(app)
     create_tables(app)
+    init_security(app)
 
     # Registering blueprints
     from app.routes import register_routes
@@ -62,19 +63,4 @@ def create_tables(app):
     with app.app_context():
         db.create_all()
         logger.info('Database tables created (if not existing)')
-        app.security.datastore.find_or_create_role(
-            name="user", permissions={"user-read", "user-write"}
-        )
-        db.session.commit()
-        if not app.security.datastore.find_user(email="user@gmail.com"):
-            from flask_security import hash_password
-            app.security.datastore.create_user(email="user@gmail.com",
-                                               password=hash_password("password"), roles=["user"])
-        db.session.commit()
 
-
-def init_security(app):
-    from app.models.user import User, Role
-    user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-    app.security = Security(app, user_datastore)
-    logger.info('Initialized security')
