@@ -9,6 +9,7 @@ def init_security(app):
     user_datastore = SQLAlchemyUserDatastore(db, User, Role)
     app.security = Security(app, user_datastore)
     logger.info('Initialized security')
+
     with app.app_context():
         if not user_datastore.find_role('user'):
             user_datastore.create_role(name='user', permissions={'user-read', 'user-write'})

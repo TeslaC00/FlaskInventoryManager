@@ -63,3 +63,4 @@ def create_tables(app):
     with app.app_context():
         db.create_all()
         logger.info('Database tables created (if not existing)')
+
