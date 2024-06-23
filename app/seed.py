@@ -7,12 +7,14 @@ from dotenv import load_dotenv
 from app.logger import logger as log
 from app.models import BillItem, ChallanItem, ProductMaterial
 from app.models import Buyer, Supplier, Material, Product, Bill, Challan, ProductScrap, MaterialScrap
+from app import create_app
+from app.extensions import db
 
 load_dotenv()
 
 
 def read_json(filename):
-    with open('app/data/' + filename, 'r') as file:
+    with open('data/' + filename, 'r') as file:
         data = load(file)
     return data
 
@@ -22,7 +24,7 @@ def convert_date(date_string):
     return datetime.strptime(date_string, date_format).date()
 
 
-def seed(db):
+def seed():
     log.info('started seed')
 
     for item in read_json('suppliers.json'):
@@ -96,3 +98,10 @@ def seed(db):
     for item in read_json('product_materials.json'):
         record = ProductMaterial(**item)
         db.session.add(record)
+
+    db.session.commit()
+
+
+if __name__ == '__main__':
+    with create_app().app_context():
+        seed()

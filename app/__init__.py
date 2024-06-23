@@ -4,10 +4,10 @@ from dotenv import load_dotenv
 from flask import Flask
 
 from app.converters import DateConverter
-from app.database import check_and_create_and_fill_tables
 from app.extensions import initialize_extensions
 from app.logger import logger
 from app.security import init_security
+from app.extensions import db
 
 
 def create_app():
@@ -48,7 +48,7 @@ def create_app():
     logger.info('All extensions initialized')
 
     init_security(app)
-    check_and_create_and_fill_tables(app)
+    create_tables(app)
 
     # Registering blueprints
     from app.routes import register_routes
@@ -57,3 +57,9 @@ def create_app():
 
     logger.info('Finished initializing FlaskInventoryManager')
     return app
+
+
+def create_tables(app):
+    with app.app_context():
+        db.create_all()
+        logger.info('Database tables created (if not existing)')
