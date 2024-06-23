@@ -8,7 +8,7 @@ class ChallanSchema(Schema):
     challan_no = fields.Integer(required=True)
     supplier_id = fields.Integer(required=True)
     total_price = fields.Float(required=True)
-    date = fields.Date(dump_only=True, format='%Y-%m-%d')
+    date = fields.Date(required=True, format='%Y-%m-%d')
     remarks = fields.String(allow_none=True)
 
 

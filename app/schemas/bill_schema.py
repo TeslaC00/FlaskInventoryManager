@@ -5,7 +5,7 @@ class BillSchema(Schema):
     id = fields.Int(dump_only=True)
     buyer_id = fields.Int(dump_only=True)
     total_price = fields.Int(required=True)
-    date = fields.Date(dump_only=True, format='%Y-%m-%d')
+    date = fields.Date(required=True, format='%Y-%m-%d')
     purchase_order = fields.Str(dump_only=True)
     remarks = fields.Str()
 
