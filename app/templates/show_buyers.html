@@ -1,486 +1,3 @@
-{#{% extends "base.html" %}#}
-{#{% block head %}#}
-{#    <meta charset="UTF-8">#}
-{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
-{#    <title>Buyer Data Table</title>#}
-{#    <style>#}
-{#        table {#}
-{#            width: 100%;#}
-{#            border-collapse: separate;#}
-{#            border-spacing: 0;#}
-{#            border-radius: 25px;#}
-{#            overflow: hidden;#}
-{#            border: 1px solid black;#}
-{#        }#}
-{##}
-{#        th, td {#}
-{#            border: 1px solid black;#}
-{#            padding: 8px;#}
-{#            text-align: left;#}
-{#        }#}
-{##}
-{#        th:first-child {#}
-{#            border-top-left-radius: 25px;#}
-{#        }#}
-{##}
-{#        th:last-child {#}
-{#            border-top-right-radius: 25px;#}
-{#        }#}
-{##}
-{#        tr:last-child td:first-child {#}
-{#            border-bottom-left-radius: 25px;#}
-{#        }#}
-{##}
-{#        tr:last-child td:last-child {#}
-{#            border-bottom-right-radius: 25px;#}
-{#        }#}
-{##}
-{#        th {#}
-{#            background-color: #f2f2f2;#}
-{#            cursor: pointer;#}
-{#            position: relative;#}
-{#        }#}
-{##}
-{#        th .sort-icon {#}
-{#            position: absolute;#}
-{#            top: 50%;#}
-{#            right: 10px;#}
-{#            transform: translateY(-50%);#}
-{#        }#}
-{##}
-{#        .checkbox-column {#}
-{#            width: 5%;#}
-{#            text-align: center;#}
-{#            cursor: default;#}
-{#        }#}
-{##}
-{#        .part-no-column {#}
-{#            width: 10%;#}
-{#            cursor: default;#}
-{#        }#}
-{##}
-{#        .name-column {#}
-{#            width: 25%;#}
-{#        }#}
-{##}
-{#        .quantity-column {#}
-{#            width: 15%;#}
-{#        }#}
-{##}
-{#        .unit-column {#}
-{#            width: 40%;#}
-{#        }#}
-{##}
-{#        .actions-column {#}
-{#            width: 5%;#}
-{#            text-align: center;#}
-{#            cursor: default;#}
-{#        }#}
-{##}
-{#        .pagination {#}
-{#            display: flex;#}
-{#            align-items: center;#}
-{#            justify-content: center;#}
-{#        }#}
-{##}
-{#        .pagination button {#}
-{#            padding-top: 6px;#}
-{#            margin: 0 5px;#}
-{#            cursor: pointer;#}
-{#            background: none;#}
-{#            border: none;#}
-{#            color: #0d6efd;#}
-{#        }#}
-{##}
-{#        .pagination button.disabled {#}
-{#            color: #c0c0c0;#}
-{#            cursor: not-allowed;#}
-{#        }#}
-{##}
-{#        .pagination .page-number {#}
-{#            margin: 0;#}
-{#            font-size: 16px;#}
-{#        }#}
-{##}
-{#        .pagination i {#}
-{#            font-size: 24px;#}
-{#            cursor: pointer;#}
-{#        }#}
-{##}
-{#        .actions-column i {#}
-{#            font-size: 100%;#}
-{#            cursor: pointer;#}
-{#        }#}
-{##}
-{#        .lni-pencil {#}
-{#            color: blue;#}
-{#        }#}
-{##}
-{#        .lni-trash-can {#}
-{#            color: red;#}
-{#        }#}
-{##}
-{#        .actions-column i:hover {#}
-{#            color: gray;#}
-{#        }#}
-{#        .controls-container {#}
-{#            display: flex;#}
-{#            justify-content: space-between;#}
-{#            align-items: center;#}
-{#            margin-bottom: 0px;#}
-{#        }#}
-{#        #searchBar {#}
-{#            padding: 5px;#}
-{#            width: 250px;#}
-{#        }#}
-{##}
-{#        .button-container button {#}
-{#            margin-left: 10px;#}
-{#            padding: 5px 10px;#}
-{#            cursor: pointer;#}
-{#            background-color: #0d6efd;#}
-{#            color: white;#}
-{#            border: none;#}
-{#            border-radius: 15px;#}
-{#        }#}
-{##}
-{#        .button-container #addBtn:hover {#}
-{#            transition: background-color 500ms;#}
-{#            background-color: #85ec85;#}
-{#        }#}
-{##}
-{#        .button-container #delBtn:hover {#}
-{#            transition: background-color 500ms;#}
-{#            background-color: red;#}
-{#        }#}
-{##}
-{#        .actions-column i {#}
-{#            cursor: pointer;#}
-{#        }#}
-{##}
-{#        .dropdown {#}
-{#            position: relative;#}
-{#            display: inline-block;#}
-{#            padding-left: 2px;#}
-{#        }#}
-{#        .dropdown-content {#}
-{#            display: none;#}
-{#            position: absolute;#}
-{#            background-color: white;#}
-{#            min-width: 160px;#}
-{#            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);#}
-{#            z-index: 2;#}
-{#        }#}
-{#        .dropdown-content a {#}
-{#            color: black;#}
-{#            padding: 12px 16px;#}
-{#            text-decoration: none;#}
-{#            display: block;#}
-{#        }#}
-{#        .dropdown-content a:hover {background-color: #ddd;}#}
-{#        .dropdown:hover .dropdown-content {display: block;}#}
-{#        .dropdown:hover .dropbtn {background-color: #69e66d;}#}
-{##}
-{#    </style>#}
-{#{% endblock %}#}
-{##}
-{#{% block content %}#}
-{#    <h2 style="margin: 0px;font-size: 50px">Buyer Table</h2>#}
-{#    <div class="controls-container">#}
-{#        <div style="display: flex; align-items: center;">#}
-{#            <input type="text" id="searchBar" placeholder="Search...">#}
-{#            <div class="dropdown">#}
-{#                <button class="dropbtn" >Filter</button>#}
-{#                <div class="dropdown-content">#}
-{#                    <a href="#" onclick="setFilter('name')">Name</a>#}
-{#                    <a href="#" onclick="setFilter('GST_No')">GST No</a>#}
-{#                    <a href="#" onclick="setFilter('state_code')">State Code</a>#}
-{#                    <a href="#" onclick="setFilter('state_name')">State Name</a>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="button-container">#}
-{#            <button id="addBuyerBtn" class="btn btn-primary" style="margin: 10px" data-bs-toggle="modal" data-bs-target="#addBuyerModal">Add New Buyer</button>#}
-{#            <button id="deleteSelectedBtn" class="btn btn-danger" style="margin: 10px 0;">Delete Selected</button>#}
-{#        </div>#}
-{#    </div>#}
-{#    <table id="dataTable" class="table table-hover">#}
-{#        <thead class="table-light" style="border-color: black; border-width: 2px; position: sticky; top: 0; z-index: 1">#}
-{#        <tr>#}
-{#            <th class="checkbox-column"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()"></th>#}
-{#            <th class="gst-column">GST No.</th>#}
-{#            <th class="name-column" data-sort-by="name">Name <span class="sort-icon"></span> </th>#}
-{#            <th class="state_code-column" data-sort-by="state_code">State Code <span class="sort-icon"></span></th>#}
-{#            <th class="state_name-column" data-sort-by="state_name">State Name <span class="sort-icon"></span></th>#}
-{#            <th class="actions-column">Actions</th>#}
-{#        </tr>#}
-{#        </thead>#}
-{#        <tbody>#}
-{#        <!-- Rows will be inserted here dynamically -->#}
-{#        </tbody>#}
-{#    </table>#}
-{##}
-{#    <div class="modal fade" id="addBuyerModal" tabindex="-1" aria-labelledby="addBuyerModalLabel"#}
-{#             aria-hidden="true">#}
-{#            <div class="modal-dialog modal-dialog-centered">#}
-{#                <div class="modal-content">#}
-{#                    <div class="modal-header">#}
-{#                        <h5 class="modal-title" id="addBuyerModalLabel">Add New Buyer</h5>#}
-{#                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
-{#                    </div>#}
-{#                    <div class="modal-body">#}
-{#                        <form id="addBuyerForm">#}
-{#                            <div class="mb-3">#}
-{#                                <label for="buyerName" class="form-label">Buyer Name</label>#}
-{#                                <input type="text" class="form-control" id="buyerName" name="name" required>#}
-{#                            </div>#}
-{#                            <div class="mb-3">#}
-{#                                <label for="buyerUnit" class="form-label">GST No.</label>#}
-{#                                <input type="number" class="form-control" id="buyerUnit" name="gst_no." required>#}
-{#                            </div>#}
-{#                            <div class="mb-3">#}
-{#                                <label for="buyerStateCode" class="form-label">State Code</label>#}
-{#                                <input type="number" class="form-control" id="buyerQuantity" name="state_code" required>#}
-{#                            </div>#}
-{#                            <div class="mb-3">#}
-{#                                <label for="buyerStateName" class="form-label">State Name</label>#}
-{#                                <input type="text" class="form-control" id="buyerQuantity" name="state_name" required>#}
-{#                            </div>#}
-{#                            <button type="submit" class="btn btn-primary">Add Material</button>#}
-{#                        </form>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#        <!-- Edit Material Modal -->#}
-{#        <div class="modal fade" id="editBuyerModal" tabindex="-1" aria-labelledby="editBuyerModalLabel"#}
-{#             aria-hidden="true">#}
-{#            <div class="modal-dialog modal-dialog-centered">#}
-{#                <div class="modal-content">#}
-{#                    <div class="modal-header">#}
-{#                        <h5 class="modal-title" id="editBuyerModalLabel">Edit Buyer</h5>#}
-{#                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
-{#                    </div>#}
-{#                    <div class="modal-body">#}
-{#                        <form id="editBuyerForm">#}
-{#                            <input type="hidden" id="editBuyerId" name="part_no">#}
-{#                            <div class="mb-3">#}
-{#                                <label for="editBuyerName" class="form-label">Buyer Name</label>#}
-{#                                <input type="text" class="form-control" id="editBuyerName" name="name" required>#}
-{#                            </div>#}
-{#                            <div class="mb-3">#}
-{#                                <label for="editBuyerUnit" class="form-label">GST No.</label>#}
-{#                                <input type="number" class="form-control" id="editBuyerUnit" name="unit" required>#}
-{#                            </div>#}
-{#                            <div class="mb-3">#}
-{#                                <label for="editBuyerStateCode" class="form-label">State Code</label>#}
-{#                                <input type="number" class="form-control" id="editBuyerStateCode" name="quantity"#}
-{#                                       required>#}
-{#                            </div>#}
-{#                            <div class="mb-3">#}
-{#                                <label for="editBuyerStateName" class="form-label">State Name</label>#}
-{#                                <input type="text" class="form-control" id="editBuyerStateName" name="quantity"#}
-{#                                       required>#}
-{#                            </div>#}
-{#                            <button type="submit" class="btn btn-primary">Save Changes</button>#}
-{#                        </form>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{##}
-{#    <div class="pagination" id="pagination">#}
-{#        <!-- Pagination buttons will be inserted here dynamically -->#}
-{#    </div>#}
-{##}
-{#    <script>#}
-{#        let currentPage = 1;#}
-{#        let currentSortBy = 'name';#}
-{#        let currentSortOrder = 'asc';#}
-{#        let sortOrders = {'name': 'asc', 'state_code': 'asc', 'state_name': 'asc'};#}
-{##}
-{#        async function fetchData(page, sortBy = 'name', sortOrder = 'asc') {#}
-{#            try {#}
-{#                const response = await fetch(`/api/v1/buyer?sort_order=${sortOrder}&sort_by=${sortBy}&page=${page}&page_size=10`);#}
-{#                const data = await response.json();#}
-{#                const pagination = JSON.parse(response.headers.get('x-pagination'));#}
-{##}
-{#                populateTable(data);#}
-{#                setupPagination(pagination);#}
-{#                updateSortIcons();#}
-{#            } catch (error) {#}
-{#                console.error('Error fetching data:', error);#}
-{#            }#}
-{#        }#}
-{##}
-{#        function populateTable(data) {#}
-{#            const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];#}
-{##}
-{#            // Clear existing rows#}
-{#            tableBody.innerHTML = '';#}
-{##}
-{#            data.forEach(item => {#}
-{#                const row = tableBody.insertRow();#}
-{#                const cellCheckbox = row.insertCell(0);#}
-{#                const cellGSTNo = row.insertCell(1);#}
-{#                const cellName = row.insertCell(2);#}
-{#                const cellStateCode = row.insertCell(3);#}
-{#                const cellStateName = row.insertCell(4);#}
-{#                const cellActions = row.insertCell(5);#}
-{##}
-{#                cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" style="margin-left: 35%">`;#}
-{#                cellGSTNo.textContent = item.GST_No;#}
-{#                cellName.textContent = item.name;#}
-{#                cellStateCode.textContent = item.state_code;#}
-{#                cellStateName.textContent = item.state_name;#}
-{#                cellActions.innerHTML = `#}
-{#                    <i class="lni lni-pencil" onclick="editRow(${item.part_no})" style="padding-right: 2px"></i>#}
-{#                    <i class="lni lni-trash-can" onclick="deleteRow(${item.part_no})" style="padding-left: 2px"></i>#}
-{#                `;#}
-{#                cellActions.className = "actions-column";#}
-{#            });#}
-{#        }#}
-{##}
-{#        function setupPagination(pagination) {#}
-{#            const paginationDiv = document.getElementById('pagination');#}
-{##}
-{#            // Clear existing buttons#}
-{#            paginationDiv.innerHTML = '';#}
-{##}
-{#            const prevButton = document.createElement('button');#}
-{#            prevButton.innerHTML = '<i class="peepo lni lni-chevron-left"></i>';#}
-{#            if (pagination.page > 1) {#}
-{#                prevButton.onclick = () => fetchData(pagination.page - 1, currentSortBy, currentSortOrder);#}
-{#                prevButton.classList.remove('disabled');#}
-{#            } else {#}
-{#                prevButton.classList.add('disabled');#}
-{#            }#}
-{#            paginationDiv.appendChild(prevButton);#}
-{##}
-{#            const pageNumber = document.createElement('span');#}
-{#            pageNumber.className = 'page-number';#}
-{#            pageNumber.textContent = `Page ${pagination.page} of ${pagination.total_pages}`;#}
-{#            paginationDiv.appendChild(pageNumber);#}
-{##}
-{#            const nextButton = document.createElement('button');#}
-{#            nextButton.innerHTML = '<i class="peepo lni lni-chevron-right"></i>';#}
-{#            if (pagination.page < pagination.total_pages) {#}
-{#                nextButton.onclick = () => fetchData(pagination.page + 1, currentSortBy, currentSortOrder);#}
-{#                nextButton.classList.remove('disabled');#}
-{#            } else {#}
-{#                nextButton.classList.add('disabled');#}
-{#            }#}
-{#            paginationDiv.appendChild(nextButton);#}
-{#        }#}
-{##}
-{#        function handleCheckboxClick(checkbox) {#}
-{#            const itemId = checkbox.getAttribute('data-id');#}
-{##}
-{#            if (checkbox.checked && !selectedItems.includes(itemId)) {#}
-{#                selectedItems.push(itemId); // Add item ID to selectedItems if checkbox is checked#}
-{#            } else if (!checkbox.checked) {#}
-{#                selectedItems = selectedItems.filter(item => item !== itemId); // Remove item ID if checkbox is unchecked#}
-{#            }#}
-{#        }#}
-{##}
-{#        function toggleSelectAll() {#}
-{#            const selectAllCheckbox = document.getElementById('selectAll');#}
-{#            const rowCheckboxes = document.querySelectorAll('.rowCheckbox');#}
-{#            rowCheckboxes.forEach(checkbox => {#}
-{#                checkbox.checked = selectAllCheckbox.checked;#}
-{#                handleCheckboxClick(checkbox);#}
-{#            });#}
-{#        }#}
-{##}
-{##}
-{##}
-{##}
-{#        // Fetch initial data;#}
-{#         fetchData(currentPage)#}
-{#        // script.js#}
-{#        let currentFilter = '';#}
-{##}
-{#        function setFilter(filter) {#}
-{#            currentFilter = filter;#}
-{#            document.querySelector('.dropbtn').textContent = `Filter: ${filter}`;#}
-{#            fetchAndDisplayData();#}
-{#        }#}
-{##}
-{#        // Debounce function to limit the rate of function calls#}
-{#        function debounce(func, delay) {#}
-{#            let debounceTimer;#}
-{#            return function() {#}
-{#                const context = this;#}
-{#                const args = arguments;#}
-{#                clearTimeout(debounceTimer);#}
-{#                debounceTimer = setTimeout(() => func.apply(context, args), delay);#}
-{#            };#}
-{#        }#}
-{##}
-{#        // Function to fetch data from the API#}
-{#        async function fetchAndDisplayData() {#}
-{#            const searchQuery = document.getElementById('searchBar').value;#}
-{#            const apiUrl = `/api/v1/buyer?search=${searchQuery}`;#}
-{##}
-{#            try {#}
-{#                const response = await fetch(apiUrl);#}
-{#                if (!response.ok) {#}
-{#                    throw new Error('Network response was not ok');#}
-{#                }#}
-{#                const data = await response.json();#}
-{#                displayData(data);#}
-{#            } catch (error) {#}
-{#                console.error('There has been a problem with your fetch operation:', error);#}
-{#            }#}
-{#        }#}
-{##}
-{#        // Function to display data in the table#}
-{#        function displayData(data) {#}
-{#            const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];#}
-{#            tableBody.innerHTML = ''; // Clear previous data#}
-{##}
-{#            data.forEach(item => {#}
-{#                const row = tableBody.insertRow();#}
-{##}
-{#                const cellCheckbox = row.insertCell(0);#}
-{#                const cellGSTNo = row.insertCell(1);#}
-{#                const cellName = row.insertCell(2);#}
-{#                const cellStateCode = row.insertCell(3);#}
-{#                const cellStateName = row.insertCell(4);#}
-{#                const cellActions = row.insertCell(5);#}
-{##}
-{#                cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" style="margin-left: 35%">`;#}
-{#                cellGSTNo.textContent = item.GST_No;#}
-{#                cellName.textContent = item.name;#}
-{#                cellStateCode.textContent = item.state_code;#}
-{#                cellStateName.textContent = item.state_name;#}
-{#                cellActions.innerHTML = `#}
-{#                    <i class="lni lni-pencil" onclick="editRow(${item.part_no})" style="padding-right: 2px"></i>#}
-{#                    <i class="lni lni-trash-can" onclick="deleteRow(${item.part_no})" style="padding-left: 2px"></i>#}
-{#                `;#}
-{#                cellActions.className = "actions-column";#}
-{#            });#}
-{#        }#}
-{##}
-{#        // Add an event listener to the search bar to fetch data as the user types#}
-{#        document.getElementById('searchBar').addEventListener('input', debounce(fetchAndDisplayData, 300));#}
-{##}
-{#        // Dummy functions for editRow and deleteRow to avoid reference errors#}
-{#        function editRow(partNo) {#}
-{#            console.log(`Edit row with part_no: ${partNo}`);#}
-{#        }#}
-{##}
-{#        function deleteRow(partNo) {#}
-{#            console.log(`Delete row with part_no: ${partNo}`);#}
-{#        }#}
-{##}
-{#    </script>#}
-{#{% endblock %}#}
-
-
-
-
-
 {% extends "base.html" %}
 {% block head %}
     <meta charset="UTF-8">
@@ -545,7 +62,7 @@
         }
 
         .gst-no-column {
-            width: 20%;
+            width: 18%;
             cursor: default;
         }
 
@@ -554,7 +71,7 @@
         }
 
         .state-code-column {
-            width: 10%;
+            width: 12%;
         }
 
         .state-name-column {
@@ -716,9 +233,10 @@
                 <div class="searchbar">
                     <input type="text" id="searchInput" placeholder="Search by name... " oninput="fetchData(1)">
                 </div>
-                <input type="number" min="0" id="stateCodeFilter" placeholder="State Code" oninput="fetchData(1)">
+                <input type="text" id="stateNameFilter" placeholder="State Name" oninput="fetchData(1)">
                 <button onclick="clearFilters()">Clear Filters</button>
             </div>
+
             <div class="button-container">
                 <button id="addBtn" onclick="openModal()">Add New Buyer</button>
                 <button id="delBtn" onclick="deleteSelected()">Delete Selected</button>
@@ -796,7 +314,7 @@
         let currentPage = 1;
         let currentSortBy = 'name';
         let currentSortOrder = 'asc';
-        let sortOrders = { 'gst_no': 'asc', 'name': 'asc', 'state_code': 'asc', 'state_name': 'asc', 'address': 'asc' };
+        let sortOrders = { 'GST_No': 'asc', 'name': 'asc', 'state_code': 'asc', 'state_name': 'asc', 'address': 'asc' };
         let editBuyerId = null;
         let selectedItems = [];
 
@@ -807,7 +325,7 @@
         async function fetchData(page, sortBy = 'name', sortOrder = 'asc') {
             try {
                 const searchQuery = document.getElementById('searchInput').value;
-                const stateCodeFilter = document.getElementById('stateCodeFilter').value;
+                const stateNameFilter = document.getElementById('stateNameFilter').value;
 
                 const queryParams = new URLSearchParams({
                     sort_order: sortOrder,
@@ -819,8 +337,8 @@
                 if (searchQuery) {
                     queryParams.append('search', searchQuery);
                 }
-                if (stateCodeFilter) {
-                    queryParams.append('state_code', stateCodeFilter);
+                if (stateNameFilter) {
+                    queryParams.append('state_name', stateNameFilter);
                 }
 
                 const response = await fetch(`/api/v1/buyer?${queryParams.toString()}`);
@@ -837,7 +355,7 @@
 
         function clearFilters() {
             document.getElementById('searchInput').value = '';
-            document.getElementById('stateCodeFilter').value = '';
+            document.getElementById('stateNameFilter').value = '';
             fetchData(1);
         }
 
@@ -969,13 +487,13 @@
                     return response.json();
                 })
                 .then(data => {
-                    document.getElementById('buyerGstNo').value = data.gst_no;
+                    document.getElementById('buyerGSTNo').setAttribute('value',  data.GST_No);
                     document.getElementById('buyerName').value = data.name;
                     document.getElementById('buyerStateCode').value = data.state_code;
                     document.getElementById('buyerStateName').value = data.state_name;
                     document.getElementById('buyerAddress').value = data.address;
 
-                    document.getElementById('buyerGstNo').disabled = true;
+                    document.getElementById('buyerGSTNo').disabled = true;
 
                     editBuyerId = id;
 
@@ -1010,7 +528,8 @@
             modal.show();
 
             document.getElementById('addBuyerForm').reset();
-            document.getElementById('buyerGstNo').disabled = false;
+            document.getElementById('buyerGSTNo').disabled = false;
+            document.getElementById('buyerGSTNo').setAttribute('value', '');
             editBuyerId = null;
             document.getElementById('addBuyerModalLabel').textContent = 'Add New Buyer';
             document.getElementById('submitBtn').textContent = 'Add Buyer';
@@ -1039,7 +558,7 @@
             const formData = new FormData(this);
 
             const data = {
-                gst_no: formData.get('gst_no'),
+                gst_no: formData.get('GST_No'),
                 name: formData.get('name'),
                 state_code: formData.get('state_code'),
                 state_name: formData.get('state_name'),
@@ -1117,4 +636,3 @@
 
 
 {% endblock %}
-
