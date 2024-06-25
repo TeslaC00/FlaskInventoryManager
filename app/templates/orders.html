@@ -1,245 +1,503 @@
 {% extends "base.html" %}
 
 {% block head %}
-<title>Sales Form</title>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <title>New Sale Form</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Poppins, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            margin-top: 30px;
+            border-bottom: 2px solid gray;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .form-container, .item-container {
+            width: 50%;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .form-container {
+            border-right: 2px solid gray;
+        }
+
+        .form-container label, .item-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-container input, .form-container select, .form-container textarea,
+        .item-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            box-sizing: border-box;
+        }
+
+        .form-container .submit-btn, .item-container .add-btn, .item-container .remove-btn {
+            background-color: #17365a;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            height: auto;
+        }
+
+        .form-container .submit-btn {
+            border-radius: 20px;
+        }
+
+        .form-container .submit-btn:hover {
+            transition: background-color 300ms;
+            background-color: #007dff;
+        }
+
+        .item-container .item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .item-container .item input {
+            outline: none;
+            border: 0;
+            border-bottom: 2px solid gray;
+            border-radius: 0;
+            margin: 5px;
+            width: calc(33% - 12px);
+        }
+
+        .item-container #item-name {
+            width: 70%;
+        }
+
+        .item-container .item .remove-btn {
+            margin-right: 5px;
+            margin-left: 10px;
+            text-align: center;
+            background-color: #17365a;
+            padding: 5px 8px 1px;
+        }
+
+        .item-container .item .remove-btn:hover {
+            transition: background-color 300ms;
+            background-color: #dd3b3b;
+        }
+
+        .item-container .add-btn {
+            margin-right: 7px;
+            float: right;
+            text-align: center;
+            background-color: #17365a;
+            padding: 5px 8px 1px;
+        }
+
+        .item-container .add-btn:hover {
+            transition: background-color 300ms;
+            background-color: #4cae4c;
+        }
+
+        #items {
+            border: 2px solid gray;
+            border-radius: 20px;
+        }
+
+        .total-price-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            border-top: 2px solid gray;
+            padding-top: 10px;
+        }
+
+        #taxes {
+            display: flex;
+            width: 50%;
+            text-align: center;
+        }
+
+        #total-price {
+            margin-right: 10px;
+        }
+
+        .form-container .submit-btn.disabled {
+            cursor: not-allowed;
+        }
+
+        .form-container .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .form-container .row .half-width {
+            width: 48%;
+        }
+    </style>
 {% endblock %}
 
-{# Block integer input fields to have negative values: Addressed in the scripts block #}
-{# Fix auto data focus and selection when selecting date: Addressed in the scripts block #}
-{# Finalize various jQuery scripts imports: Redundant imports removed, only necessary ones kept #}
-
 {% block content %}
-    <div class="container-fluid">
-        <div class="container mt-5">
-            <!-- Form -->
-            <div class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-                <div class="card">
-                    <div class="card-header">
-                        Sales Form
+    <div class="container" style="margin-left: 30px">
+        <h2>New Sale Entry</h2>
+        <div class="main-content">
+            <div class="form-container">
+                <form id="sale-form" action="#" method="post">
+                    <div class="row">
+                        <div class="half-width">
+                            <label for="bill-no">Bill No.</label>
+                            <input type="text" id="bill-no" name="bill-no" placeholder="Bill No." autocomplete="off"
+                                   disabled>
+                        </div>
+                        <div class="half-width">
+                            <label for="purchase-order">Purchase Order</label>
+                            <input type="text" id="purchase-order" name="purchase-order" placeholder="Purchase Order"
+                                   autocomplete="off">
+                        </div>
                     </div>
-                    <div class="card-body">
-                       <form method="post" action="{{ url_for('bill.sales') }}">
 
-                        {{ form.hidden_tag() }}
-                        {{ form.csrf_token }}
+                    <label for="buyer-gstno">Buyer GST No.</label>
+                    <input type="text" id="buyer-gstno" name="buyer-gstno" placeholder="Buyer GST No." required
+                           list="buyer-suggestions" autocomplete="off">
+                    <datalist id="buyer-suggestions"></datalist>
 
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                {{ form.gst_no.label(class="form-control-label") }}
-                                {{ form.gst_no(class="form-control") }}
-                            </div>
-                            <div class="form-group col-md-6">
-                                {{ form.date.label(class="form-control-label") }}
-                                {{ form.date(class="form-control") }}
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                {{ form.bill_no.label(class="form-control-label") }}
-                                {{ form.bill_no(class="form-control") }}
-                            </div>
-                        </div>
+                    <label for="buyer-name">Buyer Name</label>
+                    <input type="text" id="buyer-name" name="buyer-name" placeholder="Buyer Name" autocomplete="off">
 
-                        <!-- Dynamic Items Section, to be managed on the client-side as before -->
-                        <div id="itemsSection">
-                        {{ form.csrf_token }}
-                            <!-- Items will be dynamically added here -->
-                        </div>
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date">
 
-                        <button type="button" class="btn btn-secondary mb-2" onclick="addItem()">Add Item</button>
+                    <label for="message">Remarks</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Type your message..."></textarea>
 
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label for="totalBeforeTax">Total Before Tax</label>
-                                <input type="number" class="form-control" id="totalBeforeTax" placeholder="Total Before Tax" readonly>
-                            </div>
-                            <div class="form-group col-md-2">
-                                {{ form.sgst.label(class="form-control-label", for="sgst") }}
-                                {{ form.sgst(class="form-control", id="sgst") }}
-                            </div>
-                            <div class="form-group col-md-2">
-                                {{ form.cgst.label(class="form-control-label", for="cgst") }}
-                                {{ form.cgst(class="form-control", id="cgst") }}
-                            </div>
-                            <div class="form-group col-md-2">
-                                {{ form.igst.label(class="form-control-label", for="igst") }}
-                                {{ form.igst(class="form-control", id="igst") }}
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="totalAfterTax">Total After Tax</label>
-                                <input type="number" class="form-control" id="totalAfterTax" placeholder="Total After Tax" readonly>
-                            </div>
-                        </div>
-
-                        {{ form.submit(class="btn btn-primary") }}
-                    </form>
-
+                    <button type="submit" class="submit-btn">Submit Sale</button>
+                </form>
+            </div>
+            <div class="item-container">
+                <label for="items">Items
+                    <button type="button" class="add-btn" onclick="addItem()"><i class="lni lni-plus"></i></button>
+                </label>
+                <div id="items">
+                    <!-- Dynamic item entries will appear here -->
+                </div>
+                <div class="total-price-container">
+                    <div id="taxes">
+                        <label for="sgst" style="padding-right: 5px">SGST (%)</label>
+                        <input type="number" id="sgst" name="sgst" value="0" onchange="updateTotalPrice()" style="margin-right: 5px">
+                        <label for="cgst" style="padding-right: 5px">CGST (%)</label>
+                        <input type="number" id="cgst" name="cgst" value="0" onchange="updateTotalPrice()" style="margin-right: 5px">
+                        <label for="igst" style="padding-right: 5px">IGST (%)</label>
+                        <input type="number" id="igst" name="igst" value="0" onchange="updateTotalPrice()" style="margin-right: 5px">
                     </div>
+                    <label for="total-price" style="margin: 0">Total Price:</label>
+                    <span id="total-price">0.00</span>
+                </div>
+                <div class="total-price-container">
+                    <label for="true-total-price">Net Total Price:</label>
+                    <span id="true-total-price" style="margin-right: 10px">0.00</span>
                 </div>
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block scripts %}
-    <!-- jQuery (Full Version, slim version removed as it's redundant) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- jQuery UI -->
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<!-- Popper.js and Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<script type="text/javascript">
-    var csrf_token = "{{ csrf_token }}";
-
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrf_token);
-            }
-        }
-    });
-</script>
 
     <script>
-        let itemCount = 0;
-        $(document).ready(function() {
-            // Initialize autocomplete for existing items (if any)
-            initializeAutocompleteForItem(`input[name='items-${itemCount}-name']`);
-
- });
-        function addItem() {
-            itemCount++;
-            const itemHTML = `
-                <div class="form-row" id="itemRow${itemCount}">
-                    <div class="form-group col-md-4">
-                        <input type="text" name="items-${itemCount}-name" class="form-control item" placeholder="Item Name">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <input type="number" name="items-${itemCount}-rate" class="form-control rate" placeholder="Rate"
-                        oninput="calculateTotalBeforeTax()">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <input type="number" name="items-${itemCount}-quantity" class="form-control quantity" placeholder="Quantity" oninput="calculateTotalBeforeTax()">
-                    </div>
-                    <div class="col-md-1">
-                        <button type="button" class="btn btn-danger" onclick="removeItem(${itemCount})">Remove</button>
-                    </div>
-                </div>`;
-            $('#itemsSection').append(itemHTML);
-
-
-            initializeAutocompleteForItem(`input[name='items-${itemCount}-name']`); // Initialize autocomplete for the new item
+        // Fetch the highest bill ID and set the Bill No. field
+        async function setBillNumber() {
+            try {
+                const response = await fetch('/api/v1/bills');
+                const bills = await response.json();
+                const highestBillId = Math.max(...bills.map(bill => bill.id));
+                document.getElementById('bill-no').value = highestBillId + 1;
+            } catch (error) {
+                console.error('Error fetching bill number:', error);
+            }
         }
 
-        function removeItem(itemId) {
-            $(`#itemRow${itemId}`).remove();
-            // Recalculate totals after item removal
-            calculateTotalBeforeTax();
-        }
+        document.addEventListener('DOMContentLoaded', setBillNumber);
 
-         function initializeAutocompleteForItem(selector) {
-        let debounceTimer;
-        $(selector).autocomplete({
-            source: function(request, response) {
-                if (debounceTimer) {
-                    clearTimeout(debounceTimer);
+        // Check if all form fields are filled
+        function isFormValid() {
+            const buyerName = document.getElementById('buyer-name').value.trim();
+            const buyerGSTNo = document.getElementById('buyer-gstno').value.trim();
+            const date = document.getElementById('date').value.trim();
+            const items = document.querySelectorAll('.item');
+
+            if (!buyerName || !buyerGSTNo || !date) {
+                return false;
+            }
+
+            for (let item of items) {
+                const itemName = item.querySelector('#item-name').value.trim();
+                const itemQuantity = item.querySelector('[name="item-quantity"]').value.trim();
+                const itemPrice = item.querySelector('[name="item-rate"]').value.trim();
+                if (!itemName || !itemQuantity || !itemPrice) {
+                    return false;
                 }
-                debounceTimer = setTimeout(function() {
-                    $.getJSON("/autocomplete", { q: request.term }, function(data) {
-                        response($.map(data.matching_results, function(item) {
-                            return {
-                                // Highlight matching part
-                                label: item.name.replace(new RegExp(request.term, "gi"), (match) => match),
-
-                            };
-                        }));
-                    });
-                }, 300); // Adjust debounce time as needed
-            },
-            minLength: 2,
-            select: function(event, ui) {
-                console.log("Selected: " + ui.item.value);
             }
-        }).on("autocompletecreate", function() {
-            $(this).data("ui-autocomplete")._renderItem = function(ul, item) {
-                return $("<li>")
-                .append($("<div>").html(item.label)) // Use jQuery's .html() to render HTML
-                .appendTo(ul);
-            };
-        });
-    }
 
-        function calculateTotalBeforeTax() {
-            let totalBeforeTax = 0;
-            // Ensure you only select .form-row within a specific parent (e.g., #itemsSection)
-            document.querySelectorAll('#itemsSection .form-row').forEach(itemRow => {
-                const rate = itemRow.querySelector('.rate')?.value || 0;
-                const quantity = itemRow.querySelector('.quantity')?.value || 0;
-                totalBeforeTax += rate * quantity;
-            });
-            document.getElementById('totalBeforeTax').value = totalBeforeTax.toFixed(2);
-            calculateTax(); // Make sure this is called after calculating totalBeforeTax
+            return true;
         }
 
-        function calculateTax() {
-            const totalBeforeTax = parseFloat(document.getElementById('totalBeforeTax').value) || 0;
-            // Ensure your SGST, CGST, and IGST fields have IDs set to 'sgst', 'cgst', 'igst' respectively
-            const sgst = parseFloat(document.getElementById('sgst')?.value) || 0;
-            const cgst = parseFloat(document.getElementById('cgst')?.value) || 0;
-            const igst = parseFloat(document.getElementById('igst')?.value) || 0;
-            const taxTotal = totalBeforeTax * (sgst + cgst + igst) / 100;
-            document.getElementById('totalAfterTax').value = (totalBeforeTax + taxTotal).toFixed(2);
+        // Toggle the submit button state based on form validation
+        function toggleSubmitButton() {
+            const submitButton = document.querySelector('.submit-btn');
+            if (isFormValid()) {
+                submitButton.classList.remove('disabled');
+                submitButton.removeAttribute('disabled');
+            } else {
+                submitButton.classList.add('disabled');
+                submitButton.setAttribute('disabled', 'true');
+            }
         }
 
-    </script>
+        // Attach event listeners to form fields for validation
+        document.getElementById('buyer-name').addEventListener('input', toggleSubmitButton);
+        document.getElementById('buyer-gstno').addEventListener('input', toggleSubmitButton);
+        document.getElementById('date').addEventListener('input', toggleSubmitButton);
+        document.getElementById('sgst').addEventListener('input', updateTotalPrice);
+        document.getElementById('cgst').addEventListener('input', updateTotalPrice);
+        document.getElementById('igst').addEventListener('input', updateTotalPrice);
 
-    <script>
-    // All your JavaScript code
-        $(document).ready(function () {
-            $('.toggle-sidebar').click(function () {
-                $('.sidebar').toggleClass('active');
+        async function fetchProductSuggestions(query) {
+            const response = await fetch(`/api/v1/product?search=${query}`);
+            const materials = await response.json();
+            return materials;
+        }
+
+        async function fetchBuyerSuggestions(query) {
+            const response = await fetch(`/api/v1/buyer?search=${query}`);
+            const buyers = await response.json();
+            return buyers;
+        }
+
+        document.getElementById('buyer-gstno').addEventListener('input', async function () {
+            const query = this.value;
+            const suggestions = await fetchBuyerSuggestions(query);
+            const dataList = document.getElementById('buyer-suggestions');
+            dataList.innerHTML = '';
+            suggestions.forEach(buyer => {
+                const option = document.createElement('option');
+                option.value = buyer.GST_No;
+                option.textContent = buyer.name;
+                option.setAttribute('data-name', buyer.name);
+                dataList.appendChild(option);
             });
         });
-    </script>
 
-    <script>
-    // Add autocomplete functionality for dynamically added items
-        $(document).ready(function() {
-            let debounceTimer;
-            $(".item").each(function() {
-                $(this).autocomplete({
-                    source: function(request, response) {
-                        if (debounceTimer) {
-                            clearTimeout(debounceTimer);
-                        }
-                        debounceTimer = setTimeout(function() {
-                            $.getJSON("/autocomplete", { q: request.term }, function(data) {
-                                response($.map(data.matching_results, function(item) {
-                                    return {
-                                        // Highlight matching part
-                                        label: item.name.replace(new RegExp(request.term, "gi"), (match) => match),
+        document.getElementById('buyer-gstno').addEventListener('change', function () {
+            const selectedOption = document.querySelector(`#buyer-suggestions option[value="${this.value}"]`);
+            if (selectedOption) {
+                const buyerName = selectedOption.getAttribute('data-name');
+                document.getElementById('buyer-name').value = buyerName;
+            } else {
+                document.getElementById('buyer-name').value = '';
+            }
+        });
 
-                                    };
-                                }));
-                            });
-                            }, 300); // Adjust debounce time as needed
-                    },
-                    minLength: 2,
-                    select: function(event, ui) {
-                        console.log("Selected: " + ui.item.value);
-                    }
-                }).on("autocompletecreate", function() {
-                    $(this).data("ui-autocomplete")._renderItem = function(ul, item) {
-                        return $("<li>")
-                        .append($("<div>").html(item.label)) // Use jQuery's .html() to render HTML
-                        .appendTo(ul);
-                    };
+        function addItem() {
+            const itemContainer = document.getElementById('items');
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('item');
+            const uniqueId = `suggestions-${itemContainer.children.length}`;
+            itemDiv.innerHTML = `
+        <input type="text" id="item-name" name="item-name" placeholder="Item Name" required list="${uniqueId}" autocomplete="off">
+        <datalist id="${uniqueId}"></datalist>
+        <input type="number" name="item-quantity" placeholder="Quantity" required autocomplete="off">
+        <input type="number" name="item-rate" placeholder="Rate" required autocomplete="off">
+        <button type="button" class="remove-btn" onclick="removeItem(this)"><i class="lni lni-trash-can"></i></button>
+    `;
+            itemContainer.appendChild(itemDiv);
+
+            const itemNameInput = itemDiv.querySelector('#item-name');
+            itemNameInput.addEventListener('input', async function () {
+                const suggestions = await fetchProductSuggestions(itemNameInput.value);
+                const dataList = itemDiv.querySelector('datalist');
+                dataList.innerHTML = '';
+                suggestions.forEach(material => {
+                    const option = document.createElement('option');
+                    option.value = material.name;
+                    dataList.appendChild(option);
                 });
             });
+
+            const itemRateInput = itemDiv.querySelector('[name="item-rate"]');
+            const itemQuantityInput = itemDiv.querySelector('[name="item-quantity"]');
+            itemRateInput.addEventListener('input', updateTotalPrice);
+            itemQuantityInput.addEventListener('input', updateTotalPrice);
+        }
+
+
+        function removeItem(button) {
+            const itemDiv = button.parentElement;
+            itemDiv.remove();
+            updateTotalPrice();
+        }
+
+        function updateTotalPrice() {
+            const itemContainer = document.getElementById('items');
+            let totalPrice = 0;
+            const items = itemContainer.querySelectorAll('.item');
+            items.forEach(item => {
+                const quantity = parseFloat(item.querySelector('[name="item-quantity"]').value) || 0;
+                const rate = parseFloat(item.querySelector('[name="item-rate"]').value) || 0;
+                totalPrice += quantity * rate;
+            });
+            document.getElementById('total-price').textContent = totalPrice.toFixed(2);
+
+            // Calculate the true total price with taxes
+            const sgst = parseFloat(document.getElementById('sgst').value) || 0;
+            const cgst = parseFloat(document.getElementById('cgst').value) || 0;
+            const igst = parseFloat(document.getElementById('igst').value) || 0;
+            const taxMultiplier = 1 + (sgst + cgst + igst) / 100;
+            const trueTotalPrice = totalPrice * taxMultiplier;
+            document.getElementById('true-total-price').textContent = trueTotalPrice.toFixed(2);
+        }
+
+        // Function to fetch buyer ID based on GST No.
+        async function fetchBuyerId(gstNo) {
+            const response = await fetch(`/api/v1/buyer?search=${gstNo}`);
+            const buyers = await response.json();
+            return buyers.length ? buyers[0].id : null;
+        }
+
+        // Function to fetch material details based on item name
+        async function fetchMaterialDetails(itemName) {
+            const response = await fetch(`/api/v1/product?search=${itemName}`);
+            const materials = await response.json();
+            return materials.length ? materials[0] : null;
+        }
+
+        // Function to handle form submission
+        document.getElementById('sale-form').addEventListener('submit', async function (event) {
+            event.preventDefault();  // Prevent default form submission
+
+            // Gather form data
+            {#const billNo = document.getElementById('bill-no').value;#}
+            const purchaseOrder = document.getElementById('purchase-order').value;
+            const buyerGSTNo = document.getElementById('buyer-gstno').value;
+            const dateInput = document.getElementById('date').value;
+            const message = document.getElementById('message').value;
+
+            // Format the date to "YYYY-MM-DD"
+            const date = new Date(dateInput).toISOString().split('T')[0];
+
+            // Fetch buyer ID
+            const buyerId = await fetchBuyerId(buyerGSTNo);
+
+            // Calculate total price
+            const itemContainer = document.getElementById('items');
+            let totalPrice = 0;
+            const items = [];
+            const itemEntries = itemContainer.querySelectorAll('.item');
+
+            for (let itemDiv of itemEntries) {
+                const itemName = itemDiv.querySelector('#item-name').value;
+                const itemQuantity = itemDiv.querySelector('[name="item-quantity"]').value;
+                const itemPrice = itemDiv.querySelector('[name="item-rate"]').value;
+                const materialDetails = await fetchMaterialDetails(itemName);
+                const sgst = parseFloat(document.getElementById('sgst').value);
+                const cgst = parseFloat(document.getElementById('cgst').value);
+                const igst = parseFloat(document.getElementById('igst').value);
+
+                totalPrice += parseFloat(itemPrice) || 0;
+
+                items.push({
+                    material_part_no: materialDetails ? materialDetails.part_no : null,
+                    quantity: parseFloat(itemQuantity) || 0,
+                    price: parseFloat(itemPrice) || 0,
+                    c_gst: cgst || 0,
+                    s_gst: sgst || 0,
+                    i_gst: igst || 0
+                });
+            }
+
+            // Create sale data object
+            const saleData = {
+                purchase_order: purchaseOrder,
+                buyer_id: buyerId,
+                total_price: Math.round(totalPrice), // Ensure total_price is an integer
+                date: date,
+                remarks: message
+            };
+
+            console.log(saleData);
+
+            // Send POST request to API for sale
+            try {
+                const response = await fetch('/api/v1/bills', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(saleData)
+                });
+
+                if (response.ok) {
+                    const responseData = await response.json();
+                    alert('Sale submitted successfully!');
+                    console.log(responseData);
+
+                    // Send POST request for each item
+                    for (let item of items) {
+                        const itemData = {
+                            bill_id: responseData.id,
+                            product_part_no: item.material_part_no,
+                            quantity: item.quantity,
+                            price: item.price,
+                            c_gst: item.c_gst,
+                            s_gst: item.s_gst,
+                            i_gst: item.i_gst
+                        };
+
+                        const itemResponse = await fetch('/api/v1/bill_item', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(itemData)
+                        });
+
+                        if (itemResponse.ok) {
+                            const itemResponseData = await itemResponse.json();
+                            console.log(`Sale item submitted successfully:`, itemResponseData);
+                        } else {
+                            const itemErrorData = await itemResponse.json();
+                            alert(`Error submitting sale item: ${itemErrorData.message}`);
+                            console.error(itemErrorData);
+                        }
+                    }
+                } else {
+                    const errorData = await response.json();
+                    alert('Error submitting sale: ' + errorData.message);
+                    console.error(errorData);
+                }
+            } catch (error) {
+                alert('An error occurred while submitting the sale.');
+                console.error(error);
+            }
         });
+
+        // Initial call to set the correct submit button state
+        toggleSubmitButton();
     </script>
 {% endblock %}

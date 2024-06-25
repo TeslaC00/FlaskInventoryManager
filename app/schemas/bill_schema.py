@@ -3,10 +3,10 @@ from marshmallow import Schema, fields, validate
 
 class BillSchema(Schema):
     id = fields.Int(dump_only=True)
-    buyer_id = fields.Int(dump_only=True)
+    buyer_id = fields.Int(required=True)
     total_price = fields.Int(required=True)
     date = fields.Date(required=True, format='%Y-%m-%d')
-    purchase_order = fields.Str(dump_only=True)
+    purchase_order = fields.Str(required=True)
     remarks = fields.Str()
 
 
