@@ -1,8 +1,6 @@
-from sqlalchemy import Column, Integer, String, Enum, Float
+from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from app.extensions import db
-
-from app.models.enums import UnitType
 
 
 class Product(db.Model):
@@ -29,7 +27,7 @@ class Product(db.Model):
     __tablename__ = 'product'
     part_no = Column(Integer, primary_key=True)
     name = Column(String(50), unique=True, nullable=False)
-    unit = Column(Enum(UnitType,values_callable=lambda obj: [enum.value for enum in obj]), nullable=False)
+    unit_id = Column(Integer, ForeignKey('unit.id'), nullable=False)
     quantity = Column(Integer, nullable=False)
     price = Column(Float, nullable=False)
     c_gst = Column(Float, nullable=False)
@@ -49,7 +47,7 @@ class Product(db.Model):
         return {
             'part_no': self.part_no,
             'name': self.name,
-            'unit': self.unit.value,
+            'unit_id': self.unit_id.value,
             'quantity': self.quantity,
             'price': self.price,
             'c_gst': self.c_gst,
