@@ -47,5 +47,6 @@ class Challan(db.Model):
             'challan_no': self.challan_no,
             'supplier_id': self.supplier_id,
             'total_price': self.total_price,
-            'date': self.date
+            'date': self.date,
+            'remarks': self.remarks
         }

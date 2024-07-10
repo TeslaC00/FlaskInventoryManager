@@ -36,4 +36,11 @@ def add_challan():
 
     return render_template('addentry.html', form=purchase_form)
 
+@challan.route('/api/challan_get', methods=['GET', 'POST'])
+def get_challan():
+    return render_template('show_challans.html')
+
+
+
+
 

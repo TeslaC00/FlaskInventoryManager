@@ -75,12 +75,18 @@
             </a>
         </li>
         <li class="sidebar-item">
+            <a href="{{ url_for('challan.get_challan') }}" class="sidebar-link">
+                <i class="lni lni-cart"></i>
+                <span>Challan</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
             <a href="{{ url_for('main.audits') }}" class="sidebar-link">
                 <i class="lni lni-checkmark-circle"></i>
                 <span>Audit Log</span>
             </a>
         </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item">                                                       
             <a href="{{ url_for('main.settings') }}" class="sidebar-link">
                 <i class="lni lni-cog"></i>
                 <span>Settings</span>
