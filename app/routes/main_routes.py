@@ -25,14 +25,14 @@ def root():
 
 
 @main_routes.route('/profile/')
-# @login_required
+@auth_required()
 def profile():
     users = User.query.all()
     return render_template('profile.html', users=users)
 
 
 @main_routes.route('/analysis/')
-# @login_required
+@auth_required()
 def analysis():
     """
     Serves the analysis page of the application. Requires user to be logged in.
@@ -43,35 +43,22 @@ def analysis():
     return render_template('analysis.html')
 
 
-# @deprecated(1)
-# @main_routes.route('/orders/')
-# @login_required
-# def orders():
-#     """
-#     Serves the orders page of the application. Requires user to be logged in.
-#
-#     Returns:
-#     - The rendered orders.html template.
-#     """
-#     return render_template('orders.html')
-
-
 # TODO: add content to audits page
 @main_routes.route('/audits/')
-# @login_required
+@auth_required()
 def audits():
     return render_template('audits.html')
 
 
 # TODO: add content to settings page
 @main_routes.route('/settings/')
-# @login_required
+@auth_required()
 def settings():
     return render_template('settings.html')
 
 
 @main_routes.route('/addentry/')
-# @login_required
+@auth_required()
 def addentry():
     return render_template('addentry.html')
 
@@ -107,20 +94,6 @@ def update_data():
         # Update the database based on each change
 
     return jsonify({"status": "success"})
-
-
-# TODO: change from records to production log
-# @main_routes.route('/json')
-# def json_response():
-#     """
-#     Retrieves all records from the Raw_Material_Records table and returns them in a JSON format.
-#
-#     Returns:
-#     - A JSON response containing all records from Raw_Material_Records.
-#     """
-#     records = Raw_Material_Records.query.all()
-#     results = [record.to_dict() for record in records]
-#     return jsonify(results)
 
 
 @main_routes.route('/autocomplete', methods=['GET'])
