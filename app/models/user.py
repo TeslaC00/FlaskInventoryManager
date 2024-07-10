@@ -1,10 +1,12 @@
 # user.py
 from flask_security import UserMixin, RoleMixin, AsaList
-
 from app.extensions import db
 from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey
 from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship, backref
+
+# registration template = security/register_user.html
+# registration url = /register
 
 
 class RolesUsers(db.Model):
@@ -28,8 +30,8 @@ class User(db.Model, UserMixin):
     email = Column(String(255), unique=True)
     username = Column(String(255), unique=True, nullable=True)
     password = Column(String(255), nullable=False)
-    security_question = Column(String(255))
-    security_answer = Column(String(255))
+    security_question = Column(String(255), nullable=False)
+    security_answer = Column(String(255), nullable=False)
     last_login_at = Column(DateTime())
     current_login_at = Column(DateTime())
     last_login_ip = Column(String(100))
