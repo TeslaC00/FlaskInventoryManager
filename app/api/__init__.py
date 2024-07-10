@@ -11,6 +11,8 @@ from .product_api import product_bp
 from .product_material_api import product_material_bp
 from .product_scrap_api import product_scrap_bp
 from .production_log_api import production_log_bp
+from .unit_api import unit_bp
+from .user_api import user_bp
 
 
 def register_api_blueprints(api):
@@ -27,3 +29,5 @@ def register_api_blueprints(api):
     api.register_blueprint(product_material_bp, url_prefix='/api/v1')
     api.register_blueprint(product_scrap_bp, url_prefix='/api/v1')
     api.register_blueprint(production_log_bp, url_prefix='/api/v1')
+    api.register_blueprint(unit_bp, url_prefix='/api/v1')
+    api.register_blueprint(user_bp, url_prefix='/api/v1')

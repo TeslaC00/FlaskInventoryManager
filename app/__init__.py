@@ -2,14 +2,15 @@ import os
 
 from dotenv import load_dotenv
 from flask import Flask
-from flask_security import SQLAlchemyUserDatastore, Security
+from flask_security import Security
 
 from app.converters import DateConverter
+from app.datastore import user_datastore
+from app.extensions import db
 from app.extensions import initialize_extensions
 from app.logger import logger
-from app.security import create_users
 from app.models.user import User, Role
-from app.extensions import db
+from app.security import create_users
 
 
 def create_app():
@@ -49,7 +50,6 @@ def create_app():
 
     create_tables(app)
     # flask security
-    user_datastore = SQLAlchemyUserDatastore(db, User, Role)
     app.security = Security(app, user_datastore)
     logger.info('Initialized security')
 

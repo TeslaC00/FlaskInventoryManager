@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, url_for, request, render_template, flash
-from flask_security import ForgotPasswordForm, current_user, ResetPasswordForm, hash_password
+from flask_security import ForgotPasswordForm, current_user, hash_password
 from flask import current_app
 
 from app.forms.password_form import VerifySecurityForm, ResetPasswordFormModify
