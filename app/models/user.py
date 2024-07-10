@@ -27,7 +27,6 @@ class User(db.Model, UserMixin):
     id = Column(Integer, primary_key=True)
     email = Column(String(255), unique=True)
     username = Column(String(255), unique=True, nullable=True)
-    email = Column(String(255), unique=True)
     password = Column(String(255), nullable=False)
     security_question = Column(String(255))
     security_answer = Column(String(255))
