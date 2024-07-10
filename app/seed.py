@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 from app.logger import logger as log
 from app.models import BillItem, ChallanItem, ProductMaterial
-from app.models import Buyer, Supplier, Material, Product, Bill, Challan, ProductScrap, MaterialScrap
+from app.models import Buyer, Supplier, Material, Product, Bill, Challan, ProductScrap, MaterialScrap, Unit
 from app import create_app
 from app.extensions import db
 
@@ -26,6 +26,10 @@ def convert_date(date_string):
 
 def seed():
     log.info('started seed')
+
+    for item in read_json('units.json'):
+        record = Unit(**item)
+        db.session.add(record)
 
     for item in read_json('suppliers.json'):
         record = Supplier(**item)
