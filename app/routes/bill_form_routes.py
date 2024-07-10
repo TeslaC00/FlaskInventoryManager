@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, Blueprint, redirect, url_for
+from flask import request, render_template, Blueprint, redirect, url_for
 from app.logger import logger as log
 from app.forms.bill_wtform import SalesForm
 from flask_wtf import csrf
