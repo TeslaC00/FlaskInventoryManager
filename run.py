@@ -1,7 +1,6 @@
 # Note: set env variables outside of code
 from app import create_app
 
-app = create_app()
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    myapp = create_app()
+    myapp.run(host='0.0.0.0')

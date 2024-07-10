@@ -1,4 +1,5 @@
 from .audit_log import AuditLog
+from .unit import Unit
 from .bill import Bill
 from .bill_item import BillItem
 from .buyer import Buyer

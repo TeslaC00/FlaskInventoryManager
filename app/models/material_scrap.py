@@ -1,6 +1,5 @@
 from sqlalchemy import Column, Integer, Enum, ForeignKey, PrimaryKeyConstraint, Date
 from app.extensions import db
-
 from app.models.enums import MaterialScrapType
 
 
