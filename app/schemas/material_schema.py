@@ -25,7 +25,7 @@ class MaterialUpdateSchema(Schema):
 
 class MaterialQuerySchema(QuerySchema):
     name = fields.String()
-    unit = fields.Nested(UnitSchema, only=('id', 'name'))
+    unit = fields.Nested(UnitSchema, only=('id',))
     min_quantity = fields.Integer()
     max_quantity = fields.Integer()
     sort_by = fields.String(validate=validate.OneOf(['name', 'quantity']), load_default='name')

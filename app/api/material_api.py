@@ -24,8 +24,8 @@ class MaterialListResource(MethodView):
         # for filtering
         if 'name' in query_args:
             query = query.filter(Material.name.like(f"%{query_args['name']}%"))
-        if 'unit.id' in query_args:
-            query = query.filter(Material.unit_id == query_args['unit.id'])
+        if 'unit' in query_args and 'id' in query_args['unit']:
+            query = query.filter(Material.unit_id == query_args['unit']['id'])
         if 'min_quantity' in query_args:
             query = query.filter(Material.quantity >= query_args['min_quantity'])
         if 'max_quantity' in query_args:
