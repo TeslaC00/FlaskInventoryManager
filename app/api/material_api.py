@@ -24,8 +24,8 @@ class MaterialListResource(MethodView):
         # for filtering
         if 'name' in query_args:
             query = query.filter(Material.name.like(f"%{query_args['name']}%"))
-        if 'unit' in query_args and 'id' in query_args['unit']:
-            query = query.filter(Material.unit_id == query_args['unit']['id'])
+        if 'unit_id' in query_args:
+            query = query.filter(Material.unit_id == query_args['unit_id'])
         if 'min_quantity' in query_args:
             query = query.filter(Material.quantity >= query_args['min_quantity'])
         if 'max_quantity' in query_args:
@@ -44,7 +44,7 @@ class MaterialListResource(MethodView):
     @material_bp.arguments(MaterialCreateSchema)
     def post(self, new_material_data):
         logger.info('POST /materials called')
-        logger.debug(f"Creating new material with args: {new_material_data}")
+        logger.debug(f"Creating new material with data: {new_material_data}")
 
         try:
             new_material = Material(**new_material_data)

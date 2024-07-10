@@ -11,21 +11,21 @@ class MaterialSchema(Schema):
 
 
 class MaterialCreateSchema(MaterialSchema):
-    unit = fields.Nested(UnitSchema, only=('id', 'name'), required=True)
+    unit_id = fields.Integer(required=True)
 
 
 class MaterialResponseSchema(MaterialSchema):
-    unit = fields.Nested(UnitSchema, only=('id', 'name'), required=True)
+    unit = fields.Nested(UnitSchema, only=('name',), required=True)
 
 
 class MaterialUpdateSchema(Schema):
-    quantity = fields.Integer(required=True)
-    unit = fields.Nested(UnitSchema, only=('id', 'name'))
+    quantity = fields.Integer()
+    unit_id = fields.Integer()
 
 
 class MaterialQuerySchema(QuerySchema):
     name = fields.String()
-    unit = fields.Nested(UnitSchema, only=('id',))
+    unit_id = fields.Integer()
     min_quantity = fields.Integer()
     max_quantity = fields.Integer()
     sort_by = fields.String(validate=validate.OneOf(['name', 'quantity']), load_default='name')

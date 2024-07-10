@@ -1,13 +1,12 @@
 from marshmallow import Schema, fields, validate
 
 from app.schemas.query_schema import QuerySchema
-from app.schemas.unit_schema import UnitSchema
 
 
 class ProductSchema(Schema):
     part_no = fields.Integer(dump_only=True)
     name = fields.String(required=True)
-    unit = fields.Nested(UnitSchema, only=('id', 'name'), required=True)
+    unit_id = fields.Integer(required=True)
     quantity = fields.Integer(required=True)
     price = fields.Float(required=True)
     c_gst = fields.Float(required=True)
@@ -25,7 +24,7 @@ class ProductUpdateSchema(Schema):
 
 class ProductQuerySchema(QuerySchema):
     name = fields.String()
-    unit = fields.Nested(UnitSchema, only=('id', 'name'))
+    unit_id = fields.Integer()
     min_quantity = fields.Integer()
     max_quantity = fields.Integer()
     min_price = fields.Float()

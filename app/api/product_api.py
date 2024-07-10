@@ -23,8 +23,8 @@ class ProductListResource(MethodView):
         # for filtering
         if 'name' in query_args:
             query = query.filter(Product.name.like(f"%{query_args['name']}%"))
-        if 'unit' in query_args:
-            query = query.filter(Product.unit_id == query_args['unit.id'])
+        if 'unit_id' in query_args:
+            query = query.filter(Product.unit_id == query_args['unit_id'])
         if 'min_quantity' in query_args:
             query = query.filter(Product.quantity >= query_args['min_quantity'])
         if 'max_quantity' in query_args:
