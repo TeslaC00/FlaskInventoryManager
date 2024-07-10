@@ -2,73 +2,73 @@
     {
         "part_no": 1,
         "name": "Metal",
-        "unit": "gram",
-        "quantity": 57
+        "quantity": 57,
+        "unit_id": 1
     },
     {
         "part_no": 2,
         "name": "Bronze",
-        "unit": "gram",
-        "quantity": 79
+        "quantity": 79,
+        "unit_id": 1
     },
     {
         "part_no": 3,
         "name": "Plastic",
-        "unit": "centimeter",
-        "quantity": 76
+        "quantity": 76,
+        "unit_id": 2
     },
     {
         "part_no": 4,
         "name": "Rubber",
-        "unit": "centimeter",
-        "quantity": 13
+        "quantity": 13,
+        "unit_id": 2
     },
     {
         "part_no": 5,
         "name": "Cotton",
-        "unit": "centimeter",
-        "quantity": 36
+        "quantity": 36,
+        "unit_id": 2
     },
     {
         "part_no": 6,
         "name": "Granite",
-        "unit": "gram",
-        "quantity": 66
+        "quantity": 66,
+        "unit_id": 1
     },
     {
         "part_no": 7,
         "name": "Fresh",
-        "unit": "gram",
-        "quantity": 79
+        "quantity": 79,
+        "unit_id": 1
     },
     {
         "part_no": 8,
         "name": "Frozen",
-        "unit": "piece",
-        "quantity": 43
+        "quantity": 43,
+        "unit_id": 3
     },
     {
         "part_no": 9,
         "name": "Steel",
-        "unit": "gram",
-        "quantity": 42
+        "quantity": 42,
+        "unit_id": 1
     },
     {
         "part_no": 10,
         "name": "Soft",
-        "unit": "centimeter",
-        "quantity": 37
+        "quantity": 37,
+        "unit_id": 2
     },
     {
         "part_no": 11,
         "name": "Concrete",
-        "unit": "piece",
-        "quantity": 30
+        "quantity": 30,
+        "unit_id": 3
     },
     {
         "part_no": 12,
         "name": "Wooden",
-        "unit": "centimeter",
-        "quantity": 61
+        "quantity": 61,
+        "unit_id": 2
     }
 ]
