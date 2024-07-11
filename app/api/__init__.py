@@ -14,6 +14,7 @@ from .production_log_api import production_log_bp
 from .unit_api import unit_bp
 from .user_api import user_bp
 from .role_api import role_bp
+from .permission_api import permission_bp
 
 
 def register_api_blueprints(api):
@@ -33,3 +34,4 @@ def register_api_blueprints(api):
     api.register_blueprint(unit_bp, url_prefix='/api/v1')
     api.register_blueprint(user_bp, url_prefix='/api/v1')
     api.register_blueprint(role_bp, url_prefix='/api/v1')
+    api.register_blueprint(permission_bp, url_prefix='/api/v1')
