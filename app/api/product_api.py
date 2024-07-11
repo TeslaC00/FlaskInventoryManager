@@ -5,14 +5,15 @@ from app.api.utils import apply_sorting
 from app.extensions import db
 from app.logger import logger
 from app.models import Product
-from app.schemas.product_schema import ProductSchema, ProductQuerySchema, ProductUpdateSchema
+from app.schemas.product_schema import ProductCreateSchema, ProductResponseSchema, ProductQuerySchema, \
+    ProductUpdateSchema
 
 product_bp = Blueprint('product_bp', __name__)
 
 
 @product_bp.route('/product')
 class ProductListResource(MethodView):
-    @product_bp.response(200, ProductSchema(many=True))
+    @product_bp.response(200, ProductResponseSchema(many=True))
     @product_bp.arguments(ProductQuerySchema, location='query')
     @product_bp.paginate()
     def get(self, query_args, pagination_parameters):
@@ -54,8 +55,8 @@ class ProductListResource(MethodView):
         logger.debug(f"Returned products: {products}")
         return products
 
-    @product_bp.response(201, ProductSchema)
-    @product_bp.arguments(ProductSchema)
+    @product_bp.response(201, ProductResponseSchema)
+    @product_bp.arguments(ProductCreateSchema)
     def post(self, new_product_data):
         logger.info('POST /products called')
         logger.debug(f"Creating new product with args: {new_product_data}")
@@ -73,14 +74,14 @@ class ProductListResource(MethodView):
 
 @product_bp.route('/product/<int:part_no>')
 class ProductResource(MethodView):
-    @product_bp.response(200, ProductSchema)
+    @product_bp.response(200, ProductResponseSchema)
     def get(self, part_no):
         logger.info(f"GET /products/{part_no} called")
         product = Product.query.get_or_404(part_no, description="Product not found")
         logger.info(f"Found product with part_no {part_no}")
         return product
 
-    @product_bp.response(200, ProductSchema)
+    @product_bp.response(200, ProductResponseSchema)
     @product_bp.arguments(ProductUpdateSchema)
     def put(self, update_product_data, part_no):
         logger.info(f"PUT /products/{part_no} called")

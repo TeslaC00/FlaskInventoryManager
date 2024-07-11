@@ -25,7 +25,7 @@ class Material(db.Model):
 
     __tablename__ = 'material'
     part_no = Column(Integer, primary_key=True)
-    name = Column(String(50), nullable=False, unique=True)
+    name = Column(String(50), nullable=False)
     unit_id = Column(Integer, ForeignKey('unit.id'), nullable=False)
     quantity = Column(Integer, nullable=False)
     challan_items = relationship('ChallanItem', backref='material')
