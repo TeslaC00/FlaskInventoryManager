@@ -21,5 +21,11 @@ def create_users():
                 roles=['user'],
                 security_question='are you gay?', security_answer='yes'
             )
+        if not current_app.security.datastore.find_user(email='admin@gmail.com'):
+            current_app.security.datastore.create_user(
+                email='admin@gmail.com', username='admin', password='admin',
+                roles=['admin', 'user'],
+                security_question='are you nigga?', security_answer='dawg'
+            )
         current_app.security.datastore.db.session.commit()
         logger.debug('Created Default Users')
