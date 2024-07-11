@@ -6,11 +6,24 @@ from app.schemas.query_schema import QuerySchema
 # Used for Supplier and Buyer
 class PersonSchema(Schema):
     id = fields.Integer(dump_only=True)
+    name = fields.String(dump_only=True)
+
+
+class PersonCreateSchema(Schema):
     name = fields.String(required=True)
     GST_No = fields.String(required=True)
     state_code = fields.Integer(required=True)
     state_name = fields.String(required=True)
     address = fields.String(allow_none=True)
+
+
+class PersonResponseSchema(Schema):
+    id = fields.Integer(dump_only=True)
+    name = fields.String(dump_only=True)
+    GST_No = fields.String(dump_only=True)
+    state_code = fields.Integer(dump_only=True)
+    state_name = fields.String(dump_only=True)
+    address = fields.String(dump_only=True)
 
 
 class PersonUpdateSchema(Schema):

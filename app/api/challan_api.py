@@ -6,17 +6,18 @@ from app import logger
 from app.api.utils import apply_sorting
 from app.extensions import db
 from app.models import Challan
-from app.schemas.challan_schema import ChallanSchema, ChallanQuerySchema, ChallanUpdateSchema
+from app.schemas.challan_schema import ChallanCreateSchema, ChallanQuerySchema, ChallanUpdateSchema, \
+    ChallanListResponseSchema, ChallanResponseSchema
 
 challan_bp = Blueprint('challan_bp', __name__)
 
 
 @challan_bp.route('/challans')
 class ChallanResource(MethodView):
-    @challan_bp.response(200, ChallanSchema(many=True))
+    @challan_bp.response(200, ChallanListResponseSchema(many=True))
     @challan_bp.arguments(ChallanQuerySchema, location='query')
     @challan_bp.paginate()
-    def get(self, query_args,pagination_parameters):
+    def get(self, query_args, pagination_parameters):
         logger.info('GET /challans called')
         logger.debug(f"Query Arguments={query_args}")
 
@@ -44,13 +45,13 @@ class ChallanResource(MethodView):
                 Challan.remarks.like(search)
             ))
         # for sorting
-        buyers = apply_sorting(query, query_args,pagination_parameters)
+        buyers = apply_sorting(query, query_args, pagination_parameters)
         logger.info(f"Found {pagination_parameters.item_count} buyers")
         logger.debug(f"Returned buyers: {buyers}")
         return buyers
 
-    @challan_bp.response(201, ChallanSchema)
-    @challan_bp.arguments(ChallanSchema)
+    @challan_bp.response(201, ChallanResponseSchema)
+    @challan_bp.arguments(ChallanCreateSchema)
     def post(self, new_challan_data):
         logger.info('POST /challans called')
         logger.debug(f"Creating new challan with args: {new_challan_data}")
@@ -66,14 +67,14 @@ class ChallanResource(MethodView):
 
 @challan_bp.route('/challans/<int:challan_id>')
 class ChallanResource(MethodView):
-    @challan_bp.response(200, ChallanSchema)
+    @challan_bp.response(200, ChallanResponseSchema)
     def get(self, challan_id):
         logger.info(f"GET /challans/{challan_id} called")
         challan = Challan.query.get_or_404(challan_id)
         logger.info(f"Found challan with ID {challan_id}")
         return challan
 
-    @challan_bp.response(200, ChallanSchema)
+    @challan_bp.response(200, ChallanResponseSchema)
     @challan_bp.arguments(ChallanUpdateSchema)
     def put(self, update_challan_data, challan_id):
         logger.info(f"PUT /challans/{challan_id} called")

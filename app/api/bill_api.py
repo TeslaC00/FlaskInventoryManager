@@ -1,19 +1,19 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
-from sqlalchemy import or_, extract
+from sqlalchemy import or_, extract, func
 
 from app.api.utils import apply_sorting
 from app.extensions import db
 from app.logger import logger
 from app.models import Bill
-from app.schemas.bill_schema import BillSchema, BillQuerySchema, BillUpdateSchema
+from app.schemas.bill_schema import BillQuerySchema, BillUpdateSchema, BillResponseSchema, BillCreateSchema, \
+    BillListResponseSchema
+from marshmallow import Schema, fields
 
 bills_bp = Blueprint('bills_bp', __name__, description='Operations on bills')
 
+
 # app/schemas/sales_analysis_schema.py
-from marshmallow import Schema, fields
-
-
 class SalesAnalysisQuerySchema(Schema):
     start_date = fields.Date(required=False)
     end_date = fields.Date(required=False)
@@ -22,7 +22,7 @@ class SalesAnalysisQuerySchema(Schema):
 
 @bills_bp.route('/bills')
 class BillListResource(MethodView):
-    @bills_bp.response(200, BillSchema(many=True))
+    @bills_bp.response(200, BillListResponseSchema(many=True))
     @bills_bp.arguments(BillQuerySchema, location='query')
     @bills_bp.paginate()
     def get(self, query_args, pagination_parameters):
@@ -55,8 +55,8 @@ class BillListResource(MethodView):
         logger.debug(f"Returned bills: {bills}")
         return bills
 
-    @bills_bp.response(201, BillSchema)
-    @bills_bp.arguments(BillSchema)
+    @bills_bp.response(201, BillResponseSchema)
+    @bills_bp.arguments(BillCreateSchema)
     def post(self, new_bill_data):
         logger.info('POST /bills called')
         logger.debug(f"Creating new bill with args: {new_bill_data}")
@@ -75,14 +75,14 @@ class BillListResource(MethodView):
 @bills_bp.route('bills/<int:bill_id>')
 class BillResource(MethodView):
 
-    @bills_bp.response(200, BillSchema)
+    @bills_bp.response(200, BillResponseSchema)
     def get(self, bill_id):
         logger.info(f"GET /bills/{bill_id} called")
         bill = Bill.query.get_or_404(bill_id)
         logger.info(f"Found bill with ID {bill_id}")
         return bill
 
-    @bills_bp.response(200, BillSchema)
+    @bills_bp.response(200, BillResponseSchema)
     @bills_bp.arguments(BillUpdateSchema)
     def put(self, update_bill_data, bill_id):
         logger.info(f"PUT /bills/{bill_id} called")

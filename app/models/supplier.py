@@ -33,6 +33,8 @@ class Supplier(db.Model):
     state_code = Column(Integer, nullable=False)
     state_name = Column(String(30), nullable=False)
     address = Column(Text, nullable=False)
+    # supplier relationship with challan using 'challans' -> both does automatic join (eager loading)
+    # challan relationship with supplier using 'supplier'(backref)
     challans = relationship('Challan', backref='supplier')
 
     def to_dict(self):

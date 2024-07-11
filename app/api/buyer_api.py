@@ -6,14 +6,14 @@ from app.api.utils import apply_sorting
 from app.extensions import db
 from app.logger import logger
 from app.models import Buyer
-from app.schemas.person_schema import PersonSchema, PersonQuerySchema, PersonUpdateSchema
+from app.schemas.person_schema import PersonCreateSchema, PersonQuerySchema, PersonUpdateSchema, PersonResponseSchema
 
 buyer_bp = Blueprint('buyer_bp', __name__)
 
 
 @buyer_bp.route('/buyer')
 class BuyerListResource(MethodView):
-    @buyer_bp.response(200, PersonSchema(many=True))
+    @buyer_bp.response(200, PersonResponseSchema(many=True))
     @buyer_bp.arguments(PersonQuerySchema, location='query')
     @buyer_bp.paginate()
     def get(self, query_args, pagination_parameters):
@@ -45,8 +45,8 @@ class BuyerListResource(MethodView):
         logger.debug(f"Returned buyers: {buyers}")
         return buyers
 
-    @buyer_bp.response(201, PersonSchema)
-    @buyer_bp.arguments(PersonSchema)
+    @buyer_bp.response(201, PersonResponseSchema)
+    @buyer_bp.arguments(PersonCreateSchema)
     def post(self, new_buyer_data):
         logger.info("POST /buyers called")
         logger.debug(f"Creating new buyer with args: {new_buyer_data}")
@@ -64,14 +64,14 @@ class BuyerListResource(MethodView):
 
 @buyer_bp.route('/buyer/<int:buyer_id>')
 class BuyerResource(MethodView):
-    @buyer_bp.response(200, PersonSchema)
+    @buyer_bp.response(200, PersonResponseSchema)
     def get(self, buyer_id):
         logger.info(f"GET /buyers/{buyer_id} called")
         buyer = Buyer.query.get_or_404(buyer_id)
         logger.info(f"Found buyer with ID {buyer_id}")
         return buyer
 
-    @buyer_bp.response(200, PersonSchema)
+    @buyer_bp.response(200, PersonResponseSchema)
     @buyer_bp.arguments(PersonUpdateSchema)
     def put(self, update_buyer_data, buyer_id):
         logger.info(f"PUT /buyers/{buyer_id} called")

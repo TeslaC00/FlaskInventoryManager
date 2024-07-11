@@ -4,6 +4,11 @@ from app.schemas.query_schema import QuerySchema
 from app.schemas.unit_schema import UnitSchema
 
 
+class ProductSchema(Schema):
+    part_no = fields.Integer(dump_only=True)
+    name = fields.String(dump_only=True)
+
+
 class ProductCreateSchema(Schema):
     name = fields.String(required=True)
     unit_id = fields.Integer(required=True)

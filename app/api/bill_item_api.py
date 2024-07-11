@@ -6,14 +6,15 @@ from app import logger
 from app.api.utils import apply_sorting
 from app.extensions import db
 from app.models import BillItem
-from app.schemas.bill_item_schema import BillItemSchema, BillItemQuerySchema, BillItemUpdateSchema
+from app.schemas.bill_item_schema import BillItemQuerySchema, BillItemUpdateSchema, BillItemCreateSchema, \
+    BillItemResponseSchema
 
 bill_item_bp = Blueprint('bill_item_bp', __name__, description='Operations on bill items')
 
 
 @bill_item_bp.route('/bill_item')
 class BillItemListResource(MethodView):
-    @bill_item_bp.response(200, BillItemSchema(many=True))
+    @bill_item_bp.response(200, BillItemResponseSchema(many=True))
     @bill_item_bp.arguments(BillItemQuerySchema, location='query')
     @bill_item_bp.paginate()
     def get(self, query_args, pagination_parameters):
@@ -41,8 +42,8 @@ class BillItemListResource(MethodView):
         logger.debug(f"Returned bills: {bill_items}")
         return bill_items
 
-    @bill_item_bp.response(201, BillItemSchema)
-    @bill_item_bp.arguments(BillItemSchema)
+    @bill_item_bp.response(201, BillItemResponseSchema)
+    @bill_item_bp.arguments(BillItemCreateSchema)
     def post(self, new_bill_item_data):
         logger.info('POST /bill_item called')
         logger.debug(f"Creating new bill item with args: {new_bill_item_data}")
@@ -59,14 +60,14 @@ class BillItemListResource(MethodView):
 
 @bill_item_bp.route('/bill_item/<int:bill_item_id>')
 class BillItemResource(MethodView):
-    @bill_item_bp.response(200, BillItemSchema)
+    @bill_item_bp.response(200, BillItemResponseSchema)
     def get(self, bill_item_id):
         logger.info(f'GET /bill_item/{bill_item_id} called')
         bill_item = BillItem.query.get_or_404(bill_item_id)
         logger.info(f"Found bill with ID {bill_item}")
         return bill_item
 
-    @bill_item_bp.response(200, BillItemSchema)
+    @bill_item_bp.response(200, BillItemResponseSchema)
     @bill_item_bp.arguments(BillItemUpdateSchema)
     def put(self, update_bill_item_data, bill_item_id):
 

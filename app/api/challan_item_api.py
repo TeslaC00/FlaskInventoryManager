@@ -6,14 +6,15 @@ from app.api.utils import apply_sorting
 from app.extensions import db
 from app.logger import logger
 from app.models import ChallanItem
-from app.schemas.challan_item_schema import ChallanItemSchema, ChallanQuerySchema, ChallanItemUpdateSchema
+from app.schemas.challan_item_schema import ChallanQuerySchema, ChallanItemUpdateSchema, ChallanItemCreateSchema, \
+    ChallanItemResponseSchema
 
 challan_item_bp = Blueprint('challan_item_bp', __name__)
 
 
 @challan_item_bp.route('/challan_item')
 class ChallanItemListResource(MethodView):
-    @challan_item_bp.response(200, ChallanItemSchema(many=True))
+    @challan_item_bp.response(200, ChallanItemResponseSchema(many=True))
     @challan_item_bp.arguments(ChallanQuerySchema, location='query')
     @challan_item_bp.paginate()
     def get(self, query_args, pagination_parameters):
@@ -41,8 +42,8 @@ class ChallanItemListResource(MethodView):
         logger.debug(f"Returned challan_items: {challan_items}")
         return challan_items
 
-    @challan_item_bp.response(201, ChallanItemSchema)
-    @challan_item_bp.arguments(ChallanItemSchema)
+    @challan_item_bp.response(201, ChallanItemResponseSchema)
+    @challan_item_bp.arguments(ChallanItemCreateSchema)
     def post(self, new_challan_item_data):
         logger.info('POST /challan_items called')
         logger.debug(f"Creating new challan items with args: {new_challan_item_data}")
@@ -60,14 +61,14 @@ class ChallanItemListResource(MethodView):
 
 @challan_item_bp.route('/challan_item/<int:challan_item_id>')
 class ChallanItemResource(MethodView):
-    @challan_item_bp.response(200, ChallanItemSchema)
+    @challan_item_bp.response(200, ChallanItemResponseSchema)
     def get(self, challan_item_id):
         logger.info(f"GET /challan_items/{challan_item_id} called")
         challan_item = ChallanItem.query.get_or_404(challan_item_id, description="Challan item not found")
         logger.info(f"Found challan item with ID {challan_item_id}")
         return challan_item
 
-    @challan_item_bp.response(200, ChallanItemSchema)
+    @challan_item_bp.response(200, ChallanItemResponseSchema)
     @challan_item_bp.arguments(ChallanItemUpdateSchema)
     def put(self, update_challan_item_data, challan_item_id):
         logger.info(f"PUT /challan_items/{challan_item_id} called")

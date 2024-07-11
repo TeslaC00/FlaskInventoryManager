@@ -6,14 +6,14 @@ from app.api.utils import apply_sorting
 from app.extensions import db
 from app.logger import logger
 from app.models import Supplier
-from app.schemas.person_schema import PersonSchema, PersonQuerySchema, PersonUpdateSchema
+from app.schemas.person_schema import PersonCreateSchema, PersonQuerySchema, PersonUpdateSchema, PersonResponseSchema
 
 supplier_bp = Blueprint('supplier_bp', __name__)
 
 
 @supplier_bp.route('/supplier')
 class SupplierListResource(MethodView):
-    @supplier_bp.response(200, PersonSchema(many=True))
+    @supplier_bp.response(200, PersonResponseSchema(many=True))
     @supplier_bp.arguments(PersonQuerySchema, location='query')
     @supplier_bp.paginate()
     def get(self, query_args, pagination_parameters):
@@ -45,8 +45,8 @@ class SupplierListResource(MethodView):
         logger.debug(f"Returned suppliers: {suppliers}")
         return suppliers
 
-    @supplier_bp.response(201, PersonSchema)
-    @supplier_bp.arguments(PersonSchema)
+    @supplier_bp.response(201, PersonResponseSchema)
+    @supplier_bp.arguments(PersonCreateSchema)
     def post(self, new_supplier_data):
         logger.info("POST /buyers called")
         logger.debug(f"Creating new supplier with args: {new_supplier_data}")
@@ -64,14 +64,14 @@ class SupplierListResource(MethodView):
 
 @supplier_bp.route('/supplier/<int:supplier_id>')
 class SupplierResource(MethodView):
-    @supplier_bp.response(200, PersonSchema)
+    @supplier_bp.response(200, PersonResponseSchema)
     def get(self, supplier_id):
         logger.info(f"GET /suppliers/{supplier_id} called")
         supplier = Supplier.query.get_or_404(supplier_id)
         logger.info(f"Found supplier with ID {supplier_id}")
         return supplier
 
-    @supplier_bp.response(200, PersonSchema)
+    @supplier_bp.response(200, PersonResponseSchema)
     @supplier_bp.arguments(PersonUpdateSchema)
     def put(self, update_supplier_data, supplier_id):
         logger.info(f"PUT /suppliers/{supplier_id} called")
