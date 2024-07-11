@@ -3,11 +3,13 @@ from flask_security import hash_password
 from flask_smorest import Blueprint, abort
 from sqlalchemy import or_
 
+from app.models.user import Role
 from app.api.utils import apply_sorting
 from app.models import User
 from app.logger import logger
 from app.extensions import db
-from app.schemas.user_schema import UserCreateSchema, UserUpdateSchema, UserQuerySchema, UserResponseSchema
+from app.schemas.user_schema import UserCreateSchema, UserUpdateSchema, UserQuerySchema, UserResponseSchema, \
+    UserListResponseSchema
 from app.datastore import user_datastore
 
 user_bp = Blueprint('user_bp', __name__)
@@ -16,7 +18,7 @@ user_bp = Blueprint('user_bp', __name__)
 # TODO: add user form and schema
 @user_bp.route('/user')
 class UserListResource(MethodView):
-    @user_bp.response(200, UserResponseSchema(many=True))
+    @user_bp.response(200, UserListResponseSchema(many=True))
     @user_bp.arguments(UserQuerySchema, location='query')
     @user_bp.paginate()
     def get(self, query_args, pagination_parameters):
@@ -50,20 +52,20 @@ class UserListResource(MethodView):
     def post(self, new_user_data):
         logger.info('POST /user called')
         logger.debug(f"Creating new user with data: {new_user_data}")
-
+        # check if datastore generate duplicate email or username errors
         try:
             new_user = user_datastore.create_user(**new_user_data)
             new_user.password = hash_password(new_user_data['password'])
             db.session.add(new_user)
             db.session.commit()
-            logger.info(f"New user created with data id: {new_user.id}")
+            logger.info(f"New user created with id: {new_user.id}")
             return new_user
         except Exception as e:
-            logger.error(f"Error creating user: {e}")
+            logger.error(f"Error creating new user: {e}")
             abort(500, message="An error occurred while creating new user")
 
 
-# decide whether to change the user id or not
+# decide whether to change the user id or not in log info
 @user_bp.route('/user/<int:user_id>')
 class UserResource(MethodView):
     @user_bp.response(200, UserResponseSchema)
@@ -80,8 +82,11 @@ class UserResource(MethodView):
         logger.debug(f"Updating user {user_id} with args: {update_user_data}")
 
         user = User.query.get_or_404(user_id, description="Material not found")
-        for key, value in update_user_data.items():
-            setattr(user, key, value)
+        if 'active' in update_user_data:
+            user.active = update_user_data['active']
+        if 'role_ids' in update_user_data:
+            roles = Role.query.filter(Role.id.in_(update_user_data['role_ids'])).all()
+            user.roles = roles
 
         try:
             db.session.commit()

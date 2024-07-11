@@ -14,6 +14,10 @@ class ProductSchema(Schema):
     i_gst = fields.Float(required=True)
 
 
+class ProductResponseSchema(Schema):
+    pass
+
+
 class ProductUpdateSchema(Schema):
     quantity = fields.Integer()
     price = fields.Float()
