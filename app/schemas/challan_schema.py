@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields, validate
 
-from app.schemas.challan_item_schema import ChallanItemSchema
+from app.schemas.challan_item_schema import ChallanItemSchema, ChallanItemCreateSchema
 from app.schemas.person_schema import PersonSchema
 from app.schemas.query_schema import QuerySchema
 
@@ -11,6 +11,7 @@ class ChallanCreateSchema(Schema):
     total_price = fields.Float(required=True)
     date = fields.Date(required=True, format='%Y-%m-%d')
     remarks = fields.String(allow_none=True)
+    items = fields.List(fields.Nested(ChallanItemCreateSchema), required=True)
 
 
 class ChallanResponseSchema(Schema):
@@ -33,7 +34,6 @@ class ChallanListResponseSchema(Schema):
 
 
 class ChallanUpdateSchema(Schema):
-    total_price = fields.Float()
     remarks = fields.String()
 
 

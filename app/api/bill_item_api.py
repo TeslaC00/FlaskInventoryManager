@@ -29,7 +29,8 @@ class BillItemListResource(MethodView):
         except Exception as e:
             abort(500, e)
 
-    @bill_item_bp.response(201)
+    @bill_item_bp.response(503,
+                           description="This API is Not maintained, using bills to create bill item is Recommended")
     def post(self):
         logger.info('POST /bill_item called')
         return ("This route is not going to be removed or inaccessible"

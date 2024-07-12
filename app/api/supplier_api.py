@@ -3,7 +3,6 @@ from flask_smorest import Blueprint, abort
 
 from app.errors.not_found_error import NotFoundError
 from app.logger import logger
-from app.models import Supplier
 from app.schemas.person_schema import PersonCreateSchema, PersonFilterSchema, PersonUpdateSchema, PersonResponseSchema
 from app.services.supplier_service import SupplierService
 
@@ -81,7 +80,6 @@ class SupplierResource(MethodView):
     @supplier_bp.response(204)
     def delete(self, supplier_id):
         logger.info(f"DELETE /suppliers/{supplier_id} called")
-        supplier = Supplier.query.get_or_404(supplier_id)
         try:
             SupplierService.delete_supplier(supplier_id)
             logger.info(f"Supplier {supplier_id} deleted")

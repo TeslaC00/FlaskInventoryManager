@@ -14,7 +14,7 @@ class ChallanItemSchema(Schema):
 class ChallanItemCreateSchema(Schema):
     price = fields.Float(required=True)
     quantity = fields.Integer(required=True)
-    challan_id = fields.Integer(required=True)
+    # challan_id = fields.Integer(required=True)
     material_part_no = fields.Integer(required=True)
 
 

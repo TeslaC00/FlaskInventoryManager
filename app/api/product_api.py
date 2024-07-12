@@ -1,12 +1,11 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 
-from app.api.utils import apply_sorting
-from app.extensions import db
+from app.errors.not_found_error import NotFoundError
 from app.logger import logger
-from app.models import Product
 from app.schemas.product_schema import ProductCreateSchema, ProductResponseSchema, ProductQuerySchema, \
     ProductUpdateSchema
+from app.services.product_service import ProductService
 
 product_bp = Blueprint('product_bp', __name__)
 
@@ -16,60 +15,37 @@ class ProductListResource(MethodView):
     @product_bp.response(200, ProductResponseSchema(many=True))
     @product_bp.arguments(ProductQuerySchema, location='query')
     @product_bp.paginate()
-    def get(self, query_args, pagination_parameters):
+    def get(self, filters, pagination_parameters):
         logger.info('GET /products called')
-        logger.debug(f"Query Arguments={query_args}")
-
-        query = Product.query
-        # for filtering
-        if 'name' in query_args:
-            query = query.filter(Product.name.like(f"%{query_args['name']}%"))
-        if 'unit_id' in query_args:
-            query = query.filter(Product.unit_id == query_args['unit_id'])
-        if 'min_quantity' in query_args:
-            query = query.filter(Product.quantity >= query_args['min_quantity'])
-        if 'max_quantity' in query_args:
-            query = query.filter(Product.quantity <= query_args['max_quantity'])
-        if 'min_price' in query_args:
-            query = query.filter(Product.price >= query_args['min_price'])
-        if 'max_price' in query_args:
-            query = query.filter(Product.price <= query_args['max_price'])
-        if 'min_c_gst' in query_args:
-            query = query.filter(Product.c_gst >= query_args['min_c_gst'])
-        if 'max_c_gst' in query_args:
-            query = query.filter(Product.c_gst <= query_args['max_c_gst'])
-        if 'min_s_gst' in query_args:
-            query = query.filter(Product.s_gst >= query_args['min_s_gst'])
-        if 'max_s_gst' in query_args:
-            query = query.filter(Product.s_gst <= query_args['max_s_gst'])
-        if 'min_i_gst' in query_args:
-            query = query.filter(Product.i_gst >= query_args['min_i_gst'])
-        if 'max_i_gst' in query_args:
-            query = query.filter(Product.i_gst <= query_args['max_i_gst'])
-        # for searching
-        if 'search' in query_args:
-            query = query.filter(Product.name.like(f"%{query_args['search']}%"))
-        # for sorting
-        products = apply_sorting(query, query_args, pagination_parameters)
-        logger.info(f"Found {pagination_parameters.item_count} products")
-        logger.debug(f"Returned products: {products}")
-        return products
+        logger.debug(f"Query Arguments={filters}")
+        try:
+            products = ProductService.get_all_products(pagination_parameters.page, pagination_parameters.page_size,
+                                                       **filters)
+            pagination_parameters.item_count = products.total
+            logger.info(f"Found {pagination_parameters.item_count} Products")
+            logger.debug(f"Returned Products: {products}")
+            return products
+        except ValueError as ve:
+            abort(400, ve)
+        except Exception as e:
+            abort(500, e)
 
     @product_bp.response(201, ProductResponseSchema)
     @product_bp.arguments(ProductCreateSchema)
-    def post(self, new_product_data):
+    def post(self, data):
         logger.info('POST /products called')
-        logger.debug(f"Creating new product with args: {new_product_data}")
+        logger.debug(f"Creating new product with args: {data}")
 
         try:
-            new_product = Product(**new_product_data)
-            db.session.add(new_product)
-            db.session.commit()
-            logger.info(f"New product created with part_no {new_product.part_no}")
-            return new_product
+            product = ProductService.add_product(**data)
+            logger.info(f"New Buyer created with ID {product.part_no}")
+            return product
+        except ValueError as ve:
+            logger.error(f"Error creating Product: {ve}")
+            abort(400, ve)
         except Exception as e:
-            logger.error(f"Error creating product: {e}")
-            abort(500, message="An error occurred while creating the product")
+            logger.error(f"Error creating Product: {e}")
+            abort(500, e)
 
 
 @product_bp.route('/product/<int:part_no>')
@@ -77,37 +53,40 @@ class ProductResource(MethodView):
     @product_bp.response(200, ProductResponseSchema)
     def get(self, part_no):
         logger.info(f"GET /products/{part_no} called")
-        product = Product.query.get_or_404(part_no, description="Product not found")
-        logger.info(f"Found product with part_no {part_no}")
-        return product
+        try:
+            product = ProductService.get_product_by_id(part_no)
+            logger.info(f"Found product with part_no {part_no}")
+            return product
+        except NotFoundError as nfe:
+            abort(404, nfe)
+        except Exception as e:
+            abort(500, e)
 
     @product_bp.response(200, ProductResponseSchema)
     @product_bp.arguments(ProductUpdateSchema)
-    def put(self, update_product_data, part_no):
+    def put(self, data, part_no):
         logger.info(f"PUT /products/{part_no} called")
-        logger.debug(f"Updating product {part_no} with args: {update_product_data}")
-
-        product = Product.query.get_or_404(part_no, description="Product not found")
-        for key, value in update_product_data.items():
-            setattr(product, key, value)
+        logger.debug(f"Updating product {part_no} with args: {data}")
 
         try:
-            db.session.commit()
+            product = ProductService.update_product(part_no, data)
             logger.info(f"Product {part_no} updated")
             return product
+        except NotFoundError as nfe:
+            abort(404, nfe)
         except Exception as e:
-            logger.error(f"Error updating product {part_no}: {e}")
-            abort(500, message="An error occurred while updating the product")
+            logger.error(f"Error updating Product {part_no}: {e}")
+            abort(500, e)
 
     @product_bp.response(204)
     def delete(self, part_no):
         logger.info(f"DELETE /products/{part_no} called")
-        product = Product.query.get_or_404(part_no, description="Product not found")
         try:
-            db.session.delete(product)
-            db.session.commit()
+            ProductService.delete_product(part_no)
             logger.info(f"Product {part_no} deleted")
             return {'message': 'Product deleted'}
+        except NotFoundError as nfe:
+            abort(404, nfe)
         except Exception as e:
-            logger.error(f"Error deleting product {part_no}: {e}")
-            abort(500, message="An error occurred while deleting the product")
+            logger.error(f"Error deleting Product {part_no}: {e}")
+            abort(500, e)
