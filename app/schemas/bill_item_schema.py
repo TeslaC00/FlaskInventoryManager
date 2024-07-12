@@ -17,7 +17,6 @@ class BillItemCreateSchema(Schema):
     c_gst = fields.Float(required=True)
     s_gst = fields.Float(required=True)
     i_gst = fields.Float(required=True)
-    bill_id = fields.Integer(required=True)
     product_part_no = fields.Integer(required=True)
 
 

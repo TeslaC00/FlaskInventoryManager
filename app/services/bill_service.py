@@ -1,6 +1,6 @@
 from app.errors.not_found_error import NotFoundError
-from app.repositories.bill_repository import BillRepository
 from app.models import Bill
+from app.repositories.bill_repository import BillRepository
 
 
 class BillService:
@@ -29,6 +29,12 @@ class BillService:
             raise RuntimeError(f"Error creating Bill: {str(e)}")
 
     @staticmethod
+    def update_total_price(bill_id: int) -> Bill:
+        bill = BillRepository.get_by_id(bill_id)
+        bill.total_price = sum(item.price * item.quantity for item in bill.bill_items)
+        return BillRepository.update(bill)
+
+    @staticmethod
     def update_bill(bill_id: int, data: dict) -> Bill:
         existing_bill = BillService.get_bill_by_id(bill_id)
 
@@ -42,7 +48,11 @@ class BillService:
 
     @staticmethod
     def delete_bill(bill_id: int) -> None:
+        bill = BillService.get_bill_by_id(bill_id)
         try:
+            from app.services.bill_item_service import BillItemService
+            for bill_item in bill.bill_items:
+                BillItemService.delete_bill_item(bill_item.id)
             BillRepository.delete(bill_id)
         except Exception as e:
             raise RuntimeError(f"Error deleting Buyer: {str(e)}")

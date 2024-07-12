@@ -35,7 +35,9 @@ class BuyerListResource(MethodView):
         logger.debug(f"Creating new buyer with args: {data}")
 
         try:
-            return BuyerService.add_buyer(**data)
+            buyer = BuyerService.add_buyer(**data)
+            logger.info(f"New Buyer created with ID {buyer.id}")
+            return buyer
         except ValueError as ve:
             logger.error(f"Error creating buyer: {ve}")
             abort(400, ve)
