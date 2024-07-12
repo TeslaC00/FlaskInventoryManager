@@ -42,6 +42,6 @@ class Material(db.Model):
         return {
             'part_no': self.part_no,
             'name': self.name,
-            'unit_id': self.unit_id.value,
+            'unit_id': self.unit_id,
             'quantity': self.quantity
         }

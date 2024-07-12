@@ -356,7 +356,7 @@
                 cellPartNo.textContent = item.part_no;
                 cellName.textContent = item.name;
                 cellQuantity.textContent = item.quantity;
-                cellUnit.textContent = item.unit;
+                cellUnit.textContent = item.unit.name;
 
                 // Check if this row's checkbox should be initially checked based on stored selection
                 if (selectedItems.includes(item.part_no)) {
