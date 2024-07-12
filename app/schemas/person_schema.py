@@ -33,7 +33,7 @@ class PersonUpdateSchema(Schema):
     address = fields.String()
 
 
-class PersonQuerySchema(QuerySchema):
+class PersonFilterSchema(QuerySchema):
     name = fields.String()
     GST_No = fields.String(validate=validate.Length(equal=15))
     state_code = fields.Integer(validate=validate.Range(min=1, max=28))

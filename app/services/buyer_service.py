@@ -1,31 +1,52 @@
+from app.errors.not_found_error import NotFoundError
 from app.models import Buyer
 from app.repositories.buyer_repository import BuyerRepository
 
 
 class BuyerService:
-    def __init__(self, buyer_repository: BuyerRepository):
-        self.buyer_repository = buyer_repository
 
-    def get_all_buyers(self, filters=None, pagination_parameters=None):
-        return self.buyer_repository.get_all(filters, pagination_parameters)
+    @staticmethod
+    def get_all_buyers(page: int = 1, per_page: int = 10, **filters: dict):
+        try:
+            return BuyerRepository.get_all(page=page, per_page=per_page, **filters)
+        except Exception as e:
+            raise RuntimeError(f"Error fetching bills: {str(e)}")
 
-    def get_buyer_by_id(self, buyer_id):
-        return self.buyer_repository.get_by_id(buyer_id)
-
-    def add_buyer(self, data):
-        buyer = Buyer(**data)
-        return self.buyer_repository.add(buyer)
-
-    def update_buyer(self, buyer_id, data):
-        buyer = self.buyer_repository.get_by_id(buyer_id)
-        if buyer:
-            for key, value in data.items():
-                setattr(buyer, key, value)
-            return self.buyer_repository.update(buyer)
-        return None
-
-    def delete_buyer(self, buyer_id):
-        buyer = self.buyer_repository.get_by_id(buyer_id)
-        if buyer:
-            self.buyer_repository.delete(buyer)
+    @staticmethod
+    def get_buyer_by_id(buyer_id: int) -> Buyer:
+        buyer = BuyerRepository.get_by_id(buyer_id)
+        if not buyer:
+            raise NotFoundError(f"Buyer with id {buyer_id} not found")
         return buyer
+
+    @staticmethod
+    def add_buyer(**data: dict) -> Buyer:
+        buyer = Buyer(**data)
+        try:
+            return BuyerRepository.add(buyer)
+        except ValueError as ve:
+            raise ValueError(f"Invalid data: {str(ve)}")
+        except Exception as e:
+            raise RuntimeError(f"Error creating bill: {str(e)}")
+
+    @staticmethod
+    def update_buyer(buyer_id: int, data: dict) -> Buyer:
+        # Fetch existing buyer
+        existing_buyer = BuyerService.get_buyer_by_id(buyer_id)
+
+        # Update fields in the existing buyer
+        for key, value in data.items():
+            setattr(existing_buyer, key, value)
+
+        # Pass updated buyer object to the repository
+        try:
+            return BuyerRepository.update(existing_buyer)
+        except Exception as e:
+            raise RuntimeError(f"Error updating bill: {str(e)}")
+
+    @staticmethod
+    def delete_buyer(buyer_id: int) -> None:
+        try:
+            BuyerRepository.delete(buyer_id)
+        except Exception as e:
+            raise RuntimeError(f"Error deleting bill: {str(e)}")
