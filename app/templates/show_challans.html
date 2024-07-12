@@ -213,7 +213,7 @@
             border: none;
             border-radius: 15px;
         }
-        
+
         #searchInput{
             width: 210px;
         }
@@ -292,8 +292,8 @@
                                 <input type="text" class="form-control" id="challanNo" name="challan_no" required>
                             </div>
                             <div class="mb-3">
-                                <label for="supplierId" class="form-label">Supplier Name</label>
-                                <input type="text" class="form-control" id="supplierId" name="supplier_id" required>
+                                <label for="supplierName" class="form-label">Supplier Name</label>
+                                <input type="text" class="form-control" id="supplierName" name="supplier_name" required>
                             </div>
                             <div class="mb-3">
                                 <label for="date" class="form-label">Date</label>
@@ -320,7 +320,7 @@
         let currentSortBy = 'supplier_id';
         let currentSortOrder = 'asc';
         let sortOrders = {'supplier_id': 'asc', 'challan_no': 'asc', 'date': 'asc', 'total_price': 'asc', 'remarks': 'asc'};
-        let editChallanNo = null; // Global variable to store the challan ID being edited
+        let editChallanID = null; // Global variable to store the challan ID being edited
         let selectedItems = []; // Global variable to store selected item IDs
 
 
@@ -394,21 +394,21 @@
                 const row = tableBody.insertRow();
                 const cellCheckbox = row.insertCell(0);
                 const cellChallanNo = row.insertCell(1);
-                const cellSupplierId = row.insertCell(2);
+                const cellSupplierName = row.insertCell(2);
                 const cellDate = row.insertCell(3);
                 const cellTotalPrice = row.insertCell(4);
                 const cellRemarks = row.insertCell(5);
                 const cellActions = row.insertCell(6);
 
-                // Store item ID or unique identifier (item.challan_no in this case) in the checkbox
-                cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" data-id="${item.challan_no}" style="margin-left: 35%">`;
+                // Store item ID or unique identifier (item.challan_id in this case) in the checkbox
+                cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" data-id="${item.id}" style="margin-left: 35%">`;
                 cellChallanNo.textContent = item.challan_no;
-                cellSupplierId.textContent = item.supplier.name;
+                cellSupplierName.textContent = item.supplier.name;
                 cellDate.textContent = item.date;
                 cellTotalPrice.textContent = item.total_price;
                 cellRemarks.textContent = item.remarks;
                 cellActions.innerHTML = `
-                    <i class="lni lni-pencil" onclick="editRow(${item.challan_no})" style="padding-right: 2px"></i>
+                    <i class="lni lni-pencil" onclick="editRow(${item.id})" style="padding-right: 2px"></i>
                     <i class="lni lni-trash-can" onclick="deleteRow(${item.challan_no})" style="padding-left: 2px"></i>
                 `;
                 cellActions.className = "actions-column";
@@ -419,7 +419,7 @@
                 }
             });
         }
-        
+
         function handleCheckboxClick(checkbox) {
             const itemId = checkbox.getAttribute('data-id');
 
@@ -530,9 +530,9 @@
             }
         });
 
-        function editRow(challan_no) {
+        function editRow(challan_id) {
         // Fetch data for the selected challan number
-            fetch(`/api/v1/challans/${challan_no}`)
+            fetch(`/api/v1/challans/${challan_id}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -543,13 +543,13 @@
                     console.log('Opening edit modal');
                     // Populate modal form fields with fetched data
                     document.getElementById('challanNo').value = data.challan_no;
-                    document.getElementById('supplierId').value = data.supplier_id;
+                    document.getElementById('supplierName').value = data.supplier_id;
                     document.getElementById('date').value = data.date;
                     document.getElementById('totalPrice').value = data.total_price;
                     document.getElementById('remarks').value = data.remarks;
 
                     // Store challan no for PUT request
-                    editChallanNo = challan_no;
+                    editChallanID = challan_id;
 
                     // Change modal title and button label for editing
                     document.getElementById('addChallanModalLabel').textContent = 'Edit Challan';
@@ -589,8 +589,8 @@
             // Clear form fields and reset modal properties
             document.getElementById('addChallanForm').reset(); // Clear form fields
             document.getElementById('challanNo').disabled = false;
-            document.getElementById('supplierId').disabled = false; // Enable the unit dropdown
-            editChallanNo = null; // Reset editChallanNo
+            document.getElementById('supplierName').disabled = false; // Enable the unit dropdown
+            editChallanID = null; // Reset editChallanID
             document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title
             document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label
         }
@@ -604,7 +604,7 @@
             // Reset form fields and modal properties
             document.getElementById('addChallanForm').reset(); // Reset form fields
             document.getElementById('materialUnit').disabled = false; // Enable the unit dropdown
-            editChallanNo = null; // Reset editChallanNo
+            editChallanID = null; // Reset editChallanID
             document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title
             document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label
         }
@@ -652,16 +652,16 @@
             };
 
             try {
-                if (editChallanNo) {
-                    // If editChallanNo is set, send a PUT request to update the challan
-                    await fetch(`/api/v1/challans/${editChallanNo}`, {
+                if (editChallanID) {
+                    // If editChallanID is set, send a PUT request to update the challan
+                    await fetch(`/api/v1/challans/${editChallanID}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify(data),
                     });
-                    editChallanNo = null; // Reset editChallanNo after successful update
+                    editChallanID = null; // Reset editChallanID after successful update
                 } else {
                     // Otherwise, it's a POST request to add a new challan
                     await fetch('/api/v1/challans', {
