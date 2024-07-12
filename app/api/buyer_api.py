@@ -26,7 +26,7 @@ class BuyerListResource(MethodView):
         except ValueError as ve:
             abort(400, ve)
         except Exception as e:
-            abort(500, e, message=str(e))
+            abort(500, e)
 
     @buyer_bp.response(201, PersonResponseSchema)
     @buyer_bp.arguments(PersonCreateSchema)
@@ -41,7 +41,7 @@ class BuyerListResource(MethodView):
             abort(400, ve)
         except Exception as e:
             logger.error(f"Error creating buyer: {e}")
-            abort(500, e, message='Internal Server Error')
+            abort(500, e)
 
 
 @buyer_bp.route('/buyer/<int:buyer_id>')
@@ -56,7 +56,7 @@ class BuyerResource(MethodView):
         except NotFoundError as nfe:
             abort(404, nfe)
         except Exception as e:
-            abort(500, e, message='Internal Server Error')
+            abort(500, e)
 
     @buyer_bp.response(200, PersonResponseSchema)
     @buyer_bp.arguments(PersonUpdateSchema)
@@ -72,7 +72,7 @@ class BuyerResource(MethodView):
             abort(404, nfe)
         except Exception as e:
             logger.error(f"Error updating buyer {buyer_id}: {e}")
-            abort(500, e, message='Internal Server Error')
+            abort(500, e)
 
     @buyer_bp.response(204)
     def delete(self, buyer_id):
@@ -85,4 +85,4 @@ class BuyerResource(MethodView):
             abort(404, nfe)
         except Exception as e:
             logger.error(f"Error deleting buyer {buyer_id}: {e}")
-            abort(500, e, message='Internal Server Error')
+            abort(500, e)

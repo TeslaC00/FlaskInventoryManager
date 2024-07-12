@@ -10,7 +10,7 @@ class BuyerService:
         try:
             return BuyerRepository.get_all(page=page, per_page=per_page, **filters)
         except Exception as e:
-            raise RuntimeError(f"Error fetching bills: {str(e)}")
+            raise RuntimeError(f"Error fetching Buyers: {str(e)}")
 
     @staticmethod
     def get_buyer_by_id(buyer_id: int) -> Buyer:
@@ -27,7 +27,7 @@ class BuyerService:
         except ValueError as ve:
             raise ValueError(f"Invalid data: {str(ve)}")
         except Exception as e:
-            raise RuntimeError(f"Error creating bill: {str(e)}")
+            raise RuntimeError(f"Error creating Buyer: {str(e)}")
 
     @staticmethod
     def update_buyer(buyer_id: int, data: dict) -> Buyer:
@@ -42,11 +42,11 @@ class BuyerService:
         try:
             return BuyerRepository.update(existing_buyer)
         except Exception as e:
-            raise RuntimeError(f"Error updating bill: {str(e)}")
+            raise RuntimeError(f"Error updating Buyer: {str(e)}")
 
     @staticmethod
     def delete_buyer(buyer_id: int) -> None:
         try:
             BuyerRepository.delete(buyer_id)
         except Exception as e:
-            raise RuntimeError(f"Error deleting bill: {str(e)}")
+            raise RuntimeError(f"Error deleting Buyer: {str(e)}")
