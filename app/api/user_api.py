@@ -28,9 +28,9 @@ class UserListResource(MethodView):
         query = User.query
         # for filtering
         if 'email' in query_args:
-            query = query.filter(User.email.like(f'%{query_args['email']}%'))
+            query = query.filter(User.email.like(f"%{query_args['email']}%"))
         if 'username' in query_args:
-            query = query.filter(User.username.like(f'%{query_args['username']}%'))
+            query = query.filter(User.username.like(f"%{query_args['username']}%"))
         if 'active' in query_args:
             query = query.filter(User.active == query_args['active'])
 
