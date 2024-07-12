@@ -6,6 +6,7 @@ from app.models.user import User
 
 user = Blueprint('user', __name__)
 
-@user.route('/api/get_users', methods=['GET','POST'])
+
+@user.route('/api/get_users', methods=['GET', 'POST'])
 def get_users():
     return render_template('user_table.html')

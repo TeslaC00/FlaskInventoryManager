@@ -1,4 +1,4 @@
-# user.py
+# user_route.py
 from flask_security import UserMixin, RoleMixin, AsaList
 from app.extensions import db
 from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey
