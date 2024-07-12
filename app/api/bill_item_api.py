@@ -1,13 +1,10 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
-from sqlalchemy import or_
 
 from app import logger
-from app.api.utils import apply_sorting
-from app.extensions import db
-from app.models import BillItem
-from app.schemas.bill_item_schema import BillItemQuerySchema, BillItemUpdateSchema, BillItemCreateSchema, \
-    BillItemResponseSchema
+from app.errors.not_found_error import NotFoundError
+from app.schemas.bill_item_schema import BillItemQuerySchema, BillItemUpdateSchema, BillItemResponseSchema
+from app.services.bill_item_service import BillItemService
 
 bill_item_bp = Blueprint('bill_item_bp', __name__, description='Operations on bill items')
 
@@ -17,45 +14,26 @@ class BillItemListResource(MethodView):
     @bill_item_bp.response(200, BillItemResponseSchema(many=True))
     @bill_item_bp.arguments(BillItemQuerySchema, location='query')
     @bill_item_bp.paginate()
-    def get(self, query_args, pagination_parameters):
+    def get(self, filters, pagination_parameters):
         logger.info('GET /bill_item called')
-        logger.debug(f"Query Arguments={query_args}")
-
-        query = BillItem.query
-        # for filtering
-        if 'bill_id' in query_args:
-            query = query.filter(BillItem.bill_id == query_args['bill_id'])
-        if 'product_part_no' in query_args:
-            query = query.filter(BillItem.product_part_no == query_args['product_part_no'])
-        # for searching
-        if 'search' in query_args:
-            search = f"%{query_args['search']}%"
-            query = query.filter(or_(
-                BillItem.quantity.like(search),
-                BillItem.price.like(search),
-                BillItem.bill_id.like(search),
-                BillItem.product_part_no.like(search)
-            ))
-        # for sorting
-        bill_items = apply_sorting(query, query_args, pagination_parameters)
-        logger.info(f"Found {pagination_parameters.item_count} bills")
-        logger.debug(f"Returned bills: {bill_items}")
-        return bill_items
-
-    @bill_item_bp.response(201, BillItemResponseSchema)
-    @bill_item_bp.arguments(BillItemCreateSchema)
-    def post(self, new_bill_item_data):
-        logger.info('POST /bill_item called')
-        logger.debug(f"Creating new bill item with args: {new_bill_item_data}")
+        logger.debug(f"Query Arguments={filters}")
         try:
-            new_bill_item = BillItem(**new_bill_item_data)
-            db.session.add(new_bill_item)
-            db.session.commit()
-            logger.info(f"New bill item created with ID {new_bill_item.id}")
-            return new_bill_item
+            bill_items = BillItemService.get_all_bill_items(pagination_parameters.page, pagination_parameters.page_size,
+                                                            **filters)
+            pagination_parameters.item_count = bill_items.total
+            logger.info(f"Found {pagination_parameters.item_count} BillItem")
+            logger.debug(f"Returned BillItems: {bill_items}")
+            return bill_items
+        except ValueError as ve:
+            abort(400, ve)
         except Exception as e:
-            logger.error(f"Error creating bill item: {e}")
-            abort(500, message="An error occurred while creating the bill item")
+            abort(500, e)
+
+    @bill_item_bp.response(201)
+    def post(self):
+        logger.info('POST /bill_item called')
+        return ("This route is not going to be removed or inaccessible"
+                "Use bills to create new bill items with it instead this one")
 
 
 @bill_item_bp.route('/bill_item/<int:bill_item_id>')
@@ -63,38 +41,41 @@ class BillItemResource(MethodView):
     @bill_item_bp.response(200, BillItemResponseSchema)
     def get(self, bill_item_id):
         logger.info(f'GET /bill_item/{bill_item_id} called')
-        bill_item = BillItem.query.get_or_404(bill_item_id)
-        logger.info(f"Found bill with ID {bill_item}")
-        return bill_item
+        try:
+            bill_item = BillItemService.get_bill_item_by_id(bill_item_id)
+            logger.info(f"Found BillItem with ID {bill_item_id}")
+            return bill_item
+        except NotFoundError as nfe:
+            abort(404, nfe)
+        except Exception as e:
+            abort(500, e)
 
     @bill_item_bp.response(200, BillItemResponseSchema)
     @bill_item_bp.arguments(BillItemUpdateSchema)
-    def put(self, update_bill_item_data, bill_item_id):
+    def put(self, data, bill_item_id):
 
         logger.info(f"PUT /bill_item/{bill_item_id} called")
-        logger.debug(f"Updating bill item {bill_item_id} with args: {update_bill_item_data}")
-
-        bill_item = BillItem.query.get_or_404(bill_item_id)
-        for key, value in update_bill_item_data.items():
-            setattr(bill_item, key, value)
+        logger.debug(f"Updating bill item {bill_item_id} with args: {data}")
 
         try:
-            db.session.commit()
+            bill_item = BillItemService.update_bill_item(bill_item_id, data)
             logger.info(f"Bill item {bill_item_id} updated")
             return bill_item
+        except NotFoundError as nfe:
+            abort(404, nfe)
         except Exception as e:
-            logger.error(f"Error updating bill item {bill_item_id}: {e}")
-            abort(500, message="An error occurred while updating the bill item")
+            logger.error(f"Error updating BillItem {bill_item_id}: {e}")
+            abort(500, e)
 
     @bill_item_bp.response(204)
     def delete(self, bill_item_id):
         logger.info(f"DELETE /bill_item/{bill_item_id} called")
-        bill_item = BillItem.query.get_or_404(bill_item_id)
         try:
-            db.session.delete(bill_item)
-            db.session.commit()
+            BillItemService.delete_bill_item(bill_item_id)
             logger.info(f"Bill item {bill_item_id} deleted")
             return {'message': 'Bill item deleted'}
+        except NotFoundError as nfe:
+            abort(404, nfe)
         except Exception as e:
-            logger.error(f"Error deleting bill item {bill_item_id}: {e}")
-            abort(500, message="An error occurred while deleting the bill item")
+            logger.error(f"Error deleting BillItem {bill_item_id}: {e}")
+            abort(500, e)

@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields, validate
 
-from app.schemas.bill_item_schema import BillItemSchema
+from app.schemas.bill_item_schema import BillItemCreateSchema, BillItemSchema
 from app.schemas.person_schema import PersonSchema
 
 
@@ -9,7 +9,8 @@ class BillCreateSchema(Schema):
     total_price = fields.Int(required=True)
     date = fields.Date(required=True, format='%Y-%m-%d')
     purchase_order = fields.Str(required=True)
-    remarks = fields.Str(allow_none=True)
+    remarks = fields.Str(required=False)
+    items = fields.List(fields.Nested(BillItemCreateSchema), required=True)
 
 
 class BillResponseSchema(Schema):
@@ -32,7 +33,6 @@ class BillListResponseSchema(Schema):
 
 
 class BillUpdateSchema(Schema):
-    total_price = fields.Int()
     remarks = fields.Str()
 
 

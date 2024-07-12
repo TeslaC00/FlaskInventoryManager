@@ -37,7 +37,9 @@ class SupplierListResource(MethodView):
         logger.debug(f"Creating new supplier with args: {data}")
 
         try:
-            return SupplierService.add_supplier(**data)
+            supplier = SupplierService.add_supplier(**data)
+            logger.info(f"New Supplier created with ID {supplier.id}")
+            return supplier
         except ValueError as ve:
             logger.error(f"Error creating supplier: {ve}")
             abort(400, ve)
