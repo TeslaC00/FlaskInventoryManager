@@ -16,16 +16,7 @@ def show_inv_raw():
     :return: Rendered 'inv_raw.html' template with raw material and produced goods data passed as context.
     """
     try:
-        # Query all raw material records from the database
-        raw_material_data = Material.query.all()
-
-        # Convert the raw material and produced goods records to dictionaries for template rendering
-        # Assuming 'to_dict' method is implemented in both 'Raw_Material' and 'Goods' models for serialization
-        table1 = [record.to_dict() for record in raw_material_data]
-
-        logger.info('Queried Raw Material table from database')
-        # Render the 'inv_raw.html' template, passing the raw material and produced goods data for display
-        return render_template('inv_raw.html', table1=table1)
+        return render_template('inv_raw.html',)
     except Exception as e:
         # TODO: add error page to show errors
         logger.error('An error occurred', e)
@@ -42,17 +33,7 @@ def show_inv_prod():
     :return: Rendered 'inv_prod.html' template with raw material and produced goods data passed as context.
     """
     try:
-
-        # Query all produced goods records from the database
-        produced_good_data = Product.query.all()
-
-        # Convert the raw material and produced goods records to dictionaries for template rendering
-        # Assuming 'to_dict' method is implemented in both 'Raw_Material' and 'Goods' models for serialization
-        table2 = [record.to_dict() for record in produced_good_data]
-
-        logger.info('Queried Goods table from database')
-        # Render the 'inv_prod.html' template, passing the raw material and produced goods data for display
-        return render_template('inv_prod.html', table2=table2)
+        return render_template('inv_prod.html')
     except Exception as e:
         # TODO: add error page to show errors
         logger.error('An error occurred', e)
