@@ -32,7 +32,10 @@ class BillItemService:
             bill_id=bill_id
         )
         try:
-            return BillItemRepository.add(bill_item)
+            new_bill_item = BillItemRepository.add(bill_item)
+            from app.services.product_service import ProductService
+            ProductService.add_quantity(-new_bill_item.quantity, new_bill_item.product_part_no)
+            return new_bill_item
         except ValueError as ve:
             raise ValueError(f"Invalid data: {str(ve)}")
         except Exception as e:
@@ -46,6 +49,7 @@ class BillItemService:
     @staticmethod
     def update_bill_item(bill_item_id: int, data: dict) -> BillItem:
         existing_bill_item = BillItemService.get_bill_item_by_id(bill_item_id)
+        initial_quantity = existing_bill_item.quantity
 
         for key, value in data.items():
             setattr(existing_bill_item, key, value)
@@ -54,6 +58,8 @@ class BillItemService:
             bill_item = BillItemRepository.update(existing_bill_item)
             from app.services.bill_service import BillService
             BillService.update_total_price(bill_item.bill_id)
+            from app.services.product_service import ProductService
+            ProductService.add_quantity(initial_quantity - bill_item.quantity, bill_item.product_part_no)
             return bill_item
         except Exception as e:
             raise RuntimeError(f"Error updating BillItem: {str(e)}")
@@ -61,6 +67,11 @@ class BillItemService:
     @staticmethod
     def delete_bill_item(bill_item_id: int) -> None:
         try:
+            bill_item = BillItemService.get_bill_item_by_id(bill_item_id)
             BillItemRepository.delete(bill_item_id)
+            from app.services.bill_service import BillService
+            BillService.update_total_price(bill_item.bill_id)
+            from app.services.product_service import ProductService
+            ProductService.add_quantity(bill_item.quantity, bill_item.product_part_no)
         except Exception as e:
             raise RuntimeError(f"Error deleting BillItem: {str(e)}")

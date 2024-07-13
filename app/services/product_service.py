@@ -13,10 +13,10 @@ class ProductService:
             raise RuntimeError(f"Error fetching Products: {str(e)}")
 
     @staticmethod
-    def get_product_by_id(product_id: int) -> Product:
-        product = ProductRepository.get_by_id(product_id)
+    def get_product_by_id(product_part_no: int) -> Product:
+        product = ProductRepository.get_by_id(product_part_no)
         if not product:
-            raise NotFoundError(f"Product with id {product_id} not found")
+            raise NotFoundError(f"Product with id {product_part_no} not found")
         return product
 
     @staticmethod
@@ -30,9 +30,9 @@ class ProductService:
             raise RuntimeError(f"Error creating Product: {str(e)}")
 
     @staticmethod
-    def update_product(product_id: int, data: dict) -> Product:
+    def update_product(product_part_no: int, data: dict) -> Product:
         # Fetch existing product
-        existing_product = ProductService.get_product_by_id(product_id)
+        existing_product = ProductService.get_product_by_id(product_part_no)
 
         # Update fields in the existing product
         for key, value in data.items():
@@ -45,8 +45,14 @@ class ProductService:
             raise RuntimeError(f"Error updating Product: {str(e)}")
 
     @staticmethod
-    def delete_product(product_id: int) -> None:
+    def delete_product(product_part_no: int) -> None:
         try:
-            ProductRepository.delete(product_id)
+            ProductRepository.delete(product_part_no)
         except Exception as e:
             raise RuntimeError(f"Error deleting Product: {str(e)}")
+
+    @staticmethod
+    def add_quantity(quantity: int, product_part_no: int) -> None:
+        product = ProductService.get_product_by_id(product_part_no)
+        product.quantity += quantity
+        ProductRepository.update(product)

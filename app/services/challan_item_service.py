@@ -30,7 +30,10 @@ class ChallanItemService:
             challan_id=challan_id
         )
         try:
-            return ChallanItemRepository.add(challan_item)
+            new_challan_item = ChallanItemRepository.add(challan_item)
+            from app.services.material_service import MaterialService
+            MaterialService.add_quantity(new_challan_item.quantity, new_challan_item.material_part_no)
+            return new_challan_item
         except ValueError as ve:
             raise ValueError(f"Invalid data: {str(ve)}")
         except Exception as e:
@@ -44,6 +47,7 @@ class ChallanItemService:
     @staticmethod
     def update_challan_item(challan_item_id: int, data: dict) -> ChallanItem:
         existing_challan_item = ChallanItemService.get_challan_item_by_id(challan_item_id)
+        initial_quantity = existing_challan_item.quantity
 
         for key, value in data.items():
             setattr(existing_challan_item, key, value)
@@ -52,6 +56,8 @@ class ChallanItemService:
             challan_item = ChallanItemRepository.update(existing_challan_item)
             from app.services.challan_service import ChallanService
             ChallanService.update_total_price(challan_item.challan_id)
+            from app.services.material_service import MaterialService
+            MaterialService.add_quantity(challan_item.quantity - initial_quantity, challan_item.material_part_no)
             return challan_item
         except Exception as e:
             raise RuntimeError(f"Error updating ChallanItem: {str(e)}")
@@ -59,11 +65,11 @@ class ChallanItemService:
     @staticmethod
     def delete_challan_item(challan_item_id: int) -> None:
         try:
-            challan_id = ChallanItemService.get_challan_item_by_id(challan_item_id).challan_id
-            logger.info(f'challan_id: {challan_id}')
-            logger.info(f'challan_item_id: {challan_item_id}')
+            challan_item = ChallanItemService.get_challan_item_by_id(challan_item_id)
             ChallanItemRepository.delete(challan_item_id)
             from app.services.challan_service import ChallanService
-            logger.info(ChallanService.update_total_price(challan_id))
+            logger.info(ChallanService.update_total_price(challan_item.challan_id))
+            from app.services.material_service import MaterialService
+            MaterialService.add_quantity(-challan_item.quantity, challan_item.material_part_no)
         except Exception as e:
             raise RuntimeError(f"Error deleting ChallanItem: {str(e)}")

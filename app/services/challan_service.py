@@ -32,8 +32,6 @@ class ChallanService:
     @staticmethod
     def update_total_price(challan_id: int) -> Challan:
         challan = ChallanRepository.get_by_id(challan_id)
-        logger.info(challan)
-        logger.info(f'price before{challan.total_price}')
         challan.total_price = sum(item.price * item.quantity for item in challan.challan_items)
         logger.info(f'price after{challan.total_price}')
         return ChallanRepository.update(challan)

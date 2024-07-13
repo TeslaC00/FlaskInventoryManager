@@ -12,10 +12,10 @@ class MaterialService:
             raise RuntimeError(f"Error fetching Materials: {str(e)}")
 
     @staticmethod
-    def get_material_by_id(material_id: int) -> Material:
-        material = MaterialRepository.get_by_id(material_id)
+    def get_material_by_id(material_part_no: int) -> Material:
+        material = MaterialRepository.get_by_id(material_part_no)
         if not material:
-            raise NotFoundError(f"Material with id {material_id} not found")
+            raise NotFoundError(f"Material with id {material_part_no} not found")
         return material
 
     @staticmethod
@@ -29,9 +29,9 @@ class MaterialService:
             raise RuntimeError(f"Error creating Material: {str(e)}")
 
     @staticmethod
-    def update_material(material_id: int, data: dict) -> Material:
+    def update_material(material_part_no: int, data: dict) -> Material:
         # Fetch existing material
-        existing_material = MaterialService.get_material_by_id(material_id)
+        existing_material = MaterialService.get_material_by_id(material_part_no)
 
         # Update fields in the existing material
         for key, value in data.items():
@@ -44,8 +44,14 @@ class MaterialService:
             raise RuntimeError(f"Error updating Material: {str(e)}")
 
     @staticmethod
-    def delete_material(material_id: int) -> None:
+    def delete_material(material_part_no: int) -> None:
         try:
-            MaterialRepository.delete(material_id)
+            MaterialRepository.delete(material_part_no)
         except Exception as e:
             raise RuntimeError(f"Error deleting Material: {str(e)}")
+
+    @staticmethod
+    def add_quantity(quantity: int, material_part_no: int) -> None:
+        material = MaterialService.get_material_by_id(material_part_no)
+        material.quantity += quantity
+        MaterialRepository.update(material)

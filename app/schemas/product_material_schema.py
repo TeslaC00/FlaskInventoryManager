@@ -7,5 +7,11 @@ class ProductMaterialSchema(Schema):
     quantity = fields.Int(required=True)
 
 
+class ProductMaterialResponseSchema(Schema):
+    product_part_no = fields.Int(dump_only=True)
+    material_part_no = fields.Int(dump_only=True)
+    quantity = fields.Int(dump_only=True)
+
+
 class ProductMaterialUpdateSchema(Schema):
     quantity = fields.Int(required=True)
