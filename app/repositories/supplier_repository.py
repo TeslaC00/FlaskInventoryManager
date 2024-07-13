@@ -1,6 +1,6 @@
 from typing import Optional
 
-from app.api.utils import apply_person_filters, apply_generic_sorting
+from app.utils import apply_person_filters, apply_generic_sorting
 from app.models import Supplier
 from app.extensions import db
 from app.errors.not_found_error import NotFoundError

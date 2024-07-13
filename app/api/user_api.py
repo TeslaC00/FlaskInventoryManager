@@ -4,7 +4,7 @@ from flask_smorest import Blueprint, abort
 from sqlalchemy import or_
 
 from app.models.user import Role
-from app.api.utils import apply_sorting
+from app.utils import apply_sorting
 from app.models import User
 from app.logger import logger
 from app.extensions import db

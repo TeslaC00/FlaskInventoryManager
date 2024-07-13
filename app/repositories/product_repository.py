@@ -1,6 +1,6 @@
 from typing import Optional
 
-from app.api.utils import apply_generic_sorting
+from app.utils import apply_generic_sorting
 from app.errors.not_found_error import NotFoundError
 from app.models import Product
 from app.extensions import db

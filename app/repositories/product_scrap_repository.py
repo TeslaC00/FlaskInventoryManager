@@ -2,7 +2,7 @@ from typing import Optional
 
 from sqlalchemy import or_
 
-from app.api.utils import apply_generic_sorting
+from app.utils import apply_generic_sorting
 from app.models import ProductScrap
 from app.extensions import db
 from app.errors.not_found_error import NotFoundError

@@ -3,7 +3,7 @@ from flask_smorest import Blueprint, abort
 from sqlalchemy import or_
 
 from app import logger
-from app.api.utils import apply_sorting
+from app.utils import apply_sorting
 from app.extensions import db
 from app.models.audit_log import AuditLog
 from app.schemas.audit_log_schema import AuditLogSchema, AuditLogQuerySchema
