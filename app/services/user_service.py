@@ -1,7 +1,10 @@
+from typing import Optional
+
 from app.errors.not_found_error import NotFoundError
 from app.models import User
 from app.repositories.user_repository import UserRepository
 from app.services.role_service import RoleService
+from flask_jwt_extended import create_access_token, create_refresh_token
 
 
 class UserService:
@@ -18,6 +21,14 @@ class UserService:
         if not user:
             raise NotFoundError(f"User with id {user_id} not found")
         return user
+
+    @staticmethod
+    def get_user_by_username(username: str) -> Optional[User]:
+        return UserRepository.get_by_username(username=username)
+
+    @staticmethod
+    def get_user_by_email(email: str) -> Optional[User]:
+        return UserRepository.get_by_email(email=email)
 
     @staticmethod
     def add_user(**data: dict) -> User:
@@ -49,8 +60,20 @@ class UserService:
             raise RuntimeError(f"Error updating User: {str(e)}")
 
     @staticmethod
+    def update_user_tracking(user: User) -> None:
+        UserRepository.update(user)
+
+    @staticmethod
     def delete_user_by_id(user_id: int) -> None:
         try:
             UserRepository.delete(user_id)
         except Exception as e:
             raise RuntimeError(f"Error deleting User: {str(e)}")
+
+    @staticmethod
+    def authenticate_user(user: User, password: str) -> dict[str, str]:
+        if UserRepository.verify_password(user, password):
+            access_token = create_access_token(identity=user.id)
+            refresh_token = create_refresh_token(identity=user.id)
+            return {'access_token': access_token, 'refresh_token': refresh_token}
+        raise ValueError("Invalid credentials")

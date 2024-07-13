@@ -1,9 +1,10 @@
-from flask import Blueprint, redirect, url_for, request, render_template, flash
-from flask_security import ForgotPasswordForm, current_user, hash_password
+from flask import Blueprint, redirect, url_for, request, render_template, flash, jsonify
+from flask_security import ForgotPasswordForm, current_user, hash_password, LoginForm, login_user
 from flask import current_app
 
 from app.forms.password_form import VerifySecurityForm, ResetPasswordFormModify
 from app.logger import logger
+from app.services.user_service import UserService
 
 # path for authentication related pages
 auth_bp = Blueprint('auth', __name__)
@@ -18,7 +19,30 @@ def login_page():
     if current_user.is_authenticated:
         logger.info('User already logged in redirecting to base page')
         return redirect(url_for('main.root'))
-    return redirect(url_for('security.login'))
+    return redirect(url_for('auth.login'))
+
+
+@auth_bp.route('/login', methods=['POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        email = form.email.data
+        username = form.username.data
+        password = form.password.data
+        user = None
+        if username:
+            user = UserService.get_user_by_username(username)
+        if email:
+            user = UserService.get_user_by_email(email)
+        if not user:
+            flash('User does not exists', 'warning')
+        try:
+            tokens = UserService.authenticate_user(user, password)
+            login_user(user)
+            UserService.update_user_tracking(user)
+            return jsonify(tokens), 200
+        except ValueError as ve:
+            flash(str(ve), 'warning')
 
 
 @auth_bp.route('/forgot_password', methods=['GET', 'POST'])
