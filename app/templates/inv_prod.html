@@ -380,6 +380,7 @@
         }
 
 
+
         function populateTable(data) {
             const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
 
@@ -398,7 +399,7 @@
                 cellPartNo.textContent = item.part_no;
                 cellName.textContent = item.name;
                 cellQuantity.textContent = item.quantity;
-                cellUnit.textContent = item.unit;
+                cellUnit.textContent = item.unit.name;
                 cellPrice.textContent=item.price;
 
 
