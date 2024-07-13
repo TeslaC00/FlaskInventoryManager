@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 from app.extensions import db
 
 
@@ -35,6 +35,8 @@ class Product(db.Model):
     i_gst = Column(Float, nullable=False)
     bill_items = relationship('BillItem', backref='product')
     scraps = relationship('ProductScrap', backref='product')
+    materials = relationship('Material', secondary='product_material',
+                             backref=backref('products', lazy='dynamic'))
 
     def to_dict(self):
         """

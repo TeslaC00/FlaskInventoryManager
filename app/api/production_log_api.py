@@ -1,10 +1,9 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 
-from app.api.utils import apply_sorting
-from app.extensions import db
+from app.errors.not_found_error import NotFoundError
 from app.logger import logger
-from app.models import ProductionLog
+from app.services.production_log_service import ProductionLogService
 from app.schemas.production_log_schema import ProductionLogSchema, ProductionLogQuerySchema, ProductionLogUpdateSchema
 
 production_log_bp = Blueprint('production_log_bp', __name__)
@@ -15,45 +14,38 @@ class ProductionLogListResource(MethodView):
     @production_log_bp.response(200, ProductionLogSchema(many=True))
     @production_log_bp.arguments(ProductionLogQuerySchema, location='query')
     @production_log_bp.paginate()
-    def get(self, query_args, pagination_parameters):
+    def get(self, filters, pagination_parameters):
         logger.info('GET /production_logs called')
-        logger.debug(f"Query Arguments={query_args}")
+        logger.debug(f"Query Arguments={filters}")
 
-        query = ProductionLog.query
-
-        # for filtering
-        if 'product_part_no' in query_args:
-            query = query.filter(ProductionLog.product_part_no.like(f"%{query_args['product_part_no']}%"))
-        if 'start_date' in query_args:
-            query = query.filter(ProductionLog.production_date >= query_args['start_date'])
-        if 'end_date' in query_args:
-            query = query.filter(ProductionLog.production_date <= query_args['end_date'])
-        if 'min_quantity' in query_args:
-            query = query.filter(ProductionLog.quantity_produced >= query_args['min_quantity'])
-        if 'max_quantity' in query_args:
-            query = query.filter(ProductionLog.quantity_produced <= query_args['max_quantity'])
-        # for searching
-        # for sorting
-        production_logs = apply_sorting(query, query_args, pagination_parameters)
-        logger.info(f"Found {pagination_parameters.item_count} production_logs")
-        logger.debug(f"Returned production_logs: {production_logs}")
-        return production_logs
+        try:
+            production_logs = ProductionLogService.get_all_production_logs(pagination_parameters.page,
+                                                                           pagination_parameters.page_size, **filters)
+            pagination_parameters.item_count = production_logs.total
+            logger.info(f"Found {pagination_parameters.item_count} production_logs")
+            logger.debug(f"Returned production_logs: {production_logs}")
+            return production_logs
+        except ValueError as ve:
+            abort(400, ve)
+        except Exception as e:
+            abort(500, e)
 
     @production_log_bp.response(201, ProductionLogSchema)
     @production_log_bp.arguments(ProductionLogSchema)
-    def post(self, new_production_log_data):
+    def post(self, data):
         logger.info('POST /production_logs called')
-        logger.debug(f"Creating new production log with args: {new_production_log_data}")
+        logger.debug(f"Creating new production log with args: {data}")
 
         try:
-            new_production_log = ProductionLog(**new_production_log_data)
-            db.session.add(new_production_log)
-            db.session.commit()
-            logger.info(f"New production log created with ID {new_production_log.id}")
-            return new_production_log
+            production_log = ProductionLogService.add_production_log(**data)
+            logger.info(f"New ProductionLog created with ID {production_log.id}")
+            return production_log
+        except ValueError as ve:
+            logger.error(f"Error creating production_log: {ve}")
+            abort(400, ve)
         except Exception as e:
-            logger.error(f"Error creating production log: {e}")
-            abort(500, message="An error occurred while creating the production log")
+            logger.error(f"Error creating production_log: {e}")
+            abort(500, e)
 
 
 @production_log_bp.route('/production_log/<int:production_log_id>')
@@ -61,37 +53,40 @@ class ProductionLogResource(MethodView):
     @production_log_bp.response(200, ProductionLogSchema)
     def get(self, production_log_id):
         logger.info(f"GET /production_logs/{production_log_id} called")
-        production_log = ProductionLog.query.get_or_404(production_log_id, description="Production log not found")
-        logger.info(f"Found production log with ID {production_log_id}")
-        return production_log
+        try:
+            production_log = ProductionLogService.get_production_log_by_id(production_log_id)
+            logger.info(f"Found production_log with ID {production_log_id}")
+            return production_log
+        except NotFoundError as nfe:
+            abort(404, nfe)
+        except Exception as e:
+            abort(500, e)
 
     @production_log_bp.response(200, ProductionLogSchema)
     @production_log_bp.arguments(ProductionLogUpdateSchema)
-    def put(self, update_production_log_data, production_log_id):
+    def put(self, data, production_log_id):
         logger.info(f"PUT /production_logs/{production_log_id} called")
-        logger.debug(f"Updating production log {production_log_id} with args: {update_production_log_data}")
-
-        production_log = ProductionLog.query.get_or_404(production_log_id, description="Production log not found")
-        for key, value in update_production_log_data.items():
-            setattr(production_log, key, value)
+        logger.debug(f"Updating production log {production_log_id} with args: {data}")
 
         try:
-            db.session.commit()
-            logger.info(f"Production log {production_log_id} updated")
+            production_log = ProductionLogService.update_production_log(production_log_id, data)
+            logger.info(f"ProductionLog {production_log_id} updated")
             return production_log
+        except NotFoundError as nfe:
+            abort(404, nfe)
         except Exception as e:
-            logger.error(f"Error updating production log {production_log_id}: {e}")
-            abort(500, message="An error occurred while updating the production log")
+            logger.error(f"Error updating production_log {production_log_id}: {e}")
+            abort(500, e)
 
     @production_log_bp.response(204)
     def delete(self, production_log_id):
         logger.info(f"DELETE /production_logs/{production_log_id} called")
-        production_log = ProductionLog.query.get_or_404(production_log_id, description="Production log not found")
         try:
-            db.session.delete(production_log)
-            db.session.commit()
-            logger.info(f"Production log {production_log_id} deleted")
-            return {'message': 'Production log deleted'}
+            ProductionLogService.delete_production_log(production_log_id)
+            logger.info(f"ProductionLog {production_log_id} deleted")
+            return {'message': 'ProductionLog deleted'}
+        except NotFoundError as nfe:
+            abort(404, nfe)
         except Exception as e:
-            logger.error(f"Error deleting production log {production_log_id}: {e}")
-            abort(500, message="An error occurred while deleting the production log")
+            logger.error(f"Error deleting production_log {production_log_id}: {e}")
+            abort(500, e)
