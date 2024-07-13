@@ -12,5 +12,6 @@ from .material_scrap import MaterialScrap
 from .product_material import ProductMaterial
 from .supplier import Supplier
 from .user import User
+from .user import Role
 from .production_log import ProductionLog
 from .permission import Permission

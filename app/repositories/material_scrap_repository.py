@@ -13,8 +13,8 @@ class MaterialScrapRepository:
     def get_all(page: int = 1, per_page: int = 10, **filters: dict):
         query = MaterialScrap.query
         # Apply filtering
-        if 'material_scrap_part_no' in filters:
-            query = query.filter(MaterialScrap.material_scrap_part_no.like(f"%{filters['material_scrap_part_no']}%"))
+        if 'material_part_no' in filters:
+            query = query.filter(MaterialScrap.material_part_no.like(f"%{filters['material_part_no']}%"))
         if 'start_date' in filters:
             query = query.filter(MaterialScrap.date >= filters['start_date'])
         if 'end_date' in filters:
@@ -29,15 +29,15 @@ class MaterialScrapRepository:
         if 'search' in filters:
             search = f"%{filters['search']}%"
             query = query.filter(or_(
-                MaterialScrap.material_scrap_part_no.like(search),
+                MaterialScrap.material_part_no.like(search),
                 MaterialScrap.scrap_type.like(search)
             ))
         query = apply_generic_sorting(query, MaterialScrap, filters)
         return query.paginate(page=page, per_page=per_page)
 
     @staticmethod
-    def get_by_id(material_part_no: int, date: str) -> Optional[MaterialScrap]:
-        return MaterialScrap.query.filter_by(material_part_no=material_part_no, date=date).first()
+    def get_by_id(material_scrap_id: int) -> Optional[MaterialScrap]:
+        return MaterialScrap.query.get(material_scrap_id)
 
     @staticmethod
     def add(material_scrap: MaterialScrap) -> MaterialScrap:
@@ -51,10 +51,10 @@ class MaterialScrapRepository:
         return material_scrap
 
     @staticmethod
-    def delete(material_part_no: int, date: str) -> None:
-        material_scrap = MaterialScrap.query.filter_by(material_part_no=material_part_no, date=date).first()
+    def delete(material_scrap_id: int) -> None:
+        material_scrap = MaterialScrap.query.get(material_scrap_id)
         if not material_scrap:
-            raise NotFoundError(f"MaterialScrap with id {material_part_no, date} not found")
+            raise NotFoundError(f"MaterialScrap with id {material_scrap_id} not found")
 
         db.session.delete(material_scrap)
         db.session.commit()

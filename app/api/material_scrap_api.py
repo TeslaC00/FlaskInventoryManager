@@ -51,11 +51,11 @@ class MaterialScrapListResource(MethodView):
 @material_scrap_bp.route('/material_scrap/<int:material_part_no>/<date:date>')
 class MaterialScrapResource(MethodView):
     @material_scrap_bp.response(200, MaterialScrapSchema)
-    def get(self, material_part_no, date):
-        logger.info(f"GET /material_scrap/{material_part_no, date} called")
+    def get(self, material_scrap_id):
+        logger.info(f"GET /material_scrap/{material_scrap_id} called")
         try:
-            material_scrap = MaterialScrapService.get_material_scrap_by_id(material_part_no, date)
-            logger.info(f"Found material_scrap with part_no {material_part_no, date}")
+            material_scrap = MaterialScrapService.get_material_scrap_by_id(material_scrap_id)
+            logger.info(f"Found material_scrap with part_no {material_scrap_id}")
             return material_scrap
         except NotFoundError as nfe:
             abort(404, nfe)
@@ -64,29 +64,29 @@ class MaterialScrapResource(MethodView):
 
     @material_scrap_bp.response(200, MaterialScrapSchema)
     @material_scrap_bp.arguments(MaterialScrapUpdateSchema)
-    def put(self, data, material_part_no, date):
-        logger.info(f"PUT /material_scrap/{material_part_no, date} called")
-        logger.debug(f"Updating material_scrap {material_part_no, date} with args: {data}")
+    def put(self, data, material_scrap_id):
+        logger.info(f"PUT /material_scrap/{material_scrap_id} called")
+        logger.debug(f"Updating material_scrap {material_scrap_id} with args: {data}")
 
         try:
-            material_scrap = MaterialScrapService.update_material_scrap(material_part_no, date, data)
-            logger.info(f"Material {material_part_no, date} updated")
+            material_scrap = MaterialScrapService.update_material_scrap(material_scrap_id, data)
+            logger.info(f"Material {material_scrap_id} updated")
             return material_scrap
         except NotFoundError as nfe:
             abort(404, nfe)
         except Exception as e:
-            logger.error(f"Error updating Material {material_part_no, date}: {e}")
+            logger.error(f"Error updating Material {material_scrap_id}: {e}")
             abort(500, e)
 
     @material_scrap_bp.response(204)
-    def delete(self, material_part_no, date):
-        logger.info(f"DELETE /material_scrap/{material_part_no, date} called")
+    def delete(self, material_scrap_id):
+        logger.info(f"DELETE /material_scrap/{material_scrap_id} called")
         try:
-            MaterialScrapService.delete_material_scrap(material_part_no, date)
-            logger.info(f"Material {material_part_no, date} deleted")
+            MaterialScrapService.delete_material_scrap(material_scrap_id)
+            logger.info(f"Material {material_scrap_id} deleted")
             return {'message': 'Material deleted'}
         except NotFoundError as nfe:
             abort(404, nfe)
         except Exception as e:
-            logger.error(f"Error deleting Material {material_part_no, date}: {e}")
+            logger.error(f"Error deleting Material {material_scrap_id}: {e}")
             abort(500, e)

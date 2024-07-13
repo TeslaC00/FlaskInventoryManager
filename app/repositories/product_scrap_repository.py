@@ -36,8 +36,8 @@ class ProductScrapRepository:
         return query.paginate(page=page, per_page=per_page)
 
     @staticmethod
-    def get_by_id(product_part_no: int, date: str) -> Optional[ProductScrap]:
-        return ProductScrap.query.filter_by(product_part_no=product_part_no, date=date).first()
+    def get_by_id(product_scrap_id: int) -> Optional[ProductScrap]:
+        return ProductScrap.query.get(product_scrap_id)
 
     @staticmethod
     def add(product_scrap: ProductScrap) -> ProductScrap:
@@ -51,10 +51,10 @@ class ProductScrapRepository:
         return product_scrap
 
     @staticmethod
-    def delete(product_part_no: int, date: str) -> None:
-        product_scrap = ProductScrap.query.filter_by(product_part_no=product_part_no, date=date).first()
+    def delete(product_scrap_id: int) -> None:
+        product_scrap = ProductScrap.query.get(product_scrap_id)
         if not product_scrap:
-            raise NotFoundError(f"ProductScrap with id {product_part_no, date} not found")
+            raise NotFoundError(f"ProductScrap with id {product_scrap_id} not found")
 
         db.session.delete(product_scrap)
         db.session.commit()

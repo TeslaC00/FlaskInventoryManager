@@ -51,11 +51,11 @@ class ProductScrapListResource(MethodView):
 @product_scrap_bp.route('/product_scrap/<int:product_part_no>/<date:date>')
 class ProductScrapResource(MethodView):
     @product_scrap_bp.response(200, ProductScrapSchema)
-    def get(self, product_part_no, date):
-        logger.info(f"GET /product_scraps/{product_part_no}/{date} called")
+    def get(self, product_scrap_id):
+        logger.info(f"GET /product_scraps/{product_scrap_id} called")
         try:
-            product_scrap = ProductScrapService.get_product_scrap_by_id(product_part_no, date)
-            logger.info(f"Found product_scrap with part_no {product_part_no, date}")
+            product_scrap = ProductScrapService.get_product_scrap_by_id(product_scrap_id)
+            logger.info(f"Found product_scrap with part_no {product_scrap_id}")
             return product_scrap
         except NotFoundError as nfe:
             abort(404, nfe)
@@ -64,29 +64,29 @@ class ProductScrapResource(MethodView):
 
     @product_scrap_bp.response(200, ProductScrapSchema)
     @product_scrap_bp.arguments(ProductScrapUpdateSchema)
-    def put(self, data, product_part_no, date):
-        logger.info(f"PUT /product_scraps/{product_part_no}/{date} called")
-        logger.debug(f"Updating product scrap {product_part_no}/{date} with args: {data}")
+    def put(self, data, product_scrap_id):
+        logger.info(f"PUT /product_scraps/{product_scrap_id} called")
+        logger.debug(f"Updating product scrap {product_scrap_id} with args: {data}")
 
         try:
-            product_scrap = ProductScrapService.update_product_scrap(product_part_no, date, data)
-            logger.info(f"Product {product_part_no, date} updated")
+            product_scrap = ProductScrapService.update_product_scrap(product_scrap_id, data)
+            logger.info(f"Product {product_scrap_id} updated")
             return product_scrap
         except NotFoundError as nfe:
             abort(404, nfe)
         except Exception as e:
-            logger.error(f"Error updating Product {product_part_no, date}: {e}")
+            logger.error(f"Error updating Product {product_scrap_id}: {e}")
             abort(500, e)
 
     @product_scrap_bp.response(204)
-    def delete(self, product_part_no, date):
-        logger.info(f"DELETE /product_scraps/{product_part_no}/{date} called")
+    def delete(self, product_scrap_id):
+        logger.info(f"DELETE /product_scraps/{product_scrap_id} called")
         try:
-            ProductScrapService.delete_product_scrap(product_part_no, date)
-            logger.info(f"Product {product_part_no, date} deleted")
+            ProductScrapService.delete_product_scrap(product_scrap_id)
+            logger.info(f"Product {product_scrap_id} deleted")
             return {'message': 'Product deleted'}
         except NotFoundError as nfe:
             abort(404, nfe)
         except Exception as e:
-            logger.error(f"Error deleting Product {product_part_no, date}: {e}")
+            logger.error(f"Error deleting Product {product_scrap_id}: {e}")
             abort(500, e)

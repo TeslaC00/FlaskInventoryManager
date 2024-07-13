@@ -12,10 +12,10 @@ class ProductScrapService:
             raise RuntimeError(f"Error fetching ProductScraps: {str(e)}")
 
     @staticmethod
-    def get_product_scrap_by_id(product_part_no: int, date: str) -> ProductScrap:
-        product_scrap = ProductScrapRepository.get_by_id(product_part_no, date)
+    def get_product_scrap_by_id(product_scrap_id: int) -> ProductScrap:
+        product_scrap = ProductScrapRepository.get_by_id(product_scrap_id)
         if not product_scrap:
-            raise NotFoundError(f"ProductScrap with id {product_part_no, date} not found")
+            raise NotFoundError(f"ProductScrap with id {product_scrap_id} not found")
         return product_scrap
 
     @staticmethod
@@ -32,25 +32,25 @@ class ProductScrapService:
             raise RuntimeError(f"Error creating ProductScrap: {str(e)}")
 
     @staticmethod
-    def update_product_scrap(product_part_no: int, date: str, data: dict) -> ProductScrap:
-        existing_product_scrap = ProductScrapService.get_product_scrap_by_id(product_part_no, date)
+    def update_product_scrap(product_scrap_id: int, data: dict) -> ProductScrap:
+        existing_product_scrap = ProductScrapService.get_product_scrap_by_id(product_scrap_id)
         initial_quantity = existing_product_scrap.quantity
         for key, value in data.items():
             setattr(existing_product_scrap, key, value)
         try:
             product_scrap = ProductScrapRepository.update(existing_product_scrap)
             from app.services.product_service import ProductService
-            ProductService.add_quantity(initial_quantity - product_scrap.quantity, product_part_no)
+            ProductService.add_quantity(initial_quantity - product_scrap.quantity, product_scrap.product_part_no)
             return product_scrap
         except Exception as e:
             raise RuntimeError(f"Error updating ProductScrap: {str(e)}")
 
     @staticmethod
-    def delete_product_scrap(product_part_no: int, date: str) -> None:
+    def delete_product_scrap(product_scrap_id: int) -> None:
         try:
-            initial_quantity = ProductScrapService.get_product_scrap_by_id(product_part_no, date).quantity
-            ProductScrapRepository.delete(product_part_no, date)
+            product_scrap = ProductScrapService.get_product_scrap_by_id(product_scrap_id)
+            ProductScrapRepository.delete(product_scrap_id)
             from app.services.product_service import ProductService
-            ProductService.add_quantity(initial_quantity, product_part_no)
+            ProductService.add_quantity(product_scrap.quantity, product_scrap.product_part_no)
         except Exception as e:
             raise RuntimeError(f"Error deleting ProductScrap: {str(e)}")
