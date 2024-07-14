@@ -48,6 +48,7 @@ class UserRepository:
     def add(**data) -> User:
         user = user_datastore.create_user(data)
         user.password = hash_password(password=user.password)
+        user.security_answer = hash_password(password=user.security_answer)
         db.session.commit()
         return user
 
@@ -74,10 +75,18 @@ class UserRepository:
         user = user_datastore.find_user(id=user_id)
         if not user:
             raise NotFoundError(f"User with id {user_id} not found")
-
         user_datastore.delete_user(user)
         db.session.commit()
 
     @staticmethod
     def verify_password(user: User, password: str) -> bool:
         return verify_password(password=password, password_hash=user.password)
+
+    @staticmethod
+    def verify_answer(user: User, answer: str) -> bool:
+        return verify_password(password=answer, password_hash=user.security_answer)
+
+    @staticmethod
+    def reset_password(user: User, password: str) -> None:
+        user.password = hash_password(password=password)
+        db.session.commit()

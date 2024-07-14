@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import relationship
 from app.extensions import db
 
@@ -28,10 +28,10 @@ class Buyer(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
     GST_No = Column(String(15), nullable=False)
-    state_code = Column(Integer, nullable=False)
-    state_name = Column(String(30), nullable=False)
+    state_code = Column(Integer, ForeignKey('indian_state.code'), nullable=False)
     address = Column(Text, nullable=False)
     bills = relationship('Bill', backref='buyer', lazy=True)
+    state = relationship('IndianState', backref='buyers', lazy=True)
 
     def to_dict(self):
         """
@@ -46,6 +46,5 @@ class Buyer(db.Model):
             'name': self.name,
             'GST_No': self.GST_No,
             'state_code': self.state_code,
-            'state_name': self.state_name,
             'address': self.address
         }
