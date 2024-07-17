@@ -35,6 +35,6 @@ def sales():
     return render_template('orders.html', form=form, csrf_token=csrf_token)
 
 
-@bill.route('/api/get', methods=['GET', 'POST'])
+@bill.route('/api/bill', methods=['GET', 'POST'])
 def get_bill():
     return render_template('show_bills.html')

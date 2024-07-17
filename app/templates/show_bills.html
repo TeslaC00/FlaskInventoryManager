@@ -2,7 +2,7 @@
 {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Material Data Table</title>
+    <title>Bill Data Table</title>
     <style>
         table {
             width: 100%;
@@ -78,7 +78,7 @@
             width: 10%;
         }
 
-        remarks-column{
+        .remarks-column{
             width: 30%;
         }
 
@@ -150,6 +150,7 @@
 
         .filter-container {
             display: flex;
+            flex-wrap: wrap;
             gap: 10px;
         }
 
@@ -178,12 +179,15 @@
         .searchbar {
             border: 1px solid gray;
             border-radius: 25px;
+            display: flex;
+            align-items: center;
         }
 
         .searchbar input {
             outline: none;
             border: 0;
             border-radius: 25px;
+            padding: 5px;
         }
 
         .searchbar select {
@@ -227,7 +231,6 @@
             transition: background-color 300ms;
             background-color: red;
         }
-
     </style>
 {% endblock %}
 {% block content %}
@@ -245,9 +248,8 @@
                         <option value="purchase_order">Purchase Order</option>
                     </select>
                 </div>
-                <a>Date Range: <input type="date" id="startDate" placeholder="Start Date" oninput="fetchData(1)">
-                    <input type="date" id="endDate" placeholder="End Date" oninput="fetchData(1)"></a>
-                <a>Price Range: <input type="number" id="minPrice" placeholder="Min Price" oninput="fetchData(1)">
+                <a>Date Range: <input type="date" id="startDate" placeholder="Start Date" oninput="fetchData(1)">-<input type="date" id="endDate" placeholder="End Date" oninput="fetchData(1)"></a>
+                <a>Price: <input type="number" id="minPrice" placeholder="Min Price" oninput="fetchData(1)">
                     <input type="number" id="maxPrice" placeholder="Max Price" oninput="fetchData(1)"></a>
                 <button onclick="clearFilters()">Clear Filters</button>
             </div>
@@ -283,7 +285,7 @@
         let currentSortBy = 'buyer_id';
         let currentSortOrder = 'asc';
         let sortOrders = {'buyer_id': 'asc', 'purchase_order': 'asc', 'date': 'asc', 'total_price': 'asc', 'remarks': 'asc'};
-        let editBillId = null; // Global variable to store the bill ID being edited
+        let editBuyerId = null; // Global variable to store the bill ID being edited
         let selectedItems = []; // Global variable to store selected item IDs
 
         async function fetchData(page, sortBy = 'buyer_id', sortOrder = 'asc') {
@@ -361,10 +363,10 @@
                 const cellRemarks = row.insertCell(5);
                 const cellActions = row.insertCell(6);
 
-                // Store item ID or unique identifier (item.purchase_order in this case) in the checkbox
-                cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" data-id="${item.purchase_order}" style="margin-left: 35%">`;
-                cellPurchaseOrder.textContent = item.purchase_order;
+                // Store item ID or unique identifier (item.buyer_id in this case) in the checkbox
+                cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" data-id="${item.buyer_id}" style="margin-left: 35%">`;
                 cellBuyerId.textContent = item.buyer_id;
+                cellPurchaseOrder.textContent = item.purchase_order;
                 cellDate.textContent = item.date;
                 cellTotalPrice.textContent = item.total_price;
                 cellRemarks.textContent = item.remarks;
@@ -388,7 +390,7 @@
             paginationDiv.innerHTML = '';
 
             const prevButton = document.createElement('button');
-            prevButton.innerHTML = '<i class="lni lni-chevron-left"></i>';
+            prevButton.innerHTML = '<i class="peepo lni lni-chevron-left"></i>';
             if (pagination.page > 1) {
                 prevButton.onclick = () => fetchData(pagination.page - 1, currentSortBy, currentSortOrder);
                 prevButton.classList.remove('disabled');
@@ -398,12 +400,13 @@
             paginationDiv.appendChild(prevButton);
 
             const pageNumber = document.createElement('span');
-            pageNumber.textContent = `Page ${pagination.page} of ${pagination.pages}`;
+            pageNumber.className = 'page-number';
+            pageNumber.textContent = `Page ${pagination.page} of ${pagination.total_pages}`;
             paginationDiv.appendChild(pageNumber);
 
             const nextButton = document.createElement('button');
-            nextButton.innerHTML = '<i class="lni lni-chevron-right"></i>';
-            if (pagination.page < pagination.pages) {
+            nextButton.innerHTML = '<i class="peepo lni lni-chevron-right"></i>';
+            if (pagination.page < pagination.total_pages) {
                 nextButton.onclick = () => fetchData(pagination.page + 1, currentSortBy, currentSortOrder);
                 nextButton.classList.remove('disabled');
             } else {
@@ -423,15 +426,22 @@
         }
 
         function updateSortIcons() {
-            const headers = document.querySelectorAll('[data-sort-by]');
+            const headers = document.querySelectorAll('th[data-sort-by]');
             headers.forEach(header => {
-                const sortBy = header.dataset.sortBy;
-                const sortIcon = header.querySelector('.sort-icon');
+                const sortBy = header.getAttribute('data-sort-by');
+                const sortIconElem = header.querySelector('.sort-icon');
 
+                // Remove 'active' class and set all icons to default state
+                sortIconElem.innerHTML = `
+            <i class="lni lni-chevron-up"></i>
+        `;
+                sortIconElem.classList.remove('active');
+
+                // Set active state and apply blue border
                 if (sortBy === currentSortBy) {
-                    sortIcon.innerHTML = currentSortOrder === 'asc' ? '&#9650;' : '&#9660;';
-                } else {
-                    sortIcon.innerHTML = '';
+                    const icon = currentSortOrder === 'asc' ? '<i class="lni lni-chevron-up"></i>' : '<i class="lni lni-chevron-down"></i>';
+                    sortIconElem.innerHTML = icon;
+                    sortIconElem.classList.add('active');
                 }
             });
         }
@@ -456,28 +466,23 @@
 
         // Function to delete selected rows
         async function deleteSelected() {
-            try {
-                const response = await fetch('/api/v1/bills/bulk-delete', {
-                    method: 'DELETE',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ids: selectedItems})
-                });
+            if (selectedItems.length === 0) {
+                alert('No rows selected');
+                return;
+            }
 
-                if (response.ok) {
-                    // Remove deleted items from the table and selectedItems array
-                    selectedItems.forEach(id => {
-                        const checkbox = document.querySelector(`.rowCheckbox[data-id="${id}"]`);
-                        if (checkbox) {
-                            const row = checkbox.closest('tr');
-                            row.remove();
-                        }
-                    });
-                    selectedItems = []; // Clear the selectedItems array
-                } else {
-                    console.error('Error deleting items:', response.statusText);
+            if (confirm(`Are you sure you want to delete selected rows?`)) {
+                try {
+                    await Promise.all(selectedItems.map(buyerNo =>
+                        fetch(`/api/v1/bills/${buyerNo}`, {
+                            method: 'DELETE',
+                        })
+                    ));
+                    selectedItems = []; // Clear selectedItems array after successful deletion
+                    fetchData(currentPage, currentSortBy, currentSortOrder); // Refresh data table after deletion
+                } catch (error) {
+                    console.error('Error deleting selected rows:', error);
                 }
-            } catch (error) {
-                console.error('Error deleting items:', error);
             }
         }
 
@@ -504,15 +509,83 @@
             console.log('Selected items:', selectedItems);
         }
 
-        function editRow(billId) {
-            // Logic for editing the row
-            // You can open a modal to edit the row's data
-            console.log('Edit row with Bill ID:', billId);
+        function editRow(challan_no) {
+        // Fetch data for the selected challan number
+            fetch(`/api/v1/challans/${challan_no}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Opening edit modal');
+                    // Populate modal form fields with fetched data
+                    document.getElementById('challanNo').value = data.challan_no;
+                    document.getElementById('supplierId').value = data.supplier_id;
+                    document.getElementById('date').value = data.date;
+                    document.getElementById('totalPrice').value = data.total_price;
+                    document.getElementById('remarks').value = data.remarks;
+
+                    // Store challan no for PUT request
+                    editChallanNo = challan_no;
+
+                    // Change modal title and button label for editing
+                    document.getElementById('addChallanModalLabel').textContent = 'Edit Challan';
+                    document.getElementById('submitBtn').textContent = 'Update Challan';
+
+                    // Show the modal
+                    openEditModal();
+                })
+                .catch(error => console.error('Error fetching challan details:', error));
         }
 
-        function deleteRow(billId) {
-            // Logic for deleting the row
-            console.log('Delete row with Bill ID:', billId);
+
+        // Function to open Bootstrap modal for editing
+        function openEditModal() {
+            console.log('Opening edit modal');
+            const modal = new bootstrap.Modal(document.getElementById('addChallanModal'));
+            modal.show();
+        }
+
+        async function deleteRow(challanNo) {
+            if (confirm(`Are you sure you want to delete part no ${challanNo}?`)) {
+                try {
+                    await fetch(`/api/v1/challans/${challanNo}`, {
+                        method: 'DELETE',
+                    });
+                    fetchData(currentPage, currentSortBy, currentSortOrder);
+                } catch (error) {
+                    console.error('Error deleting row:', error);
+                }
+            }
+        }
+
+        function openModal() {
+            const modal = new bootstrap.Modal(document.getElementById('addMaterialModal'));
+            modal.show();
+
+            // Clear form fields and reset modal properties
+            document.getElementById('addChallanForm').reset(); // Clear form fields
+            document.getElementById('challanNo').disabled = false;
+            document.getElementById('supplierId').disabled = false; // Enable the unit dropdown
+            editChallanNo = null; // Reset editChallanNo
+            document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title
+            document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label
+        }
+
+        // Function to close Bootstrap modal and reset its state
+        function closeModal() {
+            const modalElement = document.getElementById('addMaterialModal');
+            const modal = bootstrap.Modal.getInstance(modalElement); // Get the instance of the modal
+            modal.hide(); // Hide the modal using Bootstrap's hide method
+
+            // Reset form fields and modal properties
+            document.getElementById('addChallanForm').reset(); // Reset form fields
+            document.getElementById('materialUnit').disabled = false; // Enable the unit dropdown
+            editChallanNo = null; // Reset editChallanNo
+            document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title
+            document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label
         }
 
         // Initial fetch

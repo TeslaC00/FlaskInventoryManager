@@ -1,0 +1,19 @@
+{
+  "name": "flaskinventorymanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TeslaC00/FlaskInventoryManager.git"
+  },
+  "private": true,
+  "dependencies": {
+    "axios": "^1.7.2",
+    "jwt-decode": "^4.0.0",
+    "react-router-dom": "^6.25.0"
+  }
+}

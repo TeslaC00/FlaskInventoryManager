@@ -313,6 +313,33 @@
                 </div>
             </div>
         </div>
+
+        <!-- Material details modal -->
+        <div class="modal fade" id="materialDetailsModal" tabindex="-1" aria-labelledby="materialDetailsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="materialDetailsModalLabel">Material Details for Challan No: <span id="challanNoModal"></span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Material Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody id="materialDetailsTableBody">
+                                <!-- Material details will be inserted here dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script>
@@ -383,6 +410,76 @@
             fetchData(1);
         }
 
+        {#async function showMaterialDetails(challanNo) {#}
+        {#    try {#}
+        {#        const response = await fetch(/api/v1/challans/${challanNo});#}
+        {#        const data = await response.json();#}
+        {##}
+        {#        document.getElementById('challanNoModal').textContent = challanNo;#}
+        {##}
+        {#        const materialDetailsTableBody = document.getElementById('materialDetailsTableBody');#}
+        {#        materialDetailsTableBody.innerHTML = '';#}
+        {##}
+        {#        data.challan_items.forEach(item => {#}
+        {#            const row = document.createElement('tr');#}
+        {#            row.innerHTML = #}
+        {#                <td>${item.material.name}</td>#}
+        {#                <td>${item.quantity}</td>#}
+        {#                <td>${item.price}</td>#}
+        {#            ;#}
+        {#            materialDetailsTableBody.appendChild(row);#}
+        {#        });#}
+        {##}
+        {#        // Show the modal#}
+        {#        const modal = new bootstrap.Modal(document.getElementById('materialDetailsModal'));#}
+        {#        modal.show();#}
+        {#    } catch (error) {#}
+        {#        console.error('Error fetching material details:', error);#}
+        {#    }#}
+        {#}#}
+
+
+        async function showMaterialDetails(challanNo) {
+            try {
+                // Fetch all challans
+                const response = await fetch(`/api/v1/challans`);
+                const data = await response.json();
+
+                console.log('Fetched challans:', data); // Debugging: log fetched data
+
+                // Find the challan with the given challan_no
+                const challan = data.find(item => item.challan_no === challanNo);
+
+                if (!challan) {
+                    console.error(`Challan with challan_no ${challanNo} not found.`);
+                    return;
+                }
+
+                console.log('Found challan:', challan); // Debugging: log found challan
+
+                document.getElementById('challanNoModal').textContent = challanNo;
+
+                const materialDetailsTableBody = document.getElementById('materialDetailsTableBody');
+                materialDetailsTableBody.innerHTML = '';
+
+                challan.challan_items.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.material.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>${item.price}</td>
+                    `;
+                    materialDetailsTableBody.appendChild(row);
+                });
+
+                // Show the modal
+                const modal = new bootstrap.Modal(document.getElementById('materialDetailsModal'));
+                modal.show();
+            } catch (error) {
+                console.error('Error fetching material details:', error);
+            }
+        }
+
 
         function populateTable(data) {
             const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
@@ -402,7 +499,7 @@
 
                 // Store item ID or unique identifier (item.challan_id in this case) in the checkbox
                 cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" data-id="${item.id}" style="margin-left: 35%">`;
-                cellChallanNo.textContent = item.challan_no;
+                cellChallanNo.innerHTML = `<a href="javascript:void(0)" onclick="showMaterialDetails(${item.challan_no})">${item.challan_no}</a>`;
                 cellSupplierName.textContent = item.supplier.name;
                 cellDate.textContent = item.date;
                 cellTotalPrice.textContent = item.total_price;
@@ -419,6 +516,7 @@
                 }
             });
         }
+
 
         function handleCheckboxClick(checkbox) {
             const itemId = checkbox.getAttribute('data-id');
@@ -481,9 +579,7 @@
                 const sortIconElem = header.querySelector('.sort-icon');
 
                 // Remove 'active' class and set all icons to default state
-                sortIconElem.innerHTML = `
-            <i class="lni lni-chevron-up"></i>
-        `;
+                sortIconElem.innerHTML = `<i class="lni lni-chevron-up"></i>`;
                 sortIconElem.classList.remove('active');
 
                 // Set active state and apply blue border

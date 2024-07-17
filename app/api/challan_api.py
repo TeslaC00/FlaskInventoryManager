@@ -1,14 +1,43 @@
+from flask import jsonify
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 
 from app import logger
 from app.errors.not_found_error import NotFoundError
+from app.models import Challan
 from app.schemas.challan_schema import ChallanCreateSchema, ChallanQuerySchema, ChallanUpdateSchema, \
     ChallanListResponseSchema, ChallanResponseSchema
 from app.services.challan_service import ChallanService
 from app.services.challan_item_service import ChallanItemService
 
 challan_bp = Blueprint('challan_bp', __name__)
+
+
+# @challan_bp.route('/challans/<int:challan_no>', methods=['GET'])
+# def get_challan(challan_no):
+#     challan = Challan.query.filter_by(challan_no=challan_no).first()
+#     if challan is None:
+#         return jsonify({"message": "Challan not found"}), 404
+#
+#     challan_items = [
+#         {
+#             "material": {
+#                 "name": item.material.name
+#             },
+#             "quantity": item.quantity,
+#             "price": item.price
+#         }
+#         for item in challan.challan_items
+#     ]
+#
+#     return jsonify({
+#         "challan_no": challan.challan_no,
+#         "supplier": {"name": challan.supplier.name},
+#         "date": challan.date,
+#         "total_price": challan.total_price,
+#         "remarks": challan.remarks,
+#         "challan_items": challan_items
+#     })
 
 
 @challan_bp.route('/challans')
