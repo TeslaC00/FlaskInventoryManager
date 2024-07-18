@@ -30,7 +30,7 @@ class Supplier(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
     GST_No = Column(String(15), nullable=False)
-    state_code = Column(Integer, ForeignKey('indian_state.code'), nullable=False)
+    state_code = Column(Integer, ForeignKey('indian_state.id'), nullable=False)
     address = Column(Text, nullable=False)
     # supplier relationship with challan using 'challans' -> both does automatic join (eager loading)
     # challan relationship with supplier using 'supplier'(backref)

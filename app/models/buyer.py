@@ -28,7 +28,7 @@ class Buyer(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
     GST_No = Column(String(15), nullable=False)
-    state_code = Column(Integer, ForeignKey('indian_state.code'), nullable=False)
+    state_code = Column(Integer, ForeignKey('indian_state.id'), nullable=False)
     address = Column(Text, nullable=False)
     bills = relationship('Bill', backref='buyer', lazy=True)
     state = relationship('IndianState', backref='buyers', lazy=True)

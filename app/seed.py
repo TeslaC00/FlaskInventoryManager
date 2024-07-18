@@ -7,7 +7,7 @@ from app.logger import logger as log
 from app.models import BillItem, ChallanItem, ProductMaterial
 from app.models import Buyer, Supplier, Material, Product, Bill, Challan, ProductScrap, MaterialScrap, Unit
 from app.models import IndianState
-from app.models import Question, Role, User, RolesUsers
+from app.models import Question, Role, User
 from app import create_app
 from app.extensions import db
 
@@ -115,11 +115,6 @@ def seed():
     # Load and add data for Question, Role, User, and RolesUsers models
     user_data = read_json('user.json')
 
-    for item in user_data['questions']:
-        record = Question(**item)
-        db.session.add(record)
-
-    log.info(f'Added Question records')
 
     for item in user_data['roles']:
         record = Role(**item)
@@ -128,16 +123,11 @@ def seed():
     log.info(f'Added Role records')
 
     for item in user_data['users']:
-        record = User(**item)
+        record = User(item)
         db.session.add(record)
 
     log.info(f'Added User records')
 
-    for item in user_data['roles_users']:
-        record = RolesUsers(**item)
-        db.session.add(record)
-
-    log.info(f'Added RolesUsers records')
 
     db.session.commit()
 
