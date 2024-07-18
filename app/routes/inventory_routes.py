@@ -21,7 +21,7 @@ def show_inv_raw():
         # TODO: add error page to show errors
         logger.error('An error occurred', e)
         # return render_template('#error template')
-        return 'Something went wrong'
+        return e.__str__()
 
 
 @inventory_bp.route('/inv_produced/')
