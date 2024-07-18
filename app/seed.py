@@ -6,8 +6,7 @@ from dotenv import load_dotenv
 from app.logger import logger as log
 from app.models import BillItem, ChallanItem, ProductMaterial
 from app.models import Buyer, Supplier, Material, Product, Bill, Challan, ProductScrap, MaterialScrap, Unit
-from app.models import IndianState
-from app.models import Question, Role, User
+from app.models import Question
 from app import create_app
 from app.extensions import db
 
@@ -27,6 +26,11 @@ def convert_date(date_string):
 
 def seed():
     log.info('started seed')
+
+    # Load and add Question records
+    for item in read_json('questions.json'):
+        record = Question(**item)
+        db.session.add(record)
 
     # Load and add Unit records
     for item in read_json('units.json'):
@@ -112,30 +116,7 @@ def seed():
         record = ProductMaterial(**item)
         db.session.add(record)
 
-    # Load and add data for Question, Role, User, and RolesUsers models
-    user_data = read_json('user.json')
-
-
-    for item in user_data['roles']:
-        record = Role(**item)
-        db.session.add(record)
-
-    log.info(f'Added Role records')
-
-    for item in user_data['users']:
-        record = User(item)
-        db.session.add(record)
-
-    log.info(f'Added User records')
-
-
     db.session.commit()
-
-    IndianState.load_state()
-    log.info('State Data loaded')
-
-    Question.load_static_data()
-    log.info('Questions saved')
 
 
 if __name__ == '__main__':
