@@ -26,16 +26,14 @@ def login_page():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        email = form.email.data
-        username = form.username.data
+        login = form.login.data
         password = form.password.data
         user = None
-        if username:
-            user = UserService.get_user_by_username(username)
-        if email:
-            user = UserService.get_user_by_email(email)
+        # Try to fetch user by username or email
+        user = UserService.get_user_by_username(login) or UserService.get_user_by_email(login)
         if not user:
-            flash('User does not exists', 'warning')
+            flash('User does not exist', 'warning')
+            return redirect(url_for('auth.login'))
         try:
             tokens = UserService.authenticate_user(user, password)
             login_user(user)
@@ -43,6 +41,7 @@ def login():
             return jsonify(tokens), 200
         except ValueError as ve:
             flash(str(ve), 'warning')
+            return redirect(url_for('auth.login'))
 
 
 @auth_bp.route('/forgot_password', methods=['GET', 'POST'])
