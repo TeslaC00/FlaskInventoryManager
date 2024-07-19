@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, url_for, request, render_template, flash, jsonify
-from flask_security import ForgotPasswordForm, current_user, hash_password, LoginForm, login_user
-from flask import current_app
+from flask_security import ForgotPasswordForm, current_user, LoginForm, login_user
 
+from app.errors.not_found_error import NotFoundError
 from app.forms.password_form import VerifySecurityForm, ResetPasswordFormModify
 from app.logger import logger
 from app.services.user_service import UserService
@@ -51,14 +51,14 @@ def forgot_password():
     if request.method == 'POST':
         if form.validate_on_submit():
             email = form.email.data
-            user = current_app.security.datastore.db.User.query.filter_by(email=email).first()
+            user = UserService.get_user_by_email(email)
             if user:
-                question = user.security_question
+                question = user.question
                 question_form = VerifySecurityForm()
                 return render_template('security_question.html', question=question, email=email,
                                        question_form=question_form)
             else:
-                flash('Email Address not found', 'warning')
+                flash('User with given Email Address does not exists', 'warning')
     return render_template('forgot_password.html', form=form)
 
 
@@ -68,8 +68,10 @@ def verify_security():
         question_form = VerifySecurityForm(request.form)
         if question_form.validate_on_submit():
             email = question_form.email.data
-            user = current_app.security.datastore.db.User.query.filter_by(email=email).first()
-            if user and question_form.security_answer == user.security_answer:
+            user = UserService.get_user_by_email(email)
+            if not user:
+                flash('User with given Email Address does not exists', 'warning')
+            if UserService.authenticate_user_answer(user, question_form.security_answer):
                 return render_template('reset_password.html', form=ResetPasswordFormModify(), email=email)
             else:
                 flash('Security Answer not match', 'warning')
@@ -84,9 +86,11 @@ def reset_password():
         if form.validate_on_submit():
             password = form.password.data
             email = form.email.data
-            user = current_app.security.datastore.db.User.query.filter_by(email=email).first()
-            hashed_password = hash_password(password)
-            user.password = hashed_password
-            flash('Your password has been updated!', 'success')
-            return redirect(url_for('security.login'))
+            user = UserService.get_user_by_email(email)
+            try:
+                UserService.reset_password(user, password)
+                flash('Your password has been updated!', 'success')
+                return redirect(url_for('security.login'))
+            except NotFoundError as nfe:
+                flash(str(nfe), 'warning')
     redirect(url_for('forgot_password'))

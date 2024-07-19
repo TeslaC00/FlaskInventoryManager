@@ -77,3 +77,13 @@ class UserService:
             refresh_token = create_refresh_token(identity=user.id)
             return {'access_token': access_token, 'refresh_token': refresh_token}
         raise ValueError("Invalid credentials")
+
+    @staticmethod
+    def authenticate_user_answer(user: User, answer: str) -> bool:
+        return UserRepository.verify_answer(user, answer)
+
+    @staticmethod
+    def reset_password(user: User, password: str) -> None:
+        if not user:
+            raise NotFoundError("Null user given")
+        UserRepository.reset_password(user, password)

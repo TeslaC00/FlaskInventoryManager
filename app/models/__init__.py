@@ -15,3 +15,5 @@ from .user import User
 from .user import Role
 from .production_log import ProductionLog
 from .permission import Permission
+from .indian_state import IndianState
+from .question import Question

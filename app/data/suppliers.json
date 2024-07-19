@@ -4,7 +4,6 @@
         "name": "Gorakhnath Dutta",
         "GST_No": "Iw2wQRMib5MVs6E",
         "state_code": 3,
-        "state_name": "Manipur",
         "address": "96693 Reddy Harbor Suite 248"
     },
     {
@@ -12,7 +11,6 @@
         "name": "Dr. Bhagvan Mehra",
         "GST_No": "0oSPf0o8SnF3jLJ",
         "state_code": 1,
-        "state_name": "Andra Pradesh",
         "address": "30443 Mehra Ridge Suite 173"
     },
     {
@@ -20,7 +18,6 @@
         "name": "Aatmaj Talwar",
         "GST_No": "rAM7Ky1pgZxZYPQ",
         "state_code": 6,
-        "state_name": "Telangana",
         "address": "35614 Gopee Views Apt. 731"
     },
     {
@@ -28,7 +25,6 @@
         "name": "Chapal Varrier",
         "GST_No": "0W1srdHdHyqvcCE",
         "state_code": 10,
-        "state_name": "Tamil Nadu",
         "address": "9632 Mishra Road Suite 320"
     },
     {
@@ -36,7 +32,6 @@
         "name": "Dr. Adheesh Butt",
         "GST_No": "Z5NrtMKDoaKAARn",
         "state_code": 36,
-        "state_name": "Madya Pradesh",
         "address": "33159 Hamsini Throughway Suite 694"
     },
     {
@@ -44,7 +39,6 @@
         "name": "Malati Kaniyar",
         "GST_No": "MA7CyWHVuZvZiD1",
         "state_code": 7,
-        "state_name": "Sikkim",
         "address": "801 Desai Branch Suite 971"
     },
     {
@@ -52,15 +46,13 @@
         "name": "Agnivesh Nair",
         "GST_No": "jvjyLQni0XdIWLJ",
         "state_code": 19,
-        "state_name": "Uttarakhand",
         "address": "629 Menon Oval Apt. 906"
     },
     {
         "id": 8,
         "name": "Chandan Singh",
         "GST_No": "ydy7uBvmuAAyKoI",
-        "state_code": 15,
-        "state_name": "Assam",
+        "state_code": 1,
         "address": "8111 Aalok Terrace Suite 437"
     },
     {
@@ -68,7 +60,6 @@
         "name": "Avani Shah",
         "GST_No": "WWOj9IIVXWd1qXG",
         "state_code": 30,
-        "state_name": "Pondicherr",
         "address": "664 Trivedi Fort Suite 469"
     },
     {
@@ -76,7 +67,6 @@
         "name": "Bhamini Agarwal",
         "GST_No": "RyA8m9vs9w4T9pa",
         "state_code": 3,
-        "state_name": "Lakshadweep",
         "address": "803 Jagdeep Crescent Apt. 470"
     },
     {
@@ -84,7 +74,6 @@
         "name": "Balagovind Shukla",
         "GST_No": "vBSsHSpovpOPHvo",
         "state_code": 18,
-        "state_name": "Chhattisgarh",
         "address": "9600 Swara Branch Apt. 627"
     },
     {
@@ -92,7 +81,6 @@
         "name": "Bala Johar-Butt",
         "GST_No": "CedGeDVL817plMT",
         "state_code": 16,
-        "state_name": "Manipur",
         "address": "71133 Khanna Drive Apt. 763"
     },
     {
@@ -100,7 +88,6 @@
         "name": "Jagadisha Pilla",
         "GST_No": "t6SJGpP8QqfH74l",
         "state_code": 24,
-        "state_name": "West Bengal",
         "address": "468 Usha Fields Apt. 960"
     },
     {
@@ -108,7 +95,6 @@
         "name": "Uma Trivedi",
         "GST_No": "YjoxmG6ZCd203j5",
         "state_code": 25,
-        "state_name": "Andaman and Nicobar Islands",
         "address": "840 Sumitra Camp Suite 266"
     },
     {
@@ -116,7 +102,6 @@
         "name": "Aasa Kapoor",
         "GST_No": "ty7gAGpR7dQpyFZ",
         "state_code": 29,
-        "state_name": "Karnataka",
         "address": "881 Trilokesh Orchard Suite 592"
     }
 ]

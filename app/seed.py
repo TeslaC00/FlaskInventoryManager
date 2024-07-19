@@ -1,4 +1,3 @@
-# seed.py
 from datetime import datetime
 from json import load
 
@@ -7,6 +6,7 @@ from dotenv import load_dotenv
 from app.logger import logger as log
 from app.models import BillItem, ChallanItem, ProductMaterial
 from app.models import Buyer, Supplier, Material, Product, Bill, Challan, ProductScrap, MaterialScrap, Unit
+from app.models import Question
 from app import create_app
 from app.extensions import db
 
@@ -27,78 +27,91 @@ def convert_date(date_string):
 def seed():
     log.info('started seed')
 
+    # Load and add Question records
+    for item in read_json('questions.json'):
+        record = Question(**item)
+        db.session.add(record)
+
+    # Load and add Unit records
     for item in read_json('units.json'):
         record = Unit(**item)
         db.session.add(record)
 
+    # Load and add Supplier records
     for item in read_json('suppliers.json'):
         record = Supplier(**item)
         db.session.add(record)
 
     log.info(f'Added Supplier records')
 
+    # Load and add Buyer records
     for item in read_json('buyers.json'):
         record = Buyer(**item)
         db.session.add(record)
 
     log.info(f'Added Buyer records')
 
+    # Load and add Material records
     for item in read_json('materials.json'):
         record = Material(**item)
         db.session.add(record)
 
     log.info(f'Added Material records')
 
+    # Load and add Product records
     for item in read_json('products.json'):
         record = Product(**item)
         db.session.add(record)
 
     log.info(f'Added Product records')
 
+    # Load and add Bill records
     for item in read_json('bills.json'):
-        # to remove in production
         item['date'] = convert_date(item['date'])
         record = Bill(**item)
         db.session.add(record)
 
     log.info(f'Added Bill records')
 
+    # Load and add BillItem records
     for item in read_json('bill_items.json'):
         record = BillItem(**item)
         db.session.add(record)
 
     log.info(f'Added BillItem records')
 
+    # Load and add Challan records
     for item in read_json('challans.json'):
-        # to remove in production
         item['date'] = convert_date(item['date'])
         record = Challan(**item)
         db.session.add(record)
 
     log.info(f'Added Challan records')
 
+    # Load and add ChallanItem records
     for item in read_json('challan_items.json'):
         record = ChallanItem(**item)
         db.session.add(record)
 
     log.info(f'Added ChallanItem records')
 
+    # Load and add ProductScrap records
     for item in read_json('product_scraps.json'):
-        # to remove in production
         item['date'] = convert_date(item['date'])
         record = ProductScrap(**item)
         db.session.add(record)
 
     log.info(f'Added ProductScrap records')
 
+    # Load and add MaterialScrap records
     for item in read_json('material_scraps.json'):
-        # to remove in production
         item['date'] = convert_date(item['date'])
         record = MaterialScrap(**item)
         db.session.add(record)
 
     log.info(f'Added MaterialScrap records')
 
+    # Load and add ProductMaterial records
     for item in read_json('product_materials.json'):
         record = ProductMaterial(**item)
         db.session.add(record)

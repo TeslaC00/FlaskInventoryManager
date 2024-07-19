@@ -4,15 +4,13 @@
         "name": "Dhara Chaturvedi",
         "GST_No": "3LIiFx9T1r6aTVj",
         "state_code": 24,
-        "state_name": "Rajasthan",
         "address": "2816 Bhadrak Hill Suite 666"
     },
     {
         "id": 2,
         "name": "Paramartha Deshpande Jr.",
         "GST_No": "gAcFshvVnZndMjW",
-        "state_code": 35,
-        "state_name": "Tripura",
+        "state_code": 2,
         "address": "3623 Menon Avenue Suite 261"
     },
     {
@@ -20,7 +18,6 @@
         "name": "Krishnadasa Pothuvaal",
         "GST_No": "7uBY6YMUdzse0Qn",
         "state_code": 23,
-        "state_name": "Uttar Pradesh",
         "address": "27651 Deeptimayee Crest Suite 684"
     },
     {
@@ -28,7 +25,6 @@
         "name": "Brahmaanand Guha",
         "GST_No": "zGUNNbRP7xIEJgN",
         "state_code": 24,
-        "state_name": "Andaman and Nicobar Islands",
         "address": "883 Khatri Mills Apt. 143"
     },
     {
@@ -36,7 +32,6 @@
         "name": "Bhaanumati Joshi",
         "GST_No": "Cm4YsJ8vzlWzlHU",
         "state_code": 21,
-        "state_name": "Maharashtra",
         "address": "30505 Enakshi View Apt. 465"
     },
     {
@@ -44,15 +39,13 @@
         "name": "Bhardwaj Mishra I",
         "GST_No": "o5t09RSN35bM8c6",
         "state_code": 3,
-        "state_name": "Daman and Diu",
         "address": "682 Anandamayi Land Apt. 107"
     },
     {
         "id": 7,
         "name": "Shubhaprada Pillai",
         "GST_No": "VTiRsJWDUsWwMIs",
-        "state_code": 10,
-        "state_name": "Assam",
+        "state_code":10,
         "address": "8407 Chandra Fall Suite 199"
     },
     {
@@ -60,23 +53,20 @@
         "name": "Gitanjali Khanna",
         "GST_No": "6iKAWMria40zZHQ",
         "state_code": 23,
-        "state_name": "Uttarakhand",
         "address": "27401 Dakshayani Landing Apt. 342"
     },
     {
         "id": 9,
         "name": "Mukul Reddy",
         "GST_No": "pk1eD5uXr1NG41b",
-        "state_code": 34,
-        "state_name": "Gujarat",
+        "state_code": 3,
         "address": "83377 Chinmayanand Crest Suite 396"
     },
     {
         "id": 10,
         "name": "Darshwana Banerjee",
         "GST_No": "B5uGQRcOIC8chvB",
-        "state_code": 20,
-        "state_name": "Manipur",
+        "state_code": 2,
         "address": "6545 Achari River Apt. 701"
     },
     {
@@ -84,7 +74,6 @@
         "name": "Kailash Kaur",
         "GST_No": "9H2cR7V3CZXd7LP",
         "state_code": 26,
-        "state_name": "Karnataka",
         "address": "75255 Asan Forges Apt. 109"
     },
     {
@@ -92,7 +81,6 @@
         "name": "Anandamayi Khan Jr.",
         "GST_No": "A4YRHBrPI43uD4M",
         "state_code": 25,
-        "state_name": "Rajasthan",
         "address": "686 Indra Viaduct Apt. 180"
     },
     {
@@ -100,7 +88,6 @@
         "name": "Balagopal Somayaji",
         "GST_No": "V8RNkQU2F5M1iSt",
         "state_code": 29,
-        "state_name": "Himachal Pradesh",
         "address": "43690 Menon Pines Apt. 894"
     },
     {
@@ -108,7 +95,6 @@
         "name": "Chandani Bandopadhyay",
         "GST_No": "LFuUBQKC6LGYM8Z",
         "state_code": 33,
-        "state_name": "Kerala",
         "address": "613 Satyen Trace Apt. 982"
     },
     {
@@ -116,7 +102,6 @@
         "name": "Dr. Dhruv Dutta",
         "GST_No": "W8KjkJ2lz6kv3xj",
         "state_code": 3,
-        "state_name": "Uttar Pradesh",
         "address": "531 Khanna Road Suite 760"
     },
     {
@@ -124,7 +109,6 @@
         "name": "Prem Dutta-Bharadwaj",
         "GST_No": "aOsQulfbMeTH23k",
         "state_code": 1,
-        "state_name": "Sikkim",
         "address": "61442 Adripathi Meadows Apt. 732"
     },
     {
@@ -132,7 +116,6 @@
         "name": "Dr. Bhadraksh Trivedi II",
         "GST_No": "eEXVJ9DXTxPKvFD",
         "state_code": 36,
-        "state_name": "Lakshadweep",
         "address": "889 Lalita Ville Suite 322"
     },
     {
@@ -140,7 +123,6 @@
         "name": "Ravi Malik",
         "GST_No": "W6nWPl513uM2k7w",
         "state_code": 30,
-        "state_name": "Manipur",
         "address": "73065 Vidhur Forge Suite 813"
     },
     {
@@ -148,7 +130,6 @@
         "name": "Mr. Deeptendu Bhat",
         "GST_No": "muyoIjk3n95Cal3",
         "state_code": 8,
-        "state_name": "Nagaland",
         "address": "98618 Sloka Club Suite 246"
     },
     {
@@ -156,7 +137,6 @@
         "name": "Daevi Gowda",
         "GST_No": "mujciP8MP4S5Mlw",
         "state_code": 1,
-        "state_name": "Chandigarh",
         "address": "3508 Saini Estates Apt. 855"
     }
 ]

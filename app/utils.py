@@ -38,7 +38,7 @@ def apply_person_filters(query: Query, model: Type[Supplier | Buyer], filters: d
     if 'state_code' in filters:
         query = query.filter(model.state_code.like(f"%{filters['state_code']}%"))
     if 'state_name' in filters:
-        query = query.filter(model.state_name.like(f"%{filters['state_name']}%"))
+        query = query.filter(model.state.name.like(f"%{filters['state_name']}%"))
     if 'search' in filters:
         search = f"%{filters['search']}%"
         query = query.filter(or_(
