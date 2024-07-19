@@ -5,7 +5,7 @@
   {% include "security/_messages.html" %}
     <div class="login-container">
       <h1>{{ _fsdomain('User Login') }}</h1>
-      <form action="{{ url_for_security('login') }}{{ prop_next() }}" method="post" name="login_user_form">
+      <form action="{{ url_for_security('login') }}{{ prop_next() }}" id="loginForm" method="post" name="login_user_form">
         {{ login_user_form.hidden_tag() }}
         {{ render_form_errors(login_user_form) }}
         {% if "email" in identity_attributes %}{{ render_field_with_errors(login_user_form.email) }}{% endif %}
@@ -19,6 +19,31 @@
         {{ render_field(login_user_form.submit) }}
       </form>
     </div>
+    <script>
+      document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        fetch("{{ url_for_security('login') }}", {
+          method: 'POST',
+          body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.access_token) {
+            localStorage.setItem('access_token', data.access_token);
+            localStorage.setItem('refresh_token', data.refresh_token);
+            // Redirect to the desired page after successful login
+            window.location.href = "{{ url_for('main.root') }}";
+          } else {
+            // Handle login errors
+            alert('Login failed: ' + (data.message || 'Unknown error'));
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      });
+    </script>
   {% if security.webauthn %}
     <hr class="fs-gap">
     <h2>{{ _fsdomain("Use WebAuthn to Sign In") }}</h2>

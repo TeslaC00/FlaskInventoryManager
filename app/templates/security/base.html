@@ -2,6 +2,7 @@
 <html{% block html_attribs %}{% endblock html_attribs %}>
   {%- block html %}
   <head>
+    <link href="{{ url_for('static',filename='css/login_page.css') }}" rel="stylesheet">
     {%- block head %}
     <title>{% block title %}{{ title|default }}{% endblock title %}</title>
 
@@ -52,7 +53,7 @@
               justify-content: center;
               align-items: center;
               padding: 50px;
-              background-image: url("app/static/images/login_page.jpg"); /* Add the background image */
+              background-image: url("/static/images/login_page.jpg"); /* Add the background image */
               background-size: cover; /* Ensure the image covers the entire section */
               background-position: center; /* Center the image */
               background-repeat: no-repeat; /* Prevent the image from repeating */
