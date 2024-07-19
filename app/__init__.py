@@ -11,7 +11,6 @@ from app.extensions import initialize_extensions
 from app.logger import logger
 from app.models.user import User, Role
 from app.security import create_users
-from app.forms.login_form import LoginForm
 
 
 def create_app():
@@ -51,7 +50,7 @@ def create_app():
 
     create_tables(app)
     # flask security
-    app.security = Security(app, user_datastore, login_form=LoginForm)
+    app.security = Security(app, user_datastore)
     logger.info('Initialized security')
 
     # creating default users

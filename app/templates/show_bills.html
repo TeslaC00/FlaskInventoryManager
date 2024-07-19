@@ -444,7 +444,7 @@
                 const cellActions = row.insertCell(6);
 
                 // Store item ID or unique identifier (item.buyer_id in this case) in the checkbox
-                cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" data-id="${item.buyer_id}" style="margin-left: 35%">`;
+                cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" data-id="${item.id}" style="margin-left: 35%">`;
                 cellBuyerId.textContent = item.buyer.name;
                 cellPurchaseOrder.innerHTML = `<a href="#" onclick="showProductDetails('${item.purchase_order}')">${item.purchase_order}</a>`;
                 cellDate.textContent = item.date;
@@ -452,7 +452,7 @@
                 cellRemarks.textContent = item.remarks;
                 cellActions.innerHTML = `
                     <i class="lni lni-pencil" onclick="editRow('${item.purchase_order}')" style="padding-right: 2px"></i>
-                    <i class="lni lni-trash-can" onclick="deleteRow('${item.purchase_order}')" style="padding-left: 2px"></i>
+                    <i class="lni lni-trash-can" onclick="deleteRow('${item.id}')" style="padding-left: 2px"></i>
                 `;
                 cellActions.className = "actions-column";
 
@@ -682,10 +682,10 @@
             modal.show();
         }
 
-        async function deleteRow(purchase_order) {
-            if (confirm(`Are you sure you want to delete part no ${purchase_order}?`)) {
+        async function deleteRow(bill_id) {
+            if (confirm(`Are you sure you want to delete bill id ${bill_id}?`)) {
                 try {
-                    await fetch(`/api/v1/bills?purchase_order=${purchase_order}`, {
+                    await fetch(`/api/v1/bills?bill_id=${bill_id}`, {
                         method: 'DELETE',
                     });
                     fetchData(currentPage, currentSortBy, currentSortOrder);

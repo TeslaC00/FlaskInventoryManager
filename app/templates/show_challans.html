@@ -638,7 +638,7 @@
                         document.getElementById('remarks').value = data.remarks;
 
                         // Store challan no for PUT request
-                        editChallanID = challan_id;
+                        editChallanID = data.id;
 
                         // Change modal title and button label for editing
                         document.getElementById('addChallanModalLabel').textContent = 'Edit Challan';
@@ -686,16 +686,16 @@
 
             // Function to close Bootstrap modal and reset its state
             function closeModal() {
-                const modalElement = document.getElementById('addMaterialModal');
+                const modalElement = document.getElementById('addChallanModal');
                 const modal = bootstrap.Modal.getInstance(modalElement); // Get the instance of the modal
                 modal.hide(); // Hide the modal using Bootstrap's hide method
 
                 // Reset form fields and modal properties
                 document.getElementById('addChallanForm').reset(); // Reset form fields
-                document.getElementById('materialUnit').disabled = false; // Enable the unit dropdown
+                {#document.getElementById('materialUnit').disabled = false; // Enable the unit dropdown#}
                 editChallanID = null; // Reset editChallanID
-                document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title
-                document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label
+                {#document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title#}
+                {#document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label#}
             }
 
 
@@ -725,17 +725,21 @@
             document.getElementById('addChallanForm').addEventListener('submit', async (event) => {
                 event.preventDefault();
                 const formData = new FormData(event.target);
-                const challan_no = formData.get('challan_no');
-                const supplier_id = formData.get('supplier_id');
+                const challanNo = formData.get('challanNo');
+                const supplierName = formData.get('supplierName');
                 const date = formData.get('date');
-                const total_price = formData.get('total_price');
+                const totalPrice = parseFloat(formData.get('totalPrice'));
                 const remarks = formData.get('remarks');
 
                 const data = {
-                    challan_no: challan_no,
-                    supplier_id: supplier_id,
+                    challanNo: challanNo,
+                    supplierName: supplierName,
                     date: date,
-                    total_price: total_price,
+                    totalPrice: totalPrice,
+                    remarks: remarks
+                };
+
+                const edit_data = {
                     remarks: remarks
                 };
 
@@ -760,8 +764,7 @@
                             body: JSON.stringify(data),
                         });
                     }
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('addChallanModal'));
-                    modal.hide(); // Close modal on successful submission
+                    closeModal(); // Close modal on successful submission
                     fetchData(currentPage, currentSortBy, currentSortOrder); // Fetch updated data
                 } catch (error) {
                     console.error('Error adding/updating challan:', error);
