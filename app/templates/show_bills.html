@@ -262,7 +262,7 @@
             <thead class="table-light" style="border-color: black; border-width: 2px">
             <tr>
                 <th class="checkbox-column"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()"></th>
-                <th class="buyer-id-column" data-sort-by="buyer_id" onclick="sortTable(this)">Buyer ID <span class="sort-icon"></span></th>
+                <th class="buyer-name-column" data-sort-by="buyer_name" onclick="sortTable(this)">Buyer Name <span class="sort-icon"></span></th>
                 <th class="purchase-order-column">Purchase Order</th>
                 <th class="date-column" data-sort-by="date" onclick="sortTable(this)">Date <span class="sort-icon"></span></th>
                 <th class="total-price-column" data-sort-by="total_price" onclick="sortTable(this)">Total Price <span class="sort-icon"></span></th>
@@ -277,6 +277,71 @@
 
         <div class="pagination" id="pagination">
             <!-- Pagination buttons will be inserted here dynamically -->
+        </div>
+
+
+        <div class="modal fade" id="addBillModal" tabindex="-1" aria-labelledby="addBillModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addBillModalLabelHeading">Add New Bill</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addBillForm">
+                            <div class="mb-3">
+                                <label for="buyerName" class="form-label">Buyer Name</label>
+                                <input type="text" class="form-control" id="buyerName" name="buyer_name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="purchaseOrder" class="form-label">Purchase Order</label>
+                                <input type="text" class="form-control" id="purchaseOrder" name="purchase_order">
+                            </div>
+                            <div class="mb-3">
+                                <label for="billDate" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="billDate" name="date" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="billTotalPrice" class="form-label">Total Price</label>
+                                <input type="number" class="form-control" id="billTotalPrice" name="total_price" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="billRemarks" class="form-label">Remarks</label>
+                                <input type="text" class="form-control" id="billRemarks" name="remarks">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="submitBillBtn">Add Bill</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal for displaying product details -->
+        <div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productDetailsModalLabel">Product Details for Purchase Order:<span
+                                id="purchaseOrderModal"></span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productDetailsTableBody">
+                                <!-- Product details will be inserted here dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -347,6 +412,8 @@
             fetchData(1);
         }
 
+
+
         function populateTable(data) {
             const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
 
@@ -365,14 +432,14 @@
 
                 // Store item ID or unique identifier (item.buyer_id in this case) in the checkbox
                 cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" data-id="${item.buyer_id}" style="margin-left: 35%">`;
-                cellBuyerId.textContent = item.buyer_id;
-                cellPurchaseOrder.textContent = item.purchase_order;
+                cellBuyerId.textContent = item.buyer.name;
+                cellPurchaseOrder.innerHTML = `<a href="#" onclick="showProductDetails('${item.purchase_order}')">${item.purchase_order}</a>`;
                 cellDate.textContent = item.date;
                 cellTotalPrice.textContent = item.total_price;
                 cellRemarks.textContent = item.remarks;
                 cellActions.innerHTML = `
-                    <i class="lni lni-pencil" onclick="editRow(${item.purchase_order})" style="padding-right: 2px"></i>
-                    <i class="lni lni-trash-can" onclick="deleteRow(${item.purchase_order})" style="padding-left: 2px"></i>
+                    <i class="lni lni-pencil" onclick="editRow('${item.purchase_order}')" style="padding-right: 2px"></i>
+                    <i class="lni lni-trash-can" onclick="deleteRow('${item.purchase_order}')" style="padding-left: 2px"></i>
                 `;
                 cellActions.className = "actions-column";
 
@@ -382,6 +449,55 @@
                 }
             });
         }
+
+        async function showProductDetails(purchase_order) {
+        try {
+            // Fetch all bills
+                    const response = await fetch(`/api/v1/bills`);
+                    const data = await response.json();
+
+                    console.log('Fetched bills:', data); // Debugging: log fetched data
+
+                    // Find the bill with the given purchase_order
+                    console.log(data)
+
+
+                    const bill = await fetch(`/api/v1/bills?purchase_order=${purchase_order}`);
+                    data2 = await bill.json();
+                    console.log(data2);
+
+                    if (!bill) {
+                        console.error(`Bill with purchase_order ${purchase_order} not found.`);
+                        return;
+                    }
+
+                    console.log('Found bill:', bill); // Debugging: log found bill
+
+                    document.getElementById('purchaseOrderModal').textContent = purchase_order;
+
+                    const productDetailsTableBody = document.getElementById('productDetailsTableBody');
+                    productDetailsTableBody.innerHTML = '';
+
+                    data2.forEach(item => {
+                        item.bill_items.forEach(item => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                        <td>${item.product.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>${item.price}</td>
+                    `;
+                            productDetailsTableBody.appendChild(row);
+                        });
+                    });
+
+                // Show the modal
+                const modal = new bootstrap.Modal(document.getElementById('productDetailsModal'));
+                modal.show();
+            } catch (error) {
+                console.error('Error fetching product details:', error);
+            }
+        }
+
 
         function setupPagination(pagination) {
             const paginationDiv = document.getElementById('pagination');
@@ -509,9 +625,9 @@
             console.log('Selected items:', selectedItems);
         }
 
-        function editRow(challan_no) {
+        function editRow(purchase_order) {
         // Fetch data for the selected challan number
-            fetch(`/api/v1/challans/${challan_no}`)
+            fetch(`/api/v1/bills?purchase_order=${purchase_order}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -520,38 +636,39 @@
                 })
                 .then(data => {
                     console.log('Opening edit modal');
+                    console.log(data);
                     // Populate modal form fields with fetched data
-                    document.getElementById('challanNo').value = data.challan_no;
-                    document.getElementById('supplierId').value = data.supplier_id;
-                    document.getElementById('date').value = data.date;
-                    document.getElementById('totalPrice').value = data.total_price;
-                    document.getElementById('remarks').value = data.remarks;
+                    document.getElementById('buyerName').value = data[0].buyer.name;
+                    document.getElementById('purchaseOrder').value = data[0].purchase_order;
+                    document.getElementById('billDate').value = data[0].date;
+                    document.getElementById('billTotalPrice').value = data[0].total_price;
+                    document.getElementById('billRemarks').value = data[0].remarks;
 
-                    // Store challan no for PUT request
-                    editChallanNo = challan_no;
+                    // Store purchase_order for PUT request
+                    editpurchase_order = purchase_order;
 
                     // Change modal title and button label for editing
-                    document.getElementById('addChallanModalLabel').textContent = 'Edit Challan';
-                    document.getElementById('submitBtn').textContent = 'Update Challan';
+                    document.getElementById('addBillModalLabelHeading').textContent = 'Edit Bill';
+                    document.getElementById('submitBillBtn').textContent = 'Update';
 
                     // Show the modal
                     openEditModal();
                 })
-                .catch(error => console.error('Error fetching challan details:', error));
+                .catch(error => console.error('Error fetching bill details:', error));
         }
 
 
         // Function to open Bootstrap modal for editing
         function openEditModal() {
             console.log('Opening edit modal');
-            const modal = new bootstrap.Modal(document.getElementById('addChallanModal'));
+            const modal = new bootstrap.Modal(document.getElementById('addBillModal'));
             modal.show();
         }
 
-        async function deleteRow(challanNo) {
-            if (confirm(`Are you sure you want to delete part no ${challanNo}?`)) {
+        async function deleteRow(purchase_order) {
+            if (confirm(`Are you sure you want to delete part no ${purchase_order}?`)) {
                 try {
-                    await fetch(`/api/v1/challans/${challanNo}`, {
+                    await fetch(`/api/v1/bills?purchase_order=${purchase_order}`, {
                         method: 'DELETE',
                     });
                     fetchData(currentPage, currentSortBy, currentSortOrder);
@@ -567,9 +684,9 @@
 
             // Clear form fields and reset modal properties
             document.getElementById('addChallanForm').reset(); // Clear form fields
-            document.getElementById('challanNo').disabled = false;
+            document.getElementById('purchase_order').disabled = false;
             document.getElementById('supplierId').disabled = false; // Enable the unit dropdown
-            editChallanNo = null; // Reset editChallanNo
+            editpurchase_order = null; // Reset editpurchase_order
             document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title
             document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label
         }
@@ -583,10 +700,72 @@
             // Reset form fields and modal properties
             document.getElementById('addChallanForm').reset(); // Reset form fields
             document.getElementById('materialUnit').disabled = false; // Enable the unit dropdown
-            editChallanNo = null; // Reset editChallanNo
+            editpurchase_order = null; // Reset editpurchase_order
             document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title
             document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label
         }
+
+        // Function to handle form submission for both add and edit
+        document.getElementById('addBillForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const buyer_name = formData.get('buyer_name');
+            const purchaseOrder = formData.get('purchase_order');
+            const billDate = formData.get('date');
+            const total_price = parseFloat(formData.get('total_price'));
+            const remarks = formData.get('remarks');
+
+            // Validate total_price is a valid integer
+            if (isNaN(total_price) || total_price <= 0) {
+                alert('Total price must be a positive number.');
+                return;
+            }
+
+            const data = {
+                buyer_name: buyer_name,
+                purchase_order: purchaseOrder,
+                date: billDate,
+                total_price: total_price,
+                remarks: remarks
+            };
+
+            const edit_data = {
+                buyer_name: buyer_name,
+                purchase_order: purchaseOrder,
+                date: billDate,
+                total_price: total_price,
+                remarks: remarks
+            };
+
+            try {
+                if (editBuyerId) {
+                    // If editBuyerId is set, send a PUT request to update the bill
+                    await fetch(`/api/v1/bills/${editBuyerId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(edit_data),
+                    });
+                    editBuyerId = null; // Reset editBuyerId after successful update
+                } else {
+                    // Otherwise, it's a POST request to add new bill
+                    await fetch('/api/v1/bills', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    });
+                }
+                closeModal(); // Close modal on successful submission
+                fetchData(currentPage, currentSortBy, currentSortOrder); // Fetch updated data
+            } catch (error) {
+                console.error('Error adding/updating bill:', error);
+            }
+        });
+
+
 
         // Initial fetch
         fetchData(currentPage);

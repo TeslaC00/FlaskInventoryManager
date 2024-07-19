@@ -78,7 +78,7 @@
             width: 10%;
         }
 
-        remarks-column{
+        remarks-column {
             width: 30%;
         }
 
@@ -214,7 +214,7 @@
             border-radius: 15px;
         }
 
-        #searchInput{
+        #searchInput {
             width: 210px;
         }
 
@@ -239,14 +239,16 @@
         <div class="top-bar">
             <div class="filter-container">
                 <div class="searchbar">
-                    <input type="text" id="searchInput" placeholder="Search Challan no. or Supplier ID..." oninput="fetchData(1)">
+                    <input type="text" id="searchInput" placeholder="Search Challan no. or Supplier ID..."
+                           oninput="fetchData(1)">
                     <select id="searchFilter" onchange="fetchData(1)">
                         <option value="">All</option>
                         <option value="supplier_id">Supplier ID</option>
                         <option value="challan_no">Challan Number</option>
                     </select>
                 </div>
-                <a>Date Range: <input type="date" id="startDate" placeholder="Start Date" oninput="fetchData(1)">-<input type="date" id="endDate" placeholder="End Date" oninput="fetchData(1)"></a>
+                <a>Date Range: <input type="date" id="startDate" placeholder="Start Date" oninput="fetchData(1)">-<input
+                        type="date" id="endDate" placeholder="End Date" oninput="fetchData(1)"></a>
                 <a>Price: <input type="number" id="minPrice" placeholder="Min Price" oninput="fetchData(1)">
                     <input type="number" id="maxPrice" placeholder="Max Price" oninput="fetchData(1)"></a>
                 <button onclick="clearFilters()">Clear Filters</button>
@@ -261,10 +263,14 @@
             <tr>
                 <th class="checkbox-column"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()"></th>
                 <th class="challan-no-column">Challan No</th>
-                <th class="supplier-id-column" data-sort-by="supplier_id" onclick="sortTable(this)">Supplier Name <span class="sort-icon"></span></th>
-                <th class="date-column" data-sort-by="date" onclick="sortTable(this)">Date <span class="sort-icon"></span></th>
-                <th class="total-price-column" data-sort-by="total_price" onclick="sortTable(this)">Total Price <span class="sort-icon"></span></th>
-                <th class="remarks-column" data-sort-by="remarks" onclick="sortTable(this)">Remarks <span class="sort-icon"></span></th>
+                <th class="supplier-id-column" data-sort-by="supplier_id" onclick="sortTable(this)">Supplier Name <span
+                        class="sort-icon"></span></th>
+                <th class="date-column" data-sort-by="date" onclick="sortTable(this)">Date <span
+                        class="sort-icon"></span></th>
+                <th class="total-price-column" data-sort-by="total_price" onclick="sortTable(this)">Total Price <span
+                        class="sort-icon"></span></th>
+                <th class="remarks-column" data-sort-by="remarks" onclick="sortTable(this)">Remarks <span
+                        class="sort-icon"></span></th>
                 <th class="actions-column">Actions</th>
             </tr>
             </thead>
@@ -315,24 +321,26 @@
         </div>
 
         <!-- Material details modal -->
-        <div class="modal fade" id="materialDetailsModal" tabindex="-1" aria-labelledby="materialDetailsModalLabel" aria-hidden="true">
+        <div class="modal fade" id="materialDetailsModal" tabindex="-1" aria-labelledby="materialDetailsModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="materialDetailsModalLabel">Material Details for Challan No: <span id="challanNoModal"></span></h5>
+                        <h5 class="modal-title" id="materialDetailsModalLabel">Material Details for Challan No: <span
+                                id="challanNoModal"></span></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <table class="table">
                             <thead>
-                                <tr>
-                                    <th>Material Name</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                </tr>
+                            <tr>
+                                <th>Material Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
                             </thead>
                             <tbody id="materialDetailsTableBody">
-                                <!-- Material details will be inserted here dynamically -->
+                            <!-- Material details will be inserted here dynamically -->
                             </tbody>
                         </table>
                     </div>
@@ -346,7 +354,13 @@
         let currentPage = 1;
         let currentSortBy = 'supplier_id';
         let currentSortOrder = 'asc';
-        let sortOrders = {'supplier_id': 'asc', 'challan_no': 'asc', 'date': 'asc', 'total_price': 'asc', 'remarks': 'asc'};
+        let sortOrders = {
+            'supplier_id': 'asc',
+            'challan_no': 'asc',
+            'date': 'asc',
+            'total_price': 'asc',
+            'remarks': 'asc'
+        };
         let editChallanID = null; // Global variable to store the challan ID being edited
         let selectedItems = []; // Global variable to store selected item IDs
 
@@ -410,373 +424,351 @@
             fetchData(1);
         }
 
-        {#async function showMaterialDetails(challanNo) {#}
-        {#    try {#}
-        {#        const response = await fetch(/api/v1/challans/${challanNo});#}
-        {#        const data = await response.json();#}
-        {##}
-        {#        document.getElementById('challanNoModal').textContent = challanNo;#}
-        {##}
-        {#        const materialDetailsTableBody = document.getElementById('materialDetailsTableBody');#}
-        {#        materialDetailsTableBody.innerHTML = '';#}
-        {##}
-        {#        data.challan_items.forEach(item => {#}
-        {#            const row = document.createElement('tr');#}
-        {#            row.innerHTML = #}
-        {#                <td>${item.material.name}</td>#}
-        {#                <td>${item.quantity}</td>#}
-        {#                <td>${item.price}</td>#}
-        {#            ;#}
-        {#            materialDetailsTableBody.appendChild(row);#}
-        {#        });#}
-        {##}
-        {#        // Show the modal#}
-        {#        const modal = new bootstrap.Modal(document.getElementById('materialDetailsModal'));#}
-        {#        modal.show();#}
-        {#    } catch (error) {#}
-        {#        console.error('Error fetching material details:', error);#}
-        {#    }#}
-        {#}#}
+
+            async function showMaterialDetails(challanNo) {
+                try {
+                    // Fetch all challans
+                    const response = await fetch(`/api/v1/challans`);
+                    const data = await response.json();
+
+                    console.log('Fetched challans:', data); // Debugging: log fetched data
+
+                    // Find the challan with the given challan_no
 
 
-        async function showMaterialDetails(challanNo) {
-            try {
-                // Fetch all challans
-                const response = await fetch(`/api/v1/challans`);
-                const data = await response.json();
+                    const challan = await fetch(`/api/v1/challans?challan_no=${challanNo}`);
+                    data2 = await challan.json();
+                    console.log(data2);
 
-                console.log('Fetched challans:', data); // Debugging: log fetched data
+                    if (!challan) {
+                        console.error(`Challan with challan_no ${challanNo} not found.`);
+                        return;
+                    }
 
-                // Find the challan with the given challan_no
-                const challan = data.find(item => item.challan_no === challanNo);
+                    console.log('Found challan:', challan); // Debugging: log found challan
 
-                if (!challan) {
-                    console.error(`Challan with challan_no ${challanNo} not found.`);
-                    return;
-                }
+                    document.getElementById('challanNoModal').textContent = challanNo;
 
-                console.log('Found challan:', challan); // Debugging: log found challan
+                    const materialDetailsTableBody = document.getElementById('materialDetailsTableBody');
+                    materialDetailsTableBody.innerHTML = '';
 
-                document.getElementById('challanNoModal').textContent = challanNo;
-
-                const materialDetailsTableBody = document.getElementById('materialDetailsTableBody');
-                materialDetailsTableBody.innerHTML = '';
-
-                challan.challan_items.forEach(item => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
+                    data2.forEach(item => {
+                        item.challan_items.forEach(item => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
                         <td>${item.material.name}</td>
                         <td>${item.quantity}</td>
                         <td>${item.price}</td>
                     `;
-                    materialDetailsTableBody.appendChild(row);
-                });
+                            materialDetailsTableBody.appendChild(row);
+                        });
+                    });
 
-                // Show the modal
-                const modal = new bootstrap.Modal(document.getElementById('materialDetailsModal'));
-                modal.show();
-            } catch (error) {
-                console.error('Error fetching material details:', error);
+
+                    // Show the modal
+                    const modal = new bootstrap.Modal(document.getElementById('materialDetailsModal'));
+                    modal.show();
+                } catch (error) {
+                    console.error('Error fetching material details:', error);
+                }
             }
-        }
 
 
-        function populateTable(data) {
-            const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+            function populateTable(data) {
+                const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
 
-            // Clear existing rows
-            tableBody.innerHTML = '';
+                // Clear existing rows
+                tableBody.innerHTML = '';
 
-            data.forEach(item => {
-                const row = tableBody.insertRow();
-                const cellCheckbox = row.insertCell(0);
-                const cellChallanNo = row.insertCell(1);
-                const cellSupplierName = row.insertCell(2);
-                const cellDate = row.insertCell(3);
-                const cellTotalPrice = row.insertCell(4);
-                const cellRemarks = row.insertCell(5);
-                const cellActions = row.insertCell(6);
+                data.forEach(item => {
+                    const row = tableBody.insertRow();
+                    const cellCheckbox = row.insertCell(0);
+                    const cellChallanNo = row.insertCell(1);
+                    const cellSupplierName = row.insertCell(2);
+                    const cellDate = row.insertCell(3);
+                    const cellTotalPrice = row.insertCell(4);
+                    const cellRemarks = row.insertCell(5);
+                    const cellActions = row.insertCell(6);
 
-                // Store item ID or unique identifier (item.challan_id in this case) in the checkbox
-                cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" data-id="${item.id}" style="margin-left: 35%">`;
-                cellChallanNo.innerHTML = `<a href="javascript:void(0)" onclick="showMaterialDetails(${item.challan_no})">${item.challan_no}</a>`;
-                cellSupplierName.textContent = item.supplier.name;
-                cellDate.textContent = item.date;
-                cellTotalPrice.textContent = item.total_price;
-                cellRemarks.textContent = item.remarks;
-                cellActions.innerHTML = `
+                    // Store item ID or unique identifier (item.challan_id in this case) in the checkbox
+                    cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" data-id="${item.id}" style="margin-left: 35%">`;
+                    cellChallanNo.innerHTML = `<a href="javascript:void(0)" onclick="showMaterialDetails(${item.challan_no})">${item.challan_no}</a>`;
+                    cellSupplierName.textContent = item.supplier.name;
+                    cellDate.textContent = item.date;
+                    cellTotalPrice.textContent = item.total_price;
+                    cellRemarks.textContent = item.remarks;
+                    cellActions.innerHTML = `
                     <i class="lni lni-pencil" onclick="editRow(${item.id})" style="padding-right: 2px"></i>
                     <i class="lni lni-trash-can" onclick="deleteRow(${item.challan_no})" style="padding-left: 2px"></i>
                 `;
-                cellActions.className = "actions-column";
+                    cellActions.className = "actions-column";
 
-                // Check if this row's checkbox should be initially checked based on stored selection
-                if (selectedItems.includes(item.challan_no)) {
-                    cellCheckbox.firstChild.checked = true;
+                    // Check if this row's checkbox should be initially checked based on stored selection
+                    if (selectedItems.includes(item.challan_no)) {
+                        cellCheckbox.firstChild.checked = true;
+                    }
+                });
+            }
+
+
+            function handleCheckboxClick(checkbox) {
+                const itemId = checkbox.getAttribute('data-id');
+
+                if (checkbox.checked && !selectedItems.includes(itemId)) {
+                    selectedItems.push(itemId); // Add item ID to selectedItems if checkbox is checked
+                } else if (!checkbox.checked) {
+                    selectedItems = selectedItems.filter(item => item !== itemId); // Remove item ID if checkbox is unchecked
                 }
-            });
-        }
-
-
-        function handleCheckboxClick(checkbox) {
-            const itemId = checkbox.getAttribute('data-id');
-
-            if (checkbox.checked && !selectedItems.includes(itemId)) {
-                selectedItems.push(itemId); // Add item ID to selectedItems if checkbox is checked
-            } else if (!checkbox.checked) {
-                selectedItems = selectedItems.filter(item => item !== itemId); // Remove item ID if checkbox is unchecked
             }
-        }
 
 
-        function setupPagination(pagination) {
-            const paginationDiv = document.getElementById('pagination');
+            function setupPagination(pagination) {
+                const paginationDiv = document.getElementById('pagination');
 
-            // Clear existing buttons
-            paginationDiv.innerHTML = '';
+                // Clear existing buttons
+                paginationDiv.innerHTML = '';
 
-            const prevButton = document.createElement('button');
-            prevButton.innerHTML = '<i class="peepo lni lni-chevron-left"></i>';
-            if (pagination.page > 1) {
-                prevButton.onclick = () => fetchData(pagination.page - 1, currentSortBy, currentSortOrder);
-                prevButton.classList.remove('disabled');
-            } else {
-                prevButton.classList.add('disabled');
-            }
-            paginationDiv.appendChild(prevButton);
-
-            const pageNumber = document.createElement('span');
-            pageNumber.className = 'page-number';
-            pageNumber.textContent = `Page ${pagination.page} of ${pagination.total_pages}`;
-            paginationDiv.appendChild(pageNumber);
-
-            const nextButton = document.createElement('button');
-            nextButton.innerHTML = '<i class="peepo lni lni-chevron-right"></i>';
-            if (pagination.page < pagination.total_pages) {
-                nextButton.onclick = () => fetchData(pagination.page + 1, currentSortBy, currentSortOrder);
-                nextButton.classList.remove('disabled');
-            } else {
-                nextButton.classList.add('disabled');
-            }
-            paginationDiv.appendChild(nextButton);
-        }
-
-
-        function sortTable(header) {
-            const sortBy = header.dataset.sortBy;
-            const sortOrder = sortOrders[sortBy] === 'asc' ? 'desc' : 'asc';
-            currentSortBy = sortBy;
-            currentSortOrder = sortOrder;
-            sortOrders[sortBy] = sortOrder;
-
-            fetchData(currentPage, sortBy, sortOrder);
-        }
-
-        function updateSortIcons() {
-            const headers = document.querySelectorAll('th[data-sort-by]');
-            headers.forEach(header => {
-                const sortBy = header.getAttribute('data-sort-by');
-                const sortIconElem = header.querySelector('.sort-icon');
-
-                // Remove 'active' class and set all icons to default state
-                sortIconElem.innerHTML = `<i class="lni lni-chevron-up"></i>`;
-                sortIconElem.classList.remove('active');
-
-                // Set active state and apply blue border
-                if (sortBy === currentSortBy) {
-                    const icon = currentSortOrder === 'asc' ? '<i class="lni lni-chevron-up"></i>' : '<i class="lni lni-chevron-down"></i>';
-                    sortIconElem.innerHTML = icon;
-                    sortIconElem.classList.add('active');
-                }
-            });
-        }
-
-        // Event listener for the checkbox
-        document.getElementById('dataTable').addEventListener('change', function (event) {
-            if (event.target.classList.contains('rowCheckbox')) {
-                const itemId = event.target.getAttribute('data-id');
-
-                if (event.target.checked) {
-                    selectedItems.push(itemId);
+                const prevButton = document.createElement('button');
+                prevButton.innerHTML = '<i class="peepo lni lni-chevron-left"></i>';
+                if (pagination.page > 1) {
+                    prevButton.onclick = () => fetchData(pagination.page - 1, currentSortBy, currentSortOrder);
+                    prevButton.classList.remove('disabled');
                 } else {
-                    const index = selectedItems.indexOf(itemId);
-                    if (index !== -1) {
-                        selectedItems.splice(index, 1);
-                    }
+                    prevButton.classList.add('disabled');
                 }
+                paginationDiv.appendChild(prevButton);
 
-                console.log('Selected items:', selectedItems);
+                const pageNumber = document.createElement('span');
+                pageNumber.className = 'page-number';
+                pageNumber.textContent = `Page ${pagination.page} of ${pagination.total_pages}`;
+                paginationDiv.appendChild(pageNumber);
+
+                const nextButton = document.createElement('button');
+                nextButton.innerHTML = '<i class="peepo lni lni-chevron-right"></i>';
+                if (pagination.page < pagination.total_pages) {
+                    nextButton.onclick = () => fetchData(pagination.page + 1, currentSortBy, currentSortOrder);
+                    nextButton.classList.remove('disabled');
+                } else {
+                    nextButton.classList.add('disabled');
+                }
+                paginationDiv.appendChild(nextButton);
             }
-        });
 
 
-        function toggleSelectAll() {
-            const selectAllCheckbox = document.getElementById('selectAll');
-            const rowCheckboxes = document.querySelectorAll('.rowCheckbox');
+            function sortTable(header) {
+                const sortBy = header.dataset.sortBy;
+                const sortOrder = sortOrders[sortBy] === 'asc' ? 'desc' : 'asc';
+                currentSortBy = sortBy;
+                currentSortOrder = sortOrder;
+                sortOrders[sortBy] = sortOrder;
 
-            rowCheckboxes.forEach(checkbox => {
-                checkbox.checked = selectAllCheckbox.checked;
-                handleCheckboxClick(checkbox); // Call handleCheckboxClick for each checkbox
+                fetchData(currentPage, sortBy, sortOrder);
+            }
+
+            function updateSortIcons() {
+                const headers = document.querySelectorAll('th[data-sort-by]');
+                headers.forEach(header => {
+                    const sortBy = header.getAttribute('data-sort-by');
+                    const sortIconElem = header.querySelector('.sort-icon');
+
+                    // Remove 'active' class and set all icons to default state
+                    sortIconElem.innerHTML = `<i class="lni lni-chevron-up"></i>`;
+                    sortIconElem.classList.remove('active');
+
+                    // Set active state and apply blue border
+                    if (sortBy === currentSortBy) {
+                        const icon = currentSortOrder === 'asc' ? '<i class="lni lni-chevron-up"></i>' : '<i class="lni lni-chevron-down"></i>';
+                        sortIconElem.innerHTML = icon;
+                        sortIconElem.classList.add('active');
+                    }
+                });
+            }
+
+            // Event listener for the checkbox
+            document.getElementById('dataTable').addEventListener('change', function (event) {
+                if (event.target.classList.contains('rowCheckbox')) {
+                    const itemId = event.target.getAttribute('data-id');
+
+                    if (event.target.checked) {
+                        selectedItems.push(itemId);
+                    } else {
+                        const index = selectedItems.indexOf(itemId);
+                        if (index !== -1) {
+                            selectedItems.splice(index, 1);
+                        }
+                    }
+
+                    console.log('Selected items:', selectedItems);
+                }
             });
-        }
 
-        document.addEventListener('change', function (event) {
-            if (event.target.classList.contains('rowCheckbox')) {
-                handleCheckboxClick(event.target); // Call handleCheckboxClick for individual checkboxes
+
+            function toggleSelectAll() {
+                const selectAllCheckbox = document.getElementById('selectAll');
+                const rowCheckboxes = document.querySelectorAll('.rowCheckbox');
+
+                rowCheckboxes.forEach(checkbox => {
+                    checkbox.checked = selectAllCheckbox.checked;
+                    handleCheckboxClick(checkbox); // Call handleCheckboxClick for each checkbox
+                });
             }
-        });
 
-        function editRow(challan_id) {
-        // Fetch data for the selected challan number
-            fetch(`/api/v1/challans/${challan_id}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Opening edit modal');
-                    // Populate modal form fields with fetched data
-                    document.getElementById('challanNo').value = data.challan_no;
-                    document.getElementById('supplierName').value = data.supplier_id;
-                    document.getElementById('date').value = data.date;
-                    document.getElementById('totalPrice').value = data.total_price;
-                    document.getElementById('remarks').value = data.remarks;
-
-                    // Store challan no for PUT request
-                    editChallanID = challan_id;
-
-                    // Change modal title and button label for editing
-                    document.getElementById('addChallanModalLabel').textContent = 'Edit Challan';
-                    document.getElementById('submitBtn').textContent = 'Update Challan';
-
-                    // Show the modal
-                    openEditModal();
-                })
-                .catch(error => console.error('Error fetching challan details:', error));
-        }
-
-
-        // Function to open Bootstrap modal for editing
-        function openEditModal() {
-            console.log('Opening edit modal');
-            const modal = new bootstrap.Modal(document.getElementById('addChallanModal'));
-            modal.show();
-        }
-
-        async function deleteRow(challanNo) {
-            if (confirm(`Are you sure you want to delete part no ${challanNo}?`)) {
-                try {
-                    await fetch(`/api/v1/challans/${challanNo}`, {
-                        method: 'DELETE',
-                    });
-                    fetchData(currentPage, currentSortBy, currentSortOrder);
-                } catch (error) {
-                    console.error('Error deleting row:', error);
+            document.addEventListener('change', function (event) {
+                if (event.target.classList.contains('rowCheckbox')) {
+                    handleCheckboxClick(event.target); // Call handleCheckboxClick for individual checkboxes
                 }
-            }
-        }
+            });
 
-        function openModal() {
-            const modal = new bootstrap.Modal(document.getElementById('addMaterialModal'));
-            modal.show();
+            function editRow(challan_id) {
+                // Fetch data for the selected challan number
+                fetch(`/api/v1/challans/${challan_id}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Opening edit modal');
+                        // Populate modal form fields with fetched data
+                        document.getElementById('challanNo').value = data.challan_no;
+                        document.getElementById('supplierName').value = data.supplier_id;
+                        document.getElementById('date').value = data.date;
+                        document.getElementById('totalPrice').value = data.total_price;
+                        document.getElementById('remarks').value = data.remarks;
 
-            // Clear form fields and reset modal properties
-            document.getElementById('addChallanForm').reset(); // Clear form fields
-            document.getElementById('challanNo').disabled = false;
-            document.getElementById('supplierName').disabled = false; // Enable the unit dropdown
-            editChallanID = null; // Reset editChallanID
-            document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title
-            document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label
-        }
+                        // Store challan no for PUT request
+                        editChallanID = challan_id;
 
-        // Function to close Bootstrap modal and reset its state
-        function closeModal() {
-            const modalElement = document.getElementById('addMaterialModal');
-            const modal = bootstrap.Modal.getInstance(modalElement); // Get the instance of the modal
-            modal.hide(); // Hide the modal using Bootstrap's hide method
+                        // Change modal title and button label for editing
+                        document.getElementById('addChallanModalLabel').textContent = 'Edit Challan';
+                        document.getElementById('submitBtn').textContent = 'Update Challan';
 
-            // Reset form fields and modal properties
-            document.getElementById('addChallanForm').reset(); // Reset form fields
-            document.getElementById('materialUnit').disabled = false; // Enable the unit dropdown
-            editChallanID = null; // Reset editChallanID
-            document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title
-            document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label
-        }
-
-
-
-        async function deleteSelected() {
-            if (selectedItems.length === 0) {
-                alert('No rows selected');
-                return;
+                        // Show the modal
+                        openEditModal();
+                    })
+                    .catch(error => console.error('Error fetching challan details:', error));
             }
 
-            if (confirm(`Are you sure you want to delete selected rows?`)) {
-                try {
-                    await Promise.all(selectedItems.map(challanNo =>
-                        fetch(`/api/v1/challans/${challanNo}`, {
+
+            // Function to open Bootstrap modal for editing
+            function openEditModal() {
+                console.log('Opening edit modal');
+                const modal = new bootstrap.Modal(document.getElementById('addChallanModal'));
+                modal.show();
+            }
+
+            async function deleteRow(challanNo) {
+                if (confirm(`Are you sure you want to delete part no ${challanNo}?`)) {
+                    try {
+                        await fetch(`/api/v1/challans/${challanNo}`, {
                             method: 'DELETE',
-                        })
-                    ));
-                    selectedItems = []; // Clear selectedItems array after successful deletion
-                    fetchData(currentPage, currentSortBy, currentSortOrder); // Refresh data table after deletion
+                        });
+                        fetchData(currentPage, currentSortBy, currentSortOrder);
+                    } catch (error) {
+                        console.error('Error deleting row:', error);
+                    }
+                }
+            }
+
+            function openModal() {
+                const modal = new bootstrap.Modal(document.getElementById('addMaterialModal'));
+                modal.show();
+
+                // Clear form fields and reset modal properties
+                document.getElementById('addChallanForm').reset(); // Clear form fields
+                document.getElementById('challanNo').disabled = false;
+                document.getElementById('supplierName').disabled = false; // Enable the unit dropdown
+                editChallanID = null; // Reset editChallanID
+                document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title
+                document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label
+            }
+
+            // Function to close Bootstrap modal and reset its state
+            function closeModal() {
+                const modalElement = document.getElementById('addMaterialModal');
+                const modal = bootstrap.Modal.getInstance(modalElement); // Get the instance of the modal
+                modal.hide(); // Hide the modal using Bootstrap's hide method
+
+                // Reset form fields and modal properties
+                document.getElementById('addChallanForm').reset(); // Reset form fields
+                document.getElementById('materialUnit').disabled = false; // Enable the unit dropdown
+                editChallanID = null; // Reset editChallanID
+                document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title
+                document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label
+            }
+
+
+            async function deleteSelected() {
+                if (selectedItems.length === 0) {
+                    alert('No rows selected');
+                    return;
+                }
+
+                if (confirm(`Are you sure you want to delete selected rows?`)) {
+                    try {
+                        await Promise.all(selectedItems.map(challanNo =>
+                            fetch(`/api/v1/challans/${challanNo}`, {
+                                method: 'DELETE',
+                            })
+                        ));
+                        selectedItems = []; // Clear selectedItems array after successful deletion
+                        fetchData(currentPage, currentSortBy, currentSortOrder); // Refresh data table after deletion
+                    } catch (error) {
+                        console.error('Error deleting selected rows:', error);
+                    }
+                }
+            }
+
+
+            // Function to handle form submission for both add and edit
+            document.getElementById('addChallanForm').addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                const challan_no = formData.get('challan_no');
+                const supplier_id = formData.get('supplier_id');
+                const date = formData.get('date');
+                const total_price = formData.get('total_price');
+                const remarks = formData.get('remarks');
+
+                const data = {
+                    challan_no: challan_no,
+                    supplier_id: supplier_id,
+                    date: date,
+                    total_price: total_price,
+                    remarks: remarks
+                };
+
+                try {
+                    if (editChallanID) {
+                        // If editChallanID is set, send a PUT request to update the challan
+                        await fetch(`/api/v1/challans/${editChallanID}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(data),
+                        });
+                        editChallanID = null; // Reset editChallanID after successful update
+                    } else {
+                        // Otherwise, it's a POST request to add a new challan
+                        await fetch('/api/v1/challans', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(data),
+                        });
+                    }
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addChallanModal'));
+                    modal.hide(); // Close modal on successful submission
+                    fetchData(currentPage, currentSortBy, currentSortOrder); // Fetch updated data
                 } catch (error) {
-                    console.error('Error deleting selected rows:', error);
+                    console.error('Error adding/updating challan:', error);
                 }
-            }
-        }
+            });
 
-
-        // Function to handle form submission for both add and edit
-         document.getElementById('addChallanForm').addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const challan_no = formData.get('challan_no');
-            const supplier_id = formData.get('supplier_id');
-            const date = formData.get('date');
-            const total_price = formData.get('total_price');
-            const remarks = formData.get('remarks');
-
-            const data = {
-                challan_no: challan_no,
-                supplier_id: supplier_id,
-                date: date,
-                total_price: total_price,
-                remarks: remarks
-            };
-
-            try {
-                if (editChallanID) {
-                    // If editChallanID is set, send a PUT request to update the challan
-                    await fetch(`/api/v1/challans/${editChallanID}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data),
-                    });
-                    editChallanID = null; // Reset editChallanID after successful update
-                } else {
-                    // Otherwise, it's a POST request to add a new challan
-                    await fetch('/api/v1/challans', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data),
-                    });
-                }
-                const modal = bootstrap.Modal.getInstance(document.getElementById('addChallanModal'));
-                modal.hide(); // Close modal on successful submission
-                fetchData(currentPage, currentSortBy, currentSortOrder); // Fetch updated data
-            } catch (error) {
-                console.error('Error adding/updating challan:', error);
-            }
-        });
-
-        // Initial fetch
-        fetchData(currentPage);
+            // Initial fetch
+            fetchData(currentPage);
     </script>
 {% endblock %}
