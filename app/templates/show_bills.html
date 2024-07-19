@@ -78,7 +78,7 @@
             width: 10%;
         }
 
-        .remarks-column{
+        .remarks-column {
             width: 30%;
         }
 
@@ -218,7 +218,7 @@
             border-radius: 15px;
         }
 
-        #searchInput{
+        #searchInput {
             width: 210px;
         }
 
@@ -241,14 +241,16 @@
         <div class="top-bar">
             <div class="filter-container">
                 <div class="searchbar">
-                    <input type="text" id="searchInput" placeholder="Search by buyer ID or purchase order..." oninput="fetchData(1)">
+                    <input type="text" id="searchInput" placeholder="Search by buyer ID or purchase order..."
+                           oninput="fetchData(1)">
                     <select id="searchFilter" onchange="fetchData(1)">
                         <option value="">All</option>
                         <option value="buyer_id">Buyer ID</option>
                         <option value="purchase_order">Purchase Order</option>
                     </select>
                 </div>
-                <a>Date Range: <input type="date" id="startDate" placeholder="Start Date" oninput="fetchData(1)">-<input type="date" id="endDate" placeholder="End Date" oninput="fetchData(1)"></a>
+                <a>Date Range: <input type="date" id="startDate" placeholder="Start Date" oninput="fetchData(1)">-<input
+                        type="date" id="endDate" placeholder="End Date" oninput="fetchData(1)"></a>
                 <a>Price: <input type="number" id="minPrice" placeholder="Min Price" oninput="fetchData(1)">
                     <input type="number" id="maxPrice" placeholder="Max Price" oninput="fetchData(1)"></a>
                 <button onclick="clearFilters()">Clear Filters</button>
@@ -262,11 +264,15 @@
             <thead class="table-light" style="border-color: black; border-width: 2px">
             <tr>
                 <th class="checkbox-column"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()"></th>
-                <th class="buyer-name-column" data-sort-by="buyer_name" onclick="sortTable(this)">Buyer Name <span class="sort-icon"></span></th>
+                <th class="buyer-name-column" data-sort-by="buyer_name" onclick="sortTable(this)">Buyer Name <span
+                        class="sort-icon"></span></th>
                 <th class="purchase-order-column">Purchase Order</th>
-                <th class="date-column" data-sort-by="date" onclick="sortTable(this)">Date <span class="sort-icon"></span></th>
-                <th class="total-price-column" data-sort-by="total_price" onclick="sortTable(this)">Total Price <span class="sort-icon"></span></th>
-                <th class="remarks-column" data-sort-by="remarks" onclick="sortTable(this)">Remarks <span class="sort-icon"></span></th>
+                <th class="date-column" data-sort-by="date" onclick="sortTable(this)">Date <span
+                        class="sort-icon"></span></th>
+                <th class="total-price-column" data-sort-by="total_price" onclick="sortTable(this)">Total Price <span
+                        class="sort-icon"></span></th>
+                <th class="remarks-column" data-sort-by="remarks" onclick="sortTable(this)">Remarks <span
+                        class="sort-icon"></span></th>
                 <th class="actions-column">Actions</th>
             </tr>
             </thead>
@@ -303,7 +309,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="billTotalPrice" class="form-label">Total Price</label>
-                                <input type="number" class="form-control" id="billTotalPrice" name="total_price" required>
+                                <input type="number" class="form-control" id="billTotalPrice" name="total_price"
+                                       required>
                             </div>
                             <div class="mb-3">
                                 <label for="billRemarks" class="form-label">Remarks</label>
@@ -318,7 +325,8 @@
 
 
         <!-- Modal for displaying product details -->
-        <div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsModalLabel" aria-hidden="true">
+        <div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -329,14 +337,14 @@
                     <div class="modal-body">
                         <table class="table table-striped">
                             <thead>
-                                <tr>
-                                    <th>Product Name</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                </tr>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
                             </thead>
                             <tbody id="productDetailsTableBody">
-                                <!-- Product details will be inserted here dynamically -->
+                            <!-- Product details will be inserted here dynamically -->
                             </tbody>
                         </table>
                     </div>
@@ -349,8 +357,14 @@
         let currentPage = 1;
         let currentSortBy = 'buyer_id';
         let currentSortOrder = 'asc';
-        let sortOrders = {'buyer_id': 'asc', 'purchase_order': 'asc', 'date': 'asc', 'total_price': 'asc', 'remarks': 'asc'};
-        let editBuyerId = null; // Global variable to store the bill ID being edited
+        let sortOrders = {
+            'buyer_id': 'asc',
+            'purchase_order': 'asc',
+            'date': 'asc',
+            'total_price': 'asc',
+            'remarks': 'asc'
+        };
+        let editBillId = null; // Global variable to store the bill ID being edited
         let selectedItems = []; // Global variable to store selected item IDs
 
         async function fetchData(page, sortBy = 'buyer_id', sortOrder = 'asc') {
@@ -413,7 +427,6 @@
         }
 
 
-
         function populateTable(data) {
             const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
 
@@ -451,44 +464,44 @@
         }
 
         async function showProductDetails(purchase_order) {
-        try {
-            // Fetch all bills
-                    const response = await fetch(`/api/v1/bills`);
-                    const data = await response.json();
+            try {
+                // Fetch all bills
+                const response = await fetch(`/api/v1/bills`);
+                const data = await response.json();
 
-                    console.log('Fetched bills:', data); // Debugging: log fetched data
+                console.log('Fetched bills:', data); // Debugging: log fetched data
 
-                    // Find the bill with the given purchase_order
-                    console.log(data)
+                // Find the bill with the given purchase_order
+                console.log(data)
 
 
-                    const bill = await fetch(`/api/v1/bills?purchase_order=${purchase_order}`);
-                    data2 = await bill.json();
-                    console.log(data2);
+                const bill = await fetch(`/api/v1/bills?purchase_order=${purchase_order}`);
+                data2 = await bill.json();
+                console.log(data2);
 
-                    if (!bill) {
-                        console.error(`Bill with purchase_order ${purchase_order} not found.`);
-                        return;
-                    }
+                if (!bill) {
+                    console.error(`Bill with purchase_order ${purchase_order} not found.`);
+                    return;
+                }
 
-                    console.log('Found bill:', bill); // Debugging: log found bill
+                console.log('Found bill:', bill); // Debugging: log found bill
 
-                    document.getElementById('purchaseOrderModal').textContent = purchase_order;
+                document.getElementById('purchaseOrderModal').textContent = purchase_order;
 
-                    const productDetailsTableBody = document.getElementById('productDetailsTableBody');
-                    productDetailsTableBody.innerHTML = '';
+                const productDetailsTableBody = document.getElementById('productDetailsTableBody');
+                productDetailsTableBody.innerHTML = '';
 
-                    data2.forEach(item => {
-                        item.bill_items.forEach(item => {
-                            const row = document.createElement('tr');
-                            row.innerHTML = `
+                data2.forEach(item => {
+                    item.bill_items.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
                         <td>${item.product.name}</td>
                         <td>${item.quantity}</td>
                         <td>${item.price}</td>
                     `;
-                            productDetailsTableBody.appendChild(row);
-                        });
+                        productDetailsTableBody.appendChild(row);
                     });
+                });
 
                 // Show the modal
                 const modal = new bootstrap.Modal(document.getElementById('productDetailsModal'));
@@ -626,7 +639,7 @@
         }
 
         function editRow(purchase_order) {
-        // Fetch data for the selected challan number
+            // Fetch data for the selected challan number
             fetch(`/api/v1/bills?purchase_order=${purchase_order}`)
                 .then(response => {
                     if (!response.ok) {
@@ -645,7 +658,7 @@
                     document.getElementById('billRemarks').value = data[0].remarks;
 
                     // Store purchase_order for PUT request
-                    editpurchase_order = purchase_order;
+                    editBillId = data[0].id;
 
                     // Change modal title and button label for editing
                     document.getElementById('addBillModalLabelHeading').textContent = 'Edit Bill';
@@ -662,6 +675,10 @@
         function openEditModal() {
             console.log('Opening edit modal');
             const modal = new bootstrap.Modal(document.getElementById('addBillModal'));
+            document.getElementById('buyerName').disabled = true;
+            document.getElementById('purchaseOrder').disabled = true;
+            document.getElementById('billDate').disabled = true;
+            document.getElementById('billTotalPrice').disabled = true;
             modal.show();
         }
 
@@ -679,30 +696,28 @@
         }
 
         function openModal() {
-            const modal = new bootstrap.Modal(document.getElementById('addMaterialModal'));
+            const modal = new bootstrap.Modal(document.getElementById('addBillModal'));
             modal.show();
 
             // Clear form fields and reset modal properties
-            document.getElementById('addChallanForm').reset(); // Clear form fields
-            document.getElementById('purchase_order').disabled = false;
-            document.getElementById('supplierId').disabled = false; // Enable the unit dropdown
-            editpurchase_order = null; // Reset editpurchase_order
-            document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title
-            document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label
+            document.getElementById('addBillForm').reset(); // Clear form fields
+            editBillId = null; // Reset editpurchase_order
+            {#document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title#}
+            {#document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label#}
         }
 
         // Function to close Bootstrap modal and reset its state
         function closeModal() {
-            const modalElement = document.getElementById('addMaterialModal');
+            const modalElement = document.getElementById('addBillModal');
             const modal = bootstrap.Modal.getInstance(modalElement); // Get the instance of the modal
             modal.hide(); // Hide the modal using Bootstrap's hide method
 
             // Reset form fields and modal properties
-            document.getElementById('addChallanForm').reset(); // Reset form fields
-            document.getElementById('materialUnit').disabled = false; // Enable the unit dropdown
-            editpurchase_order = null; // Reset editpurchase_order
-            document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title
-            document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label
+            document.getElementById('addBillForm').reset(); // Reset form fields
+            {#document.getElementById('purchase_order').disabled = false;#}
+            editBillId = null; // Reset editpurchase_order
+            {#document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title#}
+            {#document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label#}
         }
 
         // Function to handle form submission for both add and edit
@@ -715,11 +730,6 @@
             const total_price = parseFloat(formData.get('total_price'));
             const remarks = formData.get('remarks');
 
-            // Validate total_price is a valid integer
-            if (isNaN(total_price) || total_price <= 0) {
-                alert('Total price must be a positive number.');
-                return;
-            }
 
             const data = {
                 buyer_name: buyer_name,
@@ -730,24 +740,20 @@
             };
 
             const edit_data = {
-                buyer_name: buyer_name,
-                purchase_order: purchaseOrder,
-                date: billDate,
-                total_price: total_price,
                 remarks: remarks
             };
 
             try {
-                if (editBuyerId) {
-                    // If editBuyerId is set, send a PUT request to update the bill
-                    await fetch(`/api/v1/bills/${editBuyerId}`, {
+                if (editBillId) {
+                    // If editBillId is set, send a PUT request to update the bill
+                    await fetch(`/api/v1/bills/${editBillId}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify(edit_data),
                     });
-                    editBuyerId = null; // Reset editBuyerId after successful update
+                    editBillId = null; // Reset editBillId after successful update
                 } else {
                     // Otherwise, it's a POST request to add new bill
                     await fetch('/api/v1/bills', {
@@ -764,7 +770,6 @@
                 console.error('Error adding/updating bill:', error);
             }
         });
-
 
 
         // Initial fetch
