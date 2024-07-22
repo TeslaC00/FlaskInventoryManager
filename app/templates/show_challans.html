@@ -725,7 +725,7 @@
             document.getElementById('addChallanForm').addEventListener('submit', async (event) => {
                 event.preventDefault();
                 const formData = new FormData(event.target);
-                const challanNo = formData.get('challanNo');
+                const challanNo = formData.get('challan_no');
                 const supplierName = formData.get('supplierName');
                 const date = formData.get('date');
                 const totalPrice = parseFloat(formData.get('totalPrice'));
@@ -751,7 +751,7 @@
                             headers: {
                                 'Content-Type': 'application/json',
                             },
-                            body: JSON.stringify(data),
+                            body: JSON.stringify(edit_data),
                         });
                         editChallanID = null; // Reset editChallanID after successful update
                     } else {

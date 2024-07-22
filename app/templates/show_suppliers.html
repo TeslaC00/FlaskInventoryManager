@@ -554,22 +554,35 @@
 
         document.getElementById('addBuyerForm').addEventListener('submit', async function (event) {
             event.preventDefault();
-            const formData = new FormData(this);
+            const formData = new FormData(event.target);
+            const gst_no=formData.get('gst_no');
+            const name=formData.get('name')
+            const state_code=parseInt(formData.get('state_code'))
+            const state_name=formData.get('state_name')
+            const address=formData.get('address')
 
             const data = {
-                gst_no: formData.get('GST_No'),
-                name: formData.get('name'),
-                state_code: formData.get('state_code'),
-                state_name: formData.get('state_name'),
-                address: formData.get('address')
+                gst_no: gst_no,
+                name: name,
+                state_code: state_code,
+                state_name: state_name,
+                address: address
             };
+
+            const edit_data = {
+                name: name,
+                state_code: state_code,
+                address: address
+            };
+
+
 
             try {
                 if (editBuyerId) {
                     // If editBuyerId is set, send a PUT request to update the buyer
                     await fetch(`/api/v1/supplier/${editBuyerId}`, {
                         method: 'PUT',
-                        body: JSON.stringify(data),
+                        body: JSON.stringify(edit_data),
                         headers: {
                             'Content-Type': 'application/json'
                         }
@@ -632,7 +645,5 @@
             });
         }
     </script>
-
-
 {% endblock %}
 

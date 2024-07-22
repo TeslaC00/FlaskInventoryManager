@@ -3,6 +3,7 @@
   {%- block html %}
   <head>
     <link href="{{ url_for('static',filename='css/login_page.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
     {%- block head %}
     <title>{% block title %}{{ title|default }}{% endblock title %}</title>
 
