@@ -186,4 +186,15 @@ a.sidebar-link:hover {
     width: 40px;
 }
 
-@media (min-width: 768px) {}
+#sidebar:not(.expand) .has-dropdown {
+    pointer-events: none;
+    cursor: default;
+}
+
+#sidebar:not(.expand) .has-dropdown > .sidebar-link:hover {
+    background-color: #17365b; /* Prevent hover effect */
+    border-left: none; /* Remove border-left on hover */
+}
+
+@media (min-width: 768px) {
+}
