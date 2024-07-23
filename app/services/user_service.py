@@ -4,7 +4,6 @@ from app.errors.not_found_error import NotFoundError
 from app.models import User
 from app.repositories.user_repository import UserRepository
 from app.services.role_service import RoleService
-from flask_jwt_extended import create_access_token, create_refresh_token
 
 
 class UserService:
@@ -61,6 +60,7 @@ class UserService:
 
     @staticmethod
     def update_user_tracking(user: User) -> None:
+        # TODO: add logic for updating user tracking attributes
         UserRepository.update(user)
 
     @staticmethod
@@ -71,12 +71,10 @@ class UserService:
             raise RuntimeError(f"Error deleting User: {str(e)}")
 
     @staticmethod
-    def authenticate_user(user: User, password: str) -> dict[str, str]:
+    def authenticate_user(user: User, password: str) -> bool:
         if UserRepository.verify_password(user, password):
-            access_token = create_access_token(identity=user.id)
-            refresh_token = create_refresh_token(identity=user.id)
-            return {'access_token': access_token, 'refresh_token': refresh_token}
-        raise ValueError("Invalid credentials")
+            return True
+        return False
 
     @staticmethod
     def authenticate_user_answer(user: User, answer: str) -> bool:
