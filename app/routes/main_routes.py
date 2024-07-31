@@ -13,9 +13,6 @@ main_routes = Blueprint('main', __name__)
 
 @main_routes.route('/base/')
 @jwt_required()
-@auth_required()
-@permissions_accepted("user-read")
-@roles_required('user')
 def root():
     """
     Serves the base template of the application. Requires user to be logged in.
@@ -24,7 +21,7 @@ def root():
     - The rendered base.html template.
     """
     user_id = get_jwt_identity()
-    logger.log(f'logged in user_id: {user_id}')
+    logger.info(f'logged in user_id: {user_id}')
     return render_template('base.html')
 
 

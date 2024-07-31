@@ -1,15 +1,18 @@
 from datetime import timedelta
 
-from flask import Blueprint, redirect, url_for, request, render_template, flash, jsonify
+from flask import Blueprint, redirect, url_for, request, render_template, flash, jsonify, make_response
 from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, jwt_required, get_jwt, \
-    decode_token
-from flask_security import ForgotPasswordForm, LoginForm, login_user, url_for_security
+    decode_token, set_access_cookies, set_refresh_cookies, unset_jwt_cookies
+from flask_security import ForgotPasswordForm, LoginForm
 
 from app.errors.not_found_error import NotFoundError
 from app.extensions import jwt
 from app.forms.password_form import VerifySecurityForm, ResetPasswordFormModify
-from app.logger import logger
 from app.services.user_service import UserService
+
+MINUTE = 60
+HOUR = 60 * MINUTE
+DAY = 24 * HOUR
 
 # path for authentication related pages
 auth_bp = Blueprint('auth', __name__)
@@ -24,8 +27,8 @@ def add_token_to_blacklist(token):
 
 
 @jwt.token_in_blocklist_loader
-def check_if_token_in_blacklist(decrypted_token):
-    jti = decrypted_token['jti']
+def check_if_token_in_blacklist(jwt_header, jwt_payload):
+    jti = jwt_payload['jti']
     return jti in blacklist
 
 
@@ -44,7 +47,8 @@ def refresh():
 
     user_id = get_jwt_identity()
     new_access_token = create_access_token(identity=user_id)
-    return jsonify(access_token=new_access_token)
+    set_access_cookies(new_access_token)
+    return jsonify({'message': 'Token refreshed'})
 
 
 # @auth_bp.route('/')
@@ -82,10 +86,14 @@ def login():
                 # remove, it uses session we are using JWT(sessionless)
                 # login_user(user)
                 UserService.update_user_tracking(user)
-                return jsonify(access_token=access_token, refresh_token=refresh_token), 200
+                response = make_response(jsonify(login=True))
+                set_access_cookies(response=response, encoded_access_token=access_token, max_age=MINUTE)
+                set_refresh_cookies(response=response, encoded_refresh_token=refresh_token, max_age=DAY)
+
+                return response, 200
             else:
                 flash('Invalid password', 'warning')
-                return jsonify({'message': 'Invalid password'}), 401
+                return jsonify(login=False), 401
         except ValueError as ve:
             flash(str(ve), 'warning')
             return jsonify({'message': 'Form validation failed'}), 400
@@ -153,6 +161,10 @@ def logout():
     refresh_token = request.cookies.get('refresh_token')
     jti_refresh = decode_token(refresh_token)['jti']  # Extract jti from refresh token
     add_token_to_blacklist(jti_refresh)  # Blacklist the refresh token
+
+    response = jsonify({"msg": "logout successful"})
+
+    unset_jwt_cookies(response=response)
 
     user_id = get_jwt_identity()
     user = UserService.get_user_by_id(user_id)
