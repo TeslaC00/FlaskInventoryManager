@@ -17,12 +17,16 @@ class UserResponseSchema(UserListResponseSchema):
     roles = fields.Nested(RoleResponseSchema, many=True)
 
 
+class UserSecurityQuestionSchema(Schema):
+    id = fields.Int(required=True)
+    answer = fields.Str(required=True)
+
+
 class UserCreateSchema(Schema):
     email = fields.Email(required=True)
     username = fields.Str(required=True, validate=validate.Length(min=8))
     password = fields.Str(required=True, validate=validate.Length(min=8))
-    security_question = fields.Str(required=True, validate=validate.Length(max=255))
-    security_answer = fields.Str(required=True, validate=validate.Length(max=255))
+    questions = fields.Nested(UserSecurityQuestionSchema, many=True)
     roles = fields.List(fields.Str(validate=validate.Length(max=255)), required=True)
 
 

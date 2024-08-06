@@ -8,6 +8,7 @@ from flask_security import ForgotPasswordForm, LoginForm
 from app.errors.not_found_error import NotFoundError
 from app.extensions import jwt
 from app.forms.password_form import VerifySecurityForm, ResetPasswordFormModify
+from app.services.security_question_service import SecurityQuestionService
 from app.services.user_service import UserService
 
 MINUTE = 60
@@ -49,16 +50,6 @@ def refresh():
     new_access_token = create_access_token(identity=user_id)
     set_access_cookies(new_access_token)
     return jsonify({'message': 'Token refreshed'})
-
-
-# @auth_bp.route('/')
-# def index():
-#     """
-#     Renders the base page when user is authenticated, otherwise redirects to the login page
-#     :return: Response: rendered login.html
-#     """
-#     # may need to create own login form to keep it sessionless
-#     return redirect(url_for('auth.login'))
 
 
 @auth_bp.route('/', methods=['POST', 'GET'])
@@ -108,9 +99,9 @@ def forgot_password():
             email = form.email.data
             user = UserService.get_user_by_email(email)
             if user:
-                question = user.question
+                questions = user.questions
                 question_form = VerifySecurityForm()
-                return render_template('security_question.html', question=question, email=email,
+                return render_template('security_question.html', question=questions, email=email,
                                        question_form=question_form)
             else:
                 flash('User with given Email Address does not exists', 'warning')
@@ -122,11 +113,12 @@ def verify_security():
     if request.method == 'POST':
         question_form = VerifySecurityForm(request.form)
         if question_form.validate_on_submit():
+            question_id = question_form.question_id
             email = question_form.email.data
             user = UserService.get_user_by_email(email)
             if not user:
                 flash('User with given Email Address does not exists', 'warning')
-            if UserService.authenticate_user_answer(user, question_form.security_answer):
+            if SecurityQuestionService.verify_answer(user.id, question_id, question_form.security_answer):
                 return render_template('reset_password.html', form=ResetPasswordFormModify(), email=email)
             else:
                 flash('Security Answer not match', 'warning')

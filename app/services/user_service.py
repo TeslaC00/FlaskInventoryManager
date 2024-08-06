@@ -4,6 +4,7 @@ from app.errors.not_found_error import NotFoundError
 from app.models import User
 from app.repositories.user_repository import UserRepository
 from app.services.role_service import RoleService
+from app.services.security_question_service import SecurityQuestionService
 
 
 class UserService:
@@ -32,7 +33,13 @@ class UserService:
     @staticmethod
     def add_user(**data: dict) -> User:
         try:
-            return UserRepository.add(**data)
+            questions = data.pop('questions')
+            user = UserRepository.add(**data)
+            for i in questions:
+                SecurityQuestionService.add_question(user.id, i['id'], i['answer'])
+            return user
+        except KeyError as ke:
+            raise KeyError(f"Security Question and Answers not found in data: {str(ke)}")
         except ValueError as ve:
             raise ValueError(f"Invalid data: {str(ve)}")
         except Exception as e:

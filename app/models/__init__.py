@@ -16,4 +16,5 @@ from .user import Role
 from .production_log import ProductionLog
 from .permission import Permission
 from .indian_state import IndianState
-from .question import Question
+from .security_question import SecurityQuestion
+from .user_security_questions import UserSecurityQuestions

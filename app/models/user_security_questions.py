@@ -1,0 +1,9 @@
+from app.extensions import db
+
+
+class UserSecurityQuestions(db.Model):
+    __tablename__ = 'user_security_questions'
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
+    answer_hash = db.Column(db.String, nullable=False)
+    salt = db.Column(db.String, nullable=False)

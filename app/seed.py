@@ -4,9 +4,9 @@ from json import load
 from dotenv import load_dotenv
 
 from app.logger import logger as log
-from app.models import BillItem, ChallanItem, ProductMaterial
+from app.models import BillItem, ChallanItem, ProductMaterial, IndianState
 from app.models import Buyer, Supplier, Material, Product, Bill, Challan, ProductScrap, MaterialScrap, Unit
-from app.models import Question
+from app.models import SecurityQuestion
 from app import create_app
 from app.extensions import db
 
@@ -27,9 +27,13 @@ def convert_date(date_string):
 def seed():
     log.info('started seed')
 
+    for item in read_json('indian_state.json'):
+        record = IndianState(**item)
+        db.session.add(record)
+
     # Load and add Question records
     for item in read_json('questions.json'):
-        record = Question(**item)
+        record = SecurityQuestion(**item)
         db.session.add(record)
 
     # Load and add Unit records
