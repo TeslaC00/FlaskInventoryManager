@@ -1,15 +1,31 @@
-Backend
-1. create bomb table to store goods(parent) to material(child) - (Done)
-2. change string -> text in audit_log
-3. add remarks to -> challan, bill, returned_good, records, audit_log
-4. add hidden folder to store images and files that are sent to app, add delimiter to save file path in remarks
-5. decide cascading on update
-
-Frontend
-1. create custom request builder for sorting and filtering
-2. functions to call api and update table contents
-
-API
-1. create api with small response for GET of list
-2. create api to send detail response with ID
-3. create query params and path variables in code and postman
+TODO:
+new feature ideas:
+	- add data import module to import data from excel(in any format) and other sources easily
+	- database backup & recovery
+	- add notification system to notify the user about significant changes or updates
+	- add check & verify system to check the records entry and update the verified changes only(could use temp DB for this, maybe)
+minor taks
+	- add real data in the database to test it
+	- make quantity logic of material/product non negative in update in service
+user features
+	- how to assign roles to user
+analysis feature
+	- could introduce new table with summarized data
+security additions
+	- overwrite forgot password with security QA - (done not tested)
+	- add jwt authentication - (tested)
+	- expire default remember me token
+more additions
+	- add user api - (wait till wireframe is ready or schema outline is ready)
+	- make fixed permissions - (discuss and finalise permissions)
+	- make bill generator
+do testing
+	- do unit test
+		- test models, forms, schemas, utilities, bill_generator, seed, error_handling
+	- do integration test
+		- test APIs, routes, bill_generator, authentication, error_handling
+	- don't test
+		- third_part_lib, static_files, db_migrate, cfg_file, generated_files(artifacts)
+think of deployment
+	- use setup tools for easier pip install
+bug fixing
