@@ -257,14 +257,14 @@
             <thead class="table-light" style="border-color: black; border-width: 2px">
             <tr>
                 <th class="checkbox-column"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()"></th>
-                <th class="part-no-column">Part No</th>
+                <th class="part-no-column" >Part No</th>
                 <th class="name-column" data-sort-by="name" onclick="sortTable(this)">Name <span
                         class="sort-icon"></span>
                 </th>
                 <th class="quantity-column" data-sort-by="quantity" onclick="sortTable(this)">Quantity <span
                         class="sort-icon"></span></th>
-                <th class="unit-column" data-sort-by="unit" onclick="sortTable(this)">Unit <span
-                        class="sort-icon"></span>
+                <th style=" cursor: default" class="unit-column" data-sort-by="unit" >Unit <span
+                        class="sort-icon" style="opacity: 0"></span>
                 </th>
                 <th class="gst-column" data-sort-by="c_gst" onclick="sortTable(this)">C GST <span
                         class="sort-icon"></span></th>
@@ -304,9 +304,9 @@
                                 <div class="col-md-6">
                                     <label for="materialUnit" class="form-label">Unit Type</label>
                                     <select class="form-select" id="materialUnit" name="unit" required>
-                                        <option value="gram">Gram</option>
-                                        <option value="centimeter">Centimeter</option>
-                                        <option value="piece">Piece</option>
+                                        <option value="1">Gram</option>
+                                        <option value="2">Centimeter</option>
+                                        <option value="3">Piece</option>
                                     </select>
                                 </div>
                             </div>
@@ -354,7 +354,6 @@
         async function fetchData(page, sortBy = 'name', sortOrder = 'asc') {
             try {
                 const searchQuery = document.getElementById('searchInput').value;
-                const unitFilter = document.getElementById('unitFilter').value;
                 const minQuantity = document.getElementById('minQuantity').value;
                 const maxQuantity = document.getElementById('maxQuantity').value;
 
@@ -367,9 +366,6 @@
 
                 if (searchQuery) {
                     queryParams.append('search', searchQuery);
-                }
-                if (unitFilter) {
-                    queryParams.append('unit', unitFilter);
                 }
                 if (minQuantity) {
                     queryParams.append('min_quantity', minQuantity);
@@ -423,7 +419,7 @@
                 cellPartNo.textContent = item.part_no;
                 cellName.textContent = item.name;
                 cellQuantity.textContent = item.quantity;
-                cellUnit.textContent = item.unit;
+                cellUnit.textContent = item.unit.name;
                 cellCGST.textContent = item.c_gst;
                 cellSGST.textContent = item.s_gst;
                 cellIGST.textContent = item.i_gst;
@@ -545,9 +541,10 @@
                 })
                 .then(data => {
                     // Populate modal form fields with fetched data
+                    console.log(data);
                     document.getElementById('materialName').value = data.name;
                     document.getElementById('materialQuantity').value = data.quantity;
-                    document.getElementById('materialUnit').setAttribute('value', data.unit);
+                    document.getElementById('materialUnit').setAttribute('value', data.unit.id);
                     document.getElementById('materialCGST').value = data.c_gst;
                     document.getElementById('materialSGST').value = data.s_gst;
                     document.getElementById('materialIGST').value = data.i_gst;
@@ -555,7 +552,7 @@
 
                     // Disable the unit dropdown
                     document.getElementById('materialName').disabled = true;
-                    document.getElementById('materialUnit').disabled = true;
+                    {#document.getElementById('materialUnit').disabled = true;#}
 
                     // Store part no for PUT request
                     editPartNo = partNo;

@@ -269,8 +269,8 @@
                         class="sort-icon"></span></th>
                 <th class="total-price-column" data-sort-by="total_price" onclick="sortTable(this)">Total Price <span
                         class="sort-icon"></span></th>
-                <th class="remarks-column" data-sort-by="remarks" onclick="sortTable(this)">Remarks <span
-                        class="sort-icon"></span></th>
+                <th style="cursor: default" class="remarks-column" data-sort-by="remarks" >Remarks <span
+                        ></span></th>
                 <th class="actions-column">Actions</th>
             </tr>
             </thead>
@@ -358,8 +358,7 @@
             'supplier_id': 'asc',
             'challan_no': 'asc',
             'date': 'asc',
-            'total_price': 'asc',
-            'remarks': 'asc'
+            'total_price': 'asc'
         };
         let editChallanID = null; // Global variable to store the challan ID being edited
         let selectedItems = []; // Global variable to store selected item IDs

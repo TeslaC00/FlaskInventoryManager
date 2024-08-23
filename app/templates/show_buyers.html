@@ -375,8 +375,8 @@
                 cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" data-id="${buyer.id}" style="margin-left: 35%">`;
                 cellGstNo.textContent = buyer.GST_No;
                 cellName.textContent = buyer.name;
-                cellStateCode.textContent = buyer.state_code;
-                cellStateName.textContent = buyer.state_name;
+                cellStateCode.textContent = buyer.state.id;
+                cellStateName.textContent = buyer.state.name;
                 cellAddress.textContent = buyer.address;
                 cellActions.innerHTML = `
                     <i class="lni lni-pencil" onclick="editBuyer(${buyer.id})" style="padding-right: 2px"></i>
@@ -488,11 +488,12 @@
                 .then(data => {
                     document.getElementById('buyerGSTNo').setAttribute('value',  data.GST_No);
                     document.getElementById('buyerName').value = data.name;
-                    document.getElementById('buyerStateCode').value = data.state_code;
-                    document.getElementById('buyerStateName').value = data.state_name;
+                    document.getElementById('buyerStateCode').value = data.state.id;
+                    document.getElementById('buyerStateName').value = data.state.name;
                     document.getElementById('buyerAddress').value = data.address;
 
                     document.getElementById('buyerGSTNo').disabled = true;
+                    document.getElementById('buyerStateName').disabled = true;
 
                     editBuyerId = id;
 
