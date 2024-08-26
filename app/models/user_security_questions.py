@@ -8,5 +8,4 @@ class UserSecurityQuestions(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     question_id = db.Column(db.Integer, db.ForeignKey('security_question.id'), nullable=False)
     answer_hash = db.Column(db.String, nullable=False)
-    salt = db.Column(db.String, nullable=False)
     __table_args__ = (PrimaryKeyConstraint('user_id', 'question_id'),)

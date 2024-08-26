@@ -2,9 +2,10 @@ from datetime import datetime
 from json import load
 
 from dotenv import load_dotenv
+from flask_security import hash_password
 
 from app.logger import logger as log
-from app.models import BillItem, ChallanItem, ProductMaterial, IndianState
+from app.models import BillItem, ChallanItem, ProductMaterial, IndianState, UserSecurityQuestions
 from app.models import Buyer, Supplier, Material, Product, Bill, Challan, ProductScrap, MaterialScrap, Unit
 from app.models import SecurityQuestion
 from app import create_app
@@ -34,6 +35,12 @@ def seed():
     # Load and add Question records
     for item in read_json('questions.json'):
         record = SecurityQuestion(**item)
+        db.session.add(record)
+
+    # Load User Security Question records
+    for item in read_json('user_questions.json'):
+        record = UserSecurityQuestions(**item)
+        record.answer_hash = hash_password(record.answer_hash)
         db.session.add(record)
 
     # Load and add Unit records
