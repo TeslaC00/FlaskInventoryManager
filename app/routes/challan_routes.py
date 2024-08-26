@@ -7,6 +7,7 @@ from app.models.challan import Challan
 challan = Blueprint('challan', __name__)
 
 
+# "Deprecated, remove it or change if needed, usage not allowed in current state"
 @challan.route('/api/add_challan', methods=['GET', 'POST'])
 def add_challan():
     purchase_form = PurchaseForm()
@@ -37,3 +38,7 @@ def add_challan():
     return render_template('addentry.html', form=purchase_form)
 
 
+# "Deprecated, remove it or change if needed, usage not allowed in current state"
+@challan.route('/api/challan_get', methods=['GET', 'POST'])
+def get_challan():
+    return render_template('show_challans.html')

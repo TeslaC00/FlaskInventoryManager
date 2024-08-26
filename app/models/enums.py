@@ -14,12 +14,6 @@ class ProductScrapType(enum.Enum):
     EXTERNAL_REJECTION = 'external_rejection'
 
 
-class UnitType(enum.Enum):
-    GRAM = 'gram'
-    CENTIMETER = 'centimeter'
-    PIECE = 'piece'
-
-
 class ActionType(enum.Enum):
     INSERT = 'insert'
     UPDATE = 'update'

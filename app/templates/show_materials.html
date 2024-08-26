@@ -259,8 +259,8 @@
                 </th>
                 <th class="quantity-column" data-sort-by="quantity" onclick="sortTable(this)">Quantity <span
                         class="sort-icon"></span></th>
-                <th class="unit-column" data-sort-by="unit" onclick="sortTable(this)">Unit <span
-                        class="sort-icon"></span>
+                <th style="cursor: default" class="unit-column" data-sort-by="unit" >Unit <span
+                        ></span>
                 </th>
                 <th class="actions-column">Actions</th>
             </tr>
@@ -292,9 +292,9 @@
                             <div class="mb-3">
                                 <label for="materialUnit" class="form-label">Unit Type</label>
                                 <select class="form-select" id="materialUnit" name="unit" disabled required>
-                                    <option value="gram">Gram</option>
-                                    <option value="centimeter">Centimeter</option>
-                                    <option value="piece">Piece</option>
+                                    <option value="1">Gram</option>
+                                    <option value="2">Centimeter</option>
+                                    <option value="3">Piece</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -310,13 +310,11 @@
         </div>
     </div>
 
-
-
     <script>
         let currentPage = 1;
         let currentSortBy = 'name';
         let currentSortOrder = 'asc';
-        let sortOrders = {'name': 'asc', 'quantity': 'asc', 'unit': 'asc'};
+        let sortOrders = {'name': 'asc', 'quantity': 'asc'};
         let editPartNo = null; // Global variable to store the part number being edited
         let selectedItems = []; // Global variable to store selected item IDs
 
@@ -390,7 +388,7 @@
                 cellPartNo.textContent = item.part_no;
                 cellName.textContent = item.name;
                 cellQuantity.textContent = item.quantity;
-                cellUnit.textContent = item.unit;
+                cellUnit.textContent = item.unit.name;
                 cellActions.innerHTML = `
             <i class="lni lni-pencil" onclick="editRow(${item.part_no})" style="padding-right: 2px"></i>
             <i class="lni lni-trash-can" onclick="deleteRow(${item.part_no})" style="padding-left: 2px"></i>
@@ -488,7 +486,6 @@
                 // Remove 'active' class and set all icons to default state
                 sortIconElem.innerHTML = `
             <i class="lni lni-chevron-up"></i>
-{#            <i class="lni lni-chevron-down"></i>#}
         `;
                 sortIconElem.classList.remove('active');
 
@@ -515,7 +512,7 @@
                     // Populate modal form fields with fetched data
                     document.getElementById('materialName').value = data.name;
                     document.getElementById('materialQuantity').value = data.quantity;
-                    document.getElementById('materialUnit').setAttribute('value', data.unit);
+                    document.getElementById('materialUnit').setAttribute('value', data.unit.name);
 
                     // Disable the unit dropdown
                     document.getElementById('materialName').disabled = true;
@@ -670,3 +667,5 @@
         fetchData(currentPage);
     </script>
 {% endblock %}
+
+

@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, Blueprint, redirect, url_for
+from flask import request, render_template, Blueprint, redirect, url_for
 from app.logger import logger as log
 from app.forms.bill_wtform import SalesForm
 from flask_wtf import csrf
@@ -32,4 +32,9 @@ def sales():
         return redirect(url_for('bill.sales'))  # Assuming you have a success endpoint
     else:
         log.info(form.errors)
-    return render_template('orders.html', form=form,  csrf_token=csrf_token)
+    return render_template('orders.html', form=form, csrf_token=csrf_token)
+
+
+@bill.route('/api/bill', methods=['GET', 'POST'])
+def get_bill():
+    return render_template('show_bills.html')

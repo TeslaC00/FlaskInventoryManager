@@ -1,4 +1,4 @@
-from flask import Blueprint, request, flash, jsonify, render_template, redirect, url_for
+from flask import Blueprint, request, flash, render_template, redirect, url_for
 
 from app.extensions import db
 from app.forms.material_form import MaterialForm
@@ -8,6 +8,7 @@ from app.models import Material
 material_routes = Blueprint('material', __name__)
 
 
+# "Deprecated, remove it or change if needed, usage not allowed in current state"
 @material_routes.route('/api/material', methods=['GET', 'POST'])
 def add_material():
     form = MaterialForm()
@@ -25,58 +26,8 @@ def add_material():
     return render_template('material.html', form=form)
 
 
-@material_routes.route('/api/material/<string:name>', methods=['GET', 'POST'])
-def edit_material(name):
-    material = Material.query.filter_by(name=name).first_or_404()
-    form = MaterialForm(obj=material)
-    if form.validate_on_submit():
-        form.populate_obj(material)
-        db.session.commit()
-        logger.info(f'Material {material.to_dict()} updated in database')
-        flash(f'Material {material.name} updated in database', 'success')
-        return redirect(url_for('material.add_product'))
-    return render_template('updel.html', form=form)
-
-
+# "Deprecated, remove it or change if needed, usage not allowed in current state"
 @material_routes.route('/api/materials', methods=['GET'])
 def get_materials():
-    # materials = Material.query.all()
     logger.info(f'Fetched all materials')
     return render_template('show_materials.html')
-    # return jsonify(materials)
-
-
-@material_routes.route('/api/material/<string:name>', methods=['GET'])
-def get_material(name):
-    material = Material.query.get(name)
-    if material:
-        logger.info(f'Fetched material {material.to_dict()}')
-        return jsonify(material)
-    else:
-        logger.error(f'Material {name} not found')
-        flash(f'Materia {name} not found', 'error')
-
-
-# @material_routes.route('/api/material/<string:name>', methods=['GET', 'POST'])
-# def update_material(name):
-#     material = Material.query.get(name)
-#     form = MaterialForm(obj=material)
-#     form.name.render_kw = {'readonly': True}
-#     if form.validate_on_submit() and request.method == 'POST':
-#         logger.info(f'Updating material {material.to_dict()}')
-#         form.populate_obj(material)
-#         db.session.commit()
-#         logger.info(f'Material {material.to_dict()} updated')
-#         flash(f'Material {material.name} updated', 'success')
-
-
-@material_routes.route('/api/material/<string:name>', methods=['POST'])
-def delete_material(name):
-    material = Material.query.get(name)
-    if material:
-        db.session.delete(material)
-        logger.info(f'Deleted material {material.to_dict()}')
-        flash(f'Material {material.name} deleted', 'success')
-    else:
-        logger.error(f'Material {name} not found')
-        flash(f'Material {name} not found', 'error')

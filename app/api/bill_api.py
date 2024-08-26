@@ -1,19 +1,21 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
-from sqlalchemy import or_, extract
+from marshmallow import Schema, fields
+from sqlalchemy import extract, func
 
-from app.api.utils import apply_sorting
+from app.errors.not_found_error import NotFoundError
 from app.extensions import db
 from app.logger import logger
 from app.models import Bill
-from app.schemas.bill_schema import BillSchema, BillQuerySchema, BillUpdateSchema
+from app.schemas.bill_schema import BillQuerySchema, BillUpdateSchema, BillResponseSchema, BillCreateSchema, \
+    BillListResponseSchema
+from app.services.bill_item_service import BillItemService
+from app.services.bill_service import BillService
 
 bills_bp = Blueprint('bills_bp', __name__, description='Operations on bills')
 
+
 # app/schemas/sales_analysis_schema.py
-from marshmallow import Schema, fields
-
-
 class SalesAnalysisQuerySchema(Schema):
     start_date = fields.Date(required=False)
     end_date = fields.Date(required=False)
@@ -22,96 +24,93 @@ class SalesAnalysisQuerySchema(Schema):
 
 @bills_bp.route('/bills')
 class BillListResource(MethodView):
-    @bills_bp.response(200, BillSchema(many=True))
+    @bills_bp.response(200, BillListResponseSchema(many=True))
     @bills_bp.arguments(BillQuerySchema, location='query')
     @bills_bp.paginate()
-    def get(self, query_args, pagination_parameters):
+    def get(self, filters, pagination_parameters):
         logger.info('GET /bills called')
-        logger.debug(f"Query Arguments={query_args}")
-
-        query = Bill.query
-        # for filtering
-        if 'buyer_id' in query_args:
-            query = query.filter(Bill.buyer_id.like(f"%{query_args['buyer_id']}%"))
-        if 'purchase_order' in query_args:
-            query = query.filter(Bill.purchase_order.like(f"%{query_args['purchase_order']}%"))
-        if 'start_date' in query_args:
-            query = query.filter(Bill.date >= query_args['start_date'])
-        if 'end_date' in query_args:
-            query = query.filter(Bill.date <= query_args['end_date'])
-        if 'min_total_price' in query_args:
-            query = query.filter(Bill.total_price >= query_args['min_total_price'])
-        if 'max_total_price' in query_args:
-            query = query.filter(Bill.total_price <= query_args['max_total_price'])
-        # for searching
-        if 'search' in query_args:
-            query = query.filter(or_(
-                Bill.purchase_order.like(f"%{query_args['search']}%"),
-                Bill.remarks.like(f"%{query_args['search']}%")
-            ))
-        # for sorting
-        bills = apply_sorting(query, query_args, pagination_parameters)
-        logger.info(f"Found {pagination_parameters.item_count} bills")
-        logger.debug(f"Returned bills: {bills}")
-        return bills
-
-    @bills_bp.response(201, BillSchema)
-    @bills_bp.arguments(BillSchema)
-    def post(self, new_bill_data):
-        logger.info('POST /bills called')
-        logger.debug(f"Creating new bill with args: {new_bill_data}")
-
+        logger.debug(f"Query Arguments={filters}")
         try:
-            new_bill = Bill(**new_bill_data)
-            db.session.add(new_bill)
-            db.session.commit()
-            logger.info(f"New bill created with ID {new_bill.id}")
-            return new_bill
+            bills = BillService.get_all_bills(pagination_parameters.page, pagination_parameters.page_size, **filters)
+            pagination_parameters.item_count = bills.total
+            logger.info(f"Found {pagination_parameters.item_count} bills")
+            logger.debug(f"Returned bills: {bills}")
+            return bills
+        except ValueError as ve:
+            abort(400, ve)
+        except Exception as e:
+            abort(500, e)
+
+    @bills_bp.response(201, BillResponseSchema)
+    @bills_bp.arguments(BillCreateSchema)
+    def post(self, data):
+        logger.info('POST /bills called')
+        logger.debug(f"Creating new bill with args: {data}")
+        bill_data = {
+            'buyer_id': data['buyer_id'],
+            'total_price': data['total_price'],
+            'date': data['date'],
+            'purchase_order': data['purchase_order'],
+            'remarks': data['remarks']
+        }
+        try:
+            bill = BillService.add_bill(**bill_data)
+            for item in data['items']:
+                BillItemService.add_bill_item(bill_id=bill.id, **item)
+
+            logger.info(f"New bill created with ID {bill.id}")
+            return BillService.update_total_price(bill.id)
+        except ValueError as ve:
+            logger.error(f"Error creating bill: {ve}")
+            abort(400, ve)
         except Exception as e:
             logger.error(f"Error creating bill: {e}")
-            abort(500, message="An error occurred while creating the bill")
+            abort(500, e)
 
 
 @bills_bp.route('bills/<int:bill_id>')
 class BillResource(MethodView):
 
-    @bills_bp.response(200, BillSchema)
+    @bills_bp.response(200, BillResponseSchema)
     def get(self, bill_id):
         logger.info(f"GET /bills/{bill_id} called")
-        bill = Bill.query.get_or_404(bill_id)
-        logger.info(f"Found bill with ID {bill_id}")
-        return bill
+        try:
+            bill = BillService.get_bill_by_id(bill_id)
+            logger.info(f"Found bill with ID {bill_id}")
+            return bill
+        except NotFoundError as nfe:
+            abort(404, nfe)
+        except Exception as e:
+            abort(500, e)
 
-    @bills_bp.response(200, BillSchema)
+    @bills_bp.response(200, BillResponseSchema)
     @bills_bp.arguments(BillUpdateSchema)
-    def put(self, update_bill_data, bill_id):
+    def put(self, data, bill_id):
         logger.info(f"PUT /bills/{bill_id} called")
-        logger.debug(f"Updating bill {bill_id} with args: {update_bill_data}")
-
-        bill = Bill.query.get_or_404(bill_id)
-        for key, value in update_bill_data.items():
-            setattr(bill, key, value)
+        logger.debug(f"Updating bill {bill_id} with args: {data}")
 
         try:
-            db.session.commit()
+            bill = BillService.update_bill(bill_id, data)
             logger.info(f"Bill {bill_id} updated")
             return bill
+        except NotFoundError as nfe:
+            abort(404, nfe)
         except Exception as e:
             logger.error(f"Error updating bill {bill_id}: {e}")
-            abort(500, message="An error occurred while updating the bill")
+            abort(500, e)
 
     @bills_bp.response(204)
     def delete(self, bill_id):
         logger.info(f"DELETE /bills/{bill_id} called")
-        bill = Bill.query.get_or_404(bill_id)
         try:
-            db.session.delete(bill)
-            db.session.commit()
+            BillService.delete_bill(bill_id)
             logger.info(f"Bill {bill_id} deleted")
             return {'message': 'Bill deleted'}
+        except NotFoundError as nfe:
+            abort(404, nfe)
         except Exception as e:
             logger.error(f"Error deleting bill {bill_id}: {e}")
-            abort(500, message="An error occurred while deleting the bill")
+            abort(500, e)
 
 
 @bills_bp.route('/bills/analysis')

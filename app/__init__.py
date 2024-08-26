@@ -2,12 +2,15 @@ import os
 
 from dotenv import load_dotenv
 from flask import Flask
+from flask_security import Security
 
 from app.converters import DateConverter
+from app.datastore import user_datastore
+from app.extensions import db
 from app.extensions import initialize_extensions
 from app.logger import logger
-from app.security import init_security
-from app.extensions import db
+from app.models.user import User, Role
+from app.security import create_users
 
 
 def create_app():
@@ -32,8 +35,6 @@ def create_app():
     app.config.from_object(ConfigClass)
 
     app.config['FLASK_ENV'] = env
-    # Configure Flask-Security-Too to use 'username' instead of 'email'
-    # app.config['SECURITY_USER_IDENTITY_ATTRIBUTES'] = 'username'
 
     logger.debug(app.config['FLASK_ENV'])
     logger.debug(app.config['SECRET_KEY'])
@@ -47,8 +48,14 @@ def create_app():
     initialize_extensions(app)
     logger.info('All extensions initialized')
 
-    init_security(app)
     create_tables(app)
+    # flask security
+    app.security = Security(app, user_datastore)
+    logger.info('Initialized security')
+
+    # creating default users
+    with app.app_context():
+        create_users()
 
     # Registering blueprints
     from app.routes import register_routes

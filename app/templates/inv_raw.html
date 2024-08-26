@@ -1,44 +1,441 @@
-{% extends 'base.html' %}
-
+{% extends "base.html" %}
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/handsontable.full.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/handsontable.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Raw Material</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 25px;
+            overflow: hidden;
+            border-bottom: 5px solid grey;
+        }
+
+        th, td {
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th:first-child {
+            border-top-left-radius: 25px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 25px;
+        }
+
+        tr:last-child td:first-child {
+            border-bottom-left-radius: 25px;
+        }
+
+        tr:last-child td:last-child {
+            border-bottom-right-radius: 25px;
+        }
+
+        th {
+            background-color: #d0f0ff;
+            cursor: pointer;
+            position: relative;
+        }
+
+        th .sort-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            padding-top: 5px;
+        }
+
+        .sort-icon.active {
+            border: 1px solid blue; /* Add blue border */
+            border-radius: 10px;
+        }
+
+        .part-no-column {
+            width: 10%;
+            cursor: default;
+        }
+
+        .name-column {
+            width: 25%;
+        }
+
+        .quantity-column {
+            width: 15%;
+        }
+
+        .unit-column {
+            width: 40%;
+        }
+
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagination button {
+            padding-top: 6px;
+            margin: 0 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #0d6efd;
+        }
+
+        .pagination button.disabled {
+            color: #c0c0c0;
+            cursor: not-allowed;
+        }
+
+        .pagination .page-number {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .pagination i {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+
+        .actions-column i:hover {
+            color: gray;
+        }
+
+        h2 {
+            margin-top: 0px;
+            text-align: left;
+            border-bottom: 2px solid gray;
+            font-size: 25px;
+        }
+
+        h1 {
+            text-align: center;
+            letter-spacing: 15px;
+            margin-top: 10px;
+            font-size: 36px;
+            color: #143b6a;
+            border-bottom: 6px solid gray;
+            border-top: 6px solid gray;
+            padding-bottom: 5px;
+            padding-top: 5px;
+            font-weight: bolder;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-container input,
+        .filter-container select,
+        .filter-container button {
+            outline: none;
+            border: 1px solid gray;
+            border-radius: 20px;
+            padding: 5px;
+        }
+
+        .filter-container button {
+            color: white;
+            background-color: #17365a;
+        }
+
+        #minQuantity {
+            width: 60px;
+        }
+
+        #maxQuantity {
+            width: 60px;
+        }
+
+        .searchbar {
+            border: 1px solid gray;
+            border-radius: 25px;
+        }
+
+        .searchbar input {
+            outline: none;
+            border: 0;
+            border-radius: 25px;
+        }
+
+        .searchbar select {
+            width: 122px;
+            outline: none;
+            border: 0;
+            border-left: 1px solid gray;
+            margin-right: 5px;
+        }
+
+        .button-container button {
+            padding: 5px 10px;
+            margin-left: 10px;
+        }
+
+
+        .button-container button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #17365a;
+            color: white;
+            border: none;
+            border-radius: 15px;
+        }
+
+    </style>
 {% endblock %}
 
 {% block content %}
-    <h1>INVENTORY</h1>
+    <div class="container" style="margin-left: 30px">
+        <h1>INVENTORY</h1>
+        <h2>RAW MATERIALS</h2>
 
-    <h2>Raw Materials</h2>
-    <div id="raw-materials"></div>
+        <!-- Wrapper for search bar and buttons -->
+        <div class="top-bar">
+            <div class="filter-container">
+                <div class="searchbar">
+                    <input type="text" id="searchInput" placeholder="Search by name... " oninput="fetchData(1)">
+                    <select id="unitFilter" onchange="fetchData(1)">
+                        <option value="">All Units</option>
+                        <option value="gram">Gram</option>
+                        <option value="centimeter">Centimeter</option>
+                        <option value="piece">Piece</option>
+                    </select>
+                </div>
+                <a>Quantity: <input type="number" min="0" id="minQuantity" placeholder="Min" oninput="fetchData(1)">
+                    <input type="number" min="0" id="maxQuantity" placeholder="Max" oninput="fetchData(1)"></a>
+                <button onclick="clearFilters()">Clear Filters</button>
+            </div>
+        </div>
 
-{% endblock %}
+        <table id="dataTable" class="table table-hover">
+            <thead class="table-light" style="border-color: black; border-width: 2px">
+            <tr>
+                <th class="part-no-column">Part No</th>
+                <th class="name-column" data-sort-by="name" onclick="sortTable(this)">Name <span
+                        class="sort-icon"></span>
+                </th>
+                <th class="quantity-column" data-sort-by="quantity" onclick="sortTable(this)">Quantity <span
+                        class="sort-icon"></span></th>
+                <th class="unit-column" data-sort-by="unit" onclick="sortTable(this)">Unit <span
+                        class="sort-icon"></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Rows will be inserted here dynamically -->
+            </tbody>
+        </table>
 
-{% block scripts %}
-    <script src="{{ url_for('static', filename='js/handsontable.full.min.js') }}"></script>
+        <div class="pagination" id="pagination">
+            <!-- Pagination buttons will be inserted here dynamically -->
+        </div>
+
+        <!-- Add Material Modal -->
+        <div class="modal fade" id="addMaterialModal" tabindex="-1" aria-labelledby="addMaterialModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addMaterialModalLabel">Add New Material</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addMaterialForm">
+                            <div class="mb-3">
+                                <label for="materialName" class="form-label">Material Name</label>
+                                <input type="text" class="form-control" id="materialName" name="name" disabled required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="materialUnit" class="form-label">Unit Type</label>
+                                <select class="form-select" id="materialUnit" name="unit" disabled required>
+                                    <option value="gram">Gram</option>
+                                    <option value="centimeter">Centimeter</option>
+                                    <option value="piece">Piece</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="materialQuantity" class="form-label">Quantity</label>
+                                <input type="number" class="form-control" id="materialQuantity" name="quantity"
+                                       required>
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="submitBtn">Add Material</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        const rawMaterialData = {{ table1|tojson }};
+        let currentPage = 1;
+        let currentSortBy = 'name';
+        let currentSortOrder = 'asc';
+        let sortOrders = {'name': 'asc', 'quantity': 'asc', 'unit': 'asc'};
+        let editPartNo = null; // Global variable to store the part number being edited
+        let selectedItems = []; // Global variable to store selected item IDs
 
-        const reorderedData = rawMaterialData.map(item => ({
-            Part_Name: item.name,
-            Unit_Type: item.unit,
-            Quantity: item.quantity
-        }));
 
-        //Initialize Handsontable for Raw Materials
-        const rawMaterialsContainer = document.getElementById('raw-materials');
-        const rawMaterialSettings = {
-            data: reorderedData,
-            filters: true,
-            licenseKey: 'non-commercial-and-evaluation',
-            rowHeaders: true,
-            colHeaders: ['Part_Name', 'Unit_Type', "Quantity"],
-            dropdownMenu: true,
-            contextMenu: true,
-            stretchH: 'all',
-            height: 500
-            {#colWidths:[450,350,350]#}
-        };
-        const rawMaterialsTable = new Handsontable(rawMaterialsContainer, rawMaterialSettings);
+        async function fetchData(page, sortBy = 'name', sortOrder = 'asc') {
+            try {
+                const searchQuery = document.getElementById('searchInput').value;
+                const unitFilter = document.getElementById('unitFilter').value;
+                const minQuantity = document.getElementById('minQuantity').value;
+                const maxQuantity = document.getElementById('maxQuantity').value;
 
+                const queryParams = new URLSearchParams({
+                    sort_order: sortOrder,
+                    sort_by: sortBy,
+                    page: page,
+                    page_size: 11,
+                });
+
+                if (searchQuery) {
+                    queryParams.append('search', searchQuery);
+                }
+                if (unitFilter) {
+                    queryParams.append('unit', unitFilter);
+                }
+                if (minQuantity) {
+                    queryParams.append('min_quantity', minQuantity);
+                }
+                if (maxQuantity) {
+                    queryParams.append('max_quantity', maxQuantity);
+                }
+
+                const response = await fetch(`/api/v1/material?${queryParams.toString()}`);
+                const data = await response.json();
+                const pagination = JSON.parse(response.headers.get('x-pagination'));
+
+                populateTable(data);
+                setupPagination(pagination);
+                updateSortIcons();
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Function to clear filters
+        function clearFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('unitFilter').value = '';
+            document.getElementById('minQuantity').value = '';
+            document.getElementById('maxQuantity').value = '';
+            fetchData(1);
+        }
+
+
+
+        function populateTable(data) {
+            const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+
+            // Clear existing rows
+            tableBody.innerHTML = '';
+
+            data.forEach(item => {
+                const row = tableBody.insertRow();
+                const cellPartNo = row.insertCell(0);
+                const cellName = row.insertCell(1);
+                const cellQuantity = row.insertCell(2);
+                const cellUnit = row.insertCell(3);
+
+                // Store item ID or unique identifier (item.part_no in this case) in the checkbox
+                cellPartNo.textContent = item.part_no;
+                cellName.textContent = item.name;
+                cellQuantity.textContent = item.quantity;
+                cellUnit.textContent = item.unit.name;
+
+                // Check if this row's checkbox should be initially checked based on stored selection
+                if (selectedItems.includes(item.part_no)) {
+                    cellCheckbox.firstChild.checked = true;
+                }
+            });
+        }
+
+
+        function setupPagination(pagination) {
+            const paginationDiv = document.getElementById('pagination');
+
+            // Clear existing buttons
+            paginationDiv.innerHTML = '';
+
+            const prevButton = document.createElement('button');
+            prevButton.innerHTML = '<i class="peepo lni lni-chevron-left"></i>';
+            if (pagination.page > 1) {
+                prevButton.onclick = () => fetchData(pagination.page - 1, currentSortBy, currentSortOrder);
+                prevButton.classList.remove('disabled');
+            } else {
+                prevButton.classList.add('disabled');
+            }
+            paginationDiv.appendChild(prevButton);
+
+            const pageNumber = document.createElement('span');
+            pageNumber.className = 'page-number';
+            pageNumber.textContent = `Page ${pagination.page} of ${pagination.total_pages}`;
+            paginationDiv.appendChild(pageNumber);
+
+            const nextButton = document.createElement('button');
+            nextButton.innerHTML = '<i class="peepo lni lni-chevron-right"></i>';
+            if (pagination.page < pagination.total_pages) {
+                nextButton.onclick = () => fetchData(pagination.page + 1, currentSortBy, currentSortOrder);
+                nextButton.classList.remove('disabled');
+            } else {
+                nextButton.classList.add('disabled');
+            }
+            paginationDiv.appendChild(nextButton);
+        }
+
+
+        function sortTable(header) {
+            const sortBy = header.getAttribute('data-sort-by');
+            if (currentSortBy === sortBy) {
+                // Toggle sort order
+                sortOrders[sortBy] = sortOrders[sortBy] === 'asc' ? 'desc' : 'asc';
+            } else {
+                // Set new sort column and default to ascending
+                currentSortBy = sortBy;
+                sortOrders[currentSortBy] = 'asc';
+            }
+            currentSortOrder = sortOrders[currentSortBy];
+            fetchData(currentPage, currentSortBy, currentSortOrder);
+        }
+
+        function updateSortIcons() {
+            const headers = document.querySelectorAll('th[data-sort-by]');
+            headers.forEach(header => {
+                const sortBy = header.getAttribute('data-sort-by');
+                const sortIconElem = header.querySelector('.sort-icon');
+
+                // Remove 'active' class and set all icons to default state
+                sortIconElem.innerHTML = `
+            <i class="lni lni-chevron-up"></i>
+{#            <i class="lni lni-chevron-down"></i>#}
+        `;
+                sortIconElem.classList.remove('active');
+
+                // Set active state and apply blue border
+                if (sortBy === currentSortBy) {
+                    const icon = currentSortOrder === 'asc' ? '<i class="lni lni-chevron-up"></i>' : '<i class="lni lni-chevron-down"></i>';
+                    sortIconElem.innerHTML = icon;
+                    sortIconElem.classList.add('active');
+                }
+            });
+        }
+        // Fetch initial data
+        fetchData(currentPage);
     </script>
 {% endblock %}

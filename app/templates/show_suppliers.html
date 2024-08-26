@@ -62,7 +62,7 @@
         }
 
         .gst-no-column {
-            width: 20%;
+            width: 18%;
             cursor: default;
         }
 
@@ -71,7 +71,7 @@
         }
 
         .state-code-column {
-            width: 10%;
+            width: 12%;
         }
 
         .state-name-column {
@@ -233,7 +233,7 @@
                 <div class="searchbar">
                     <input type="text" id="searchInput" placeholder="Search by name... " oninput="fetchData(1)">
                 </div>
-                <input type="number" min="0" id="stateCodeFilter" placeholder="State Code" oninput="fetchData(1)">
+                <input type="text" id="stateNameFilter" placeholder="State Name" oninput="fetchData(1)">
                 <button onclick="clearFilters()">Clear Filters</button>
             </div>
             <div class="button-container">
@@ -255,8 +255,8 @@
                 <th class="state-name-column" data-sort-by="state_name" onclick="sortTable(this)">State Name <span
                         class="sort-icon"></span>
                 </th>
-                <th class="address-column" data-sort-by="address" onclick="sortTable(this)">Address <span
-                        class="sort-icon"></span>
+                <th style="cursor: default" class="address-column" data-sort-by="address" >Address <span
+                        ></span>
                 </th>
                 <th class="actions-column">Actions</th>
             </tr>
@@ -301,7 +301,7 @@
                                 <label for="buyerAddress" class="form-label">Address</label>
                                 <textarea class="form-control" id="buyerAddress" name="address" required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary" id="submitBtn">Add Buyer</button>
+                            <button type="submit" class="btn btn-primary" id="submitBtn">Add Supplier</button>
                         </form>
                     </div>
                 </div>
@@ -313,7 +313,7 @@
         let currentPage = 1;
         let currentSortBy = 'name';
         let currentSortOrder = 'asc';
-        let sortOrders = { 'gst_no': 'asc', 'name': 'asc', 'state_code': 'asc', 'state_name': 'asc', 'address': 'asc' };
+        let sortOrders = { 'gst_no': 'asc', 'name': 'asc', 'state_code': 'asc', 'state_name': 'asc' };
         let editBuyerId = null;
         let selectedItems = [];
 
@@ -324,7 +324,7 @@
         async function fetchData(page, sortBy = 'name', sortOrder = 'asc') {
             try {
                 const searchQuery = document.getElementById('searchInput').value;
-                const stateCodeFilter = document.getElementById('stateCodeFilter').value;
+                const stateNameFilter = document.getElementById('stateNameFilter').value;
 
                 const queryParams = new URLSearchParams({
                     sort_order: sortOrder,
@@ -336,8 +336,8 @@
                 if (searchQuery) {
                     queryParams.append('search', searchQuery);
                 }
-                if (stateCodeFilter) {
-                    queryParams.append('state_code', stateCodeFilter);
+                if (stateNameFilter) {
+                    queryParams.append('state_name', stateNameFilter);
                 }
 
                 const response = await fetch(`/api/v1/supplier?${queryParams.toString()}`);
@@ -354,7 +354,7 @@
 
         function clearFilters() {
             document.getElementById('searchInput').value = '';
-            document.getElementById('stateCodeFilter').value = '';
+            document.getElementById('stateNameFilter').value = '';
             fetchData(1);
         }
 
@@ -375,8 +375,8 @@
                 cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" data-id="${buyer.id}" style="margin-left: 35%">`;
                 cellGstNo.textContent = buyer.GST_No;
                 cellName.textContent = buyer.name;
-                cellStateCode.textContent = buyer.state_code;
-                cellStateName.textContent = buyer.state_name;
+                cellStateCode.textContent = buyer.state.id;
+                cellStateName.textContent = buyer.state.name;
                 cellAddress.textContent = buyer.address;
                 cellActions.innerHTML = `
                     <i class="lni lni-pencil" onclick="editBuyer(${buyer.id})" style="padding-right: 2px"></i>
@@ -486,18 +486,19 @@
                     return response.json();
                 })
                 .then(data => {
-                    document.getElementById('buyerGstNo').value = data.gst_no;
+                    document.getElementById('buyerGSTNo').setAttribute('value',  data.GST_No);
                     document.getElementById('buyerName').value = data.name;
-                    document.getElementById('buyerStateCode').value = data.state_code;
-                    document.getElementById('buyerStateName').value = data.state_name;
+                    document.getElementById('buyerStateCode').value = data.state.id;
+                    document.getElementById('buyerStateName').value = data.state.name;
                     document.getElementById('buyerAddress').value = data.address;
 
-                    document.getElementById('buyerGstNo').disabled = true;
+                    document.getElementById('buyerGSTNo').disabled = true;
+                    document.getElementById('buyerStateName').disabled = true;
 
                     editBuyerId = id;
 
-                    document.getElementById('addBuyerModalLabel').textContent = 'Edit Buyer';
-                    document.getElementById('submitBtn').textContent = 'Update Buyer';
+                    document.getElementById('addBuyerModalLabel').textContent = 'Edit Supplier';
+                    document.getElementById('submitBtn').textContent = 'Update Supplier';
 
                     openEditModal();
                 })
@@ -527,10 +528,11 @@
             modal.show();
 
             document.getElementById('addBuyerForm').reset();
-            document.getElementById('buyerGstNo').disabled = false;
+            document.getElementById('buyerGSTNo').disabled = false;
+            document.getElementById('buyerGSTNo').setAttribute('value', '');
             editBuyerId = null;
-            document.getElementById('addBuyerModalLabel').textContent = 'Add New Buyer';
-            document.getElementById('submitBtn').textContent = 'Add Buyer';
+            document.getElementById('addBuyerModalLabel').textContent = 'Add New Supplier';
+            document.getElementById('submitBtn').textContent = 'Add Supplier';
         }
 
         function closeModal() {
@@ -553,22 +555,35 @@
 
         document.getElementById('addBuyerForm').addEventListener('submit', async function (event) {
             event.preventDefault();
-            const formData = new FormData(this);
+            const formData = new FormData(event.target);
+            const gst_no=formData.get('gst_no');
+            const name=formData.get('name')
+            const state_code=parseInt(formData.get('state_code'))
+            const state_name=formData.get('state_name')
+            const address=formData.get('address')
 
             const data = {
-                gst_no: formData.get('gst_no'),
-                name: formData.get('name'),
-                state_code: formData.get('state_code'),
-                state_name: formData.get('state_name'),
-                address: formData.get('address')
+                gst_no: gst_no,
+                name: name,
+                state_code: state_code,
+                state_name: state_name,
+                address: address
             };
+
+            const edit_data = {
+                name: name,
+                state_code: state_code,
+                address: address
+            };
+
+
 
             try {
                 if (editBuyerId) {
                     // If editBuyerId is set, send a PUT request to update the buyer
                     await fetch(`/api/v1/supplier/${editBuyerId}`, {
                         method: 'PUT',
-                        body: JSON.stringify(data),
+                        body: JSON.stringify(edit_data),
                         headers: {
                             'Content-Type': 'application/json'
                         }
@@ -631,7 +646,5 @@
             });
         }
     </script>
-
-
 {% endblock %}
 
