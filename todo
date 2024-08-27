@@ -15,6 +15,7 @@ security additions
 	- overwrite forgot password with security QA - (done not tested)
 	- add jwt authentication - (tested)
 	- expire default remember me token
+	- Implement CSRF protection for cookies
 more additions
 	- add user api - (wait till wireframe is ready or schema outline is ready)
 	- make fixed permissions - (discuss and finalise permissions)

@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from flask import Blueprint, redirect, url_for, request, render_template, flash, jsonify, make_response
 from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, jwt_required, get_jwt, \
-    decode_token, set_access_cookies, set_refresh_cookies, unset_jwt_cookies
+    decode_token, set_access_cookies, set_refresh_cookies, unset_jwt_cookies, verify_jwt_in_request
 from flask_security import ForgotPasswordForm, LoginForm
 
 from app.errors.not_found_error import NotFoundError
@@ -48,23 +48,29 @@ def refresh():
 
     user_id = get_jwt_identity()
     new_access_token = create_access_token(identity=user_id)
-    set_access_cookies(new_access_token)
+    response = make_response(jsonify(refresh=True))
+    set_access_cookies(response=response, encoded_access_token=new_access_token)
     return jsonify({'message': 'Token refreshed'})
 
 
 @auth_bp.route('/', methods=['POST', 'GET'])
 def login():
     form = LoginForm()
-    if form.validate_on_submit():
+    if request.method == 'GET':
+        verify_jwt_in_request(optional=True)
+        user_id = get_jwt_identity()
+        if user_id:
+            response = make_response(jsonify(login=True))
+            return response, 200
+
+    if request.method == 'POST' and form.validate_on_submit():
         email = form.email.data
         username = form.username.data
         password = form.password.data
         remember = form.remember.data
-        user = None
-        if username:
-            user = UserService.get_user_by_username(username)
-        if email:
-            user = UserService.get_user_by_email(email)
+
+        user = UserService.get_user_by_username(username) if username else UserService.get_user_by_email(email)
+
         if not user:
             flash('User does not exists', 'warning')
             return jsonify({'message': 'User does not exist'}), 400
