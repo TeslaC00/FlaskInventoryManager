@@ -31,7 +31,7 @@ class Buyer(db.Model):
     state_code = Column(Integer, ForeignKey('indian_state.id'), nullable=False)
     address = Column(Text, nullable=False)
     bills = relationship('Bill', backref='buyer', lazy=True)
-    state = relationship('IndianState', backref='buyers', lazy=True)
+    state = relationship('IndianState', backref='buyers', lazy='joined')
 
     def to_dict(self):
         """

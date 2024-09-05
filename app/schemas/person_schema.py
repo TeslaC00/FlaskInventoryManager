@@ -39,6 +39,6 @@ class PersonUpdateSchema(Schema):
 class PersonFilterSchema(QuerySchema):
     name = fields.String()
     GST_No = fields.String(validate=validate.Length(equal=15))
-    state_code = fields.Integer(validate=validate.Range(min=1, max=28))
+    state_code = fields.Integer(validate=validate.Range(min=1, max=37))
     state_name = fields.String()
     sort_by = fields.String(validate=validate.OneOf(['name', 'state_code', 'state_name']), load_default='name')

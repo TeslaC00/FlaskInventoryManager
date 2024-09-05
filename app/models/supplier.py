@@ -34,8 +34,8 @@ class Supplier(db.Model):
     address = Column(Text, nullable=False)
     # supplier relationship with challan using 'challans' -> both does automatic join (eager loading)
     # challan relationship with supplier using 'supplier'(backref)
-    challans = relationship('Challan', backref='supplier')
-    state = relationship('IndianState', backref='suppliers', lazy=True)
+    challans = relationship('Challan', backref='supplier', lazy=True)
+    state = relationship('IndianState', backref='suppliers', lazy='joined')
 
     def to_dict(self):
         """

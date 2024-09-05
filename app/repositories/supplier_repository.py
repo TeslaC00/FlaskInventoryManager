@@ -1,19 +1,21 @@
 from typing import Optional
 
-from app.utils import apply_person_filters, apply_generic_sorting
+from sqlalchemy.orm import joinedload
+
+from app.utils import apply_person_filters, apply_person_sorting
+from app.errors.not_found_error import NotFoundError
 from app.models import Supplier
 from app.extensions import db
-from app.errors.not_found_error import NotFoundError
 
 
 class SupplierRepository:
     @staticmethod
     def get_all(page: int = 1, per_page: int = 10, **filters: dict):
-        query = Supplier.query
+        query = Supplier.query.options(joinedload(Supplier.state))
 
         # Apply filters
         query = apply_person_filters(query, Supplier, filters)
-        query = apply_generic_sorting(query, Supplier, filters)
+        query = apply_person_sorting(query, Supplier, filters)
         return query.paginate(page=page, per_page=per_page)
 
     @staticmethod
