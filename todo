@@ -1,6 +1,7 @@
 TODO:
 new feature ideas:
 	- add data import module to import data from excel(in any format) and other sources easily
+	- add ubl or pdf bill generator module
 	- database backup & recovery
 	- add notification system to notify the user about significant changes or updates
 	- add check & verify system to check the records entry and update the verified changes only(could use temp DB for this, maybe)
@@ -16,10 +17,11 @@ security additions
 	- add jwt authentication - (tested)
 	- expire default remember me token
 	- Implement CSRF protection for cookies
-more additions
+backend features
+	- add audit log logic
+	- add audit log api
 	- add user api - (wait till wireframe is ready or schema outline is ready)
 	- make fixed permissions - (discuss and finalise permissions)
-	- make bill generator
 do testing
 	- do unit test
 		- test models, forms, schemas, utilities, bill_generator, seed, error_handling
