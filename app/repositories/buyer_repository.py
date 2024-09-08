@@ -1,6 +1,6 @@
-from typing import Optional
+from sqlalchemy.orm import joinedload
 
-from app.utils import apply_person_filters, apply_generic_sorting
+from app.utils import apply_person_filters, apply_person_sorting
 from app.errors.not_found_error import NotFoundError
 from app.models import Buyer
 from app.extensions import db
@@ -9,15 +9,15 @@ from app.extensions import db
 class BuyerRepository:
     @staticmethod
     def get_all(page: int = 1, per_page: int = 10, **filters: dict):
-        query = Buyer.query
+        query = Buyer.query.options(joinedload(Buyer.state))
 
         # Apply filters
         query = apply_person_filters(query, Buyer, filters)
-        query = apply_generic_sorting(query, Buyer, filters)
+        query = apply_person_sorting(query, Buyer, filters)
         return query.paginate(page=page, per_page=per_page)
 
     @staticmethod
-    def get_by_id(buyer_id: int) -> Optional[Buyer]:
+    def get_by_id(buyer_id: int) -> Buyer | None:
         return Buyer.query.get(buyer_id)
 
     @staticmethod

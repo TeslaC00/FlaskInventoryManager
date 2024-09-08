@@ -1,4 +1,5 @@
 # extensions.py
+from flask_migrate import Migrate
 from flask_smorest import Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
@@ -8,6 +9,7 @@ logger.info('Creating extensions objects')
 db = SQLAlchemy()
 api = Api()
 jwt = JWTManager()
+migrate = Migrate()
 
 
 def initialize_extensions(app):
@@ -21,6 +23,10 @@ def initialize_extensions(app):
 
     api.init_app(app)
     logger.debug('Initialized Api')
+
+    migrate.init_app(app, db)
+    logger.debug('Initialized Migrate')
+
     from app.api import register_api_blueprints
     register_api_blueprints(api)
 

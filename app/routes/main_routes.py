@@ -26,14 +26,14 @@ def root():
 
 
 @main_routes.route('/profile/')
-@auth_required()
+# @auth_required()
 def profile():
     users = User.query.all()
     return render_template('profile.html', users=users)
 
 
 @main_routes.route('/analysis/')
-@auth_required()
+# @auth_required()
 def analysis():
     """
     Serves the analysis page of the application. Requires user to be logged in.
@@ -46,20 +46,20 @@ def analysis():
 
 # TODO: add content to audits page
 @main_routes.route('/audits/')
-@auth_required()
+# @auth_required()
 def audits():
     return render_template('audits.html')
 
 
 # TODO: add content to settings page
 @main_routes.route('/settings/')
-@auth_required()
+# @auth_required()
 def settings():
     return render_template('settings.html')
 
 
 @main_routes.route('/addentry/')
-@auth_required()
+# @auth_required()
 def addentry():
     return render_template('addentry.html')
 
