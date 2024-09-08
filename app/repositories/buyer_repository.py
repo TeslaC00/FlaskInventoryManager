@@ -1,5 +1,3 @@
-from typing import Optional
-
 from sqlalchemy.orm import joinedload
 
 from app.utils import apply_person_filters, apply_person_sorting
@@ -19,7 +17,7 @@ class BuyerRepository:
         return query.paginate(page=page, per_page=per_page)
 
     @staticmethod
-    def get_by_id(buyer_id: int) -> Optional[Buyer]:
+    def get_by_id(buyer_id: int) -> Buyer | None:
         return Buyer.query.get(buyer_id)
 
     @staticmethod

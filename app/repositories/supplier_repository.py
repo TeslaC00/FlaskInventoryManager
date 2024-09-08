@@ -1,5 +1,3 @@
-from typing import Optional
-
 from sqlalchemy.orm import joinedload
 
 from app.utils import apply_person_filters, apply_person_sorting
@@ -19,7 +17,7 @@ class SupplierRepository:
         return query.paginate(page=page, per_page=per_page)
 
     @staticmethod
-    def get_by_id(supplier_id: int) -> Optional[Supplier]:
+    def get_by_id(supplier_id: int) -> Supplier | None:
         return Supplier.query.get(supplier_id)
 
     @staticmethod
@@ -37,7 +35,7 @@ class SupplierRepository:
     def delete(supplier_id: int) -> None:
         supplier = Supplier.query.get(supplier_id)
         if not supplier:
-            raise NotFoundError(f"Bill with id {supplier_id} not found")
+            raise NotFoundError(f"Supplier with id {supplier_id} not found")
 
         db.session.delete(supplier)
         db.session.commit()
