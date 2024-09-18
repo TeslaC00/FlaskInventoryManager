@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .invoice-box {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            font-size: 16px;
+            line-height: 40px;
+            color: #555;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f2f2f2;
+        }
+
+        .header-text {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        .header-image {
+            max-width: 100px;
+            height: auto;
+            margin-left: auto;
+        }
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            {#background-color: #f2f2f2;#}
+        }
+        .body {
+            padding: 20px 0;
+        }
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+            border-collapse: collapse;
+        }
+        .invoice-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        .invoice-box table tr.top table td.title {
+            font-size: 45px;
+            line-height: 45px;
+            color: #333;
+        }
+        .invoice-box table tr.top table td.info {
+            text-align: left;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+        .invoice-box table tr.information table {
+            width: 100%;
+        }
+        .invoice-box table tr.information table td.details {
+            border: 1px solid #ddd;
+            padding: 8px;
+            width: 48%;
+        }
+        .invoice-box table tr.information table td.space {
+            width: 4%;
+        }
+        .invoice-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+        .invoice-box table tr.item td {
+            border-bottom: 1px solid #eee;
+        }
+        .invoice-box table tr.item.last td {
+            border-bottom: none;
+        }
+        .invoice-box table tr.total td:nth-child(2) {
+            border-top: 2px solid #eee;
+            font-weight: bold;
+        }
+        .invoice-box .total-in-words {
+            margin-top: 20px;
+            font-style: italic;
+        }
+        .invoice-box .signature {
+            margin-top: 50px;
+            text-align: right;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-box">
+        <!-- Header Section -->
+        <div class="header">
+            <span class="header-text">INVOICE</span>
+            <img src="{{ url_for('static', filename='images/company.png') }}" alt="Company Logo" class="header-image">
+        </div>
+
+        <!-- Body Section -->
+        <div class="body">
+            <table cellpadding="0" cellspacing="0">
+                <tr class="top">
+                    <td colspan="7">
+                        <table>
+                            <tr>
+                                <td class="info">
+                                    Bill No: {{ bill_no }}<br>
+                                    Date: {{ bill_date }}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr class="information">
+                    <td colspan="7">
+                        <table>
+                            <tr>
+                                <td class="details">
+                                    <strong>Seller:</strong><br>
+                                    {{ seller_name }}<br>
+                                    GST: {{ seller_gst }}<br>
+                                    {{ seller_address }}
+                                </td>
+                                <td class="space"></td>
+                                <td class="details">
+                                    <strong>Buyer:</strong><br>
+                                    {{ buyer_name }}<br>
+                                    GST: {{ buyer_gst }}<br>
+                                    {{ buyer_address }}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr class="heading">
+                    <td>Item</td>
+                    <td>Price</td>
+                    <td>Qty</td>
+                    <td>Amt Before Tax</td>
+                    <td>SGST (%)</td>
+                    <td>CGST (%)</td>
+                    <td>Total After GST</td>
+                </tr>
+
+                {% for item in items %}
+                <tr class="item {% if loop.last %}last{% endif %}">
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.amount_before_tax }}</td>
+                    <td>{{ item.sgst }}</td>
+                    <td>{{ item.cgst }}</td>
+                    <td>{{ item.total_after_gst }}</td>
+                </tr>
+                {% endfor %}
+
+                <tr class="total">
+                    <td colspan="6">Grand Total:</td>
+                    <td>{{ grand_total }}</td>
+                </tr>
+            </table>
+
+            <div class="total-in-words">
+                <strong>Total (In words):</strong> {{ total_in_words }}
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <div class="signature">
+                This document is digitally signed by {{ signed_by }}.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
