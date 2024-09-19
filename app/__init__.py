@@ -13,7 +13,7 @@ from app.models.user import User, Role
 from app.security import create_users
 
 
-def create_app():
+def create_app(env: str = None):
     # Creates flask object
     app = Flask(__name__, instance_relative_config=True)
     logger.info('Created Flask app object')
@@ -21,7 +21,8 @@ def create_app():
     app.url_map.converters['date'] = DateConverter
 
     load_dotenv()
-    env = os.getenv('FLASK_ENV', 'development')
+    if env is None:
+        env = os.getenv('FLASK_ENV', 'development')
 
     if env == 'development':
         from instance.config import DevelopmentConfig as ConfigClass
