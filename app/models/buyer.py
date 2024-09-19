@@ -4,4 +4,5 @@ from app.models.person_base import PersonBase
 
 class Buyer(PersonBase):
     __tablename__ = 'buyer'
+    state = relationship('IndianState', backref='buyers', lazy='joined')
     bills = relationship('Bill', backref='buyer', lazy=True)
