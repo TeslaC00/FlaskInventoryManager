@@ -22,6 +22,14 @@ backend features
 	- add audit log api
 	- add user api - (wait till wireframe is ready or schema outline is ready)
 	- make fixed permissions - (discuss and finalise permissions)
+backend improvements
+	- switch from sqlAlchemy 1.x style to 2.0
+	- decouple table creation from app
+	- implement unit of work
+	- use mapped_column instead of column
+	- use back_populate instead of backref
+	- use registry
+	- maybe also use mapped_as_dataclass ?
 do testing
 	- do unit test
 		- test models, forms, schemas, utilities, bill_generator, seed, error_handling

@@ -1,4 +1,5 @@
 from marshmallow import Schema, fields, validate
+from marshmallow.validate import Length
 
 from app.schemas.bill_item_schema import BillItemCreateSchema, BillItemSchema
 from app.schemas.person_schema import PersonSchema
@@ -8,7 +9,7 @@ class BillCreateSchema(Schema):
     buyer_id = fields.Int(required=True)
     total_price = fields.Int(required=True)
     date = fields.Date(required=True, format='%Y-%m-%d')
-    purchase_order = fields.Str(required=True)
+    purchase_order = fields.Str(required=True, validate=Length(max=30))
     remarks = fields.Str(required=False)
     items = fields.List(fields.Nested(BillItemCreateSchema), required=True)
 
