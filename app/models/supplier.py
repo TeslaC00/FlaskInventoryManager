@@ -6,4 +6,5 @@ class Supplier(PersonBase):
     __tablename__ = 'supplier'
     # supplier relationship with challan using 'challans' -> both does automatic join (eager loading)
     # challan relationship with supplier using 'supplier'(backref)
+    state = relationship('IndianState', backref='suppliers', lazy='joined')
     challans = relationship('Challan', backref='supplier', lazy=True)
