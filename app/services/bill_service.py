@@ -31,7 +31,9 @@ class BillService:
     @staticmethod
     def update_total_price(bill_id: int) -> Bill:
         bill = BillRepository.get_by_id(bill_id)
-        bill.total_price = sum(item.price * item.quantity for item in bill.bill_items)
+        bill.total_price = sum(
+            (item.price + item.price * (item.c_gst + item.s_gst + item.i_gst)) * item.quantity for item in
+            bill.bill_items)
         return BillRepository.update(bill)
 
     @staticmethod
