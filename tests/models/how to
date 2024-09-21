@@ -1,0 +1,7 @@
+help link : https://www.youtube.com/playlist?list=PLab_if3UBk98jBTmyxShFVirMbgfFYu8W
+
+create the schema to return the created DTO object
+test if valid objects are created based on different schema parameters
+test if fields are missing it throws exception
+
+
