@@ -5,7 +5,7 @@ new feature ideas:
 	- database backup & recovery
 	- add notification system to notify the user about significant changes or updates
 	- add check & verify system to check the records entry and update the verified changes only(could use temp DB for this, maybe)
-minor taks
+minor tasks
 	- add real data in the database to test it
 	- make quantity logic of material/product non negative in update in service
 user features
