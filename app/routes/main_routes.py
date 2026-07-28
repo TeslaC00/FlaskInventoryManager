@@ -29,6 +29,9 @@ def root():
 # @auth_required()
 def profile():
     users = User.query.all()
+    for user in users:
+        user.password = "REDACTED"
+        user.role = ', '.join([role.name for role in user.roles])  # Convert roles to a comma-separated string
     return render_template('profile.html', users=users)
 
 

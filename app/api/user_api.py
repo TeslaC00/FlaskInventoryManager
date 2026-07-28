@@ -21,7 +21,9 @@ class UserListResource(MethodView):
 
         try:
             users = UserService.get_all_users(pagination_parameters.page, pagination_parameters.page_size,
-                                              **filters)
+                                              **filters) 
+            for user in users.items:
+                user.password = "REDACTED"
             pagination_parameters.item_count = users.total
             logger.info(f"Found {pagination_parameters.item_count} users")
             logger.debug(f"Returned users: {users}")

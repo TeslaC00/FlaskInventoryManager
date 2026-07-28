@@ -18,14 +18,6 @@
         </tr>
         </thead>
         <tbody class="table-group-divider">
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>123</td>
-            <td>admin</td>
-            <td>20 january</td>
-            <td>edit</td>
-        </tr>
         {% if users %}
             {% for user in users %}
                 <tr>
@@ -33,30 +25,13 @@
                     <td>{{ user.username }}</td>
                     <td>{{ user.password }}</td>
                     <td>{{ user.role }}</td>
-                    <td>{{ user.last_login }}</td>
+                    <td>{{ user.last_login_at }}</td>
                     <td><a class="link-info" href="#">edit</a></td>
                 </tr>
             {% endfor %}
         {% else %}
             No users added to database
         {% endif %}
-
-        <tr>
-            <th scope="row">2</th>
-            <td>Mark</td>
-            <td>123</td>
-            <td>admin</td>
-            <td>20 january</td>
-            <td>edit available</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Mark</td>
-            <td>123</td>
-            <td>admin</td>
-            <td>20 january</td>
-            <td>edit available</td>
-        </tr>
         </tbody>
     </table>
 {% endblock %}k
