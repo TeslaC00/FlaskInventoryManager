@@ -46,9 +46,8 @@ class UserRepository:
 
     @staticmethod
     def add(**data) -> User:
-        user = user_datastore.create_user(data)
+        user = user_datastore.create_user(**data)
         user.password = hash_password(password=user.password)
-        user.security_answer = hash_password(password=user.security_answer)
         db.session.commit()
         return user
 

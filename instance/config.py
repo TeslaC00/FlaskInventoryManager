@@ -19,8 +19,8 @@ class APIConfig:
 
 
 class Config(APIConfig):
-    SECRET_KEY = "2e95ecc7acac7ebd88d45c6ae64e3dcea45e625de589e504"
-    SECURITY_PASSWORD_SALT = "109801664110750927464141306118929706514"
+    SECRET_KEY = "2e95ecc7acac7ebd88d45c6ae64e3dcea45e625de589e504" # change for PROD
+    SECURITY_PASSWORD_SALT = "109801664110750927464141306118929706514" # change for PROD
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     REMEMBER_COOKIE_SAMESITE = "strict"
     SESSION_COOKIE_SAMESITE = "strict"
@@ -29,7 +29,7 @@ class Config(APIConfig):
     SQLALCHEMY_ENGINE_OPTIONS = {
         "pool_pre_ping": True
     }  # recommended by flask security too
-    JWT_SECRET_KEY = "70fde58923028a892a7978e9e900cf07abfc82a37830b7b5"
+    JWT_SECRET_KEY = "70fde58923028a892a7978e9e900cf07abfc82a37830b7b5" # change for PROD
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(
         minutes=15
     )  # Access tokens expire after 15 minutes
@@ -45,8 +45,8 @@ class Config(APIConfig):
     # JWT_REFRESH_COOKIE_PATH = '/token/refresh'  # Path where the refresh token cookie is valid
     # JWT_COOKIE_SECURE = True  # Ensure cookies are only sent over HTTPS
     JWT_COOKIE_SAMESITE = "Strict"  # Controls the samesite attribute for cookies
-    JWT_ACCESS_COOKIE_NAME = "access_token_cookie"
-    JWT_REFRESH_COOKIE_NAME = "refresh_token_cookie"
+    JWT_ACCESS_COOKIE_NAME = "access_token_cookie" # change for PROD
+    JWT_REFRESH_COOKIE_NAME = "refresh_token_cookie" # change for PROD
 
     # SECURITY_TOKEN_AUTHENTICATION_HEADER = 'Authorization'
     # SECURITY_TOKEN_AUTHENTICATION_METHODS = ['Bearer']
@@ -67,4 +67,4 @@ class TestingConfig(Config):
 class ProductionConfig(Config):
     DEBUG = False
     SQLALCHEMY_ECHO = False
-    SQLALCHEMY_DATABASE_URI = "mysql://root:vikas1612@localhost:3306/mock"
+    SQLALCHEMY_DATABASE_URI = "mysql://USERNAME:PASSWORD@localhost:3306/DB_NAME"

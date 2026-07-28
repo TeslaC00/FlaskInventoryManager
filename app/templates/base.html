@@ -1,75 +1,78 @@
 <!doctype html>
 <!-- Base template for Flask App. This template includes Bootstrap for styling and responsiveness. -->
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet"/>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="{{ url_for('static',filename='css/sidebar.css') }}" rel="stylesheet">
     <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
     <!-- Custom styles for this template -->
     {% block head %}
-        <title>Flask App</title>
+    <title>Flask App</title>
     {% endblock %}
 </head>
+
 <body data-bs-theme="light">
-<div class="wrapper">
-    {% include 'sidebar.html' %}
-    <div class="main">
-{#        <nav class="navbar navbar-expand px-4 py-3">#}
-{#            <form action="#" class="d-none d-sm-inline-block"></form>#}
-{#            <div class="navbar-collapse collapse" >#}
-{#                <ul class="navbar-nav ms-auto">#}
-{#                    <li class="nav-item dropdown">#}
-                        {#TODO: why is there href for image#}
-                        {#TODO: add default user and admin image#}
-                        {#href to go to account directly#}
-{#                        <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">#}
-{#                            {% if current_user.role=='admin' %}#}
-{#                                <img src="/static/images/admin.jpg" class="avatar img-fluid"#}
-{#                                     alt="Account Image not available">#}
-{#                            {% else %}#}
-{#                                <img src="/static/images/user.jpg" class="avatar img-fluid"#}
-{#                                     alt="Account Image not available">#}
-{#                            {% endif %}#}
-{#                        </a>#}
-{#                        <div class="dropdown-menu dropdown-menu-end rounded">#}
-{#                        </div>#}
-{#                    </li>#}
-{#                </ul>#}
-{#            </div>#}
-{#        </nav>#}
-        <div class="container">
-            {% block content %}
-            {% endblock %}
+    <div class="wrapper">
+        {% include 'sidebar.html' %}
+        <div class="main">
+            {# <nav class="navbar navbar-expand px-4 py-3">#}
+                {# <form action="#" class="d-none d-sm-inline-block"></form>#}
+                {# <div class="navbar-collapse collapse">#}
+                    {# <ul class="navbar-nav ms-auto">#}
+                        {# <li class="nav-item dropdown">#}
+                            {#TODO: why is there href for image#}
+                            {#TODO: add default user and admin image#}
+                            {#href to go to account directly#}
+                            {# <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">#}
+                                {# {% if current_user.role=='admin' %}#}
+                                {# <img src="/static/images/admin.jpg" class="avatar img-fluid" #} {#
+                                    alt="Account Image not available">#}
+                                {# {% else %}#}
+                                {# <img src="/static/images/user.jpg" class="avatar img-fluid" #} {#
+                                    alt="Account Image not available">#}
+                                {# {% endif %}#}
+                                {# </a>#}
+                            {# <div class="dropdown-menu dropdown-menu-end rounded">#}
+                                {# </div>#}
+                            {# </li>#}
+                        {# </ul>#}
+                    {# </div>#}
+                {# </nav>#}
+            <div class="container">
+                {% block content %}
+                {% endblock %}
+            </div>
         </div>
     </div>
-</div>
-<!-- Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-<script>
-    const hamBurger = document.querySelector(".toggle-btn");
+    <script>
+        const hamBurger = document.querySelector(".toggle-btn");
 
-    hamBurger.addEventListener("click", function () {
-        document.querySelector("#sidebar").classList.toggle("expand");
-    });
-</script>
-{#<script>#}
-{#    function darkMode() {#}
-{#        const element = document.body;#}
-{#        element.dataset.bsTheme = element.dataset.bsTheme === "light" ? "dark" : "light";#}
-{#    }#}
-{#</script>#}
-<!-- Custom scripts for this template -->
-<script src="{{ url_for('static', filename='js/dark_mode.js') }}"></script>
-<script src="{{ url_for('static', filename='js/searchbar.js') }}"></script>
-{% block scripts %}{% endblock %}
+        hamBurger.addEventListener("click", function () {
+            document.querySelector("#sidebar").classList.toggle("expand");
+        });
+    </script>
+    <!-- <script>
+        function darkMode() {
+            const element = document.body;
+            element.dataset.bsTheme = element.dataset.bsTheme === "light" ? "dark" : "light";
+        }
+    </script> -->
+    <!-- Custom scripts for this template -->
+    <script src="{{ url_for('static', filename='js/dark_mode.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/searchbar.js') }}"></script>
+    {% block scripts %}{% endblock %}
 
 </body>
+
 </html>

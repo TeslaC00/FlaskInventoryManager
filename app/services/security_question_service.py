@@ -13,7 +13,7 @@ class SecurityQuestionService:
 
     @staticmethod
     def add_question(user_id: int, question_id: int, answer: str) -> UserSecurityQuestions:
-        question = UserSecurityQuestions(user_id=user_id, question_id=question_id, answer=answer)
+        question = UserSecurityQuestions(user_id=user_id, question_id=question_id, answer_hash=answer)
         try:
             return SecurityQuestionRepository.add(question)
         except ValueError as ve:

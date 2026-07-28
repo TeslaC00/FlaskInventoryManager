@@ -1,6 +1,7 @@
 from typing import Optional
 
 from app.errors.not_found_error import NotFoundError
+from flask_security import hash_password
 from app.models import User
 from app.repositories.user_repository import UserRepository
 from app.services.role_service import RoleService
@@ -36,7 +37,8 @@ class UserService:
             questions = data.pop('questions')
             user = UserRepository.add(**data)
             for i in questions:
-                SecurityQuestionService.add_question(user.id, i['id'], i['answer'])
+                answer = hash_password(password=i['answer'])
+                SecurityQuestionService.add_question(user.id, i['id'], answer)
             return user
         except KeyError as ke:
             raise KeyError(f"Security Question and Answers not found in data: {str(ke)}")
