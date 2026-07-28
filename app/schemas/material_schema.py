@@ -1,23 +1,35 @@
 from marshmallow import Schema, fields, validate
 
-from app.models.enums import UnitType
 from app.schemas.query_schema import QuerySchema
+from app.schemas.unit_schema import UnitSchema
 
 
 class MaterialSchema(Schema):
     part_no = fields.Integer(dump_only=True)
+    name = fields.String(dump_only=True)
+
+
+class MaterialCreateSchema(Schema):
+    unit_id = fields.Integer(required=True)
     name = fields.String(required=True)
-    unit = fields.String(required=True, validate=validate.OneOf([unit.value for unit in UnitType]))
     quantity = fields.Integer(required=True)
+
+
+class MaterialResponseSchema(Schema):
+    part_no = fields.Integer(dump_only=True)
+    unit = fields.Nested(UnitSchema, dump_only=True)
+    name = fields.String(dump_only=True)
+    quantity = fields.Integer(dump_only=True)
 
 
 class MaterialUpdateSchema(Schema):
-    quantity = fields.Integer(required=True)
+    quantity = fields.Integer()
+    unit_id = fields.Integer()
 
 
 class MaterialQuerySchema(QuerySchema):
     name = fields.String()
-    unit = fields.String(validate=validate.OneOf([unit.value for unit in UnitType]))
+    unit_id = fields.Integer()
     min_quantity = fields.Integer()
     max_quantity = fields.Integer()
-    sort_by = fields.String(validate=validate.OneOf(['name', 'quantity', 'unit']), load_default='name')
+    sort_by = fields.String(validate=validate.OneOf(['name', 'quantity']), load_default='name')

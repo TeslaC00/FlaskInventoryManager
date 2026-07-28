@@ -1,13 +1,17 @@
 from marshmallow import Schema, fields, validate
 
-from app.models.enums import UnitType
 from app.schemas.query_schema import QuerySchema
+from app.schemas.unit_schema import UnitSchema
 
 
 class ProductSchema(Schema):
     part_no = fields.Integer(dump_only=True)
+    name = fields.String(dump_only=True)
+
+
+class ProductCreateSchema(Schema):
     name = fields.String(required=True)
-    unit = fields.String(required=True, validate=validate.OneOf([unit.value for unit in UnitType]))
+    unit_id = fields.Integer(required=True)
     quantity = fields.Integer(required=True)
     price = fields.Float(required=True)
     c_gst = fields.Float(required=True)
@@ -15,8 +19,20 @@ class ProductSchema(Schema):
     i_gst = fields.Float(required=True)
 
 
+class ProductResponseSchema(Schema):
+    part_no = fields.Integer(dump_only=True)
+    name = fields.String(dump_only=True)
+    unit = fields.Nested(UnitSchema, dump_only=True)
+    quantity = fields.Integer(dump_only=True)
+    price = fields.Float(dump_only=True)
+    c_gst = fields.Float(dump_only=True)
+    s_gst = fields.Float(dump_only=True)
+    i_gst = fields.Float(dump_only=True)
+
+
 class ProductUpdateSchema(Schema):
     quantity = fields.Integer()
+    unit_id = fields.Integer()
     price = fields.Float()
     c_gst = fields.Float()
     s_gst = fields.Float()
@@ -25,7 +41,7 @@ class ProductUpdateSchema(Schema):
 
 class ProductQuerySchema(QuerySchema):
     name = fields.String()
-    unit = fields.String(validate=validate.OneOf([unit.value for unit in UnitType]))
+    unit_id = fields.Integer()
     min_quantity = fields.Integer()
     max_quantity = fields.Integer()
     min_price = fields.Float()

@@ -8,8 +8,6 @@ pyvenv.cfg
 Scripts
 
 ### Flask ###
-instance/*
-!instance/.gitignore
 .webassets-cache
 .env
 
@@ -76,9 +74,6 @@ test/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-
-# Flask stuff:
-instance/
 
 # Scrapy stuff:
 .scrapy

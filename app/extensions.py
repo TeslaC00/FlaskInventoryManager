@@ -1,32 +1,33 @@
 # extensions.py
-# from flask_bcrypt import Bcrypt
+from flask_migrate import Migrate
 from flask_smorest import Api
-
-from app.logger import logger
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
+from flask_jwt_extended import JWTManager
+from app.logger import logger
 
 logger.info('Creating extensions objects')
-# bcrypt = Bcrypt()
 db = SQLAlchemy()
-login_manager = LoginManager()
 api = Api()
+jwt = JWTManager()
+migrate = Migrate()
 
 
 def initialize_extensions(app):
     """Helper function to initialize all Flask extensions with the given app."""
-    logger.info('Initialized extensions')
-
-    # bcrypt.init_app(app)
-    logger.info('Initialized Bcrypt')
 
     db.init_app(app)
-    logger.info('Initialized Database')
+    logger.debug('Initialized Database')
 
-    login_manager.init_app(app)
-    logger.info('Initialized Login Manager')
+    jwt.init_app(app)
+    logger.debug('Initialized JWT')
 
     api.init_app(app)
+    logger.debug('Initialized Api')
+
+    migrate.init_app(app, db)
+    logger.debug('Initialized Migrate')
+
     from app.api import register_api_blueprints
     register_api_blueprints(api)
-    logger.info('Initialized Api')
+
+    logger.info('Initialized extensions')

@@ -1,0 +1,34 @@
+TODO:
+new feature ideas:
+	- add data import module to import data from excel(in any format) and other sources easily
+	- add ubl or pdf bill generator module
+	- database backup & recovery
+	- add notification system to notify the user about significant changes or updates
+	- add check & verify system to check the records entry and update the verified changes only(could use temp DB for this, maybe)
+minor tasks
+	- add real data in the database to test it
+	- make quantity logic of material/product non negative in update in service
+user features
+	- how to assign roles to user
+analysis feature
+	- could introduce new table with summarized data
+security additions
+	- overwrite forgot password with security QA - (done not tested)
+	- add jwt authentication - (tested)
+	- expire default remember me token
+	- Implement CSRF protection for cookies
+backend features
+	- add audit log logic
+	- add audit log api
+	- add user api - (wait till wireframe is ready or schema outline is ready)
+	- make fixed permissions - (discuss and finalise permissions)
+do testing
+	- do unit test
+		- test models, forms, schemas, utilities, bill_generator, seed, error_handling
+	- do integration test
+		- test APIs, routes, bill_generator, authentication, error_handling
+	- don't test
+		- third_part_lib, static_files, db_migrate, cfg_file, generated_files(artifacts)
+think of deployment
+	- use setup tools for easier pip install
+bug fixing

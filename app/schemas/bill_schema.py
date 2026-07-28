@@ -1,17 +1,38 @@
 from marshmallow import Schema, fields, validate
 
+from app.schemas.bill_item_schema import BillItemCreateSchema, BillItemSchema
+from app.schemas.person_schema import PersonSchema
 
-class BillSchema(Schema):
+
+class BillCreateSchema(Schema):
+    buyer_id = fields.Int(required=True)
+    total_price = fields.Int(required=True)
+    date = fields.Date(required=True, format='%Y-%m-%d')
+    purchase_order = fields.Str(required=True)
+    remarks = fields.Str(required=False)
+    items = fields.List(fields.Nested(BillItemCreateSchema), required=True)
+
+
+class BillResponseSchema(Schema):
     id = fields.Int(dump_only=True)
     buyer_id = fields.Int(dump_only=True)
-    total_price = fields.Int(required=True)
+    total_price = fields.Int(dump_only=True)
     date = fields.Date(dump_only=True, format='%Y-%m-%d')
     purchase_order = fields.Str(dump_only=True)
     remarks = fields.Str()
 
 
+class BillListResponseSchema(Schema):
+    id = fields.Int(dump_only=True)
+    total_price = fields.Int(dump_only=True)
+    date = fields.Date(dump_only=True, format='%Y-%m-%d')
+    purchase_order = fields.Str(dump_only=True)
+    remarks = fields.Str()
+    buyer = fields.Nested(PersonSchema, dump_only=True)
+    bill_items = fields.Nested(BillItemSchema, many=True, dump_only=True)
+
+
 class BillUpdateSchema(Schema):
-    total_price = fields.Int()
     remarks = fields.Str()
 
 

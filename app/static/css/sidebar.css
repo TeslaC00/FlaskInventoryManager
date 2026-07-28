@@ -149,6 +149,7 @@ a.sidebar-link:hover {
     padding: 0;
     min-width: 15rem;
     display: none;
+    border-left: 3px solid #dd3b3b; /* Add border-left */
 }
 
 #sidebar:not(.expand) .sidebar-item:hover .has-dropdown + .sidebar-dropdown {
@@ -176,7 +177,6 @@ a.sidebar-link:hover {
     transition: all .2s ease-out;
 }
 
-
 .navbar-expand .navbar-collapse {
     min-width: 200px;
 }
@@ -186,6 +186,15 @@ a.sidebar-link:hover {
     width: 40px;
 }
 
+#sidebar:not(.expand) .has-dropdown {
+    pointer-events: none;
+    cursor: default;
+}
+
+#sidebar:not(.expand) .has-dropdown > .sidebar-link:hover {
+    background-color: #17365b; /* Prevent hover effect */
+    border-left: none; /* Remove border-left on hover */
+}
 
 @media (min-width: 768px) {
 }

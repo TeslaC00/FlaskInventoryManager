@@ -23,7 +23,7 @@ class Bill(db.Model):
     __tablename__ = 'bill'
     id = Column(Integer, primary_key=True)
     buyer_id = Column(Integer, ForeignKey('buyer.id', name='fk_bill_buyer_id'), nullable=False)
-    total_price = Column(Float, nullable=False)
+    total_price = Column(Float, nullable=False, default=0)
     date = Column(Date, nullable=False)
     purchase_order = Column(String(30), nullable=False)
     remarks = Column(Text, nullable=True)

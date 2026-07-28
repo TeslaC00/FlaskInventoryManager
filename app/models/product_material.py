@@ -1,3 +1,5 @@
+from sqlalchemy.orm import relationship
+
 from app.extensions import db
 from sqlalchemy import Column, Integer, ForeignKey, PrimaryKeyConstraint
 
@@ -12,6 +14,8 @@ class ProductMaterial(db.Model):
                               nullable=False)
     quantity = Column(Integer, nullable=False)
     __table_args__ = (PrimaryKeyConstraint('product_part_no', 'material_part_no', name='pk_product_material'),)
+    product = relationship('Product', backref='product_materials', viewonly=True)
+    material = relationship('Material', backref='product_materials', viewonly=True)
 
     def to_dict(self):
         return {

@@ -1,0 +1,778 @@
+{% extends "base.html" %}
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Data Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 25px;
+            overflow: hidden;
+            border-bottom: 5px solid grey;
+        }
+
+        th, td {
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th:first-child {
+            border-top-left-radius: 25px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 25px;
+        }
+
+        tr:last-child td:first-child {
+            border-bottom-left-radius: 25px;
+        }
+
+        tr:last-child td:last-child {
+            border-bottom-right-radius: 25px;
+        }
+
+        th {
+            background-color: #d0f0ff;
+            cursor: pointer;
+            position: relative;
+        }
+
+        th .sort-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            padding-top: 5px;
+        }
+
+        .sort-icon.active {
+            border: 1px solid blue; /* Add blue border */
+            border-radius: 10px;
+        }
+
+        .checkbox-column {
+            width: 5%;
+            text-align: center;
+            cursor: default;
+        }
+
+        .buyer-id-column {
+            width: 20%;
+            cursor: default;
+        }
+
+        .purchase-order-column {
+            width: 20%;
+        }
+
+        .total-price-column {
+            width: 10%;
+        }
+
+        .date-column {
+            width: 10%;
+        }
+
+        .remarks-column {
+            width: 30%;
+        }
+
+        .actions-column {
+            width: 5%;
+            text-align: center;
+            cursor: default;
+        }
+
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagination button {
+            padding-top: 6px;
+            margin: 0 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #0d6efd;
+        }
+
+        .pagination button.disabled {
+            color: #c0c0c0;
+            cursor: not-allowed;
+        }
+
+        .pagination .page-number {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .pagination i {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .actions-column i {
+            font-size: 100%;
+            cursor: pointer;
+        }
+
+        .lni-pencil {
+            color: blue;
+        }
+
+        .lni-trash-can {
+            color: red;
+        }
+
+        .actions-column i:hover {
+            color: gray;
+        }
+
+        h2 {
+            margin-top: 30px;
+            border-bottom: 2px solid gray;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-container input,
+        .filter-container select,
+        .filter-container button {
+            outline: none;
+            border: 1px solid gray;
+            border-radius: 20px;
+            padding: 5px;
+        }
+
+        .filter-container button {
+            color: white;
+            background-color: #17365a;
+        }
+
+        #minPrice {
+            width: 105px;
+        }
+
+        #maxPrice {
+            width: 105px;
+        }
+
+        .searchbar {
+            border: 1px solid gray;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        .searchbar input {
+            outline: none;
+            border: 0;
+            border-radius: 25px;
+            padding: 5px;
+        }
+
+        .searchbar select {
+            width: 50px;
+            outline: none;
+            border: 0;
+            border-left: 1px solid gray;
+            margin-right: 5px;
+        }
+
+        .button-container button {
+            padding: 5px 10px;
+            margin-left: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .button-container button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #17365a;
+            color: white;
+            border: none;
+            border-radius: 15px;
+        }
+
+        #searchInput {
+            width: 210px;
+        }
+
+        .button-container #addBtn:hover {
+            transition: background-color 300ms;
+            background-color: #63be63;
+        }
+
+        .button-container #delBtn:hover {
+            transition: background-color 300ms;
+            background-color: red;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container" style="margin-left: 30px">
+        <h2>Bill Data</h2>
+
+        <!-- Wrapper for search bar and buttons -->
+        <div class="top-bar">
+            <div class="filter-container">
+                <div class="searchbar">
+                    <input type="text" id="searchInput" placeholder="Search by buyer ID or purchase order..."
+                           oninput="fetchData(1)">
+                    <select id="searchFilter" onchange="fetchData(1)">
+                        <option value="">All</option>
+                        <option value="buyer_id">Buyer ID</option>
+                        <option value="purchase_order">Purchase Order</option>
+                    </select>
+                </div>
+                <a>Date Range: <input type="date" id="startDate" placeholder="Start Date" oninput="fetchData(1)">-<input
+                        type="date" id="endDate" placeholder="End Date" oninput="fetchData(1)"></a>
+                <a>Price: <input type="number" id="minPrice" placeholder="Min Price" oninput="fetchData(1)">
+                    <input type="number" id="maxPrice" placeholder="Max Price" oninput="fetchData(1)"></a>
+                <button onclick="clearFilters()">Clear Filters</button>
+            </div>
+            <div class="button-container">
+                <button id="delBtn" onclick="deleteSelected()">Delete Selected</button>
+            </div>
+        </div>
+
+        <table id="dataTable" class="table table-hover">
+            <thead class="table-light" style="border-color: black; border-width: 2px">
+            <tr>
+                <th class="checkbox-column"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()"></th>
+                <th class="buyer-name-column" data-sort-by="buyer_name" onclick="sortTable(this)">Buyer Name <span
+                        class="sort-icon"></span></th>
+                <th class="purchase-order-column">Purchase Order</th>
+                <th class="date-column" data-sort-by="date" onclick="sortTable(this)">Date <span
+                        class="sort-icon"></span></th>
+                <th class="total-price-column" data-sort-by="total_price" onclick="sortTable(this)">Total Price <span
+                        class="sort-icon"></span></th>
+                <th class="remarks-column" data-sort-by="remarks" onclick="sortTable(this)">Remarks <span
+                        class="sort-icon"></span></th>
+                <th class="actions-column">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Rows will be inserted here dynamically -->
+            </tbody>
+        </table>
+
+        <div class="pagination" id="pagination">
+            <!-- Pagination buttons will be inserted here dynamically -->
+        </div>
+
+
+        <div class="modal fade" id="addBillModal" tabindex="-1" aria-labelledby="addBillModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addBillModalLabelHeading">Add New Bill</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addBillForm">
+                            <div class="mb-3">
+                                <label for="buyerName" class="form-label">Buyer Name</label>
+                                <input type="text" class="form-control" id="buyerName" name="buyer_name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="purchaseOrder" class="form-label">Purchase Order</label>
+                                <input type="text" class="form-control" id="purchaseOrder" name="purchase_order">
+                            </div>
+                            <div class="mb-3">
+                                <label for="billDate" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="billDate" name="date" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="billTotalPrice" class="form-label">Total Price</label>
+                                <input type="number" class="form-control" id="billTotalPrice" name="total_price"
+                                       required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="billRemarks" class="form-label">Remarks</label>
+                                <input type="text" class="form-control" id="billRemarks" name="remarks">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="submitBillBtn">Add Bill</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal for displaying product details -->
+        <div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productDetailsModalLabel">Product Details for Purchase Order:<span
+                                id="purchaseOrderModal"></span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
+                            </thead>
+                            <tbody id="productDetailsTableBody">
+                            <!-- Product details will be inserted here dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        let currentSortBy = 'buyer_id';
+        let currentSortOrder = 'asc';
+        let sortOrders = {
+            'buyer_id': 'asc',
+            'purchase_order': 'asc',
+            'date': 'asc',
+            'total_price': 'asc',
+            'remarks': 'asc'
+        };
+        let editBillId = null; // Global variable to store the bill ID being edited
+        let selectedItems = []; // Global variable to store selected item IDs
+
+        async function fetchData(page, sortBy = 'buyer_id', sortOrder = 'asc') {
+            try {
+                const searchQuery = document.getElementById('searchInput').value;
+                const searchFilter = document.getElementById('searchFilter').value;
+                const startDate = document.getElementById('startDate').value;
+                const endDate = document.getElementById('endDate').value;
+                const minPrice = document.getElementById('minPrice').value;
+                const maxPrice = document.getElementById('maxPrice').value;
+
+                const queryParams = new URLSearchParams({
+                    sort_order: sortOrder,
+                    sort_by: sortBy,
+                    page: page,
+                    page_size: 10,
+                });
+
+                if (searchQuery) {
+                    if (searchFilter) {
+                        queryParams.append(searchFilter, searchQuery);
+                    } else {
+                        queryParams.append('search', searchQuery);
+                    }
+                }
+                if (startDate) {
+                    queryParams.append('start_date', startDate);
+                }
+                if (endDate) {
+                    queryParams.append('end_date', endDate);
+                }
+                if (minPrice) {
+                    queryParams.append('min_total_price', minPrice);
+                }
+                if (maxPrice) {
+                    queryParams.append('max_total_price', maxPrice);
+                }
+
+                const response = await fetch(`/api/v1/bills?${queryParams.toString()}`);
+                const data = await response.json();
+                const pagination = JSON.parse(response.headers.get('x-pagination'));
+
+                populateTable(data);
+                setupPagination(pagination);
+                updateSortIcons();
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Function to clear filters
+        function clearFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchFilter').value = '';
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
+            document.getElementById('minPrice').value = '';
+            document.getElementById('maxPrice').value = '';
+            fetchData(1);
+        }
+
+
+        function populateTable(data) {
+            const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+
+            // Clear existing rows
+            tableBody.innerHTML = '';
+
+            data.forEach(item => {
+                const row = tableBody.insertRow();
+                const cellCheckbox = row.insertCell(0);
+                const cellBuyerId = row.insertCell(1);
+                const cellPurchaseOrder = row.insertCell(2);
+                const cellDate = row.insertCell(3);
+                const cellTotalPrice = row.insertCell(4);
+                const cellRemarks = row.insertCell(5);
+                const cellActions = row.insertCell(6);
+
+                // Store item ID or unique identifier (item.buyer_id in this case) in the checkbox
+                cellCheckbox.innerHTML = `<input type="checkbox" class="rowCheckbox" data-id="${item.id}" style="margin-left: 35%">`;
+                cellBuyerId.textContent = item.buyer.name;
+                cellPurchaseOrder.innerHTML = `<a href="#" onclick="showProductDetails('${item.purchase_order}')">${item.purchase_order}</a>`;
+                cellDate.textContent = item.date;
+                cellTotalPrice.textContent = item.total_price;
+                cellRemarks.textContent = item.remarks;
+                cellActions.innerHTML = `
+                    <i class="lni lni-pencil" onclick="editRow('${item.purchase_order}')" style="padding-right: 2px"></i>
+                    <i class="lni lni-trash-can" onclick="deleteRow('${item.id}')" style="padding-left: 2px"></i>
+                `;
+                cellActions.className = "actions-column";
+
+                // Check if this row's checkbox should be initially checked based on stored selection
+                if (selectedItems.includes(item.purchase_order)) {
+                    cellCheckbox.firstChild.checked = true;
+                }
+            });
+        }
+
+        async function showProductDetails(purchase_order) {
+            try {
+                // Fetch all bills
+                const response = await fetch(`/api/v1/bills`);
+                const data = await response.json();
+
+                console.log('Fetched bills:', data); // Debugging: log fetched data
+
+                // Find the bill with the given purchase_order
+                console.log(data)
+
+
+                const bill = await fetch(`/api/v1/bills?purchase_order=${purchase_order}`);
+                data2 = await bill.json();
+                console.log(data2);
+
+                if (!bill) {
+                    console.error(`Bill with purchase_order ${purchase_order} not found.`);
+                    return;
+                }
+
+                console.log('Found bill:', bill); // Debugging: log found bill
+
+                document.getElementById('purchaseOrderModal').textContent = purchase_order;
+
+                const productDetailsTableBody = document.getElementById('productDetailsTableBody');
+                productDetailsTableBody.innerHTML = '';
+
+                data2.forEach(item => {
+                    item.bill_items.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                        <td>${item.product.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>${item.price}</td>
+                    `;
+                        productDetailsTableBody.appendChild(row);
+                    });
+                });
+
+                // Show the modal
+                const modal = new bootstrap.Modal(document.getElementById('productDetailsModal'));
+                modal.show();
+            } catch (error) {
+                console.error('Error fetching product details:', error);
+            }
+        }
+
+
+        function setupPagination(pagination) {
+            const paginationDiv = document.getElementById('pagination');
+
+            // Clear existing buttons
+            paginationDiv.innerHTML = '';
+
+            const prevButton = document.createElement('button');
+            prevButton.innerHTML = '<i class="peepo lni lni-chevron-left"></i>';
+            if (pagination.page > 1) {
+                prevButton.onclick = () => fetchData(pagination.page - 1, currentSortBy, currentSortOrder);
+                prevButton.classList.remove('disabled');
+            } else {
+                prevButton.classList.add('disabled');
+            }
+            paginationDiv.appendChild(prevButton);
+
+            const pageNumber = document.createElement('span');
+            pageNumber.className = 'page-number';
+            pageNumber.textContent = `Page ${pagination.page} of ${pagination.total_pages}`;
+            paginationDiv.appendChild(pageNumber);
+
+            const nextButton = document.createElement('button');
+            nextButton.innerHTML = '<i class="peepo lni lni-chevron-right"></i>';
+            if (pagination.page < pagination.total_pages) {
+                nextButton.onclick = () => fetchData(pagination.page + 1, currentSortBy, currentSortOrder);
+                nextButton.classList.remove('disabled');
+            } else {
+                nextButton.classList.add('disabled');
+            }
+            paginationDiv.appendChild(nextButton);
+        }
+
+        function sortTable(header) {
+            const sortBy = header.dataset.sortBy;
+            const sortOrder = sortOrders[sortBy] === 'asc' ? 'desc' : 'asc';
+            currentSortBy = sortBy;
+            currentSortOrder = sortOrder;
+            sortOrders[sortBy] = sortOrder;
+
+            fetchData(currentPage, sortBy, sortOrder);
+        }
+
+        function updateSortIcons() {
+            const headers = document.querySelectorAll('th[data-sort-by]');
+            headers.forEach(header => {
+                const sortBy = header.getAttribute('data-sort-by');
+                const sortIconElem = header.querySelector('.sort-icon');
+
+                // Remove 'active' class and set all icons to default state
+                sortIconElem.innerHTML = `
+            <i class="lni lni-chevron-up"></i>
+        `;
+                sortIconElem.classList.remove('active');
+
+                // Set active state and apply blue border
+                if (sortBy === currentSortBy) {
+                    const icon = currentSortOrder === 'asc' ? '<i class="lni lni-chevron-up"></i>' : '<i class="lni lni-chevron-down"></i>';
+                    sortIconElem.innerHTML = icon;
+                    sortIconElem.classList.add('active');
+                }
+            });
+        }
+
+        // Event listener for the checkbox
+        document.getElementById('dataTable').addEventListener('change', function (event) {
+            if (event.target.classList.contains('rowCheckbox')) {
+                const itemId = event.target.getAttribute('data-id');
+
+                if (event.target.checked) {
+                    selectedItems.push(itemId);
+                } else {
+                    const index = selectedItems.indexOf(itemId);
+                    if (index !== -1) {
+                        selectedItems.splice(index, 1);
+                    }
+                }
+
+                console.log('Selected items:', selectedItems);
+            }
+        });
+
+        // Function to delete selected rows
+        async function deleteSelected() {
+            if (selectedItems.length === 0) {
+                alert('No rows selected');
+                return;
+            }
+
+            if (confirm(`Are you sure you want to delete selected rows?`)) {
+                try {
+                    await Promise.all(selectedItems.map(buyerNo =>
+                        fetch(`/api/v1/bills/${buyerNo}`, {
+                            method: 'DELETE',
+                        })
+                    ));
+                    selectedItems = []; // Clear selectedItems array after successful deletion
+                    fetchData(currentPage, currentSortBy, currentSortOrder); // Refresh data table after deletion
+                } catch (error) {
+                    console.error('Error deleting selected rows:', error);
+                }
+            }
+        }
+
+        function toggleSelectAll() {
+            const checkboxes = document.querySelectorAll('.rowCheckbox');
+            const selectAllCheckbox = document.getElementById('selectAll');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+
+                const itemId = checkbox.getAttribute('data-id');
+                if (selectAllCheckbox.checked) {
+                    if (!selectedItems.includes(itemId)) {
+                        selectedItems.push(itemId);
+                    }
+                } else {
+                    const index = selectedItems.indexOf(itemId);
+                    if (index !== -1) {
+                        selectedItems.splice(index, 1);
+                    }
+                }
+            });
+
+            console.log('Selected items:', selectedItems);
+        }
+
+        function editRow(purchase_order) {
+            // Fetch data for the selected challan number
+            fetch(`/api/v1/bills?purchase_order=${purchase_order}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Opening edit modal');
+                    console.log(data);
+                    // Populate modal form fields with fetched data
+                    document.getElementById('buyerName').value = data[0].buyer.name;
+                    document.getElementById('purchaseOrder').value = data[0].purchase_order;
+                    document.getElementById('billDate').value = data[0].date;
+                    document.getElementById('billTotalPrice').value = data[0].total_price;
+                    document.getElementById('billRemarks').value = data[0].remarks;
+
+                    // Store purchase_order for PUT request
+                    editBillId = data[0].id;
+
+                    // Change modal title and button label for editing
+                    document.getElementById('addBillModalLabelHeading').textContent = 'Edit Bill';
+                    document.getElementById('submitBillBtn').textContent = 'Update';
+
+                    // Show the modal
+                    openEditModal();
+                })
+                .catch(error => console.error('Error fetching bill details:', error));
+        }
+
+
+        // Function to open Bootstrap modal for editing
+        function openEditModal() {
+            console.log('Opening edit modal');
+            const modal = new bootstrap.Modal(document.getElementById('addBillModal'));
+            document.getElementById('buyerName').disabled = true;
+            document.getElementById('purchaseOrder').disabled = true;
+            document.getElementById('billDate').disabled = true;
+            document.getElementById('billTotalPrice').disabled = true;
+            modal.show();
+        }
+
+        async function deleteRow(bill_id) {
+            if (confirm(`Are you sure you want to delete bill id ${bill_id}?`)) {
+                try {
+                    await fetch(`/api/v1/bills?bill_id=${bill_id}`, {
+                        method: 'DELETE',
+                    });
+                    fetchData(currentPage, currentSortBy, currentSortOrder);
+                } catch (error) {
+                    console.error('Error deleting row:', error);
+                }
+            }
+        }
+
+        function openModal() {
+            const modal = new bootstrap.Modal(document.getElementById('addBillModal'));
+            modal.show();
+
+            // Clear form fields and reset modal properties
+            document.getElementById('addBillForm').reset(); // Clear form fields
+            editBillId = null; // Reset editpurchase_order
+            {#document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title#}
+            {#document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label#}
+        }
+
+        // Function to close Bootstrap modal and reset its state
+        function closeModal() {
+            const modalElement = document.getElementById('addBillModal');
+            const modal = bootstrap.Modal.getInstance(modalElement); // Get the instance of the modal
+            modal.hide(); // Hide the modal using Bootstrap's hide method
+
+            // Reset form fields and modal properties
+            document.getElementById('addBillForm').reset(); // Reset form fields
+            {#document.getElementById('purchase_order').disabled = false;#}
+            editBillId = null; // Reset editpurchase_order
+            {#document.getElementById('addChallanModalLabel').textContent = 'Add New Material'; // Reset modal title#}
+            {#document.getElementById('submitBtn').textContent = 'Add Material'; // Reset submit button label#}
+        }
+
+        // Function to handle form submission for both add and edit
+        document.getElementById('addBillForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const buyer_name = formData.get('buyer_name');
+            const purchaseOrder = formData.get('purchase_order');
+            const billDate = formData.get('date');
+            const total_price = parseFloat(formData.get('total_price'));
+            const remarks = formData.get('remarks');
+
+
+            const data = {
+                buyer_name: buyer_name,
+                purchase_order: purchaseOrder,
+                date: billDate,
+                total_price: total_price,
+                remarks: remarks
+            };
+
+            const edit_data = {
+                remarks: remarks
+            };
+
+            try {
+                if (editBillId) {
+                    // If editBillId is set, send a PUT request to update the bill
+                    await fetch(`/api/v1/bills/${editBillId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(edit_data),
+                    });
+                    editBillId = null; // Reset editBillId after successful update
+                } else {
+                    // Otherwise, it's a POST request to add new bill
+                    await fetch('/api/v1/bills', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    });
+                }
+                closeModal(); // Close modal on successful submission
+                fetchData(currentPage, currentSortBy, currentSortOrder); // Fetch updated data
+            } catch (error) {
+                console.error('Error adding/updating bill:', error);
+            }
+        });
+
+
+        // Initial fetch
+        fetchData(currentPage);
+    </script>
+{% endblock %}

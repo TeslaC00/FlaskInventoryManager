@@ -32,6 +32,8 @@ class Challan(db.Model):
     total_price = Column(Float, nullable=False)
     date = Column(Date, nullable=False)
     remarks = Column(Text, nullable=True)
+    # Challan relationship with ChallanItem using 'challan_items' -> both does automatic join (eager loading)
+    # ChallanItem relationship with Challan using 'challan'(backref)
     challan_items = relationship('ChallanItem', backref='challan')
 
     def to_dict(self):
@@ -47,5 +49,6 @@ class Challan(db.Model):
             'challan_no': self.challan_no,
             'supplier_id': self.supplier_id,
             'total_price': self.total_price,
-            'date': self.date
+            'date': self.date,
+            'remarks': self.remarks
         }

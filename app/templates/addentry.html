@@ -1,143 +1,439 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <title>New Challan Entry Form</title>
+    <title>Challan Entry Form</title>
     <style>
-        form {
-            background: #f8f9fa; /* Light grey background */
-            color: #333; /* Dark grey text for better readability */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Poppins, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            margin-top: 30px;
+            border-bottom: 2px solid gray;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .form-container, .item-container {
+            width: 50%;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            overflow-y: auto;
         }
 
-        .card-header, .btn-primary {
-            background: #007bff; /* Bootstrap primary color for consistency */
-            color: #fff;
+        .form-container {
+            border-right: 2px solid gray;
         }
 
-        .alert-success {
-            color: #155724;
-            background-color: #d4edda;
-            border-color: #c3e6cb;
+        .form-container label, .item-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-container input, .form-container select, .form-container textarea,
+        .item-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            box-sizing: border-box;
+        }
+
+        .form-container .submit-btn, .item-container .add-btn, .item-container .remove-btn {
+            background-color: #17365a;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            height: auto;
+        }
+
+        .form-container .submit-btn {
+            border-radius: 20px;
+        }
+
+        .form-container .submit-btn:hover {
+            transition: background-color 300ms;
+            background-color: #007dff;
+        }
+
+        .item-container .item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .item-container .item input {
+            outline: none;
+            border: 0;
+            border-bottom: 2px solid gray;
+            border-radius: 0;
+            margin: 5px;
+            width: calc(33% - 12px);
+        }
+
+        .item-container #item-name {
+            width: 70%;
+        }
+
+        .item-container .item .remove-btn {
+            margin-right: 5px;
+            margin-left: 10px;
+            text-align: center;
+            background-color: #17365a;
+            padding: 5px 8px 1px;
+        }
+
+        .item-container .item .remove-btn:hover {
+            transition: background-color 300ms;
+            background-color: #dd3b3b;
+        }
+
+        .item-container .add-btn {
+            margin-right: 7px;
+            float: right;
+            text-align: center;
+            background-color: #17365a;
+            padding: 5px 8px 1px;
+        }
+
+        .item-container .add-btn:hover {
+            transition: background-color 300ms;
+            background-color: #4cae4c;
+        }
+
+        #items {
+            border: 2px solid gray;
+            border-radius: 20px;
+        }
+
+        .total-price-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            border-top: 2px solid gray;
+            padding-top: 10px;
+        }
+
+        #total-price {
+            margin-right: 10px;
+        }
+
+        .form-container .submit-btn.disabled {
+            cursor: not-allowed;
         }
     </style>
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
-        <div class="container mt-5">
-            <div class="col-md-9 mx-auto col-lg-10 px-md-4">
-                <div class="card">
-                    <div class="card-header">New Challan Entry</div>
-                    {% with messages = get_flashed_messages() %}
-                        {% if messages %}
-                            {% for message in messages %}
-                                <div class="alert alert-success" role="alert">
-                                    {{ message }}
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                    {% endwith %}
-                    <div class="card-body">
-                        <form method="post" action="{{ url_for('challan.add_challan') }}">
-                            {{ form.hidden_tag() }}
-                            <div class="mb-3">
-                                {{ form.challan_no.label(class="form-label") }}
-                                {{ form.challan_no(class="form-control") }}
-                            </div>
-                            <div class="mb-3">
-                                {{ form.supplier_id.label(class="form-label") }}
-                                {{ form.supplier_id(class="form-control") }}
-                            </div>
-                            <div class="mb-3">
-                                {{ form.supplier_name.label(class="form-label") }}
-                                {{ form.supplier_name(class="form-control") }}
-                            </div>
-                            <div class="mb-3">
-                                {{ form.date.label(class="form-label") }}
-                                {{ form.date(class="form-control") }}
-                            </div>
-                            <div id="items-section" class="mb-3">
-                                <label class="form-label">Items</label>
-                                <div id="items-container">
-                                    <!-- JavaScript will append item fields here -->
-                                <fieldset>
-        <legend>Add Products</legend>
-        <div id="products">
-            {% for product in form.products %}
-                <div class="product">
-                    {{ product.name.label }} {{ product.name }}
-                    {{ product.price.label }} {{ product.price }}
-                {{ product.quantity.label }}{{ product.quantity }}
-                </div>
-            {% endfor %}
-        </div>
-        <button type="button" id="add-product">Add Product</button>
-    </fieldset>
-                                </div>
-                                <button type="button" id="add-item" class="btn btn-secondary">Add Item</button>
-                            </div>
+    <div class="container" style="margin-left: 30px">
+        <h2>New Challan Entry</h2>
+        <div class="main-content">
+            <div class="form-container">
+                <form id="challan-form" action="#" method="post">
+                    <label for="challan-no">Challan No.</label>
+                    <input type="text" id="challan-no" name="challan-no" placeholder="Challan No." autocomplete="off">
 
-                            <button type="submit" class="btn btn-primary">{{ form.submit }}</button>
-                        </form>
-                    </div>
+                    <label for="supplier-name">Supplier Name</label>
+                    <input type="text" id="supplier-name" name="supplier-name" placeholder="Supplier Name"
+                           autocomplete="off">
+
+                    <label for="supplier-gstno">Supplier GST No.</label>
+                    <input type="text" id="supplier-gstno" name="supplier-gstno" placeholder="Supplier GST No." required
+                           list="supplier-suggestions" autocomplete="off">
+                    <datalist id="supplier-suggestions"></datalist>
+
+
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date">
+
+                    <label for="message">Remarks</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Type your message..."></textarea>
+
+                    <button type="submit" class="submit-btn">Submit Challan</button>
+                </form>
+            </div>
+            <div class="item-container">
+                <label for="items">Items
+                    <button type="button" class="add-btn" onclick="addItem()"><i class="lni lni-plus"></i></button>
+                </label>
+                <div id="items">
+                    <!-- Dynamic item entries will appear here -->
+                </div>
+                <div class="total-price-container">
+                    <label for="total-price">Total Price:</label>
+                    <span id="total-price">0</span>
                 </div>
             </div>
         </div>
     </div>
+
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('add-product').addEventListener('click', function() {
-        let productsDiv = document.getElementById('products');
-        let productCount = productsDiv.getElementsByClassName('product').length;
+        // Check if all form fields are filled
+        function isFormValid() {
+            const challanNo = document.getElementById('challan-no').value.trim();
+            const supplierName = document.getElementById('supplier-name').value.trim();
+            const supplierGSTNo = document.getElementById('supplier-gstno').value.trim();
+            const date = document.getElementById('date').value.trim();
+            const items = document.querySelectorAll('.item');
 
-        let newProductDiv = document.createElement('div');
-        newProductDiv.className = 'product';
-
-        let nameLabel = document.createElement('label');
-        nameLabel.textContent = 'Product Name';
-        let nameInput = document.createElement('input');
-        nameInput.type = 'text';
-        nameInput.name = 'products-' + productCount + '-name';
-
-        let priceLabel = document.createElement('label');
-        priceLabel.textContent = 'Price';
-        let priceInput = document.createElement('input');
-        priceInput.type = 'text';
-        priceInput.name = 'products-' + productCount + '-price';
-
-        newProductDiv.appendChild(nameLabel);
-        newProductDiv.appendChild(nameInput);
-        newProductDiv.appendChild(priceLabel);
-        newProductDiv.appendChild(priceInput);
-
-        productsDiv.appendChild(newProductDiv);
-    });
-});
-
-        document.addEventListener('DOMContentLoaded', function () {
-            let itemIndex = 0;
-
-            function addItem() {
-                const container = document.getElementById('items-container');
-                let itemHTML = `<div class="item-group mb-2" id="item-${itemIndex}">
-            <input type="text" name="items-${itemIndex}-name" placeholder="Raw Material" required class="form-control mb-2">
-            <input type="number" step="any" name="items-${itemIndex}-price" placeholder="Price" required class="form-control mb-2">
-            <input type="number" name="items-${itemIndex}-quantity" placeholder="Quantity" required class="form-control mb-5">
-            <button type="button" onclick="removeItem(${itemIndex})" class="btn btn-danger">Remove</button>
-        </div>`;
-                container.insertAdjacentHTML('beforeend', itemHTML);
-                itemIndex++;
+            if (!challanNo || !supplierName || !supplierGSTNo || !date) {
+                return false;
             }
 
-            window.removeItem = function (index) {
-                let item = document.getElementById(`item-${index}`);
-                item.parentNode.removeChild(item);
+            for (let item of items) {
+                const itemName = item.querySelector('#item-name').value.trim();
+                const itemQuantity = item.querySelector('[name="item-quantity"]').value.trim();
+                const itemPrice = item.querySelector('[name="item-price"]').value.trim();
+                if (!itemName || !itemQuantity || !itemPrice) {
+                    return false;
+                }
             }
 
-            document.getElementById('add-item').addEventListener('click', addItem);
+            return true;
+        }
+
+        // Toggle the submit button state based on form validation
+        function toggleSubmitButton() {
+            const submitButton = document.querySelector('.submit-btn');
+            if (isFormValid()) {
+                submitButton.classList.remove('disabled');
+                submitButton.removeAttribute('disabled');
+            } else {
+                submitButton.classList.add('disabled');
+                submitButton.setAttribute('disabled', 'true');
+            }
+        }
+
+        // Attach event listeners to form fields for validation
+        document.getElementById('challan-no').addEventListener('input', toggleSubmitButton);
+        document.getElementById('supplier-name').addEventListener('input', toggleSubmitButton);
+        document.getElementById('supplier-gstno').addEventListener('input', toggleSubmitButton);
+        document.getElementById('date').addEventListener('input', toggleSubmitButton);
+
+        async function fetchProductSuggestions(query) {
+            const response = await fetch(`/api/v1/material?search=${query}`);
+            const materials = await response.json();
+            return materials;
+        }
+
+        async function fetchSupplierSuggestions(query) {
+            const response = await fetch(`/api/v1/supplier?search=${query}`);
+            const suppliers = await response.json();
+            return suppliers;
+        }
+
+        document.getElementById('supplier-gstno').addEventListener('input', async function () {
+            const query = this.value;
+            const suggestions = await fetchSupplierSuggestions(query);
+            const dataList = document.getElementById('supplier-suggestions');
+            dataList.innerHTML = '';
+            suggestions.forEach(supplier => {
+                const option = document.createElement('option');
+                option.value = supplier.GST_No;
+                option.textContent = supplier.name;
+                option.setAttribute('data-name', supplier.name);
+                dataList.appendChild(option);
+            });
         });
+
+        document.getElementById('supplier-gstno').addEventListener('change', function () {
+            const selectedOption = document.querySelector(`#supplier-suggestions option[value="${this.value}"]`);
+            if (selectedOption) {
+                const supplierNameInput = document.getElementById('supplier-name');
+                supplierNameInput.value = selectedOption.getAttribute('data-name');
+            }
+        });
+
+        function addItem() {
+            const itemContainer = document.getElementById('items');
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('item');
+            const uniqueId = `suggestions-${itemContainer.children.length}`;
+            itemDiv.innerHTML = `
+        <input type="text" id="item-name" name="item-name" placeholder="Item Name" required list="${uniqueId}" autocomplete="off">
+        <datalist id="${uniqueId}"></datalist>
+        <input type="number" name="item-quantity" placeholder="Quantity" required autocomplete="off">
+        <input type="number" name="item-price" placeholder="Price" required autocomplete="off">
+        <button type="button" class="remove-btn" onclick="removeItem(this)"><i class="lni lni-trash-can"></i></button>
+    `;
+            itemContainer.appendChild(itemDiv);
+
+            const itemNameInput = itemDiv.querySelector('#item-name');
+            itemNameInput.addEventListener('input', async function () {
+                const suggestions = await fetchProductSuggestions(itemNameInput.value);
+                const dataList = itemDiv.querySelector('datalist');
+                dataList.innerHTML = '';
+                suggestions.forEach(material => {
+                    const option = document.createElement('option');
+                    option.value = material.name;
+                    dataList.appendChild(option);
+                });
+            });
+
+            const itemPriceInput = itemDiv.querySelector('[name="item-price"]');
+            itemPriceInput.addEventListener('input', updateTotalPrice);
+        }
+
+        function removeItem(button) {
+            const itemDiv = button.parentElement;
+            itemDiv.remove();
+            updateTotalPrice();
+        }
+
+        function updateTotalPrice() {
+            const itemContainer = document.getElementById('items');
+            let totalPrice = 0;
+            const itemPrices = itemContainer.querySelectorAll('[name="item-price"]');
+            itemPrices.forEach(input => {
+                const price = parseFloat(input.value) || 0;
+                totalPrice += price;
+            });
+            document.getElementById('total-price').textContent = totalPrice.toFixed(2);
+        }
+
+        // Function to fetch supplier ID based on GST No.
+        async function fetchSupplierId(gstNo) {
+            const response = await fetch(`/api/v1/supplier?search=${gstNo}`);
+            const suppliers = await response.json();
+            return suppliers.length ? suppliers[0].id : null;
+        }
+
+        // Function to fetch material details based on item name
+        async function fetchMaterialDetails(itemName) {
+            const response = await fetch(`/api/v1/material?search=${itemName}`);
+            const materials = await response.json();
+            return materials.length ? materials[0] : null;
+        }
+
+        // Function to get challan ID using challan_no
+        async function fetchChallanId(challanNo) {
+            const response = await fetch(`/api/v1/challans?search=${challanNo}`);
+            const challans = await response.json();
+            return challans.length ? challans[0].id : null;
+        }
+
+
+        // Function to handle form submission
+        document.getElementById('challan-form').addEventListener('submit', async function (event) {
+            event.preventDefault();  // Prevent default form submission
+
+            // Gather form data
+            const challanNo = document.getElementById('challan-no').value;
+            const supplierGSTNo = document.getElementById('supplier-gstno').value;
+            const dateInput = document.getElementById('date').value;
+            const message = document.getElementById('message').value;
+
+            // Format the date to "YYYY-MM-DD"
+            const date = new Date(dateInput).toISOString().split('T')[0];
+
+            // Fetch supplier ID
+            const supplierId = await fetchSupplierId(supplierGSTNo);
+
+            // Calculate total price
+            const itemContainer = document.getElementById('items');
+            let totalPrice = 0;
+            const items = [];
+            const itemEntries = itemContainer.querySelectorAll('.item');
+
+            for (let itemDiv of itemEntries) {
+                const itemName = itemDiv.querySelector('#item-name').value;
+                const itemQuantity = itemDiv.querySelector('[name="item-quantity"]').value;
+                const itemPrice = itemDiv.querySelector('[name="item-price"]').value;
+                const materialDetails = await fetchMaterialDetails(itemName);
+
+                totalPrice += parseFloat(itemPrice) || 0;
+
+                items.push({
+                    material_part_no: materialDetails ? materialDetails.part_no : null,
+                    quantity: parseFloat(itemQuantity) || 0,
+                    price: parseFloat(itemPrice) || 0
+                });
+            }
+
+            // Create challan data object
+            const challanData = {
+                challan_no: challanNo,
+                supplier_id: supplierId,
+                total_price: totalPrice.toFixed(2),
+                date: date,  // Adjusted field name
+                remarks: message
+            };
+
+            console.log(challanData);
+
+            // Send POST request to API for challan
+            try {
+                const response = await fetch('/api/v1/challans', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(challanData)
+                });
+
+                if (response.ok) {
+                    const responseData = await response.json();
+                    alert('Challan submitted successfully!');
+                    console.log(responseData);
+
+                    // Get the challan_id using challan_no
+                    const challanId = await fetchChallanId(challanNo);
+
+                    // Send POST request for each item
+                    for (let item of items) {
+                        const itemData = {
+                            challan_id: challanId,
+                            material_part_no: item.material_part_no,
+                            quantity: item.quantity,
+                            price: item.price
+                        };
+
+                        const itemResponse = await fetch('/api/v1/challan_item', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(itemData)
+                        });
+
+                        if (itemResponse.ok) {
+                            const itemResponseData = await itemResponse.json();
+                            console.log(`Challan item submitted successfully:`, itemResponseData);
+                        } else {
+                            const itemErrorData = await itemResponse.json();
+                            alert(`Error submitting challan item: ${itemErrorData.message}`);
+                            console.error(itemErrorData);
+                        }
+                    }
+                } else {
+                    const errorData = await response.json();
+                    alert('Error submitting challan: ' + errorData.message);
+                    console.error(errorData);
+                }
+            } catch (error) {
+                alert('An error occurred while submitting the challan.');
+                console.error(error);
+            }
+        });
+        // Initial call to set the correct submit button state
+        toggleSubmitButton();
     </script>
 
 {% endblock %}

@@ -1,10 +1,13 @@
-# user.py
+# user_route.py
 from flask_security import UserMixin, RoleMixin, AsaList
 from app.extensions import db
 from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey
 from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship, backref
-# from app.extensions import bcrypt
+
+
+# registration template = security/register_user.html
+# registration url = /register
 
 
 class RolesUsers(db.Model):
@@ -25,6 +28,7 @@ class Role(db.Model, RoleMixin):
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
+    email = Column(String(255), unique=True)
     username = Column(String(255), unique=True, nullable=True)
     password = Column(String(255), nullable=False)
     last_login_at = Column(DateTime())
@@ -35,32 +39,5 @@ class User(db.Model, UserMixin):
     active = Column(Boolean())
     fs_uniquifier = Column(String(64), unique=True, nullable=False)
     confirmed_at = Column(DateTime())
-    roles = relationship('Role', secondary='roles_users',
-                         backref=backref('users', lazy='dynamic'))
-
-    def set_password(self, password):
-        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
-
-    def check_password(self, password) -> bool:
-        return bcrypt.check_password_hash(self.password, password)
-
-    def to_dict(self):
-        """
-        Creates a dictionary representation of the User instance, including the username, password, and user type.
-
-        Returns:
-            dict: A dictionary containing the user's 'username', 'password', and 'user_type'.
-        """
-        return {
-
-        }
-
-    # def get_id(self):
-    #     """
-    #     Overrides the `get_id` method from UserMixin, utilizing the username as the unique identifier
-    #     for the user session.
-    #
-    #     Returns:
-    #         str: The username of the user, serving as the unique identifier.
-    #     """
-    #     return self.username
+    roles = relationship('Role', secondary='roles_users', backref=backref('users', lazy='dynamic'))
+    questions = relationship('SecurityQuestion', secondary='user_security_questions', backref='users')

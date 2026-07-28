@@ -1,5 +1,5 @@
 from app.extensions import db
-from sqlalchemy import Column, Integer, Enum, ForeignKey, PrimaryKeyConstraint, Date
+from sqlalchemy import Column, Integer, Enum, ForeignKey, Date
 
 from app.models.enums import ProductScrapType
 
@@ -27,12 +27,12 @@ class ProductScrap(db.Model):
     """
 
     __tablename__ = 'product_scrap'
+    id = Column(Integer, primary_key=True)
     product_part_no = Column(Integer, ForeignKey('product.part_no', name='fk_product_scrap_product_part_no'),
                              nullable=False)
     quantity = Column(Integer, nullable=False)
     date = Column(Date, nullable=False)
     scrap_type = Column(Enum(ProductScrapType), nullable=False)
-    __table_args__ = (PrimaryKeyConstraint('date', 'product_part_no', name='pk_product_scrap'),)
 
     def to_dict(self):
         """
@@ -43,6 +43,7 @@ class ProductScrap(db.Model):
             including 'date', 'good_name', and 'quantity'.
         """
         return {
+            'id': self.id,
             'part_no': self.product_part_no,
             'date': self.date,
             'quantity': self.quantity,
