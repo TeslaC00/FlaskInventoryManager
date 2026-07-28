@@ -1,6 +1,13 @@
 ## Flask Inventory Manager
 
-A flask based inventory manager
+A flask based inventory manager project made by me and my friends >-<. You can check out the images or read the configuration setup used by my us to keep each other in sync with backend.
+
+### Images
+| | |
+|---|---|
+| ![Login Page](images/login.png) | ![Inventory Goods Page](images/invGoods.png) 
+| ![Challan Page](images/challan.png) | ![Challan Info](images/challanInfo.png) 
+| ![New Sales Form](images/sale.png) | ![Product Table Page](images/product.png) 
 
 ## Local Database Setup
 
