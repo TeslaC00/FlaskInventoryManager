@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, render_template, flash, redirect, url_for
+from flask import Blueprint, jsonify, request, render_template, flash
 
 from app.database import db
 from app.forms.supplier_form import SupplierForm
@@ -8,7 +8,7 @@ from app.models import Supplier
 supplier_routes = Blueprint('supplier', __name__)
 
 
-@supplier_routes.route('/api/supplier', methods=['POST', 'GET'])
+@supplier_routes.route('/api/supplier', methods=['POST'])
 def add_supplier():
     form = SupplierForm()
     if request.method == 'POST' and form.validate_on_submit():
@@ -18,16 +18,16 @@ def add_supplier():
         db.session.add(supplier)
         db.session.commit()
         logger.info(f'Added supplier {supplier.to_dict()} to supplier table')
-        flash(f'New Supplier {supplier.name} Added', 'success')
-        return redirect(url_for('supplier.add_supplier'))
-    return render_template('add_supplier.html', form=form)
+        return jsonify(supplier.to_dict()), 201  # 201 Created
+    else:
+        return jsonify({'error': 'Invalid data'}), 400
 
 
 @supplier_routes.route('/api/suppliers', methods=['GET'])
 def get_suppliers():
     suppliers = Supplier.query.all()
     logger.info('Fetched all suppliers')
-    return render_template('show_suppliers.html', suppliers=suppliers)
+    return render_template('show_suppliers.html', suppliers=suppliers, form=SupplierForm())
     # return jsonify(suppliers)
 
 
@@ -36,13 +36,13 @@ def get_supplier(supplier_id):
     supplier = Supplier.query.get(supplier_id)
     if supplier:
         logger.info(f'Fetched supplier {supplier.to_dict()}')
-        return jsonify(supplier)
+        return jsonify(supplier.to_dict()), 200
     else:
         logger.error(f'Supplier {supplier_id} not found')
         flash('Supplier not found', 'error')
 
 
-@supplier_routes.route('/api/supplier/<int:supplier_id>', methods=['GET', 'POST'])
+@supplier_routes.route('/api/supplier/<int:supplier_id>', methods=['POST'])
 def update_supplier(supplier_id):
     supplier = Supplier.query.get_or_404(supplier_id)  # 404 -> object not found
     form = SupplierForm(obj=supplier)
@@ -52,6 +52,10 @@ def update_supplier(supplier_id):
         db.session.commit()
         logger.info(f'Updated supplier {supplier.to_dict()}')
         flash('Updated Supplier', 'success')
+        return jsonify('Updated Supplier'), 200
+    else:
+        logger.error(form.errors)
+        return jsonify({'error': 'Invalid or missing data'}), 400
 
 
 @supplier_routes.route('/api/supplier/<int:supplier_id>', methods=['POST'])

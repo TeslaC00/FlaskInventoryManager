@@ -1,6 +1,7 @@
 from app.database import db
 
 
+@DeprecationWarning
 class MaterialPartNo(db.Model):
     """
     Represents a mapping between raw materials and their part numbers from specific suppliers,

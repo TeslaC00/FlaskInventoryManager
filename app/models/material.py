@@ -9,9 +9,12 @@ class Material(db.Model):
 
     Attributes:
         __tablename__ (str): Specifies the name of the table in the database for the Raw_Material model.
-        name (db.Column): The name of the raw material, which serves as the primary key for the Raw_Material table. It is a non-nullable string of maximum length 50.
-        unit_type (db.Column): Specifies the unit of measure for the raw material (e.g., kg, liters). It is a non-nullable string of maximum length 10.
-        quantity (db.Column): Represents the current stock quantity of the raw material. It is a non-nullable integer, indicating how much of the material is available.
+        name (db.Column): The name of the raw material, which serves as the primary key for the Raw_Material table. It
+        is a non-nullable string of maximum length 50.
+        unit_type (db.Column): Specifies the unit of measure for the raw material (e.g., kg, liters). It is a
+        non-nullable string of maximum length 10.
+        quantity (db.Column): Represents the current stock quantity of the raw material. It is a non-nullable integer,
+        indicating how much of the material is available.
 
     The Raw_Material model includes a method `to_dict` which converts the raw material record into a dictionary,
     facilitating easy JSON serialization for API responses or other purposes.
@@ -23,6 +26,7 @@ class Material(db.Model):
 
     __tablename__ = 'material'
     name = db.Column(db.String(50), primary_key=True)
+    part_no = db.Column(db.Integer, nullable=False, unique=True)
     unit_type = db.Column(db.String(10), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     challans = db.relationship('Challan', backref='material')

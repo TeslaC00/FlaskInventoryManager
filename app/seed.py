@@ -63,9 +63,10 @@ def seed():
 
     log.info(f'Added Challan records')
 
-    for item in read_json('data/raw_material_part_no.json'):
-        record = MaterialPartNo(**item)
-        db.session.add(record)
+    # @DeprecationWarning
+    # for item in read_json('data/raw_material_part_no.json'):
+    #     record = MaterialPartNo(**item)
+    #     db.session.add(record)
 
     log.info(f'Added MaterialPartNo records')
 

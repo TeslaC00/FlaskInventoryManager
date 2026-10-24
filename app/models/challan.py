@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from app.database import db
 
 
@@ -27,15 +29,10 @@ class Challan(db.Model):
     """
 
     __tablename__ = 'challan'
-    challan_no = db.Column(db.Integer, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
     supplier_id = db.Column(db.Integer, db.ForeignKey('supplier.id', name='fk_challan_supplier_id'), nullable=False)
-    material_name = db.Column(db.String(50), db.ForeignKey('material.name', name='fk_challan_material_name'),
-                              nullable=False)
-    price = db.Column(db.Integer, nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
-    date = db.Column(db.Date, nullable=False)
-    remarks = db.Column(db.Text, nullable=True)
-    __table_args__ = (db.PrimaryKeyConstraint(date, supplier_id, material_name, name='pk_challan'),)
+    total_price = db.Column(db.Integer, nullable=False)
+    date = db.Column(db.Date, nullable=False, default = datetime.today())
 
     def to_dict(self):
         """
@@ -46,11 +43,7 @@ class Challan(db.Model):
             including 'price', 'challan_no', 'date', 'quantity', 'supplier_id', and 'raw_material_name'.
         """
         return {
-            'challan_no': self.challan_no,
-            'supplier_id': self.supplier_id,
-            'material_name': self.material_name,
-            'price': self.price,
-            'quantity': self.quantity,
+            'id': self.id,
+            'total_price': self.total_price,
             'date': self.date,
-            'remarks': self.remarks,
         }
